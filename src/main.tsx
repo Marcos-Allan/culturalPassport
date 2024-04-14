@@ -5,9 +5,12 @@ import {
   RouterProvider,
 } from "react-router-dom";
 import './index.css'
-import Login from './screens/Login/index.tsx';
+
+import SignIn from './screens/SignIn/index.tsx';
 import Home from './screens/Home/index.tsx';
-import { Provider } from './provider/index.tsx'; './provider/index.tsx'
+import SignUp from './screens/SignUp/indx.tsx';
+
+import { Provider } from './provider/index.tsx';
 
 const router = createBrowserRouter([
   {
@@ -15,8 +18,12 @@ const router = createBrowserRouter([
     element: <Home />,
   },
   {
-    path: "/login",
-    element: <Login />,
+    path: "/signin",
+    element: <SignIn />,
+  },
+  {
+    path: "/signup",
+    element: <SignUp />,
   },
 ])
 

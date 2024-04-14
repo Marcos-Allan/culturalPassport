@@ -1,16 +1,14 @@
-import { Link } from "react-router-dom"
-import { useMyContext } from "../../provider/geral.tsx"
+import Linkin from "../../components/Linkin/index.tsx"
+import ScreenPage from "../../components/ScreenPage/index.tsx"
+import ToggleTheme from "../../components/ToggleTheme/index.tsx"
 
 export default function Home(){
 
-    const states:any = useMyContext()
-    const { theme, toggleTheme } = states
-
     return(
-        <div>
-            <button onClick={() => toggleTheme()}>{`${theme == 'light' ? 'light' : 'dark'}`}</button>
-            <br/>
-            <Link to="/login">LOGIN</Link>
-        </div>
+        <ScreenPage>
+            <Linkin route="/signin" text="Login" />
+            <Linkin route="/signup" text="Criar conta" />
+            <ToggleTheme />
+        </ScreenPage>
     )
 }
