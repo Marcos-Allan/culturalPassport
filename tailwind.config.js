@@ -12,7 +12,7 @@ export default {
         'my-terciary': '#21DD98',
         'my-black': '#000000',
         'my-white': '#ffffff',
-        'my-gray': '#e6e6e6',
+        'my-gray': '#9e9e9e',
         'my-gray-black': '#b2b2b2',
       },
     },
