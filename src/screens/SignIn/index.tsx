@@ -26,7 +26,7 @@ export default function SignIn(){
 
                 <Linkin route="/signin" text="Esqueceu sua senha" />
 
-                <Button text="entrar" />
+                <Button text="entrar" route="undefined" />
 
                 <Linkin route="/signup" text="Crie sua conta" />
                 <Separation />

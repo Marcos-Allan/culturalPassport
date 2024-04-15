@@ -20,7 +20,7 @@ export default function SignUp(){
                 <PasswordInput text="Password" placeholder="Digite uma senha" hidden={false} />
                 <PasswordInput text="Confirmar Password" placeholder="Digite a confirmação da senha" hidden={false} />
                 <PersonType />
-                <Button text="criar" />
+                <Button text="criar" route="undefined" />
             </form>
             
             <Linkin route="/signin" text="Já possui uma conta?" />

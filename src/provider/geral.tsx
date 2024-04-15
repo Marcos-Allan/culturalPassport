@@ -3,17 +3,18 @@ import { useState, createContext, useContext } from 'react'
 export const MyContext = createContext({})
 
 export const MyProvider = ({ children } : { children: React.ReactNode }) => {
-    const themeAplicked = 'light'
     
-    const [theme, setTheme] = useState<string | null>(themeAplicked)
+    const [theme, setTheme] = useState<string | null>(localStorage.getItem('themePC'))
     const [menuOpen, setMenuOpen] = useState<boolean>(false)
 
     const toggleMenuOpen = () => {
         setMenuOpen(!menuOpen)
     }
-
+    
     const toggleTheme = () => {
-        setTheme(theme == 'light' ? 'dark' : 'light')
+        let themeAplicked = localStorage.getItem('themePC')
+        localStorage.setItem('themePC', themeAplicked == 'light' ? 'dark' : 'light')
+        setTheme(themeAplicked == 'light' ? 'dark' : 'light')
     }
     
     return (
