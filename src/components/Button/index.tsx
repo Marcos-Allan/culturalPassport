@@ -1,16 +1,22 @@
 import { Link } from "react-router-dom"
 import { useMyContext } from "../../provider/geral"
 
-export default function Button({ text, route }:{ text: string, route: string }) {
+interface Props {
+    text: string,
+    route: string,
+    event?: () => void,
+}
+
+export default function Button(props: Props) {
 
     const states:any = useMyContext()
     const { theme } = states
 
     return(
         <>
-            {route !== 'undefined' ? (
+            {props.route !== 'undefined' ? (
                 <Link
-                    to={route}
+                    to={props.route}
                     className={`
                         w-[90%]
                         my-3
@@ -28,10 +34,13 @@ export default function Button({ text, route }:{ text: string, route: string }) 
                             ${theme == 'light' ? 'text-my-white' : 'text-my-black'}
                         `}
                         // onClick={() => alert('Paciência é uma virtude que nem todos tem')}
-                        >{text}</p>
+                        >{props.text}</p>
                 </Link>
             ):(
                 <div
+                    onClick={() => {
+                        props.event && props.event()
+                    }}
                     className={`
                         w-[90%]
                         my-3
@@ -49,7 +58,7 @@ export default function Button({ text, route }:{ text: string, route: string }) 
                             ${theme == 'light' ? 'text-my-white' : 'text-my-black'}
                         `}
                         // onClick={() => alert('Paciência é uma virtude que nem todos tem')}
-                        >{text}</p>
+                        >{props.text}</p>
                 </div>
             )}
         </>

@@ -12,6 +12,9 @@ import SignUp from './screens/SignUp/indx.tsx';
 
 import { Provider } from './provider/index.tsx';
 import ErrorPage from './screens/ErrorPage/index.tsx';
+import ForgoutPassword from './screens/ForgoutPassword/index.tsx';
+import ConfirmCode from './screens/ConfirmCode/index.tsx';
+import SwitchPassword from './screens/SwitchPassword/index.tsx';
 
 const router = createBrowserRouter([
   {
@@ -20,13 +23,28 @@ const router = createBrowserRouter([
     errorElement: <ErrorPage />
   },
   {
-    path: "/signin",
+    path: "/sign-in",
     element: <SignIn />,
     errorElement: <ErrorPage />
   },
   {
-    path: "/signup",
+    path: "/sign-up",
     element: <SignUp />,
+    errorElement: <ErrorPage />
+  },
+  {
+    path: "/forgout-passowrd",
+    element: <ForgoutPassword />,
+    errorElement: <ErrorPage />
+  },
+  {
+    path: "/confirm-code",
+    element: <ConfirmCode />,
+    errorElement: <ErrorPage />
+  },
+  {
+    path: "/switch-password",
+    element: <SwitchPassword />,
     errorElement: <ErrorPage />
   },
 ])

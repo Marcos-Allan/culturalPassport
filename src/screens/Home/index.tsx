@@ -8,8 +8,8 @@ export default function Home(){
     return(
         <ScreenPage>
             <TitlePage text="Inicio" />
-            <Button text="login" route="/signin" />
-            <Button text="criar conta" route="/signup" />
+            <Button text="login" route="/sign-in" />
+            <Button text="criar conta" route="/sign-up" />
             <ToggleTheme />
         </ScreenPage>
     )
