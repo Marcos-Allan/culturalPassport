@@ -92,8 +92,8 @@ export default function PasswordInput({text, placeholder, hidden}:{text:string, 
                         py-3
                         border
                         ${theme == 'light'
-                        ? 'text-my-gray border-my-gray bg-my-white'
-                        : 'text-my-gray-black border-my-gray-black bg-my-black'
+                        ? 'text-my-gray placeholder-my-gray border-my-gray bg-my-white'
+                        : 'text-my-gray-black placeholder-my-gray-black border-my-gray-black bg-my-black'
                         }
                         focus:outline-none
                     `}
