@@ -1,12 +1,12 @@
 import { useEffect, useState } from 'react'
-import { redirect } from 'react-router-dom'
 import { FcGoogle } from "react-icons/fc";
 import { useMyContext } from "../../provider/geral";
-import { GoogleAuthProvider, auth, getRedirectResult, provider, signInWithRedirect } from '../../utils/firebase.tsx'
+import { auth, getRedirectResult, provider, signInWithRedirect } from '../../utils/firebase.tsx'
+import Linkin from '../Linkin/index.tsx';
 export default function GoogleLogin() {
 
     const states:any = useMyContext()
-    const { theme, toggleUser, userS } = states
+    const { theme, userS, toggleUser } = states
 
     const [loading, setLoading] = useState<boolean>(false)
 
@@ -20,14 +20,15 @@ export default function GoogleLogin() {
         getRedirectResult(auth)
         .then((result) => {
         // This gives you a Google Access Token. You can use it to access Google APIs.
-            const credential = GoogleAuthProvider.credentialFromResult(result);
-            const token = credential ? credential.accessToken : null;
-            console.log(result.user)
+            // const credential = GoogleAuthProvider.credentialFromResult(result);
+            // const token = credential ? credential.accessToken : null;
     
             // The signed-in user info.
             const user = result ? result.user : null;
 
-            toggleUser(result?.user.displayName, result?.user.photoURL)
+            if(user){
+                toggleUser(user.displayName, user.photoURL)
+            }
             return true
             // IdP data available using getAdditionalUserInfo(result)
             // ...
@@ -65,20 +66,25 @@ export default function GoogleLogin() {
                 }>
                 </div>
             ) : (
-                <FcGoogle
-                    className={`
-                        text-[70px]
-                        border border-my-primary
-                        rounded-[50%]
-                        p-3
-                        ${theme == 'light' ? '' : ''}
-                    `}
-                    onClick={() => {
-                        // alert('Calma... função a ser implementada')
-                        setLoading(true)
-                        signInRedirect()
-                    }}
-                />
+                <>
+                    <FcGoogle
+                        className={`
+                            text-[70px]
+                            border border-my-primary
+                            rounded-[50%]
+                            p-3
+                            ${theme == 'light' ? '' : ''}
+                        `}
+                        onClick={() => {
+                            // alert('Calma... função a ser implementada')
+                            setLoading(true)
+                            signInRedirect()
+                        }}
+                    />
+                    {userS.logged == true && (
+                        <Linkin route='/' text='voltar' />
+                    )}
+                </>
             )}
         </>
 
