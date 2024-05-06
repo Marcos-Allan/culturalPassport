@@ -8,7 +8,7 @@ export default function EmailInput() {
     const { theme } = states
 
     return(
-        <>
+        <div className="w-[90%]">
             {/* INPUT DE EMAIL */}
             <label
             className={`
@@ -56,6 +56,6 @@ export default function EmailInput() {
                 `}
             />
         </div>
-    </>
+    </div>
     )
 }

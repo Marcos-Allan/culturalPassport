@@ -30,7 +30,7 @@ export default function PersonType() {
                     relative
                     flex
                     items-center
-                    w-[70%]
+                    w-[90%]
                     border
                     p-3
                     ps-4
@@ -98,7 +98,7 @@ export default function PersonType() {
                     <div
                         className={`
                             relative
-                            w-[70%]
+                            w-[90%]
                             flex
                             items-center
                             justify-start
@@ -126,7 +126,7 @@ export default function PersonType() {
                     <div
                         className={`
                         relative
-                        w-[70%]
+                        w-[90%]
                         flex
                         mb-6
                         items-center

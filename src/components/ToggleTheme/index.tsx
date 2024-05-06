@@ -10,7 +10,7 @@ export default function ToggleTheme() {
 
     return(
         <div
-            className={`absolute right-0 m-5`}
+            className={`mt-4`}
             onClick={() => toggleTheme()}
         >
             {theme == 'light' ? (

@@ -20,7 +20,7 @@ export default function Button(props: Props) {
                     className={`
                         w-[90%]
                         my-3
-                        rounded-[20px]
+                        rounded-[8px]
                         ${theme == 'light' ? 'bg-my-primary' : 'bg-my-secondary'}
                     `}
                 >
@@ -44,7 +44,7 @@ export default function Button(props: Props) {
                     className={`
                         w-[90%]
                         my-3
-                        rounded-[20px]
+                        rounded-[8px]
                         ${theme == 'light' ? 'bg-my-primary' : 'bg-my-secondary'}
                     `}
                 >

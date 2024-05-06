@@ -2,13 +2,13 @@ import { useMyContext } from "../../provider/geral"
 
 import { MdOutlinePerson } from "react-icons/md";
 
-export default function NameInput() {
+export default function NameInput({ text, placeholder }:{ text:string, placeholder:string }) {
 
     const states:any = useMyContext()
     const { theme } = states
 
     return(
-        <>
+        <div className="w-[90%]">
             {/* INPUT DE EMAIL */}
             <label
             className={`
@@ -20,7 +20,7 @@ export default function NameInput() {
             `}
             htmlFor="emailInput"
         >
-            Nome
+            {text}
         </label>
 
         <div
@@ -40,7 +40,7 @@ export default function NameInput() {
             <input
                 id="emailInput"
                 type="text"
-                placeholder="Digite seu nome ou nickname"
+                placeholder={placeholder}
                 className={`
                     w-full
                     text-[20px]
@@ -56,6 +56,6 @@ export default function NameInput() {
                 `}
             />
         </div>
-    </>
+    </div>
     )
 }

@@ -24,7 +24,7 @@ export default function PasswordInput({text, placeholder, hidden}:{text:string, 
     }
 
     return(
-        <>
+        <div className="w-[90%]">
             {/* INPUT DE PASSWORD */}
             <label
                 className={`
@@ -99,6 +99,6 @@ export default function PasswordInput({text, placeholder, hidden}:{text:string, 
                     `}
                 />
             </div>
-        </>
+        </div>
     )
 }

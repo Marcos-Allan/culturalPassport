@@ -5,10 +5,11 @@ import TitlePage from "../../components/TitlePage/index.tsx"
 import ToggleTheme from "../../components/ToggleTheme/index.tsx"
 import { useMyContext } from "../../provider/geral";
 
-import Person from '../../assets/person_1.png'
+import Person from '../../assets/person_2.png'
 import Navbar from "../../components/Navbar/index.tsx";
+import Return from "../../components/Return/index.tsx";
 
-export default function Home(){
+export default function Signs(){
 
     const states:any = useMyContext()
     const { theme, userS } = states
@@ -16,12 +17,15 @@ export default function Home(){
     return(
         <ScreenPage>
             <Navbar>
-                <TitlePage text="Bem Vindo Estudante" />
+                <Return />
+                <TitlePage
+                    text={`salve se uprogresso`}
+                />
                 <ToggleTheme />
             </Navbar>
-
+            
             <Text
-                text="Seja muito bem-vindo ao nosso app de estudos. Se prepare para os vestibulares com imulados e contúdos"
+                text="Faça login ou cadastre-se para não perder seu progresso"
             />
 
             <img
@@ -42,7 +46,8 @@ export default function Home(){
                 </>
             )}
                         
-            <Button text="iniciar" route="/signs" />
+            <Button text="login" route="/sign-in" />
+            <Button text="criar conta" route="/sign-up" />
         </ScreenPage>
     )
 }

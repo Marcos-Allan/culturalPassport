@@ -9,6 +9,9 @@ import Separation from "../../components/Separation";
 import Button from "../../components/Button";
 import TitlePage from "../../components/TitlePage";
 import ScreenPage from "../../components/ScreenPage";
+import Navbar from "../../components/Navbar";
+
+import Return from "../../components/Return";
 
 
 export default function SignIn(){
@@ -16,7 +19,13 @@ export default function SignIn(){
     return(
         <ScreenPage>
             
-            <TitlePage text="login" />
+            <Navbar>   
+                <Return />
+                <TitlePage
+                    text={`login`}
+                />
+                <ToggleTheme />
+            </Navbar>
 
             <form className={`mt-8 items-center flex flex-col w-[90%]`}>
                 
@@ -34,7 +43,6 @@ export default function SignIn(){
                 <GoogleLogin />
             </form>
 
-            <ToggleTheme />
         </ScreenPage>
     )
 }

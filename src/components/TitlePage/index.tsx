@@ -6,7 +6,7 @@ export default function TitlePage({text}:{text:string}) {
     const { theme } = states
 
     return(
-        <h1 className={`text-left w-[90%] pt-4 text-[26px] font-bold capitalize
+        <h1 className={`text-center w-[90%] pt-4 text-[26px] font-bold capitalize
             ${theme == 'light' ? 'text-my-black' : 'text-my-white'}
         `}>{text}</h1>
     )

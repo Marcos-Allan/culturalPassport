@@ -6,6 +6,8 @@ import Text from "../../components/Text";
 import TitlePage from "../../components/TitlePage";
 import ToggleTheme from "../../components/ToggleTheme";
 import { useMyContext } from "../../provider/geral";
+import Navbar from "../../components/Navbar";
+import Return from "../../components/Return";
 
 export default function ErrorPage() {
 
@@ -14,7 +16,12 @@ export default function ErrorPage() {
 
     return(
         <ScreenPage>
-            <TitlePage text="Erro" />
+            <Navbar>
+                <Return />
+                <TitlePage text="Erro" />
+                <ToggleTheme />
+            </Navbar>
+
             
             <Text text="Sentimos muito não encontramos esta página por favor volte para a página principal" />
 
@@ -27,7 +34,6 @@ export default function ErrorPage() {
             
             <Button route="/" text="Voltar" />
             
-            <ToggleTheme />
         </ScreenPage>
     )
 }

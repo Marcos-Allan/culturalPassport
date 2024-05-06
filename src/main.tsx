@@ -7,6 +7,7 @@ import {
 import './index.css'
 
 import SignIn from './screens/SignIn/index.tsx';
+import Signs from './screens/Signs/index.tsx';
 import Home from './screens/Home/index.tsx';
 import SignUp from './screens/SignUp/indx.tsx';
 
@@ -20,6 +21,11 @@ const router = createBrowserRouter([
   {
     path: "/",
     element: <Home />,
+    errorElement: <ErrorPage />
+  },
+  {
+    path: "/signs",
+    element: <Signs />,
     errorElement: <ErrorPage />
   },
   {
