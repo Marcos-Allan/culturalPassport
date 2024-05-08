@@ -24,32 +24,32 @@ const router = createBrowserRouter([
     errorElement: <ErrorPage />
   },
   {
-    path: "/signs",
+    path: "signs",
     element: <Signs />,
     errorElement: <ErrorPage />
   },
   {
-    path: "/sign-in",
+    path: "sign-in",
     element: <SignIn />,
     errorElement: <ErrorPage />
   },
   {
-    path: "/sign-up",
+    path: "sign-up",
     element: <SignUp />,
     errorElement: <ErrorPage />
   },
   {
-    path: "/forgout-passowrd",
+    path: "forgout-passowrd",
     element: <ForgoutPassword />,
     errorElement: <ErrorPage />
   },
   {
-    path: "/confirm-code",
+    path: "confirm-code",
     element: <ConfirmCode />,
     errorElement: <ErrorPage />
   },
   {
-    path: "/switch-password",
+    path: "switch-password",
     element: <SwitchPassword />,
     errorElement: <ErrorPage />
   },

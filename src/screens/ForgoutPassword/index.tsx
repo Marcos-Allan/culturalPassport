@@ -25,7 +25,7 @@ export default function ForgoutPassword() {
                 <form className={`mt-8 items-center flex flex-col w-[90%]`}>
                     
                     <EmailInput />
-                    <Text text={`enviaremos um código para o endereço de email`} />
+                    <Text text={`enviaremos um código para o endereço de email digitado`} />
                         
                     <Button route='/confirm-code' text={`Enviar`} />
                 </form>

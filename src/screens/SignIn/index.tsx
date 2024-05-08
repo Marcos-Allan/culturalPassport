@@ -33,7 +33,7 @@ export default function SignIn(){
                 <PasswordInput text="Password" placeholder="Digite uma senha" hidden={true} />
                 <PersonType />
 
-                <Linkin route="/forgout-passowrd" text="Esqueceu sua senha" />
+                <Linkin route="/forgout-passowrd" text="Esqueceu sua senha?" />
 
                 <Button text="entrar" route="undefined" />
 

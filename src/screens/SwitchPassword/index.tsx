@@ -23,7 +23,7 @@ export default function SwitchPassword() {
             <form className={`mt-8 items-center flex flex-col w-[90%]`}>
                 <PasswordInput hidden={false} placeholder="Senha" text="Senha" />
                 <PasswordInput hidden={false} placeholder="Senha" text="Confirmação da Senha" />
-                <Button route='/sign-in' text={`trocar`} />
+                <Button route='/sign-in' text={`confirmar`} />
             </form>
         </ScreenPage >
     )

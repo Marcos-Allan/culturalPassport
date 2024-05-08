@@ -70,10 +70,10 @@ export default function GoogleLogin() {
                     <FcGoogle
                         className={`
                             text-[70px]
-                            border border-my-primary
+                            border
                             rounded-[50%]
                             p-3
-                            ${theme == 'light' ? '' : ''}
+                            ${theme == 'light' ? 'border-my-gray' : 'border-my-gray-black'}
                         `}
                         onClick={() => {
                             // alert('Calma... função a ser implementada')

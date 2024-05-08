@@ -21,7 +21,7 @@ export default function Home(){
             </Navbar>
 
             <Text
-                text="Seja muito bem-vindo ao nosso app de estudos. Se prepare para os vestibulares com imulados e contúdos"
+                text="Seja muito bem-vindo ao nosso app de estudos. Se prepare para os vestibulares com simulados e conteúdos diversos"
             />
 
             <img

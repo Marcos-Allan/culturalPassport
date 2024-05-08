@@ -23,7 +23,7 @@ export default function ConfirmCode() {
 
             <form className={`mt-8 items-center flex flex-col w-[90%]`}>
                 <EmailInput />
-                <Text text={`enviamos um código para o email enviado`} />
+                <Text text={`Confirme o código enviado para o seu email para alterar a senha`} />
                 <Button route='/switch-password' text={`Confirmar`} />
             </form>
         </ScreenPage >

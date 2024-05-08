@@ -19,13 +19,13 @@ export default function Signs(){
             <Navbar>
                 <Return />
                 <TitlePage
-                    text={`salve se uprogresso`}
+                    text={`salve seu progresso`}
                 />
                 <ToggleTheme />
             </Navbar>
             
             <Text
-                text="Faça login ou cadastre-se para não perder seu progresso"
+                text="Faça login ou cadastre-se para não perder seus dados"
             />
 
             <img
