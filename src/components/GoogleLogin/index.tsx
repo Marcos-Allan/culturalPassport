@@ -1,9 +1,12 @@
+import { useNavigate } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 import { FcGoogle } from "react-icons/fc";
 import { useMyContext } from "../../provider/geral";
 import { auth, getRedirectResult, provider, signInWithRedirect } from '../../utils/firebase.tsx'
 import Linkin from '../Linkin/index.tsx';
 export default function GoogleLogin() {
+
+    const navigate = useNavigate()
 
     const states:any = useMyContext()
     const { theme, userS, toggleUser } = states
@@ -28,6 +31,7 @@ export default function GoogleLogin() {
 
             if(user){
                 toggleUser(user.displayName, user.photoURL)
+                navigate('/')
             }
             return true
             // IdP data available using getAdditionalUserInfo(result)
