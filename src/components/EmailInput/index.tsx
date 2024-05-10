@@ -2,7 +2,12 @@ import { useMyContext } from "../../provider/geral"
 
 import { MdOutlineEmail } from "react-icons/md";
 
-export default function EmailInput() {
+interface Props {
+    value?: string,
+    event?: (e:React.ChangeEvent<HTMLInputElement>) => void,
+}
+
+export default function EmailInput(props: Props) {
 
     const states:any = useMyContext()
     const { theme } = states
@@ -36,10 +41,12 @@ export default function EmailInput() {
                 text-[24px]
                 ${theme == 'light' ? 'text-my-gray' : 'text-my-gray-black'}
                 `}
-                />
+            />
             <input
+                onChange={props.event && props.event}
                 id="emailInput"
-                type="text"
+                type="email"
+                value={props.value && props.value}
                 placeholder="Digite seu endereço de email"
                 className={`
                     w-full

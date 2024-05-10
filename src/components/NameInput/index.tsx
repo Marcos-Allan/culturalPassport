@@ -1,8 +1,14 @@
 import { useMyContext } from "../../provider/geral"
-
 import { MdOutlinePerson } from "react-icons/md";
 
-export default function NameInput({ text, placeholder }:{ text:string, placeholder:string }) {
+interface Props {
+    text: string,
+    placeholder: string,
+    value?: string,
+    event?: (e:React.ChangeEvent<HTMLInputElement>) => void
+}
+
+export default function NameInput(props: Props) {
 
     const states:any = useMyContext()
     const { theme } = states
@@ -20,7 +26,7 @@ export default function NameInput({ text, placeholder }:{ text:string, placehold
             `}
             htmlFor="emailInput"
         >
-            {text}
+            {props.text}
         </label>
 
         <div
@@ -36,11 +42,13 @@ export default function NameInput({ text, placeholder }:{ text:string, placehold
                 text-[24px]
                 ${theme == 'light' ? 'text-my-gray' : 'text-my-gray-black'}
                 `}
-                />
+            />
             <input
                 id="emailInput"
                 type="text"
-                placeholder={placeholder}
+                value={props.value && props.value}
+                onChange={props.event && props.event}
+                placeholder={props.placeholder}
                 className={`
                     w-full
                     text-[20px]
