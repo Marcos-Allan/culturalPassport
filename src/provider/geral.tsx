@@ -17,7 +17,6 @@ export const MyProvider = ({ children } : { children: React.ReactNode }) => {
     const [theme, setTheme] = useState<string | null>(localStorage.getItem('themePC'))
     const [menuOpen, setMenuOpen] = useState<boolean>(false)
     const [userS, setUserS] = useState<User>({ logged: false, name: '', img: '' })
-    const [openMenu, setOpenMenu] = useState<boolean>(false)
 
     //FUNÇÃO RESPONSAVEL POR ABRIR E FECHAR O MENU
     const toggleUser = (name:string, img:string) => {
