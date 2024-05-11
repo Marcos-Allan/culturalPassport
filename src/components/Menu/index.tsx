@@ -1,10 +1,16 @@
+//IMPORTAÇÃO DOS ICONES
 import { useMyContext } from "../../provider/geral"
 import { IoCloseOutline } from "react-icons/io5";
+
+//IMPORTAÇÃO DOS COMPONENTES
 import ToggleTheme from "../ToggleTheme";
 
 export default function Menu() {
 
+    //UTILIZAÇÃO DO HOOK DE NAVEGAÇÃO 
     const states:any = useMyContext()
+
+    //RESGATA AS VARIAVEIS GLOBAIS
     const { theme, menuOpen, toggleMenuOpen, userS } = states
 
     return(
@@ -24,7 +30,9 @@ export default function Menu() {
                 onClick={() => toggleMenuOpen()}
             />
 
+            {/* VERIFICA SE O ESTADO DA VARIAVEL GLOBAL userS.logged É IGUAL A TRUE */}
             {userS.logged == true && (
+                //COLOCA OS DADOS DE FOTO E NOME DO USUÁRIO NA TELA
                 <div className={`flex items-center gap-[10px] absolute top-0 left-0 m-3`}>
                     <img
                         src={userS.img}

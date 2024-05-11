@@ -1,11 +1,12 @@
-import Button from '../../components/Button'
-import EmailInput from '../../components/EmailInput'
+//IMPORTAÇÃO DOS COMPONENTES
 import ScreenPage from '../../components/ScreenPage'
-import Text from '../../components/Text'
-import TitlePage from '../../components/TitlePage'
 import Navbar from "../../components/Navbar";
 import Return from "../../components/Return";
+import TitlePage from '../../components/TitlePage'
 import MenuBUtton from '../../components/MenuButton'
+import Text from '../../components/Text'
+import EmailInput from '../../components/EmailInput'
+import Button from '../../components/Button'
 
 export default function ForgoutPassword() {
 

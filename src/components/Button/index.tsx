@@ -1,6 +1,10 @@
+//IMPORTAÇÃO DAS BIBLIOTECAS
 import { Link } from "react-router-dom"
+
+//IMPORTAÇÃO DO PROVEDOR PARA PEGAR AS VARIÁVEIS GLOBAIS
 import { useMyContext } from "../../provider/geral"
 
+//TIPAGEM DAS PROPS DO COMPONENTE
 interface Props {
     text: string,
     route: string,
@@ -9,10 +13,14 @@ interface Props {
 
 export default function Button(props: Props) {
 
+    //RESGATA AS VARIAVEIS GLOBAIS
     const states:any = useMyContext()
+
+    //DESESTRUTURA AS VARIAVEIS ESPECIFICADAS
     const { theme } = states
 
     return(
+        //VÊ SE A POR PROPS FOI PASSADA UMA ROTA DE NAVEGAÇÃO, SE NÃO DTERMINA A ROTA PASSADA POR PROPS
         <>
             {props.route !== 'undefined' ? (
                 <Link
@@ -37,6 +45,7 @@ export default function Button(props: Props) {
                         >{props.text}</p>
                 </Link>
             ):(
+                //EXECUTA A FUNÇÃO PASSADA POR PROPS
                 <div
                     onClick={() => {
                         props.event && props.event()
@@ -57,7 +66,6 @@ export default function Button(props: Props) {
                             capitalize
                             ${theme == 'light' ? 'text-my-white' : 'text-my-black'}
                         `}
-                        // onClick={() => alert('Paciência é uma virtude que nem todos tem')}
                         >{props.text}</p>
                 </div>
             )}

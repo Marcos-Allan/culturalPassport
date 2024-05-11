@@ -1,6 +1,10 @@
-import { useMyContext } from "../../provider/geral"
+//IMPORTAÇÃO DOS ICONES
 import { MdOutlinePerson } from "react-icons/md";
 
+//IMPORTAÇÃO DO PROVEDOR PARA PEGAR AS VARIÁVEIS GLOBAIS
+import { useMyContext } from "../../provider/geral"
+
+//TIPAGEM DAS PROPS DO COMPONENTE
 interface Props {
     text: string,
     placeholder: string,
@@ -10,7 +14,10 @@ interface Props {
 
 export default function NameInput(props: Props) {
 
+    //RESGATA AS VARIAVEIS GLOBAIS
     const states:any = useMyContext()
+
+    //DESESTRUTURA AS VARIAVEIS ESPECIFICADAS
     const { theme } = states
 
     return(

@@ -4,50 +4,55 @@ import { useState, ChangeEvent } from 'react'
 import { useNavigate } from 'react-router-dom';
 
 //IMPORTAÇÃO DOS COMPONENTES
-import EmailInput from "../../components/EmailInput";
-import PasswordInput from "../../components/PasswordInput";
-import GoogleLogin from "../../components/GoogleLogin";
-import PersonType from "../../components/PersonType";
-import Linkin from "../../components/Linkin";
-import Separation from "../../components/Separation";
-import Button from "../../components/Button";
-import TitlePage from "../../components/TitlePage";
 import ScreenPage from "../../components/ScreenPage";
 import Navbar from "../../components/Navbar";
-
 import Return from "../../components/Return";
-import { useMyContext } from '../../provider/geral';
+import TitlePage from "../../components/TitlePage";
 import MenuBUtton from '../../components/MenuButton';
+import EmailInput from "../../components/EmailInput";
+import PasswordInput from "../../components/PasswordInput";
+import PersonType from "../../components/PersonType";
+import Linkin from "../../components/Linkin";
+import Button from "../../components/Button";
+import Separation from "../../components/Separation";
+import GoogleLogin from "../../components/GoogleLogin";
+
+//IMPORTAÇÃO DO PROVEDOR PARA PEGAR AS VARIÁVEIS GLOBAIS
+import { useMyContext } from '../../provider/geral';
 
 
 export default function SignIn(){
 
+    //UTILIZAÇÃO DO HOOK DE NAVEGAÇÃO 
     const navigate = useNavigate()
 
+    //RESGATA AS VARIAVEIS GLOBAIS
     const states:any = useMyContext()
+
+    //DESESTRUTURA AS VARIAVEIS ESPECIFICADAS
     const { toggleUser } = states
 
+    //UTILIZA O HOOK useState
     const [inputValue, setInputValue] = useState<string>('')
 
+    //FUNÇÃO UTILIZADA PARA MUDAR O VALOR DA VARIAVEL COM BASE NO INPUT
     function handleInputChange(e:ChangeEvent<HTMLInputElement>) {
         setInputValue(e.target.value)
-        console.log(inputValue)
     }
 
+    //FUNÇÃO RESPONSÁVEL PELO LOGIN PELO EMAIL
     function signIn() {
 
         //FAZ UMA REQUISIÇÃO POST PARA O BACKEND DA APLICAÇÃO
         axios.post('https://backendculturalpassport-1.onrender.com/signin', {
+            //MANDA OS DADOS PARA O BACKEND JUNTO COM A REQUISIÇÃO
             email: inputValue
-            // email: 'allanmenezes888@gmail.com'
         })
         .then(function (response) {
             //EXECUTA UMA FUNÇÃO QUANDO A REQUISIÇÃO FOR BEM SUCEDIDA
             
             //VERIFICA SE A CONTA FOI ENCONTRADA PELO TIPO DO DADO RETORNADO
             if(typeof response.data === "object"){
-                //MOSTRA OS DADOS DO USUÁRIO CADASTRADO NO BANCO DE DADOS
-                console.log('Usuário encontrado')
 
                 //REGISTRA O NOME E A FOTO DO USUARIO LOGADO PARA MOSTRAR NO FRONT-END
                 toggleUser(response.data.name, response.data.img)
@@ -62,7 +67,7 @@ export default function SignIn(){
         })
         .catch(function (error) {
             //EXECUTA UMA FUNÇÃO QUANDO A REQUISIÇÃO FOR MAL SUCEDIDA
-            console.log(error);
+            console.log('ocorreu algum erro: ', error);
         });
         
     }

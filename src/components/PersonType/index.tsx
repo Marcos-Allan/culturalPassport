@@ -1,22 +1,33 @@
+//IMPORTAÇÃO DAS BIBLIOTECAS
 import { useState } from "react";
+
+//IMPORTAÇÃO DO PROVEDOR PARA PEGAR AS VARIÁVEIS GLOBAIS
 import { useMyContext } from "../../provider/geral";
 
+//IMPORTAÇÃO DOS ICONES
 import { IoChevronDownOutline } from "react-icons/io5";
 import { GiTeacher } from "react-icons/gi";
 import { PiStudent } from "react-icons/pi";
 
 export default function PersonType() {
 
+    //RESGATA AS VARIAVEIS GLOBAIS
     const states:any = useMyContext()
+
+    //DESESTRUTURA AS VARIAVEIS ESPECIFICADAS
     const { theme } = states
 
+    //UTILIZA O HOOK useState
     const [isTypeOpen, setIsTypeOpen] = useState<boolean>(false)
     const [personType, setPersonType] = useState<string>('')
 
+    //FUNÇÃO QUE ABRE OU FECHA AS OPÇÕES DE ESCOLHA
     function toggleIsTypeOpen() {
+        //TROCA DE true PARA false OU false PARA true
         setIsTypeOpen(!isTypeOpen)
     }
 
+    //FUNÇÃO RESPONSÁVEL POR DEIXAR TODAS AS INICIAIS DE UMA PALAVRA EM MAIUSCULAS E O RESTANTE EM MINUSCULAS
     function capitalizeText(text:string) {
         return text.replace(/\b\w/g, function(letter) {
             return letter.toUpperCase();

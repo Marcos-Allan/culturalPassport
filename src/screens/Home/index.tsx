@@ -1,11 +1,13 @@
-import Button from "../../components/Button/index.tsx"
+//IMPORTAÇÃO DOS COMPONENTES
 import ScreenPage from "../../components/ScreenPage/index.tsx"
-import Text from "../../components/Text/index.tsx";
-import TitlePage from "../../components/TitlePage/index.tsx"
-
-import Person from '../../assets/person_1.png'
 import Navbar from "../../components/Navbar/index.tsx";
+import TitlePage from "../../components/TitlePage/index.tsx"
 import MenuBUtton from "../../components/MenuButton/index.tsx";
+import Button from "../../components/Button/index.tsx"
+import Text from "../../components/Text/index.tsx";
+
+//IMPORTAÇÃO DA IMAGEM USADA NA TELA
+import Person from '../../assets/person_1.png'
 
 export default function Home(){
 

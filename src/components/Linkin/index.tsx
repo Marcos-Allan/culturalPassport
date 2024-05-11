@@ -1,6 +1,10 @@
+// IMPORTAÇÃO DAS BIBLIOTECAS
 import { Link } from "react-router-dom";
+
+//IMPORTAÇÃO DO PROVEDOR PARA PEGAR AS VARIÁVEIS GLOBAIS
 import { useMyContext } from "../../provider/geral";
 
+//TIPAGEM DAS PROPS DO COMPONENTE
 interface Props {
     route: string,
     text: string,
@@ -8,7 +12,10 @@ interface Props {
 
 export default function Linkin(props: Props) {
     
+    //RESGATA AS VARIAVEIS GLOBAIS
     const states:any = useMyContext()
+
+    //DESESTRUTURA AS VARIAVEIS ESPECIFICADAS
     const { theme } = states
 
     return(

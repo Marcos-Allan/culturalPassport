@@ -1,23 +1,31 @@
+//IMPORTAÇÃO DAS BIBLIOTECAS
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 import {
   createBrowserRouter,
   RouterProvider,
 } from "react-router-dom";
+
+//IMPORTAÇÃO DO CSS GLOBAL
 import './index.css'
 
-import SignIn from './screens/SignIn/index.tsx';
-import Signs from './screens/Signs/index.tsx';
+//IMPORTAÇÃO DAS PÁGINAS
 import Home from './screens/Home/index.tsx';
+import Signs from './screens/Signs/index.tsx';
+import SignIn from './screens/SignIn/index.tsx';
 import SignUp from './screens/SignUp/indx.tsx';
-
-import { Provider } from './provider/index.tsx';
-import ErrorPage from './screens/ErrorPage/index.tsx';
 import ForgoutPassword from './screens/ForgoutPassword/index.tsx';
 import ConfirmCode from './screens/ConfirmCode/index.tsx';
 import SwitchPassword from './screens/SwitchPassword/index.tsx';
+import ErrorPage from './screens/ErrorPage/index.tsx';
+
+//IMPORTAÇÃO DO PROVEDOR QUE GUARDA AS VÁRIAVEIS DE ESTADO GLOBAL
+import { Provider } from './provider/index.tsx';
+
+//IMPORTAÇÃO DOS COMPONENTES PRESENTES EM TODAS AS PÁGINAS
 import Menu from './components/Menu/index.tsx';
 
+//ARQUIVO DE CONFIGURAÇÃO DAS ROTAS
 const router = createBrowserRouter([
   {
     path: "/",
@@ -56,6 +64,7 @@ const router = createBrowserRouter([
   },
 ])
 
+//RENDRIZADOR DAS PÁGINAS
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
     <Provider>

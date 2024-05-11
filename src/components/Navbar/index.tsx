@@ -1,5 +1,7 @@
+//IMPORTAÇÃO DA TIPAGEM PARA COMPONENTES FILHOS DIRETO DO REACT
 import { ReactNode } from "react"
 
+//TIPAGEM DAS PROPS DO COMPONENTE
 interface Props {
     children: ReactNode
 }

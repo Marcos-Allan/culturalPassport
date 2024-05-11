@@ -1,12 +1,15 @@
-import Button from "../../components/Button/index.tsx"
+//IMPORTAÇÃO DOS COMPONENTES DA PÁGINA
 import ScreenPage from "../../components/ScreenPage/index.tsx"
-import Text from "../../components/Text/index.tsx";
-import TitlePage from "../../components/TitlePage/index.tsx"
-
-import Person from '../../assets/person_2.png'
 import Navbar from "../../components/Navbar/index.tsx";
 import Return from "../../components/Return/index.tsx";
+import TitlePage from "../../components/TitlePage/index.tsx"
 import MenuBUtton from "../../components/MenuButton/index.tsx";
+import Text from "../../components/Text/index.tsx";
+import Button from "../../components/Button/index.tsx"
+
+//IMPORTAÇÃO DA IMAGEM USADA NA PÁGINA
+import Person from '../../assets/person_2.png'
+
 
 export default function Signs(){
 

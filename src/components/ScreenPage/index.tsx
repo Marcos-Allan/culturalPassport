@@ -1,13 +1,20 @@
+//IMPORTAÇÃO DA TIPAGEM PARA COMPONENTES FILHOS DIRETO DO REACT
 import { ReactNode } from "react"
+
+//IMPORTAÇÃO DO PROVEDOR PARA PEGAR AS VARIÁVEIS GLOBAIS
 import { useMyContext } from "../../provider/geral"
 
+//TIPAGEM DAS PROPS DO COMPONENTE
 interface Props {
     children: ReactNode
 }
 
 export default function ScreenPage(props: Props) {
     
+    //RESGATA AS VARIAVEIS GLOBAIS
     const states:any = useMyContext()
+
+    //DESESTRUTURA AS VARIAVEIS ESPECIFICADAS
     const { theme, menuOpen, toggleMenuOpen } = states
 
     return(

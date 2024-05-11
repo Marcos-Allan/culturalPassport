@@ -1,7 +1,10 @@
+//IMPORTAÇÃO DO PROVEDOR PARA PEGAR AS VARIÁVEIS GLOBAIS
 import { useMyContext } from "../../provider/geral"
 
+//IMPORTAÇÃO DOS ICONES
 import { MdOutlineEmail } from "react-icons/md";
 
+//TIPAGEM DAS PROPS DO COMPONENTE
 interface Props {
     value?: string,
     event?: (e:React.ChangeEvent<HTMLInputElement>) => void,
@@ -9,7 +12,10 @@ interface Props {
 
 export default function EmailInput(props: Props) {
 
+    //RESGATA AS VARIAVEIS GLOBAIS
     const states:any = useMyContext()
+
+    //DESESTRUTURA AS VARIAVEIS ESPECIFICADAS
     const { theme } = states
 
     return(
