@@ -6,7 +6,6 @@ import { useNavigate } from 'react-router-dom';
 //IMPORTAÇÃO DOS COMPONENTES
 import EmailInput from "../../components/EmailInput";
 import PasswordInput from "../../components/PasswordInput";
-import ToggleTheme from "../../components/ToggleTheme";
 import GoogleLogin from "../../components/GoogleLogin";
 import PersonType from "../../components/PersonType";
 import Linkin from "../../components/Linkin";
@@ -18,6 +17,7 @@ import Navbar from "../../components/Navbar";
 
 import Return from "../../components/Return";
 import { useMyContext } from '../../provider/geral';
+import MenuBUtton from '../../components/MenuButton';
 
 
 export default function SignIn(){
@@ -75,7 +75,7 @@ export default function SignIn(){
                 <TitlePage
                     text={`login`}
                 />
-                <ToggleTheme />
+                <MenuBUtton />
             </Navbar>
 
             <form className={`mt-8 items-center flex flex-col w-[90%]`}>

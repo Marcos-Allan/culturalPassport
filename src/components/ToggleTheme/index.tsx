@@ -10,17 +10,23 @@ export default function ToggleTheme() {
 
     return(
         <div
-            className={`mt-4`}
+            className={`w-[80%] flex`}
             onClick={() => toggleTheme()}
         >
             {theme == 'light' ? (
-                <IoSunny
-                    className={`text-my-black text-[30px]`}
+                <>
+                    <IoSunny
+                        className={`text-my-white text-[30px]`}
                     />
-                ):(
-                <IoMoon
-                    className={`text-my-white text-[30px]`}
-                />
+                    <p className="text-my-white text-[18px] font-semibold capitalize flex-grow-[1] text-right">light mode</p>
+                </>
+            ):(
+                <>
+                    <IoMoon
+                        className={`text-my-black text-[30px]`}
+                    />
+                    <p className="text-my-black text-[18px] font-semibold capitalize flex-grow-[1] text-right">dark mode</p>
+                </>
             )}
         </div>
     )

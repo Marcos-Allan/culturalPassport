@@ -3,9 +3,9 @@ import ScreenPage from '../../components/ScreenPage'
 import Text from '../../components/Text'
 import TitlePage from '../../components/TitlePage'
 import PasswordInput from "../../components/PasswordInput";
-import ToggleTheme from "../../components/ToggleTheme";
 import Navbar from "../../components/Navbar";
 import Return from "../../components/Return";
+import MenuBUtton from '../../components/MenuButton';
 
 export default function SwitchPassword() {
 
@@ -16,7 +16,7 @@ export default function SwitchPassword() {
                 <TitlePage
                     text={`Trocar a Senha`}
                 />
-                <ToggleTheme />
+                <MenuBUtton />
             </Navbar>
             <Text text={`Crie sua nova senha`} />
 

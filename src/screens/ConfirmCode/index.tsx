@@ -3,9 +3,9 @@ import EmailInput from '../../components/EmailInput'
 import ScreenPage from '../../components/ScreenPage'
 import Text from '../../components/Text'
 import TitlePage from '../../components/TitlePage'
-import ToggleTheme from "../../components/ToggleTheme";
 import Navbar from "../../components/Navbar";
 import Return from "../../components/Return";
+import MenuBUtton from '../../components/MenuButton'
 
 export default function ConfirmCode() {
 
@@ -17,7 +17,7 @@ export default function ConfirmCode() {
                 <TitlePage
                     text={`Confirmar código`}
                 />
-                <ToggleTheme />
+                <MenuBUtton />
             </Navbar>
             <Text text={`Digite o código que foi enviado por email`} />
 

@@ -3,13 +3,12 @@ import { useEffect, useState } from 'react'
 import { FcGoogle } from "react-icons/fc";
 import { useMyContext } from "../../provider/geral";
 import { auth, getRedirectResult, provider, signInWithRedirect } from '../../utils/firebase.tsx'
-import Linkin from '../Linkin/index.tsx';
 export default function GoogleLogin() {
 
     const navigate = useNavigate()
 
     const states:any = useMyContext()
-    const { theme, userS, toggleUser } = states
+    const { theme, toggleUser } = states
 
     const [loading, setLoading] = useState<boolean>(false)
 
@@ -20,6 +19,8 @@ export default function GoogleLogin() {
     
     //CRIA UMA FUNÇÃO PARA SER EXPORTADA QUE PEGA O RESULTADO DO LOGIN REDIRECIONADO
     function getLoginResult() {
+        setLoading(true)
+
         getRedirectResult(auth)
         .then((result) => {
         // This gives you a Google Access Token. You can use it to access Google APIs.
@@ -28,11 +29,12 @@ export default function GoogleLogin() {
     
             // The signed-in user info.
             const user = result ? result.user : null;
-
+            
             if(user){
                 toggleUser(user.displayName, user.photoURL)
                 navigate('/')
             }
+            setLoading(false)
             return true
             // IdP data available using getAdditionalUserInfo(result)
             // ...
@@ -47,19 +49,13 @@ export default function GoogleLogin() {
             // const credential = GoogleAuthProvider.credentialFromError(error);
             // ...
             console.log(false)
+            setLoading(false)
             return false
         });
-        console.log('finaized')
-        return 'finaized'
     }
 
     useEffect(() => {
-        const login = getLoginResult()
-        if(login == 'finaized'){
-            setLoading(false)
-        }else{
-            setLoading(true)
-        }
+        getLoginResult()
     },[])
 
     return(
@@ -85,9 +81,6 @@ export default function GoogleLogin() {
                             signInRedirect()
                         }}
                     />
-                    {userS.logged == true && (
-                        <Linkin route='/' text='voltar' />
-                    )}
                 </>
             )}
         </>

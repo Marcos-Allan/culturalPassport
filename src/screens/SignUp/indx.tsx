@@ -13,7 +13,7 @@ import PasswordInput from "../../components/PasswordInput/index.tsx"
 import Return from "../../components/Return/index.tsx"
 import ScreenPage from "../../components/ScreenPage/index.tsx"
 import TitlePage from "../../components/TitlePage/index.tsx"
-import ToggleTheme from "../../components/ToggleTheme/index.tsx"
+import MenuBUtton from '../../components/MenuButton/index.tsx'
 
 export default function SignUp(){
 
@@ -52,7 +52,7 @@ export default function SignUp(){
                 <TitlePage
                     text={`cadastrar`}
                 />
-                <ToggleTheme />
+                <MenuBUtton />
             </Navbar>
 
             <form className={`mt-8 items-center flex flex-col w-full`}>

@@ -16,6 +16,7 @@ import ErrorPage from './screens/ErrorPage/index.tsx';
 import ForgoutPassword from './screens/ForgoutPassword/index.tsx';
 import ConfirmCode from './screens/ConfirmCode/index.tsx';
 import SwitchPassword from './screens/SwitchPassword/index.tsx';
+import Menu from './components/Menu/index.tsx';
 
 const router = createBrowserRouter([
   {
@@ -59,6 +60,7 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
     <Provider>
       <RouterProvider router={router} />
+      <Menu />
     </Provider>
   </React.StrictMode>,
 )
