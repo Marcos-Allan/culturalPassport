@@ -24,6 +24,8 @@ export default {
         'my-white': '#ffffff',
         'my-gray': '#818181',
         'my-gray-black': '#c0c0c0',
+        'my-white-opacity': '#ffffffbb',
+        'my-black-opacity': '#000000bb',
         
         // 'my-primary': '#5576D9',
         // 'my-secondary': '#A0BBF2',

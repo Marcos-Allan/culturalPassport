@@ -1,6 +1,6 @@
 //IMPORTAÇÃO DAS BIBLIOTECAS
 import { useNavigate } from 'react-router-dom'
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 
 //IMPORTAÇÃO DOS ICONES
 import { FcGoogle } from "react-icons/fc";
@@ -20,10 +20,7 @@ export default function GoogleLogin() {
     const states:any = useMyContext()
 
     //DESESTRUTURA AS VARIAVEIS ESPECIFICADAS
-    const { theme, toggleUser } = states
-
-    //UTILIZA O HOOK useState
-    const [loading, setLoading] = useState<boolean>(false)
+    const { theme, toggleUser, loading, toggleLoading } = states
 
     //FUNÇÃO QUE FAZ LOGIN COM O GOOGLE COM REDIRECIONAMENTO DE PÁGINA
     function signInRedirect() {
@@ -32,7 +29,8 @@ export default function GoogleLogin() {
     
     //FUNÇÃO PARA PEGAR O RESULTADO DO LOGIN QUE FOI REDIRECIONADO
     function getLoginResult() {
-        setLoading(true)
+        //MUDA O ESTADO DE CARREGAMENTO DA APLICAÇÃO PARA true
+        toggleLoading(true)
 
         getRedirectResult(auth)
         .then((result) => {
@@ -54,8 +52,8 @@ export default function GoogleLogin() {
                 navigate('/')
             }
             
-            //MUDA O ESTADO DE CARREGAMENTO DO BOTÃO PARA true
-            setLoading(false)
+            //MUDA O ESTADO DE CARREGAMENTO DA APLICAÇÃO PARA false
+            toggleLoading(false)
 
             //RETORNA true
             return true
@@ -75,8 +73,8 @@ export default function GoogleLogin() {
             // const credential = GoogleAuthProvider.credentialFromError(error);
             // ...
             
-            //MUDA O ESTADO DE CARREGAMENTO DO BOTÃO PARA false
-            setLoading(false)
+            //MUDA O ESTADO DE CARREGAMENTO DA APLICAÇÃO PARA false
+            toggleLoading(false)
 
             //RETORNA false
             return false
@@ -85,6 +83,8 @@ export default function GoogleLogin() {
 
     //FUNÇÃO CHAMADA TODA VES QUE A PÁGINA É RECARREGADA
     useEffect(() => {
+        //MUDA O ESTADO DE CARREGAMENTO DA APLICAÇÃO PARA false
+        toggleLoading(false)
         getLoginResult()
     },[])
 
@@ -106,7 +106,8 @@ export default function GoogleLogin() {
                             ${theme == 'light' ? 'border-my-gray' : 'border-my-gray-black'}
                         `}
                         onClick={() => {
-                            setLoading(true)
+                            //MUDA O ESTADO DE CARREGAMENTO DA APLICAÇÃO PARA true
+                            toggleLoading(true)
                             signInRedirect()
                         }}
                     />

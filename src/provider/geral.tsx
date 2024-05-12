@@ -17,17 +17,8 @@ export const MyProvider = ({ children } : { children: React.ReactNode }) => {
     const [theme, setTheme] = useState<string | null>(localStorage.getItem('themePC'))
     const [menuOpen, setMenuOpen] = useState<boolean>(false)
     const [userS, setUserS] = useState<User>({ logged: false, name: '', img: '' })
+    const [loading, setLoading] = useState<boolean>(false)
 
-    //FUNÇÃO RESPONSAVEL POR ABRIR E FECHAR O MENU
-    const toggleUser = (name:string, img:string) => {
-        setUserS({ logged: true, name: name, img: img })
-    }
-
-    //FUNÇÃO RESPONSAVEL POR ABRIR E FECHAR O MENU
-    const toggleMenuOpen = () => {
-        setMenuOpen(!menuOpen)
-    }
-    
     //FUNÇÃO RESPONSAVEL POR TROCAR E SALVAR NO localStorage O TEMA ESCOLHIDO PELO USUÁRIO
     const toggleTheme = () => {
         let themeAplicked = localStorage.getItem('themePC')
@@ -35,9 +26,24 @@ export const MyProvider = ({ children } : { children: React.ReactNode }) => {
         setTheme(themeAplicked == 'light' ? 'dark' : 'light')
     }
     
+    //FUNÇÃO RESPONSAVEL POR ABRIR E FECHAR O MENU
+    const toggleMenuOpen = () => {
+        setMenuOpen(!menuOpen)
+    }
+    
+    //FUNÇÃO RESPONSAVEL POR ABRIR E FECHAR O MENU
+    const toggleUser = (name:string, img:string) => {
+        setUserS({ logged: true, name: name, img: img })
+    }
+    
+    //FUNÇÃO RESPONSAVEL POR TROCAR O ESTADO DE LOADING DA APLICAÇÃO
+    const toggleLoading = (cond:boolean) => {
+        setLoading(cond)
+    }
+
     //RETORNA TUDO PARA SER USADO EM TODO O SITE
     return (
-        <MyContext.Provider value={{ theme, toggleTheme, menuOpen, toggleMenuOpen, userS, toggleUser }}>
+        <MyContext.Provider value={{ theme, toggleTheme, menuOpen, toggleMenuOpen, userS, toggleUser, loading, toggleLoading }}>
             {children}
         </MyContext.Provider>
     )
