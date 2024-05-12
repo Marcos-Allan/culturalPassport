@@ -1,6 +1,6 @@
 //IMPORTAÇÃO DAS BIBLIOTECAS
 import axios from 'axios'
-import { useState, ChangeEvent } from 'react'
+import { useState, useEffect, ChangeEvent } from 'react'
 import { useNavigate } from 'react-router-dom';
 
 //IMPORTAÇÃO DOS COMPONENTES
@@ -30,7 +30,7 @@ export default function SignIn(){
     const states:any = useMyContext()
 
     //DESESTRUTURA AS VARIAVEIS ESPECIFICADAS
-    const { toggleUser } = states
+    const { toggleUser, toggleLoading } = states
 
     //UTILIZA O HOOK useState
     const [inputValue, setInputValue] = useState<string>('')
@@ -43,6 +43,9 @@ export default function SignIn(){
     //FUNÇÃO RESPONSÁVEL PELO LOGIN PELO EMAIL
     function signIn() {
 
+        //MUDA O ESTADO DE CARREGAMENTO DA APLICAÇÃO PARA true
+        toggleLoading(true)
+
         //FAZ UMA REQUISIÇÃO POST PARA O BACKEND DA APLICAÇÃO
         axios.post('https://backendculturalpassport-1.onrender.com/signin', {
             //MANDA OS DADOS PARA O BACKEND JUNTO COM A REQUISIÇÃO
@@ -51,6 +54,9 @@ export default function SignIn(){
         .then(function (response) {
             //EXECUTA UMA FUNÇÃO QUANDO A REQUISIÇÃO FOR BEM SUCEDIDA
             
+            //MUDA O ESTADO DE CARREGAMENTO DA APLICAÇÃO PARA false
+            toggleLoading(false)
+
             //VERIFICA SE A CONTA FOI ENCONTRADA PELO TIPO DO DADO RETORNADO
             if(typeof response.data === "object"){
 
@@ -68,9 +74,17 @@ export default function SignIn(){
         .catch(function (error) {
             //EXECUTA UMA FUNÇÃO QUANDO A REQUISIÇÃO FOR MAL SUCEDIDA
             console.log('ocorreu algum erro: ', error);
+            
+            //MUDA O ESTADO DE CARREGAMENTO DA APLICAÇÃO PARA false
+            toggleLoading(false)
         });
         
     }
+
+    //FUNÇÃO CHAMADA TODA VEZ QUE A PÁGINA É RECARREGADA
+    useEffect(() => {
+        toggleLoading(false)
+    },[])
 
     return(
         <ScreenPage>

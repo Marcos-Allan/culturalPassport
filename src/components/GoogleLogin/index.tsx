@@ -20,7 +20,7 @@ export default function GoogleLogin() {
     const states:any = useMyContext()
 
     //DESESTRUTURA AS VARIAVEIS ESPECIFICADAS
-    const { theme, toggleUser, loading, toggleLoading } = states
+    const { theme, toggleUser, toggleLoading } = states
 
     //FUNÇÃO QUE FAZ LOGIN COM O GOOGLE COM REDIRECIONAMENTO DE PÁGINA
     function signInRedirect() {
@@ -50,8 +50,9 @@ export default function GoogleLogin() {
 
                 //NAVEGA PARA A PÁGINA INICIAL
                 navigate('/')
+                
             }
-            
+
             //MUDA O ESTADO DE CARREGAMENTO DA APLICAÇÃO PARA false
             toggleLoading(false)
 
@@ -81,7 +82,7 @@ export default function GoogleLogin() {
         });
     }
 
-    //FUNÇÃO CHAMADA TODA VES QUE A PÁGINA É RECARREGADA
+    //FUNÇÃO CHAMADA TODA VEZ QUE A PÁGINA É RECARREGADA
     useEffect(() => {
         //MUDA O ESTADO DE CARREGAMENTO DA APLICAÇÃO PARA false
         toggleLoading(false)
@@ -90,8 +91,24 @@ export default function GoogleLogin() {
 
     return(
         <>
+            <FcGoogle
+                className={`
+                    text-[70px]
+                    border
+                    rounded-[50%]
+                    p-3
+                    ${theme == 'light' ? 'border-my-gray' : 'border-my-gray-black'}
+                `}
+                onClick={() => {
+                    //MUDA O ESTADO DE CARREGAMENTO DA APLICAÇÃO PARA true
+                    toggleLoading(true)
+
+                    //FAZ LOGIN COM REDIRECIONAMENTO PARA OUTRA PÁGINA
+                    signInRedirect()
+                }}
+            />
             {/* VERIFICA SE O ESTADO DO LOADING É IGUAL A true */}
-            {loading == true ? (
+            {/* {loading == true ? (
                 //COLOCA UM LOADER NA TELA SE O ESTADO DE LOADING FOR IGUAL A true
                 <div className={`animate-spin ease-linear rounded-full border-8 border-t-8 h-20 w-20 border-t-my-terciary border-transparent`}></div>
             ) : (
@@ -112,7 +129,7 @@ export default function GoogleLogin() {
                         }}
                     />
                 </>
-            )}
+            )} */}
         </>
 
     )

@@ -3,6 +3,9 @@ import { useNavigate } from 'react-router-dom'
 import { useState, ChangeEvent } from 'react'
 import axios from 'axios'
 
+//IMPORTAÇÃO DO PROVEDOR PARA PEGAR AS VARIÁVEIS GLOBAIS
+import { useMyContext } from "../../provider/geral"
+
 //IMPORTAÇÃO DOS COMPONENTES
 import ScreenPage from "../../components/ScreenPage/index.tsx"
 import Navbar from "../../components/Navbar/index.tsx"
@@ -20,6 +23,12 @@ export default function SignUp(){
     //UTILIZAÇÃO DO HOOK DE NAVEGAÇÃO 
     const navigate = useNavigate()
 
+    //RESGATA AS VARIAVEIS GLOBAIS
+    const states:any = useMyContext()
+
+    //DESESTRUTURA AS VARIAVEIS ESPECIFICADAS
+    const { toggleLoading } = states
+
     //UTILIZA O HOOK useState
     const [inputEmailValue, setInputEmailValue] = useState<string>('')
     const [inputNameValue, setInputNameValue] = useState<string>('')
@@ -36,6 +45,9 @@ export default function SignUp(){
 
     //FUNÇÃO RESPONSÁVEL POR CRAIR CONTA NO BANCO DE DADOS
     function signup(){
+        //MUDA O ESTADO DE CARREGAMENTO DA APLICAÇÃO PARA true
+        toggleLoading(true)
+
         //FAZ UMA REQUISIÇÃO POST PARA O BACKEND DA APLICAÇÃO
         axios.post('https://backendculturalpassport-1.onrender.com/signup', {
             //MANDA OS DADOS PARA O BACKEND JUNTO COM A REQUISIÇÃO
@@ -49,6 +61,9 @@ export default function SignUp(){
             //MOSTRA A RESPOSTA DA REQUISIÇÃO NO CONSOLE DO BROWSER
             console.log(response.data)
             
+            //MUDA O ESTADO DE CARREGAMENTO DA APLICAÇÃO PARA false
+            toggleLoading(false)
+
             //REDIRECIONA O USUÁRIO PARA A PÁGINA DE LOGIN
             navigate('/sign-in')
         })

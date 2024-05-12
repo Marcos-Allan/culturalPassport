@@ -16,7 +16,10 @@ export default function LoadingPage() {
                     absolute top-0 left-0 w-screen h-screen flex justify-center items-center
                     ${theme == 'light' ? 'bg-my-black-opacity' : 'bg-my-white-opacity'}
                 `}>
-                    <p className={`${theme == 'light' ? 'text-my-white' : 'text-my-black'} font-bold text-[36px]`}>Loading</p>
+                    <div className={`
+                        w-[80px] h-[80px] bg-my-transparent rounded-[50%] border-[6px] border-t-transparent animate-spin
+                        ${theme == 'light' ? 'border-my-quartenary' : 'border-my-terciary'}
+                    `}></div>
                 </div>
             )}
         </>

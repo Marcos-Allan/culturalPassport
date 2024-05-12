@@ -39,7 +39,7 @@ export default function Menu() {
                         alt=""
                         className={`rounded-[50%] mb-2 w-20 h-20 border-[1px] ${theme == 'light' ? 'border-my-quartenary' : 'border-my-terciary'} p-1`}
                     />
-                    <p className={`text-[22px] font-bold
+                    <p className={`text-[22px] font-bold capitalize
                         ${theme == 'light' ? 'text-my-white' : 'text-my-black'}
                     `}>{userS.name}</p>
                 </div>
