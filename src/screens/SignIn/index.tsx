@@ -38,7 +38,6 @@ export default function SignIn(){
     //FUNÇÃO UTILIZADA PARA MUDAR O VALOR DA VARIAVEL COM BASE NO INPUT
     function handleInputChange(e:ChangeEvent<HTMLInputElement>) {
         setInputValue(e.target.value)
-        toggleAlert('error', 'hihihiha')
     }
 
     //FUNÇÃO RESPONSÁVEL PELO LOGIN PELO EMAIL
@@ -64,17 +63,26 @@ export default function SignIn(){
                 //REGISTRA O NOME E A FOTO DO USUARIO LOGADO PARA MOSTRAR NO FRONT-END
                 toggleUser(response.data.name, response.data.img)
 
+                //COLOCA ALERT NA TELA
+                toggleAlert(`success`, `seja bem-vindo(a) ${response.data.name}`)
+                
                 //REDIRECIONA O USUÁRIO PARA A PÁGINA INICIAL
                 navigate('/')
 
             }else{
                 //RETORNA MENSAGEM DE ERRO AO USUARIO
                 console.log('Usuário não encontrado')
+
+                //COLOCA ALERT NA TELA
+                toggleAlert(`error`, `usuário não encontrado`)
             }
         })
         .catch(function (error) {
             //EXECUTA UMA FUNÇÃO QUANDO A REQUISIÇÃO FOR MAL SUCEDIDA
             console.log('ocorreu algum erro: ', error);
+
+            //COLOCA ALERT NA TELA
+            toggleAlert(`error`, `lamentamos, erro interno no servidor`)
             
             //MUDA O ESTADO DE CARREGAMENTO DA APLICAÇÃO PARA false
             toggleLoading(false)

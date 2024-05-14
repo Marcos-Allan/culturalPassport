@@ -20,7 +20,7 @@ export default function GoogleLogin() {
     const states:any = useMyContext()
 
     //DESESTRUTURA AS VARIAVEIS ESPECIFICADAS
-    const { theme, toggleUser, toggleLoading } = states
+    const { theme, toggleUser, toggleLoading, toggleAlert } = states
 
     //FUNÇÃO QUE FAZ LOGIN COM O GOOGLE COM REDIRECIONAMENTO DE PÁGINA
     function signInRedirect() {
@@ -48,6 +48,9 @@ export default function GoogleLogin() {
                 //FAZ O LOGIN DO USUÁRIO COM O NOME E COM A FOTO DA CONTA DO GOOGLE DELE
                 toggleUser(user.displayName, user.photoURL)
 
+                //COLOCA ALERT NA TELA
+                toggleAlert(`success`, `seja bem-vindo(a) ${user.displayName}`)
+
                 //NAVEGA PARA A PÁGINA INICIAL
                 navigate('/')
                 
@@ -55,6 +58,7 @@ export default function GoogleLogin() {
 
             //MUDA O ESTADO DE CARREGAMENTO DA APLICAÇÃO PARA false
             toggleLoading(false)
+
 
             //RETORNA true
             return true
@@ -76,6 +80,9 @@ export default function GoogleLogin() {
             
             //MUDA O ESTADO DE CARREGAMENTO DA APLICAÇÃO PARA false
             toggleLoading(false)
+
+            //COLOCA ALERT NA TELA
+            toggleAlert(`error`, `Lamentamos, ocorreu algum erro inesperado`)
 
             //RETORNA false
             return false
