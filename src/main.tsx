@@ -25,6 +25,7 @@ import { Provider } from './provider/index.tsx';
 //IMPORTAÇÃO DOS COMPONENTES PRESENTES EM TODAS AS PÁGINAS
 import Menu from './components/Menu/index.tsx';
 import LoadingPage from './components/LoadingPage';
+import Alert from './components/Alert/index.tsx';
 
 //ARQUIVO DE CONFIGURAÇÃO DAS ROTAS
 const router = createBrowserRouter([
@@ -72,6 +73,7 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
       <RouterProvider router={router} />
       <Menu />
       <LoadingPage />
+      <Alert />
     </Provider>
   </React.StrictMode>,
 )

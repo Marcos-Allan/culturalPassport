@@ -30,7 +30,7 @@ export default function SignIn(){
     const states:any = useMyContext()
 
     //DESESTRUTURA AS VARIAVEIS ESPECIFICADAS
-    const { toggleUser, toggleLoading } = states
+    const { toggleUser, toggleLoading, toggleAlert } = states
 
     //UTILIZA O HOOK useState
     const [inputValue, setInputValue] = useState<string>('')
@@ -38,6 +38,7 @@ export default function SignIn(){
     //FUNÇÃO UTILIZADA PARA MUDAR O VALOR DA VARIAVEL COM BASE NO INPUT
     function handleInputChange(e:ChangeEvent<HTMLInputElement>) {
         setInputValue(e.target.value)
+        toggleAlert('error', 'hihihiha')
     }
 
     //FUNÇÃO RESPONSÁVEL PELO LOGIN PELO EMAIL
