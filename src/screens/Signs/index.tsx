@@ -29,6 +29,7 @@ export default function Signs(){
 
             <img
                 src={Person}
+                className="w-[93%]"
                 alt=""
             />
                         
