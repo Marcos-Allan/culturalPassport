@@ -78,10 +78,10 @@ export default function SignIn(){
 
             }else{
                 //RETORNA MENSAGEM DE ERRO AO USUARIO
-                console.log('Usuário não encontrado')
+                console.log(response)
 
                 //COLOCA ALERT NA TELA
-                toggleAlert(`error`, `usuário não encontrado`)
+                toggleAlert(`error`, `${response.data}`)
             }
         })
         .catch(function (error) {
