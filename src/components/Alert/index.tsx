@@ -109,7 +109,7 @@ export default function Alert() {
                 ${theme == 'light' ? 'bg-my-white border-my-terciary' : 'bg-my-black border-my-quartenary'}
                 w-[95%] border-2 rounded-[8px] px-3 py-2 pb-3 relative overflow-hidden ${opacity == 0 ? 'opacity-0' : 'opacity-100'} transition-opacity duration-[400ms]
             `}>
-                <p className={`text-center ${theme == 'light' ? 'text-my-black' : 'text-my-white'}`}>{message.text}</p>
+                <p className={`text-center capitalize ${theme == 'light' ? 'text-my-black' : 'text-my-white'}`}>{message.text}</p>
 
                 {/* CRIA UMA DIV COM ANIMAÇÃO */}
                 <animated.div

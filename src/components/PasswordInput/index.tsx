@@ -13,6 +13,8 @@ interface Props {
     text: string,
     placeholder: string,
     hidden: boolean,
+    value?: string,
+    event?: (e:React.ChangeEvent<HTMLInputElement>) => void,
 }
 
 export default function PasswordInput(props: Props) {
@@ -105,7 +107,9 @@ export default function PasswordInput(props: Props) {
 
                 <input
                     ref={passwordInputVisible}
+                    onChange={props.event && props.event}
                     placeholder={props.placeholder}
+                    value={props.value && props.value}
                     id="passwordInput"
                     type={`${props.hidden == true ? 'password' : 'text'}`}
                     className={`

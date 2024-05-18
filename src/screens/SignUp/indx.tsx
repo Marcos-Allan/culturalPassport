@@ -32,6 +32,7 @@ export default function SignUp(){
     //UTILIZA O HOOK useState
     const [inputEmailValue, setInputEmailValue] = useState<string>('')
     const [inputNameValue, setInputNameValue] = useState<string>('')
+    const [inputPasswordValue, setInputPasswordValue] = useState<string>('')
 
     //FUNÇÃO UTILIZADA PARA MUDAR O VALOR DA VARIAVEL COM BASE NO INPUT
     function handleInputNameChange(e:ChangeEvent<HTMLInputElement>){
@@ -41,6 +42,11 @@ export default function SignUp(){
     //FUNÇÃO UTILIZADA PARA MUDAR O VALOR DA VARIAVEL COM BASE NO INPUT
     function handleInputEmailChange(e:ChangeEvent<HTMLInputElement>){
         setInputEmailValue(e.target.value)
+    }
+
+    //FUNÇÃO UTILIZADA PARA MUDAR O VALOR DA VARIAVEL COM BASE NO INPUT
+    function handleInputPasswordChange(e:ChangeEvent<HTMLInputElement>) {
+        setInputPasswordValue(e.target.value)
     }
 
     //FUNÇÃO RESPONSÁVEL POR CRAIR CONTA NO BANCO DE DADOS
@@ -53,6 +59,7 @@ export default function SignUp(){
             //MANDA OS DADOS PARA O BACKEND JUNTO COM A REQUISIÇÃO
             name: inputNameValue,
             email: inputEmailValue,
+            password: inputPasswordValue
         })
         .then(function (response) {
             //EXECUTA UMA FUNÇÃO QUANDO A REQUISIÇÃO FOR BEM SUCEDIDA
@@ -104,8 +111,9 @@ export default function SignUp(){
 
                 <EmailInput event={handleInputEmailChange} value={inputEmailValue} />   
 
-                <PasswordInput text="Password" placeholder="Digite uma senha" hidden={false} />
+                <PasswordInput text="Password" placeholder="Digite uma senha" hidden={false} value={inputPasswordValue} event={handleInputPasswordChange} />
                 <PasswordInput text="Confirm Password" placeholder="Digite a confirmação da senha" hidden={false} />
+                
                 <Button text="criar" route="undefined" event={signup} />
             </form>
             

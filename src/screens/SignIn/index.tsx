@@ -33,11 +33,17 @@ export default function SignIn(){
     const { toggleUser, toggleLoading, toggleAlert } = states
 
     //UTILIZA O HOOK useState
-    const [inputValue, setInputValue] = useState<string>('')
+    const [inputEmailValue, setInputEmailValue] = useState<string>('')
+    const [inputPasswordValue, setInputPasswordValue] = useState<string>('')
 
     //FUNÇÃO UTILIZADA PARA MUDAR O VALOR DA VARIAVEL COM BASE NO INPUT
-    function handleInputChange(e:ChangeEvent<HTMLInputElement>) {
-        setInputValue(e.target.value)
+    function handleInputEmailChange(e:ChangeEvent<HTMLInputElement>) {
+        setInputEmailValue(e.target.value)
+    }
+    
+    //FUNÇÃO UTILIZADA PARA MUDAR O VALOR DA VARIAVEL COM BASE NO INPUT
+    function handleInputPasswordChange(e:ChangeEvent<HTMLInputElement>) {
+        setInputPasswordValue(e.target.value)
     }
 
     //FUNÇÃO RESPONSÁVEL PELO LOGIN PELO EMAIL
@@ -49,7 +55,8 @@ export default function SignIn(){
         //FAZ UMA REQUISIÇÃO POST PARA O BACKEND DA APLICAÇÃO
         axios.post('https://backendculturalpassport-1.onrender.com/signin', {
             //MANDA OS DADOS PARA O BACKEND JUNTO COM A REQUISIÇÃO
-            email: inputValue
+            email: inputEmailValue,
+            password: inputPasswordValue
         })
         .then(function (response) {
             //EXECUTA UMA FUNÇÃO QUANDO A REQUISIÇÃO FOR BEM SUCEDIDA
@@ -108,8 +115,8 @@ export default function SignIn(){
 
             <form className={`mt-8 items-center flex flex-col w-[90%]`}>
                 
-                <EmailInput value={inputValue} event={handleInputChange} />   
-                <PasswordInput text="Password" placeholder="Digite uma senha" hidden={true} />
+                <EmailInput value={inputEmailValue} event={handleInputEmailChange} />   
+                <PasswordInput text="Password" placeholder="Digite uma senha" hidden={true} value={inputPasswordValue} event={handleInputPasswordChange} />
                 <PersonType />
 
                 <Linkin route="/forgout-passowrd" text="Esqueceu sua senha?" />
