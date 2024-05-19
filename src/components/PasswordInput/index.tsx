@@ -19,8 +19,12 @@ interface Props {
 
 export default function PasswordInput(props: Props) {
 
-    //PEGA A REFERENCIA DE UM INPUT 
+    //PEGA A REFERÊNCIA A ELEMENTOS 
     const passwordInputVisible = useRef<HTMLInputElement>(null)
+    const label = useRef<HTMLLabelElement>(null) 
+    const message = useRef<HTMLParagraphElement>(null) 
+    const span = useRef<HTMLSpanElement>(null) 
+    const spanOne = useRef<HTMLSpanElement>(null)
     
     //RESGATA AS VARIAVEIS GLOBAIS
     const states:any = useMyContext()
@@ -30,6 +34,54 @@ export default function PasswordInput(props: Props) {
 
     //UTILIZA O HOOK useState
     const [isVisible, setIsVisible] = useState<boolean>(false)
+
+    //FUNÇÃO QUE VERIFICA SE O CAMPO ESTÁ DENTRO DO PADRÃO
+    function handleValidatePassword() {
+
+        //USA REGEX PARA VERIFICAR O PADRÃO DA STRING
+        const padraoPassword = /^[\w._-]{6,10}$/i
+
+        //VÊ SE O VALOR DO INPUT EXISTE
+        if(props.value){
+            //VERIFICA SE O VALOR DO INPUT ESTÁ NO PADRÃO DA REGEX padraoEmail
+            if(padraoPassword.test(props.value) == true){
+                //PEGA AS REFERÊNCIAS ATUAIS DOS ELEMENTOS
+                if(passwordInputVisible.current && label.current && message.current && span.current && spanOne.current){
+                    //MUDA O ESTILO COMO CORES DE LETRAS, ICONES E BORDAS DOS RESPECTIVOS ELEMENTOS 
+                    passwordInputVisible.current.style.border = `1px solid #00ff00`
+                    label.current.style.color = `#00ff00`
+                    passwordInputVisible.current.style.color = `#00ff00`
+                    message.current.style.color = `#00ff00`
+                    span.current.style.color = `#00ff00`
+                    spanOne.current.style.color = `#00ff00`
+                    
+                    //MUDA A OPACIDADE DA MENSAGEM PARA
+                    message.current.style.opacity = `100%`
+
+                    //ALTERA O TEXTO DA MENSAGEM
+                    message.current.innerText = `Senha dentro do padrão`
+                }
+                //VERIFICA SE O VALOR DO INPUT NÃO ESTÁ NO PADRÃO DA REGEX padraoEmail
+            }else{
+                //PEGA AS REFERÊNCIAS ATUAIS DOS ELEMENTOS
+                if(passwordInputVisible.current && label.current && message.current && span.current && spanOne.current){
+                    //MUDA O ESTILO COMO CORES DE LETRAS, ICONES E BORDAS DOS RESPECTIVOS ELEMENTOS 
+                    passwordInputVisible.current.style.border = `1px solid #ff0000`
+                    label.current.style.color = `#ff0000`
+                    passwordInputVisible.current.style.color = `#ff0000`
+                    message.current.style.color = `#ff0000`
+                    span.current.style.color = `#ff0000`
+                    spanOne.current.style.color = `#ff0000`
+                    
+                    //MUDA A OPACIDADE DA MENSAGEM PARA
+                    message.current.style.opacity = `100%`
+
+                    //ALTERA O TEXTO DA MENSAGEM
+                    message.current.innerText = `A senha deve ter entre 6 e 10 caracteres`
+                }
+            }
+        }
+    }
 
     //FUNÇÃO RESPONSÁVEL POR TROCAR O TIPO DO INPUT
     function toggleIsVisiblePassword() {
@@ -50,9 +102,10 @@ export default function PasswordInput(props: Props) {
     }
 
     return(
-        <div className="w-[90%]">
+        <div className="w-[90%] relative">
             {/* INPUT DE PASSWORD */}
             <label
+                ref={label}
                 className={`
                     w-full
                     text-[20px]
@@ -70,42 +123,42 @@ export default function PasswordInput(props: Props) {
                     w-full relative flex justify-center items-start flex-col mb-5
                 `}
             >
-                <MdOutlineLock
+                <span
+                    ref={span}
                     className={`
                     absolute
                     ms-2
                     left-0
                     text-[24px]
+                    ${theme == 'light' ? 'text-my-gray' : 'text-my-gray-black'}`}
+                >
+                    <MdOutlineLock />
+                </span>
+
+                <span
+                    ref={spanOne}
+                    className={`
+                    absolute
+                    me-2
+                    right-0
+                    text-[24px]
                     ${theme == 'light' ? 'text-my-gray' : 'text-my-gray-black'}
                     `}
-                />
-                {props.hidden == true && isVisible == true && (
-                    <IoEyeOutline 
-                        className={`
-                            absolute
-                            me-2
-                            right-0
-                            text-[24px]
-                            ${theme == 'light' ? 'text-my-gray' : 'text-my-gray-black'}
-                        `}
-                        onClick={() => toggleIsVisiblePassword()}
-                        />
-                )}
-                {props.hidden == true && isVisible == false && (
-                    <IoEyeOffOutline
-                        className={`
-                            absolute
-                            me-2
-                            right-0
-                            text-[24px]
-                            ${theme == 'light' ? 'text-my-gray' : 'text-my-gray-black'}
-                            `}
-                            onClick={() => toggleIsVisiblePassword()}
-                        />
-
-                )}
+                    onClick={() => toggleIsVisiblePassword()}
+                >
+                    {props.hidden == true && (
+                        <>
+                            {isVisible == true ? (
+                                <IoEyeOutline />
+                            ):(
+                                <IoEyeOffOutline />
+                            )}
+                        </>
+                    )}
+                </span>
 
                 <input
+                    onBlur={handleValidatePassword}
                     ref={passwordInputVisible}
                     onChange={props.event && props.event}
                     placeholder={props.placeholder}
@@ -127,6 +180,7 @@ export default function PasswordInput(props: Props) {
                     `}
                 />
             </div>
+            <p ref={message} className={`w-full ps-2 opacity-0 absolute bottom-[-3%]`}>oioioi</p>
         </div>
     )
 }

@@ -26,27 +26,36 @@ export default function Button(props: Props) {
                 <Link
                     to={props.route}
                     className={`
-                        w-[90%]
-                        my-3
                         rounded-[8px]
-                        ${theme == 'light' ? 'bg-my-primary' : 'bg-my-secondary'}
+                        my-2
+                        text-center
+                        p-[10px]
+                        text-[24px]
+                        font-medium
+                        capitalize
+                        w-[90%]
+                        focus:bg-transparent
+                        focus:outline-none
+                        border-[2px]
+                        ${theme == 'light'
+                            ? 'bg-my-primary text-my-white border-my-primary focus:text-my-primary'
+                            : 'bg-my-secondary text-my-black border-my-secondary focus:text-my-secondary'
+                        }
                     `}
                 >
-                    <p
-                        className={`
-                            text-center
-                            p-[10px]
-                            text-[24px]
-                            font-medium
-                            capitalize
-                            ${theme == 'light' ? 'text-my-white' : 'text-my-black'}
-                        `}
-                        // onClick={() => alert('Paciência é uma virtude que nem todos tem')}
-                        >{props.text}</p>
+                <input
+                    type="submit"
+                    className="capitalize"
+                    onClick={() => {
+                        props.event && props.event()
+                    }}
+                    value={props.text}
+                />
                 </Link>
             ):(
                 //EXECUTA A FUNÇÃO PASSADA POR PROPS
-                <div
+                <input
+                    type="submit"
                     onClick={() => {
                         props.event && props.event()
                     }}
@@ -54,20 +63,19 @@ export default function Button(props: Props) {
                         w-[90%]
                         my-3
                         rounded-[8px]
-                        ${theme == 'light' ? 'bg-my-primary' : 'bg-my-secondary'}
+                        text-center
+                        p-[10px]
+                        text-[24px]
+                        font-medium
+                        capitalize
+                        focus:bg-transparent focus:outline-none border-[2px]
+                        ${theme == 'light'
+                            ? 'bg-my-primary text-my-white border-my-primary focus:text-my-primary'
+                            : 'bg-my-secondary text-my-black border-my-secondary focus:text-my-secondary'
+                        }
                     `}
-                >
-                    <p
-                        className={`
-                            text-center
-                            p-[10px]
-                            text-[24px]
-                            font-medium
-                            capitalize
-                            ${theme == 'light' ? 'text-my-white' : 'text-my-black'}
-                        `}
-                        >{props.text}</p>
-                </div>
+                    value={props.text}
+                />
             )}
         </>
     )

@@ -20,7 +20,6 @@ import GoogleLogin from "../../components/GoogleLogin";
 //IMPORTAÇÃO DO PROVEDOR PARA PEGAR AS VARIÁVEIS GLOBAIS
 import { useMyContext } from '../../provider/geral';
 
-
 export default function SignIn(){
 
     //UTILIZAÇÃO DO HOOK DE NAVEGAÇÃO 
@@ -45,8 +44,8 @@ export default function SignIn(){
     function handleInputPasswordChange(e:ChangeEvent<HTMLInputElement>) {
         setInputPasswordValue(e.target.value)
     }
-
-    //FUNÇÃO RESPONSÁVEL PELO LOGIN PELO EMAIL
+    
+    //FUNÇÃO RESPONSÁVEL PELO LOGIN COM EMAIL E SENHA
     function signIn() {
 
         //MUDA O ESTADO DE CARREGAMENTO DA APLICAÇÃO PARA true
@@ -113,17 +112,18 @@ export default function SignIn(){
                 <MenuBUtton />
             </Navbar>
 
-            <form className={`mt-8 items-center flex flex-col w-[90%]`}>
+            <form className={`mt-8 items-center flex flex-col w-[90%]`} onSubmit={(e) => e.preventDefault()}>
                 
                 <EmailInput value={inputEmailValue} event={handleInputEmailChange} />   
                 <PasswordInput text="Password" placeholder="Digite uma senha" hidden={true} value={inputPasswordValue} event={handleInputPasswordChange} />
                 <PersonType />
 
+                <Button text="entrar" route="undefined" event={signIn} />
+                
                 <Linkin route="/forgout-passowrd" text="Esqueceu sua senha?" />
 
-                <Button text="entrar" route="undefined" event={signIn} />
-
                 <Linkin route="/sign-up" text="Crie sua conta" />
+
                 <Separation />
 
                 <GoogleLogin />
