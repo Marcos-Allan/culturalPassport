@@ -102,7 +102,7 @@ export default function SignUp(){
                 <MenuBUtton />
             </Navbar>
 
-            <form className={`mt-8 items-center flex flex-col w-full`}>
+            <form className={`mt-8 items-center flex flex-col w-full`} onSubmit={(e) => e.preventDefault()}>
                 
                 <NameInput text="Name" placeholder="Digite seu nome" value={inputNameValue} event={handleInputNameChange} />
 

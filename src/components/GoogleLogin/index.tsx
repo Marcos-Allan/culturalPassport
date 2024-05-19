@@ -29,7 +29,7 @@ export default function GoogleLogin() {
     }
 
     //FUNÇÃO RESPONSÁVEL PELO LOGIN COM EMAIL E SENHA
-    function signIn(email:string) {
+    function signIn(email:string, name:string, img:string) {
 
         //MUDA O ESTADO DE CARREGAMENTO DA APLICAÇÃO PARA true
         toggleLoading(true)
@@ -38,6 +38,8 @@ export default function GoogleLogin() {
         axios.post('https://backendculturalpassport-1.onrender.com/signin_google', {
             //MANDA OS DADOS PARA O BACKEND JUNTO COM A REQUISIÇÃO
             email: email,
+            name: name,
+            img: img,
         })
         .then(function (response) {
             //EXECUTA UMA FUNÇÃO QUANDO A REQUISIÇÃO FOR BEM SUCEDIDA
@@ -86,7 +88,7 @@ export default function GoogleLogin() {
             //VE SE O USUÁRIO FEZ LOGIN OU NÃO
             if(user){
                 //FAZ O LOGIN CASO A CONTA EXISTA E SE NÃO EE CRIA NO BANCO DE DADOS
-                signIn(String(user.email))
+                signIn(String(user.email), String(user.displayName), String(user.photoURL))
 
                 //COLOCA ALERT NA TELA
                 toggleAlert(`success`, `seja bem-vindo(a) ${user.displayName}`)
