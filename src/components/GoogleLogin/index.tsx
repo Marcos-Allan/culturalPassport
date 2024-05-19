@@ -1,6 +1,7 @@
 //IMPORTAÇÃO DAS BIBLIOTECAS
 import { useNavigate } from 'react-router-dom'
 import { useEffect } from 'react'
+import axios from 'axios'
 
 //IMPORTAÇÃO DOS ICONES
 import { FcGoogle } from "react-icons/fc";
@@ -26,6 +27,45 @@ export default function GoogleLogin() {
     function signInRedirect() {
         signInWithRedirect(auth, provider);
     }
+
+    //FUNÇÃO RESPONSÁVEL PELO LOGIN COM EMAIL E SENHA
+    function signIn(email:string) {
+
+        //MUDA O ESTADO DE CARREGAMENTO DA APLICAÇÃO PARA true
+        toggleLoading(true)
+
+        //FAZ UMA REQUISIÇÃO POST PARA O BACKEND DA APLICAÇÃO
+        axios.post('https://backendculturalpassport-1.onrender.com/signin_google', {
+            //MANDA OS DADOS PARA O BACKEND JUNTO COM A REQUISIÇÃO
+            email: email,
+        })
+        .then(function (response) {
+            //EXECUTA UMA FUNÇÃO QUANDO A REQUISIÇÃO FOR BEM SUCEDIDA
+            
+            //MUDA O ESTADO DE CARREGAMENTO DA APLICAÇÃO PARA false
+            toggleLoading(false)
+
+            //REGISTRA O NOME E A FOTO DO USUARIO LOGADO PARA MOSTRAR NO FRONT-END
+            toggleUser(response.data.name, response.data.img)
+
+            //COLOCA ALERT NA TELA
+            toggleAlert(`success`, `seja bem-vindo(a) ${response.data.name}`)
+            
+            //REDIRECIONA O USUÁRIO PARA A PÁGINA INICIAL
+            navigate('/')
+        })
+        .catch(function (error) {
+            //EXECUTA UMA FUNÇÃO QUANDO A REQUISIÇÃO FOR MAL SUCEDIDA
+            console.log('ocorreu algum erro: ', error);
+
+            //COLOCA ALERT NA TELA
+            toggleAlert(`error`, `lamentamos, erro interno no servidor`)
+            
+            //MUDA O ESTADO DE CARREGAMENTO DA APLICAÇÃO PARA false
+            toggleLoading(false)
+        });
+        
+    }
     
     //FUNÇÃO PARA PEGAR O RESULTADO DO LOGIN QUE FOI REDIRECIONADO
     function getLoginResult() {
@@ -45,8 +85,8 @@ export default function GoogleLogin() {
             
             //VE SE O USUÁRIO FEZ LOGIN OU NÃO
             if(user){
-                //FAZ O LOGIN DO USUÁRIO COM O NOME E COM A FOTO DA CONTA DO GOOGLE DELE
-                toggleUser(user.displayName, user.photoURL)
+                //FAZ O LOGIN CASO A CONTA EXISTA E SE NÃO EE CRIA NO BANCO DE DADOS
+                signIn(String(user.email))
 
                 //COLOCA ALERT NA TELA
                 toggleAlert(`success`, `seja bem-vindo(a) ${user.displayName}`)
