@@ -1,7 +1,9 @@
 //IMPORTAÇÃO DAS BIBLIOTECAS
 import { useNavigate } from 'react-router-dom'
 import { useEffect } from 'react'
-import axios from 'axios'
+
+//CONFIGURAÇÃO DA BASE URL DO AXIOS
+import instance from '../../utils/axios.ts';
 
 //IMPORTAÇÃO DOS ICONES
 import { FcGoogle } from "react-icons/fc";
@@ -35,7 +37,7 @@ export default function GoogleLogin() {
         toggleLoading(true)
 
         //FAZ UMA REQUISIÇÃO POST PARA O BACKEND DA APLICAÇÃO
-        axios.post('https://backendculturalpassport-1.onrender.com/signin_google', {
+        instance.post('/signin_google', {
             //MANDA OS DADOS PARA O BACKEND JUNTO COM A REQUISIÇÃO
             email: email,
             name: name,

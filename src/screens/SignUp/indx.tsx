@@ -1,7 +1,9 @@
 //IMPORTAÇÃO DAS BIBLIOTECAS
 import { useNavigate } from 'react-router-dom'
 import { useState, ChangeEvent } from 'react'
-import axios from 'axios'
+
+//CONFIGURAÇÃO DA BASE URL DO AXIOS
+import instance from '../../utils/axios.ts'
 
 //IMPORTAÇÃO DO PROVEDOR PARA PEGAR AS VARIÁVEIS GLOBAIS
 import { useMyContext } from "../../provider/geral"
@@ -17,6 +19,7 @@ import EmailInput from "../../components/EmailInput/index.tsx"
 import PasswordInput from "../../components/PasswordInput/index.tsx"
 import Button from "../../components/Button/index.tsx"
 import Linkin from "../../components/Linkin/index.tsx"
+
 
 export default function SignUp(){
 
@@ -55,7 +58,7 @@ export default function SignUp(){
         toggleLoading(true)
 
         //FAZ UMA REQUISIÇÃO POST PARA O BACKEND DA APLICAÇÃO
-        axios.post('https://backendculturalpassport-1.onrender.com/signup', {
+        instance.post('/signup', {
             //MANDA OS DADOS PARA O BACKEND JUNTO COM A REQUISIÇÃO
             name: inputNameValue,
             email: inputEmailValue,

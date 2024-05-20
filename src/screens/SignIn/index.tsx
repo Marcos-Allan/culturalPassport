@@ -1,7 +1,9 @@
 //IMPORTAÇÃO DAS BIBLIOTECAS
-import axios from 'axios'
 import { useState, useEffect, ChangeEvent } from 'react'
 import { useNavigate } from 'react-router-dom';
+
+//CONFIGURAÇÃO DA BASE URL DO AXIOS
+import instance from '../../utils/axios';
 
 //IMPORTAÇÃO DOS COMPONENTES
 import ScreenPage from "../../components/ScreenPage";
@@ -19,6 +21,7 @@ import GoogleLogin from "../../components/GoogleLogin";
 
 //IMPORTAÇÃO DO PROVEDOR PARA PEGAR AS VARIÁVEIS GLOBAIS
 import { useMyContext } from '../../provider/geral';
+
 
 export default function SignIn(){
 
@@ -52,7 +55,7 @@ export default function SignIn(){
         toggleLoading(true)
 
         //FAZ UMA REQUISIÇÃO POST PARA O BACKEND DA APLICAÇÃO
-        axios.post('https://backendculturalpassport-1.onrender.com/signin', {
+        instance.post('/signin', {
             //MANDA OS DADOS PARA O BACKEND JUNTO COM A REQUISIÇÃO
             email: inputEmailValue,
             password: inputPasswordValue
