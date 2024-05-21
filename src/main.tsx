@@ -23,9 +23,10 @@ import ErrorPage from './screens/ErrorPage/index.tsx';
 import { Provider } from './provider/index.tsx';
 
 //IMPORTAÇÃO DOS COMPONENTES PRESENTES EM TODAS AS PÁGINAS
-import Menu from './components/Menu/index.tsx';
+// import Menu from './components/Menu/index.tsx';
 import LoadingPage from './components/LoadingPage';
 import Alert from './components/Alert/index.tsx';
+import MyPerfil from './screens/MyPerfil/index.tsx';
 
 //ARQUIVO DE CONFIGURAÇÃO DAS ROTAS
 const router = createBrowserRouter([
@@ -64,6 +65,11 @@ const router = createBrowserRouter([
     element: <SwitchPassword />,
     errorElement: <ErrorPage />
   },
+  {
+    path: "my-perfil",
+    element: <MyPerfil />,
+    errorElement: <ErrorPage />
+  },
 ])
 
 //RENDRIZADOR DAS PÁGINAS
@@ -71,7 +77,6 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
     <Provider>
       <RouterProvider router={router} />
-      <Menu />
       <LoadingPage />
       <Alert />
     </Provider>

@@ -7,10 +7,12 @@ import MenuBUtton from '../../components/MenuButton'
 import Text from '../../components/Text'
 import EmailInput from '../../components/EmailInput'
 import Button from '../../components/Button'
+import Menu from '../../components/Menu';
 
 export default function ForgoutPassword() {
 
     return(
+        <>
             <ScreenPage >
                 
                 <Navbar>
@@ -31,5 +33,7 @@ export default function ForgoutPassword() {
                     <Button route='/confirm-code' text={`Enviar`} />
                 </form>
             </ScreenPage >
+            <Menu />
+            </>
     )
 }

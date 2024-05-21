@@ -7,10 +7,12 @@ import MenuBUtton from '../../components/MenuButton';
 import Text from '../../components/Text'
 import PasswordInput from "../../components/PasswordInput";
 import Button from '../../components/Button'
+import Menu from '../../components/Menu';
 
 export default function SwitchPassword() {
 
     return(
+        <>
         <ScreenPage>
             <Navbar>
                 <Return />
@@ -27,5 +29,7 @@ export default function SwitchPassword() {
                 <Button route='/sign-in' text={`confirmar`} />
             </form>
         </ScreenPage >
+        <Menu />
+        </>
     )
 }

@@ -9,11 +9,13 @@ import Button from "../../components/Button/index.tsx"
 
 //IMPORTAÇÃO DA IMAGEM USADA NA PÁGINA
 import Person from '../../assets/person_2.png'
+import Menu from "../../components/Menu/index.tsx";
 
 
 export default function Signs(){
 
     return(
+        <>
         <ScreenPage>
             <Navbar>
                 <Return />
@@ -36,5 +38,7 @@ export default function Signs(){
             <Button text="login" route="/sign-in" />
             <Button text="criar conta" route="/sign-up" />
         </ScreenPage>
+        <Menu />
+        </>
     )
 }

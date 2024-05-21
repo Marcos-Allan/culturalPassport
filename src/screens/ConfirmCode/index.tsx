@@ -7,10 +7,12 @@ import MenuBUtton from '../../components/MenuButton'
 import Text from '../../components/Text'
 import EmailInput from '../../components/EmailInput'
 import Button from '../../components/Button'
+import Menu from '../../components/Menu';
 
 export default function ConfirmCode() {
 
     return(
+        <>
         <ScreenPage>
                 
             <Navbar>
@@ -28,5 +30,7 @@ export default function ConfirmCode() {
                 <Button route='/switch-password' text={`Confirmar`} />
             </form>
         </ScreenPage >
+        <Menu />
+        </>
     )
 }

@@ -19,6 +19,7 @@ import EmailInput from "../../components/EmailInput/index.tsx"
 import PasswordInput from "../../components/PasswordInput/index.tsx"
 import Button from "../../components/Button/index.tsx"
 import Linkin from "../../components/Linkin/index.tsx"
+import Menu from '../../components/Menu/index.tsx'
 
 
 export default function SignUp(){
@@ -96,6 +97,7 @@ export default function SignUp(){
     }
 
     return(
+        <>
         <ScreenPage>
             <Navbar>
                 <Return />
@@ -122,5 +124,7 @@ export default function SignUp(){
             
             <Linkin route="/sign-in" text="Já possui uma conta?" />
         </ScreenPage>
+        <Menu />
+        </>
     )
 }

@@ -12,6 +12,7 @@ import { IoSadOutline } from "react-icons/io5";
 
 //IMPORTAÇÃO DO PROVEDOR PARA PEGAR AS VARIÁVEIS GLOBAIS
 import { useMyContext } from "../../provider/geral";
+import Menu from "../../components/Menu";
 
 export default function ErrorPage() {
 
@@ -22,6 +23,7 @@ export default function ErrorPage() {
     const { theme } = states
 
     return(
+        <>
         <ScreenPage>
             <Navbar>
                 <Return />
@@ -42,5 +44,7 @@ export default function ErrorPage() {
             <Button route="/" text="Voltar" />
             
         </ScreenPage>
+        <Menu />
+        </>
     )
 }

@@ -1,5 +1,10 @@
-//IMPORTAÇÃO DOS ICONES
+//IMPORTAÇÃO DAS BIBLIOTECAS
+import { useNavigate } from 'react-router-dom';
+
+//IMPORTAÇÃO DO PROVEDOR PARA PEGAR AS VARIÁVEIS GLOBAIS
 import { useMyContext } from "../../provider/geral"
+
+//IMPORTAÇÃO DOS ICONES 
 import { IoCloseOutline } from "react-icons/io5";
 
 //IMPORTAÇÃO DOS COMPONENTES
@@ -7,6 +12,9 @@ import ToggleTheme from "../ToggleTheme";
 
 export default function Menu() {
 
+    //UTILIZAÇÃO DO HOOK DE NAVEGAÇÃO 
+    const navigate = useNavigate()
+    
     //UTILIZAÇÃO DO HOOK DE NAVEGAÇÃO 
     const states:any = useMyContext()
 
@@ -33,7 +41,10 @@ export default function Menu() {
             {/* VERIFICA SE O ESTADO DA VARIAVEL GLOBAL userS.logged É IGUAL A TRUE */}
             {userS.logged == true && (
                 //COLOCA OS DADOS DE FOTO E NOME DO USUÁRIO NA TELA
-                <div className={`flex items-center gap-[10px] absolute top-0 left-0 m-3`}>
+                <div
+                    className={`flex items-center gap-[10px] absolute top-0 left-0 m-3`}
+                    onClick={() => navigate('/my-perfil')}
+                >
                     <img
                         src={userS.img}
                         alt=""
@@ -42,9 +53,9 @@ export default function Menu() {
                     <p className={`text-[22px] font-bold capitalize
                         ${theme == 'light' ? 'text-my-white' : 'text-my-black'}
                     `}>{userS.name}</p>
+
                 </div>
             )}
-
             <ToggleTheme />
         </div>
     )

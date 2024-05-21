@@ -18,10 +18,10 @@ import Linkin from "../../components/Linkin";
 import Button from "../../components/Button";
 import Separation from "../../components/Separation";
 import GoogleLogin from "../../components/GoogleLogin";
+import Menu from '../../components/Menu';
 
 //IMPORTAÇÃO DO PROVEDOR PARA PEGAR AS VARIÁVEIS GLOBAIS
 import { useMyContext } from '../../provider/geral';
-
 
 export default function SignIn(){
 
@@ -69,8 +69,8 @@ export default function SignIn(){
             //VERIFICA SE A CONTA FOI ENCONTRADA PELO TIPO DO DADO RETORNADO
             if(typeof response.data === "object"){
 
-                //REGISTRA O NOME E A FOTO DO USUARIO LOGADO PARA MOSTRAR NO FRONT-END
-                toggleUser(response.data.name, response.data.img)
+                //REGISTRA O NOME E A FOTO E O ID DO DO USUARIO LOGADO PARA MOSTRAR NO FRONT-END
+                toggleUser(response.data.name, response.data.img, response.data._id)
 
                 //COLOCA ALERT NA TELA
                 toggleAlert(`success`, `seja bem-vindo(a) ${response.data.name}`)
@@ -105,6 +105,7 @@ export default function SignIn(){
     },[])
 
     return(
+        <>
         <ScreenPage>
             
             <Navbar>   
@@ -133,5 +134,7 @@ export default function SignIn(){
             </form>
 
         </ScreenPage>
+        <Menu />
+        </>
     )
 }
