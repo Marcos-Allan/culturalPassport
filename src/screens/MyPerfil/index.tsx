@@ -25,6 +25,7 @@ import Return from "../../components/Return";
 import TitlePage from "../../components/TitlePage";
 import MenuBUtton from "../../components/MenuButton";
 import Menu from "../../components/Menu";
+import Button from '../../components/Button';
 
 export default function MyPerfil() {
 
@@ -171,6 +172,7 @@ export default function MyPerfil() {
                         src={avatar_6} alt=""
                     />
                 </div>
+                <Button event={updateUser} text='atualzar' route='undefined' />
             </ScreenPage>
             <Menu />
         </>
