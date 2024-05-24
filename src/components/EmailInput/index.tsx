@@ -10,6 +10,7 @@ import { MdOutlineEmail } from "react-icons/md";
 //TIPAGEM DAS PROPS DO COMPONENTE
 interface Props {
     value?: string,
+    checked?: boolean,
     event?: (e:React.ChangeEvent<HTMLInputElement>) => void,
 }
 
@@ -30,13 +31,10 @@ export default function EmailInput(props: Props) {
     //FUNÇÃO QUE VERIFICA SE O CAMPO ESTÁ DENTRO DO PADRÃO
     function handleValidateEmail() {
 
-        //USA REGEX PARA VERIFICAR O PADRÃO DA STRING
-        const padraoEmail = /^[\w._-]+@[\w._-]+\.[\w]{2,}/i
-
         //VÊ SE O VALOR DO INPUT EXISTE
         if(props.value){
             //VERIFICA SE O VALOR DO INPUT ESTÁ NO PADRÃO DA REGEX padraoEmail
-            if(padraoEmail.test(props.value) == true){
+            if(props.checked == true){
                 //PEGA AS REFERÊNCIAS ATUAIS DOS ELEMENTOS
                 if(input.current && label.current && message.current && span.current){
                     //MUDA O ESTILO COMO CORES DE LETRAS, ICONES E BORDAS DOS RESPECTIVOS ELEMENTOS 

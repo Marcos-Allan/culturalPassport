@@ -50,7 +50,7 @@ export default function GoogleLogin() {
             toggleLoading(false)
 
             //REGISTRA O NOME E A FOTO DO USUARIO LOGADO PARA MOSTRAR NO FRONT-END
-            toggleUser(response.data.name, response.data.img)
+            toggleUser(response.data.name, response.data.img, response.data._id)
 
             //COLOCA ALERT NA TELA
             toggleAlert(`success`, `seja bem-vindo(a) ${response.data.name}`)

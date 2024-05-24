@@ -1,6 +1,6 @@
 //IMPORTAÇÃO DAS BIBLIOTECAS
 import { useNavigate } from 'react-router-dom'
-import { useState, ChangeEvent } from 'react'
+import { useState, useEffect, ChangeEvent } from 'react'
 
 //CONFIGURAÇÃO DA BASE URL DO AXIOS
 import instance from '../../utils/axios.ts'
@@ -37,21 +37,85 @@ export default function SignUp(){
     const [inputEmailValue, setInputEmailValue] = useState<string>('')
     const [inputNameValue, setInputNameValue] = useState<string>('')
     const [inputPasswordValue, setInputPasswordValue] = useState<string>('')
+    const [inputConfirmPasswordValue, setInputConfirmPasswordValue] = useState<string>('')
+
+    const [statePassword, setStatePassword] = useState<boolean>(false)
+    const [stateConfirmPassword, setStateConfirmPassword] = useState<boolean>(false)
+    const [stateEmail, setStateEmail] = useState<boolean>(false)
+    const [formValidate, setFormValidate] = useState<boolean>(true)
 
     //FUNÇÃO UTILIZADA PARA MUDAR O VALOR DA VARIAVEL COM BASE NO INPUT
     function handleInputNameChange(e:ChangeEvent<HTMLInputElement>){
         setInputNameValue(e.target.value)
     }
-    
-    //FUNÇÃO UTILIZADA PARA MUDAR O VALOR DA VARIAVEL COM BASE NO INPUT
-    function handleInputEmailChange(e:ChangeEvent<HTMLInputElement>){
-        setInputEmailValue(e.target.value)
-    }
 
+    //FUNÇÃO UTILIZADA PARA MUDAR O VALOR DA VARIAVEL COM BASE NO INPUT
+    function handleInputEmailChange(e:ChangeEvent<HTMLInputElement>) {
+        setInputEmailValue(e.target.value)
+
+        //CHAMA UMA FUNÇÃO PARA VER A VALIDAÇÃO DO INPUT
+        validateInputEmail()
+    }
+    
     //FUNÇÃO UTILIZADA PARA MUDAR O VALOR DA VARIAVEL COM BASE NO INPUT
     function handleInputPasswordChange(e:ChangeEvent<HTMLInputElement>) {
         setInputPasswordValue(e.target.value)
+
+        //CHAMA UMA FUNÇÃO PARA VER A VALIDAÇÃO DO INPUT
+        validateInputPassword()
     }
+    
+    //FUNÇÃO UTILIZADA PARA MUDAR O VALOR DA VARIAVEL COM BASE NO INPUT
+    function handleInputConfirmPasswordChange(e:ChangeEvent<HTMLInputElement>) {
+        setInputConfirmPasswordValue(e.target.value)
+
+        //CHAMA UMA FUNÇÃO PARA VER A VALIDAÇÃO DO INPUT
+        validateInputConfirmPassword()
+    }
+
+    //FUNÇÃO RESPONSÁVEL POR VER SE O CAMPO ESTÁ NO PADRÃO
+    function validateInputEmail(){
+        //USA REGEX PARA VERIFICAR O PADRÃO DA STRING
+        const padraoEmail = /^[\w._-]+@[\w._-]+\.[\w]{2,}/i
+        
+        if(padraoEmail.test(inputEmailValue) == true){
+            setStateEmail(true)
+        }else{
+            setStateEmail(false)
+        }
+    }
+    
+    //FUNÇÃO RESPONSÁVEL POR VER SE O CAMPO ESTÁ NO PADRÃO
+    function validateInputPassword(){
+        //USA REGEX PARA VERIFICAR O PADRÃO DA STRING
+        const padraoPassword = /^[\w._-]{6,10}$/i
+
+        if(padraoPassword.test(inputPasswordValue) == true){
+            setStatePassword(true)
+        }else{
+            setStatePassword(false)
+        }
+    }
+    
+    //FUNÇÃO RESPONSÁVEL POR VER SE O CAMPO ESTÁ NO PADRÃO
+    function validateInputConfirmPassword(){
+        //USA REGEX PARA VERIFICAR O PADRÃO DA STRING
+        const padraoConfirmPassword = new RegExp(`\^${inputPasswordValue.slice(0, -1)}$`)
+
+        if(padraoConfirmPassword.test(inputConfirmPasswordValue) == true){
+            setStateConfirmPassword(true)
+        }else{
+            setStateConfirmPassword(false)
+        }
+    }
+
+    useEffect(() => {
+        if(stateEmail == true && statePassword == true && stateConfirmPassword == true){
+            setFormValidate(false)
+        }else{
+            setFormValidate(true)
+        }
+    },[stateEmail, statePassword, stateConfirmPassword]) 
 
     //FUNÇÃO RESPONSÁVEL POR CRAIR CONTA NO BANCO DE DADOS
     function signup(){
@@ -114,12 +178,12 @@ export default function SignUp(){
                 <NameInput text="Last Name" placeholder="Digite seu sobrenome" />
                 <NameInput text="RA/RM" placeholder="Digite seu RA ou RM" />
 
-                <EmailInput event={handleInputEmailChange} value={inputEmailValue} />   
+                <EmailInput event={handleInputEmailChange} value={inputEmailValue} checked={stateEmail} />   
 
-                <PasswordInput text="Password" placeholder="Digite uma senha" hidden={false} value={inputPasswordValue} event={handleInputPasswordChange} />
-                <PasswordInput text="Confirm Password" placeholder="Digite a confirmação da senha" hidden={false} />
+                <PasswordInput text="Password" placeholder="Digite uma senha" hidden={false} value={inputPasswordValue} event={handleInputPasswordChange} checked={statePassword} />
+                <PasswordInput text="Confirm Password" placeholder="Digite a confirmação da senha" hidden={false} value={inputConfirmPasswordValue} event={handleInputConfirmPasswordChange} checked={stateConfirmPassword} />
                 
-                <Button text="criar" route="undefined" event={signup} />
+                <Button text="criar" route="undefined" event={signup} disabled={formValidate} />
             </form>
             
             <Linkin route="/sign-in" text="Já possui uma conta?" />

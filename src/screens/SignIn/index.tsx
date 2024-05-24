@@ -37,15 +37,49 @@ export default function SignIn(){
     //UTILIZA O HOOK useState
     const [inputEmailValue, setInputEmailValue] = useState<string>('')
     const [inputPasswordValue, setInputPasswordValue] = useState<string>('')
+    
+    const [statePassword, setStatePassword] = useState<boolean>(false)
+    const [stateEmail, setStateEmail] = useState<boolean>(false)
+    const [formValidate, setFormValidate] = useState<boolean>(true)
 
     //FUNÇÃO UTILIZADA PARA MUDAR O VALOR DA VARIAVEL COM BASE NO INPUT
     function handleInputEmailChange(e:ChangeEvent<HTMLInputElement>) {
         setInputEmailValue(e.target.value)
+
+        //CHAMA UMA FUNÇÃO PARA VER A VALIDAÇÃO DO INPUT
+        validateInputEmail()
     }
     
     //FUNÇÃO UTILIZADA PARA MUDAR O VALOR DA VARIAVEL COM BASE NO INPUT
     function handleInputPasswordChange(e:ChangeEvent<HTMLInputElement>) {
         setInputPasswordValue(e.target.value)
+
+        //CHAMA UMA FUNÇÃO PARA VER A VALIDAÇÃO DO INPUT
+        validateInputPassword()
+    }
+
+    //FUNÇÃO RESPONSÁVEL POR VER SE O CAMPO ESTÁ NO PADRÃO
+    function validateInputEmail(){
+        //USA REGEX PARA VERIFICAR O PADRÃO DA STRING
+        const padraoEmail = /^[\w._-]+@[\w._-]+\.[\w]{2,}/i
+        
+        if(padraoEmail.test(inputEmailValue) == true){
+            setStateEmail(true)
+        }else{
+            setStateEmail(false)
+        }
+    }
+    
+    //FUNÇÃO RESPONSÁVEL POR VER SE O CAMPO ESTÁ NO PADRÃO
+    function validateInputPassword(){
+        //USA REGEX PARA VERIFICAR O PADRÃO DA STRING
+        const padraoPassword = /^[\w._-]{6,10}$/i
+
+        if(padraoPassword.test(inputPasswordValue) == true){
+            setStatePassword(true)
+        }else{
+            setStatePassword(false)
+        }
     }
     
     //FUNÇÃO RESPONSÁVEL PELO LOGIN COM EMAIL E SENHA
@@ -104,6 +138,14 @@ export default function SignIn(){
         toggleLoading(false)
     },[])
 
+    useEffect(() => {
+        if(stateEmail == true && statePassword == true){
+            setFormValidate(false)
+        }else{
+            setFormValidate(true)
+        }
+    },[stateEmail, statePassword])  
+
     return(
         <>
         <ScreenPage>
@@ -118,11 +160,11 @@ export default function SignIn(){
 
             <form className={`mt-8 items-center flex flex-col w-[90%]`} onSubmit={(e) => e.preventDefault()}>
                 
-                <EmailInput value={inputEmailValue} event={handleInputEmailChange} />   
-                <PasswordInput text="Password" placeholder="Digite uma senha" hidden={true} value={inputPasswordValue} event={handleInputPasswordChange} />
+                <EmailInput value={inputEmailValue} event={handleInputEmailChange} checked={stateEmail} />   
+                <PasswordInput text="Password" placeholder="Digite uma senha" hidden={true} value={inputPasswordValue} event={handleInputPasswordChange} checked={statePassword}/>
                 <PersonType />
 
-                <Button text="entrar" route="undefined" event={signIn} />
+                <Button text="entrar" route="undefined" event={signIn} disabled={formValidate} />
                 
                 <Linkin route="/forgout-passowrd" text="Esqueceu sua senha?" />
 

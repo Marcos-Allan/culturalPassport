@@ -9,6 +9,7 @@ interface Props {
     text: string,
     route: string,
     event?: () => void,
+    disabled?: boolean,
 }
 
 export default function Button(props: Props) {
@@ -44,6 +45,7 @@ export default function Button(props: Props) {
                     `}
                 >
                 <input
+                    disabled={props.disabled}
                     type="submit"
                     className="capitalize"
                     onClick={() => {
@@ -55,6 +57,7 @@ export default function Button(props: Props) {
             ):(
                 //EXECUTA A FUNÇÃO PASSADA POR PROPS
                 <input
+                    disabled={props.disabled}
                     type="submit"
                     onClick={() => {
                         props.event && props.event()
@@ -70,8 +73,8 @@ export default function Button(props: Props) {
                         capitalize
                         focus:bg-transparent focus:outline-none border-[2px]
                         ${theme == 'light'
-                            ? 'bg-my-primary text-my-white border-my-primary focus:text-my-primary'
-                            : 'bg-my-secondary text-my-black border-my-secondary focus:text-my-secondary'
+                            ? 'bg-my-primary disabled:bg-my-gray text-my-white border-my-primary disabled:border-my-gray focus:text-my-primary'
+                            : 'bg-my-secondary disabled:bg-my-gray-black text-my-black border-my-secondary disabled:border-my-gray-black focus:text-my-secondary'
                         }
                     `}
                     value={props.text}

@@ -14,6 +14,7 @@ interface Props {
     placeholder: string,
     hidden: boolean,
     value?: string,
+    checked?: boolean,
     event?: (e:React.ChangeEvent<HTMLInputElement>) => void,
 }
 
@@ -38,13 +39,10 @@ export default function PasswordInput(props: Props) {
     //FUNÇÃO QUE VERIFICA SE O CAMPO ESTÁ DENTRO DO PADRÃO
     function handleValidatePassword() {
 
-        //USA REGEX PARA VERIFICAR O PADRÃO DA STRING
-        const padraoPassword = /^[\w._-]{6,10}$/i
-
         //VÊ SE O VALOR DO INPUT EXISTE
         if(props.value){
-            //VERIFICA SE O VALOR DO INPUT ESTÁ NO PADRÃO DA REGEX padraoEmail
-            if(padraoPassword.test(props.value) == true){
+            //VERIFICA SE O VALOR DO INPUT ESTÁ NO PADRÃO DA REGEX padraoPasswors
+            if(props.checked == true){
                 //PEGA AS REFERÊNCIAS ATUAIS DOS ELEMENTOS
                 if(passwordInputVisible.current && label.current && message.current && span.current && spanOne.current){
                     //MUDA O ESTILO COMO CORES DE LETRAS, ICONES E BORDAS DOS RESPECTIVOS ELEMENTOS 

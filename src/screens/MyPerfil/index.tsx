@@ -60,14 +60,18 @@ export default function MyPerfil() {
         }).then((response) => {
             //MUDA O ESTADO DE CARREGAMENTO DA APLICAÇÃO PARA false
             toggleLoading(false)
-
+            
             //MOSTRA OS DADOS DA REQUISIÇÃO
             console.log(`Requisição feita com sucesso ${response.data}`)
 
             //COLOCA ALERT NA TELA
             toggleAlert(`success`, `Alteração feita com sucesso`)
         }).catch((error) => {
+            //ESCREVE NO CONSOLE O ERRO OCORRIDO
             console.log(`Requisição feita com falhas ${error}`)
+            
+            //MUDA O ESTADO DE CARREGAMENTO DA APLICAÇÃO PARA false
+            toggleLoading(false)
             
             //COLOCA ALERT NA TELA
             toggleAlert(`error`, `Ocorreu um erro interno no servidor`)
