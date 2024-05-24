@@ -9,6 +9,7 @@ import { IoCloseOutline } from "react-icons/io5";
 
 //IMPORTAÇÃO DOS COMPONENTES
 import ToggleTheme from "../ToggleTheme";
+import LogoutButton from "../LogoutButton";
 
 export default function Menu() {
 
@@ -57,6 +58,11 @@ export default function Menu() {
                 </div>
             )}
             <ToggleTheme />
+
+            {/* VERIFICA SE O ESTADO DA VARIAVEL GLOBAL userS.logged É IGUAL A TRUE */}
+            {userS.logged == true && (
+                <LogoutButton />
+            )}
         </div>
     )
 }

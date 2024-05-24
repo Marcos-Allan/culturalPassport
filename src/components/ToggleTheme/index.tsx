@@ -14,12 +14,12 @@ export default function ToggleTheme() {
 
     return(
         <div
-            className={`w-[80%] flex`}
+            className={`w-[80%] flex py-3`}
             onClick={() => toggleTheme()}
         >
             {/* VERIFICA SE O TEMA ESTÁ NO MODO dark OU light */}
             {theme == 'light' ? (
-                //BOTA O ICONE DE SOL SE ESTIVER NO MODO light
+                //BOTA O ICONE DE SOL SE ESTIVER NO MODO LIGHT
                 <>
                     <IoSunny
                         className={`text-my-white text-[30px]`}

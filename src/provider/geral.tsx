@@ -41,8 +41,8 @@ export const MyProvider = ({ children } : { children: React.ReactNode }) => {
     }
     
     //FUNÇÃO RESPONSAVEL POR ABRIR E FECHAR O MENU
-    const toggleUser = (name:string, img:string, id:string) => {
-        setUserS({ logged: true, name: name, img: img, id: id })
+    const toggleUser = (name:string, img:string, id:string, logged:boolean = true) => {
+        setUserS({ logged: logged, name: name, img: img, id: id })
     }
     
     //FUNÇÃO RESPONSAVEL POR TROCAR O ESTADO DE LOADING DA APLICAÇÃO
