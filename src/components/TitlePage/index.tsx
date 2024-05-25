@@ -15,7 +15,7 @@ export default function TitlePage(props: Props) {
     const { theme } = states
 
     return(
-        <h1 className={`text-center w-[90%] pt-4 text-[26px] font-bold capitalize
+        <h1 className={`text-center w-[90%] pt-4 text-[26px] sm:text-[28px] font-bold capitalize
             ${theme == 'light' ? 'text-my-black' : 'text-my-white'}
         `}>{props.text}</h1>
     )

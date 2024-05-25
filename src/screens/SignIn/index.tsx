@@ -6,7 +6,6 @@ import { useNavigate } from 'react-router-dom';
 import instance from '../../utils/axios';
 
 //IMPORTAÇÃO DOS COMPONENTES
-import ScreenPage from "../../components/ScreenPage";
 import Navbar from "../../components/Navbar";
 import Return from "../../components/Return";
 import TitlePage from "../../components/TitlePage";
@@ -147,9 +146,7 @@ export default function SignIn(){
     },[stateEmail, statePassword])  
 
     return(
-        <>
-        <ScreenPage>
-            
+        <>  
             <Navbar>   
                 <Return />
                 <TitlePage
@@ -158,7 +155,7 @@ export default function SignIn(){
                 <MenuBUtton />
             </Navbar>
 
-            <form className={`mt-8 items-center flex flex-col w-[90%]`} onSubmit={(e) => e.preventDefault()}>
+            <form className={`mt-8 sm:mt-4 items-center flex flex-col w-[90%]`} onSubmit={(e) => e.preventDefault()}>
                 
                 <EmailInput value={inputEmailValue} event={handleInputEmailChange} checked={stateEmail} />   
                 <PasswordInput text="Password" placeholder="Digite uma senha" hidden={true} value={inputPasswordValue} event={handleInputPasswordChange} checked={statePassword}/>
@@ -174,9 +171,7 @@ export default function SignIn(){
 
                 <GoogleLogin />
             </form>
-
-        </ScreenPage>
-        <Menu />
+            <Menu />
         </>
     )
 }

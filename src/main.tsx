@@ -27,6 +27,7 @@ import { Provider } from './provider/index.tsx';
 import LoadingPage from './components/LoadingPage';
 import Alert from './components/Alert/index.tsx';
 import MyPerfil from './screens/MyPerfil/index.tsx';
+import ScreenPage from './components/ScreenPage/index.tsx';
 
 //ARQUIVO DE CONFIGURAÇÃO DAS ROTAS
 const router = createBrowserRouter([
@@ -76,9 +77,11 @@ const router = createBrowserRouter([
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
     <Provider>
-      <RouterProvider router={router} />
-      <LoadingPage />
-      <Alert />
+      <ScreenPage>
+        <RouterProvider router={router} />
+        <LoadingPage />
+        <Alert />
+      </ScreenPage>
     </Provider>
   </React.StrictMode>,
 )

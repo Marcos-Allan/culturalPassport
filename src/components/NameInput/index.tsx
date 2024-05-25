@@ -21,7 +21,7 @@ export default function NameInput(props: Props) {
     const { theme } = states
 
     return(
-        <div className="w-[90%]">
+        <div className="w-[90%] sm:w-[60%]">
             {/* INPUT DE EMAIL */}
             <label
             className={`

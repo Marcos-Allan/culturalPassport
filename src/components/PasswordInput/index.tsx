@@ -100,7 +100,7 @@ export default function PasswordInput(props: Props) {
     }
 
     return(
-        <div className="w-[90%] relative">
+        <div className="w-[90%] sm:w-[60%] relative">
             {/* INPUT DE PASSWORD */}
             <label
                 ref={label}

@@ -24,6 +24,7 @@ export default function Linkin(props: Props) {
             className={`
                 font-medium
                 text-[20px]
+                sm:text-[16px]
                 ${theme == 'light' ? 'text-my-primary' : 'text-my-secondary'}
             `}
         >

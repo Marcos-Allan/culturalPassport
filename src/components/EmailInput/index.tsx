@@ -72,7 +72,7 @@ export default function EmailInput(props: Props) {
     }
 
     return(
-        <div className="w-[90%] relative mb-1">
+        <div className="w-[90%] sm:w-[60%] relative mb-1">
             {/* INPUT DE EMAIL */}
             <label
             ref={label}

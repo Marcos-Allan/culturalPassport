@@ -102,7 +102,7 @@ export default function Alert() {
     }, [message])
 
     return(
-        <div className={`w-full flex flex-col items-center p-2 pt-4 absolute top-0 left-0`}>
+        <div className={`w-full sm:w-[60%] flex flex-col items-center p-2 pt-4 absolute top-0`}>
             <div
                 ref={msg}
                 className={`

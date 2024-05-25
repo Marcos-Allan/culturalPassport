@@ -1,5 +1,4 @@
 //IMPORTAÇÃO DOS COMPONENTES
-import ScreenPage from '../../components/ScreenPage'
 import Navbar from "../../components/Navbar";
 import Return from "../../components/Return";
 import TitlePage from '../../components/TitlePage'
@@ -13,27 +12,24 @@ export default function ForgoutPassword() {
 
     return(
         <>
-            <ScreenPage >
+            <Navbar>
+                <Return />
+                <TitlePage
+                    text={`esqueceu a senha`}
+                />
+                <MenuBUtton />
+            </Navbar>
+
+            <Text text={`Digite o endereço de email no campo abaixo`} />
+
+            <form className={`mt-8 items-center flex flex-col w-[90%]`}>
                 
-                <Navbar>
-                    <Return />
-                    <TitlePage
-                        text={`esqueceu a senha`}
-                    />
-                    <MenuBUtton />
-                </Navbar>
-
-                <Text text={`Digite o endereço de email no campo abaixo`} />
-
-                <form className={`mt-8 items-center flex flex-col w-[90%]`}>
+                <EmailInput />
+                <Text text={`enviaremos um código para o endereço de email digitado`} />
                     
-                    <EmailInput />
-                    <Text text={`enviaremos um código para o endereço de email digitado`} />
-                        
-                    <Button route='/confirm-code' text={`Enviar`} />
-                </form>
-            </ScreenPage >
+                <Button route='/confirm-code' text={`Enviar`} />
+            </form>
             <Menu />
-            </>
+        </>
     )
 }

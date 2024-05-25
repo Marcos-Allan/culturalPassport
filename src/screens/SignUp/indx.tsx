@@ -9,7 +9,6 @@ import instance from '../../utils/axios.ts'
 import { useMyContext } from "../../provider/geral"
 
 //IMPORTAÇÃO DOS COMPONENTES
-import ScreenPage from "../../components/ScreenPage/index.tsx"
 import Navbar from "../../components/Navbar/index.tsx"
 import Return from "../../components/Return/index.tsx"
 import TitlePage from "../../components/TitlePage/index.tsx"
@@ -162,7 +161,6 @@ export default function SignUp(){
 
     return(
         <>
-        <ScreenPage>
             <Navbar>
                 <Return />
                 <TitlePage
@@ -187,8 +185,7 @@ export default function SignUp(){
             </form>
             
             <Linkin route="/sign-in" text="Já possui uma conta?" />
-        </ScreenPage>
-        <Menu />
+            <Menu />
         </>
     )
 }

@@ -1,5 +1,4 @@
 //IMPORTAÇÃO DOS COMPONENTES
-import ScreenPage from "../../components/ScreenPage";
 import Navbar from "../../components/Navbar";
 import Return from "../../components/Return";
 import TitlePage from "../../components/TitlePage";
@@ -24,7 +23,6 @@ export default function ErrorPage() {
 
     return(
         <>
-        <ScreenPage>
             <Navbar>
                 <Return />
                 <TitlePage text="Erro" />
@@ -42,9 +40,7 @@ export default function ErrorPage() {
             />
             
             <Button route="/" text="Voltar" />
-            
-        </ScreenPage>
-        <Menu />
+            <Menu />
         </>
     )
 }

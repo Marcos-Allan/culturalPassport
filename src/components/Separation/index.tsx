@@ -11,9 +11,9 @@ export default function Separation() {
 
     return (
         <>
-            <div className={`my-8 w-full flex justify-center items-center`}>
+            <div className={`my-8 sm:my-2 w-full sm:w-[60%] flex justify-center items-center`}>
                 <div className={`flex-grow-[1] h-[2px] ${theme == 'light' ? 'bg-my-black' : 'bg-my-white'} `}/>
-                <p className={`text-[24px] font-semibold pb-3 ${theme == 'light' ? 'text-my-black' : 'text-my-white'} px-3`}>
+                <p className={`text-[24px] sm:text-[20px] font-semibold pb-3 ${theme == 'light' ? 'text-my-black' : 'text-my-white'} px-3`}>
                     ou
                 </p>
                 <div className={`flex-grow-[1] h-[2px] ${theme == 'light' ? 'bg-my-black' : 'bg-my-white'}`}/>

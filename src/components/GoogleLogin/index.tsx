@@ -145,9 +145,11 @@ export default function GoogleLogin() {
             <FcGoogle
                 className={`
                     text-[70px]
+                    sm:text-[50px]
                     border
                     rounded-[50%]
                     p-3
+                    sm:p-2
                     ${theme == 'light' ? 'border-my-gray' : 'border-my-gray-black'}
                 `}
                 onClick={() => {
@@ -158,29 +160,6 @@ export default function GoogleLogin() {
                     signInRedirect()
                 }}
             />
-            {/* VERIFICA SE O ESTADO DO LOADING É IGUAL A true */}
-            {/* {loading == true ? (
-                //COLOCA UM LOADER NA TELA SE O ESTADO DE LOADING FOR IGUAL A true
-                <div className={`animate-spin ease-linear rounded-full border-8 border-t-8 h-20 w-20 border-t-my-terciary border-transparent`}></div>
-            ) : (
-                //COLOCA O BOTÃO DE LOGIN COM O GOOGLE SE O ESTADO DO LOADING FOR IGUAL A false
-                <>
-                    <FcGoogle
-                        className={`
-                            text-[70px]
-                            border
-                            rounded-[50%]
-                            p-3
-                            ${theme == 'light' ? 'border-my-gray' : 'border-my-gray-black'}
-                        `}
-                        onClick={() => {
-                            //MUDA O ESTADO DE CARREGAMENTO DA APLICAÇÃO PARA true
-                            toggleLoading(true)
-                            signInRedirect()
-                        }}
-                    />
-                </>
-            )} */}
         </>
 
     )

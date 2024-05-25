@@ -35,7 +35,7 @@ export default function PersonType() {
     }
 
     return(
-        <div className="my-5 w-full flex flex-col items-center">
+        <div className="my-5 sm:my-3 w-full sm:w-[66.6%] flex flex-col items-center">
             <div 
                 className={`
                     relative

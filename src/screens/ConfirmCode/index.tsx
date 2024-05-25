@@ -1,5 +1,4 @@
 //IMPORTAÇÃO DOS COMPONENTES
-import ScreenPage from '../../components/ScreenPage'
 import Navbar from "../../components/Navbar";
 import Return from "../../components/Return";
 import TitlePage from '../../components/TitlePage'
@@ -12,9 +11,7 @@ import Menu from '../../components/Menu';
 export default function ConfirmCode() {
 
     return(
-        <>
-        <ScreenPage>
-                
+        <>      
             <Navbar>
                 <Return />
                 <TitlePage
@@ -29,8 +26,7 @@ export default function ConfirmCode() {
                 <Text text={`Confirme o código enviado para o seu email para alterar a senha`} />
                 <Button route='/switch-password' text={`Confirmar`} />
             </form>
-        </ScreenPage >
-        <Menu />
+            <Menu />
         </>
     )
 }

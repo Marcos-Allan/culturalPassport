@@ -1,5 +1,4 @@
 //IMPORTAÇÃO DOS COMPONENTES
-import ScreenPage from "../../components/ScreenPage/index.tsx"
 import Navbar from "../../components/Navbar/index.tsx";
 import TitlePage from "../../components/TitlePage/index.tsx"
 import MenuBUtton from "../../components/MenuButton/index.tsx";
@@ -14,7 +13,6 @@ export default function Home(){
 
     return(
         <>
-        <ScreenPage>
             <Navbar>
                 <TitlePage text="Bem Vindo Estudante" />
                 <MenuBUtton />
@@ -26,12 +24,12 @@ export default function Home(){
 
             <img
                 src={Person}
+                className={`w-full sm:w-[30%]`}
                 alt=""
             />
                         
             <Button text="iniciar" route="/signs" />
-        </ScreenPage>
-        <Menu />
+            <Menu />
         </>
     )
 }

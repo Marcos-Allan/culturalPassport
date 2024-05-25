@@ -1,5 +1,4 @@
 //IMPORTAÇÃO DOS COMPONENTES
-import ScreenPage from '../../components/ScreenPage'
 import Navbar from "../../components/Navbar";
 import Return from "../../components/Return";
 import TitlePage from '../../components/TitlePage'
@@ -13,7 +12,6 @@ export default function SwitchPassword() {
 
     return(
         <>
-        <ScreenPage>
             <Navbar>
                 <Return />
                 <TitlePage
@@ -28,8 +26,7 @@ export default function SwitchPassword() {
                 <PasswordInput hidden={false} placeholder="Senha" text="Confirmação da Senha" />
                 <Button route='/sign-in' text={`confirmar`} />
             </form>
-        </ScreenPage >
-        <Menu />
+            <Menu />
         </>
     )
 }

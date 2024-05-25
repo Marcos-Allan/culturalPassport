@@ -29,12 +29,15 @@ export default function Button(props: Props) {
                     className={`
                         rounded-[8px]
                         my-2
+                        sm:my-1
                         text-center
                         p-[10px]
                         text-[24px]
+                        sm:text-[18px]
                         font-medium
                         capitalize
                         w-[90%]
+                        sm:w-[60%]
                         focus:bg-transparent
                         focus:outline-none
                         border-[2px]
@@ -44,15 +47,11 @@ export default function Button(props: Props) {
                         }
                     `}
                 >
-                <input
-                    disabled={props.disabled}
-                    type="submit"
+                <p
                     className="capitalize"
-                    onClick={() => {
-                        props.event && props.event()
-                    }}
-                    value={props.text}
-                />
+                >
+                    {props.text}
+                </p>
                 </Link>
             ):(
                 //EXECUTA A FUNÇÃO PASSADA POR PROPS
@@ -64,11 +63,15 @@ export default function Button(props: Props) {
                     }}
                     className={`
                         w-[90%]
-                        my-3
+                        sm:w-[60%]
+                        my-2
+                        sm:my-1
                         rounded-[8px]
                         text-center
                         p-[10px]
+                        sm:p-[6px]
                         text-[24px]
+                        sm:text-[16px]
                         font-medium
                         capitalize
                         focus:bg-transparent focus:outline-none border-[2px]

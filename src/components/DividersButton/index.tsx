@@ -6,10 +6,9 @@ interface Props {
     children: ReactNode
 }
 
-export default function Navbar(props: Props) {
-
+export default function DividersButton(props: Props) {
     return(
-        <div className={`w-[90%] sm:w-[60%] gap-3 sm:gap-1 flex justify-start items-center flex-row`}>
+        <div className={`w-[90%] sm:w-[60%] flex flex-col sm:flex-row justify-center items-center sm:gap-[10px]`}>
             {props.children}
         </div>
     )
