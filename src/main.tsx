@@ -28,6 +28,7 @@ import LoadingPage from './components/LoadingPage';
 import Alert from './components/Alert/index.tsx';
 import MyPerfil from './screens/MyPerfil/index.tsx';
 import ScreenPage from './components/ScreenPage/index.tsx';
+import Materias from './screens/Materias/index.tsx';
 
 //ARQUIVO DE CONFIGURAÇÃO DAS ROTAS
 const router = createBrowserRouter([
@@ -69,6 +70,11 @@ const router = createBrowserRouter([
   {
     path: "my-perfil",
     element: <MyPerfil />,
+    errorElement: <ErrorPage />
+  },
+  {
+    path: "materias",
+    element: <Materias />,
     errorElement: <ErrorPage />
   },
 ])
