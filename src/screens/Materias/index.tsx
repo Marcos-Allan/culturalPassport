@@ -18,18 +18,19 @@ export default function Materias() {
                 />
                 <MenuBUtton />
             </Navbar>
+            <div className={`w-full sm:w-[70%] flex flex-col sm:flex-row flex-wrap justify-center items-center sm:gap-[20px]`}>
+                <MaterialCard ContentMateria={'Geometria Plana'} TitleMateria={'Matemática'} background={0} />
 
-            <MaterialCard ContentMateria={'Geometria Plana'} TitleMateria={'Matemática'} background={0} />
-
-            <MaterialCard ContentMateria={'Reprodução Sexuada'} TitleMateria={'Biologia'} background={1} />
-            
-            <MaterialCard ContentMateria={'Ondulatória'} TitleMateria={'Fisíca'} background={2} />
-            
-            <MaterialCard ContentMateria={'Ambiguidade'} TitleMateria={'Português'} background={3} />
-            
-            <MaterialCard ContentMateria={'Guerra Fria'} TitleMateria={'História'} background={4} />
-            
-            <MaterialCard ContentMateria={'Tabela Periódica'} TitleMateria={'Quimica'} background={5} />
+                <MaterialCard ContentMateria={'Reprodução Sexuada'} TitleMateria={'Biologia'} background={1} />
+                
+                <MaterialCard ContentMateria={'Ondulatória'} TitleMateria={'Fisíca'} background={2} />
+                
+                <MaterialCard ContentMateria={'Ambiguidade'} TitleMateria={'Português'} background={3} />
+                
+                <MaterialCard ContentMateria={'Guerra Fria'} TitleMateria={'História'} background={4} />
+                
+                <MaterialCard ContentMateria={'Tabela Periódica'} TitleMateria={'Quimica'} background={5} />
+            </div>
             
             <BottomNavigation />
             

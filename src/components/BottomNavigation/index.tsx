@@ -9,7 +9,7 @@ import { IoPersonOutline } from "react-icons/io5";
 export default function BottomNavigation() {
 
     return(
-        <div className={`fixed bottom-0 w-full h-[80px] px-3 bg-my-secondary flex justify-around items-center`}>
+        <div className={`fixed bottom-0 w-full sm:px-[20%] h-[80px] px-3 bg-my-secondary flex justify-around items-center`}>
             
             <div className={`flex flex-col items-center justify-center gap-[5px]`}>
                 <GoHome className={`text-[24px] text-my-white`} />
