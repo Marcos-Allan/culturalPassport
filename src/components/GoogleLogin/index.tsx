@@ -96,7 +96,7 @@ export default function GoogleLogin() {
                 toggleAlert(`success`, `seja bem-vindo(a) ${user.displayName}`)
 
                 //NAVEGA PARA A PÁGINA INICIAL
-                navigate('/')
+                navigate('/materias')
                 
             }
 

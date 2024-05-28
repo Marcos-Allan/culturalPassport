@@ -30,7 +30,7 @@ export default function SignUp(){
     const states:any = useMyContext()
 
     //DESESTRUTURA AS VARIAVEIS ESPECIFICADAS
-    const { toggleLoading, toggleAlert } = states
+    const { toggleLoading, toggleAlert, userS } = states
 
     //UTILIZA O HOOK useState
     const [inputEmailValue, setInputEmailValue] = useState<string>('')
@@ -158,6 +158,16 @@ export default function SignUp(){
             toggleAlert('error', 'erro de servidor')
         })
     }
+
+    //FUNÇÃO CHAMADA AO RECARREGAR A PÁGINA
+    useEffect(() => {
+        //VERIFICA SE O USUÁRIO ESTÁ LOGADO
+        if(userS.logged == true){
+
+            //REDIRECIONA ELE PARA A PÁGINA DE MATÉRIAS
+            navigate('/materias')
+        }
+    })
 
     return(
         <>

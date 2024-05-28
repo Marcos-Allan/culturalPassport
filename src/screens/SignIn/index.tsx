@@ -31,7 +31,7 @@ export default function SignIn(){
     const states:any = useMyContext()
 
     //DESESTRUTURA AS VARIAVEIS ESPECIFICADAS
-    const { toggleUser, toggleLoading, toggleAlert } = states
+    const { userS, toggleUser, toggleLoading, toggleAlert } = states
 
     //UTILIZA O HOOK useState
     const [inputEmailValue, setInputEmailValue] = useState<string>('')
@@ -109,7 +109,7 @@ export default function SignIn(){
                 toggleAlert(`success`, `seja bem-vindo(a) ${response.data.name}`)
                 
                 //REDIRECIONA O USUÁRIO PARA A PÁGINA INICIAL
-                navigate('/')
+                navigate('/materias')
 
             }else{
                 //RETORNA MENSAGEM DE ERRO AO USUARIO
@@ -144,6 +144,16 @@ export default function SignIn(){
             setFormValidate(true)
         }
     },[stateEmail, statePassword])  
+
+    //FUNÇÃO CHAMADA AO RECARREGAR A PÁGINA
+    useEffect(() => {
+        //VERIFICA SE O USUÁRIO ESTÁ LOGADO
+        if(userS.logged == true){
+
+            //REDIRECIONA ELE PARA A PÁGINA DE MATÉRIAS
+            navigate('/materias')
+        }
+    })
 
     return(
         <>  
