@@ -1,6 +1,7 @@
 //IMPORTAÇÃO DAS BIBLIOTECAS    
-import { useEffect } from 'react'
+import { useState, useEffect, ChangeEvent } from 'react'
 import { useNavigate } from 'react-router-dom';
+import instance from '../../utils/axios';
 
 //IMPORTAÇÃO DOS COMPONENTES
 import Navbar from "../../components/Navbar";
@@ -24,7 +25,7 @@ export default function ForgoutPassword() {
     const states:any = useMyContext()
 
     //DESESTRUTURA AS VARIAVEIS ESPECIFICADAS
-    const { userS } = states
+    const { userS, toggleAlert, toggleLoading } = states
 
     //FUNÇÃO CHAMADA AO RECARREGAR A PÁGINA
     useEffect(() => {
@@ -35,6 +36,65 @@ export default function ForgoutPassword() {
             navigate('/materias')
         }
     })
+
+    //UTILIZA O HOOK useState
+    const [inputEmailValue, setInputEmailValue] = useState<string>('')
+    const [stateEmail, setStateEmail] = useState<boolean>(false)
+    const [formValidate, setFormValidate] = useState<boolean>(true)
+
+    //FUNÇÃO UTILIZADA PARA MUDAR O VALOR DA VARIAVEL COM BASE NO INPUT
+    function handleInputEmailChange(e:ChangeEvent<HTMLInputElement>) {
+        setInputEmailValue(e.target.value)
+
+        //CHAMA UMA FUNÇÃO PARA VER A VALIDAÇÃO DO INPUT
+        validateInputEmail()
+    }
+
+    //FUNÇÃO RESPONSÁVEL POR VER SE O CAMPO ESTÁ NO PADRÃO
+    function validateInputEmail(){
+        //USA REGEX PARA VERIFICAR O PADRÃO DA STRING
+        const padraoEmail = /^[\w._-]+@[\w._-]+\.[\w]{2,}/i
+        
+        if(padraoEmail.test(inputEmailValue) == true){
+            setStateEmail(true)
+        }else{
+            setStateEmail(false)
+        }
+    }
+
+    //FUNÇÃO RESPONSÁVEL POR ENVIAR CÓDIGO PARA O EMAIL DO USUÁRIO
+    function sendEmail() {
+
+        //MUDA O ESTADO DE CARREGAMENTO DA APLICAÇÃO PARA true
+        toggleLoading(true)
+
+        instance.get(`/forgoutpassword/${inputEmailValue}`)
+        .then(function (response) {
+            //MUDA O ESTADO DE CARREGAMENTO DA APLICAÇÃO PARA false
+            toggleLoading(false)
+
+            //ESCREVE NO CONSOLE DO SITE 
+            console.log(response.data)
+        })
+        .catch(function (error) {
+            //EXECUTA UMA FUNÇÃO QUANDO A REQUISIÇÃO FOR MAL SUCEDIDA
+            console.log('ocorreu algum erro: ', error);
+
+            //COLOCA ALERT NA TELA
+            toggleAlert(`error`, `lamentamos, erro interno no servidor`)
+            
+            //MUDA O ESTADO DE CARREGAMENTO DA APLICAÇÃO PARA false
+            toggleLoading(false)
+        })
+    }
+
+    useEffect(() => {
+        if(stateEmail == true){
+            setFormValidate(false)
+        }else{
+            setFormValidate(true)
+        }
+    },[stateEmail])
 
     return(
         <>
@@ -48,12 +108,12 @@ export default function ForgoutPassword() {
 
             <Text text={`Digite o endereço de email no campo abaixo`} />
 
-            <form className={`mt-8 items-center flex flex-col w-[90%]`}>
+            <form className={`mt-8 items-center flex flex-col w-[90%]`} onSubmit={(e) => e.preventDefault()}>
                 
-                <EmailInput />
+                <EmailInput value={inputEmailValue} event={handleInputEmailChange} checked={stateEmail} />
                 <Text text={`enviaremos um código para o endereço de email digitado`} />
                     
-                <Button route='/confirm-code' text={`Enviar`} />
+                <Button route='undefined' text={`Enviar`}  disabled={formValidate} event={sendEmail} />
             </form>
             <Menu />
         </>
