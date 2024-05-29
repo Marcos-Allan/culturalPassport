@@ -44,7 +44,9 @@ export default function Materias() {
                 />
                 <MenuBUtton />
             </Navbar>
-            <div className={`w-full sm:w-[70%] flex flex-col sm:flex-row flex-wrap justify-center items-center sm:gap-[20px]`}>
+
+            <div className={`w-full sm:w-[70%] flex flex-col sm:flex-row flex-wrap justify-center items-center sm:gap-[20px] pb-[80px]`}>
+                
                 <MaterialCard ContentMateria={'Geometria Plana'} TitleMateria={'Matemática'} background={0} />
 
                 <MaterialCard ContentMateria={'Reprodução Sexuada'} TitleMateria={'Biologia'} background={1} />
