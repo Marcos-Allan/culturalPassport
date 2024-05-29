@@ -156,7 +156,7 @@ export default function SignIn(){
     })
 
     return(
-        <>  
+        <> 
             <Navbar>   
                 <Return />
                 <TitlePage
