@@ -91,7 +91,7 @@ export default function ConfirmCode() {
     //FUNÇÃO RESPONSÁVEL POR VER SE O CAMPO ESTÁ NO PADRÃO
     function validateInputEmail(){
         //USA REGEX PARA VERIFICAR O PADRÃO DA STRING
-        const padraoCode = /[0-9]{5}/
+        const padraoCode = /^\d{3}-\d{2}/
         
         if(padraoCode.test(inputCodeValue) == true){
             setStateCode(true)
