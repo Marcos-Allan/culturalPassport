@@ -57,14 +57,14 @@ export default function ConfirmCode() {
             console.log(response.data)
 
             //VERIFICA SE A CONTA EXISTE NO BANCO DE DADOS
-            if(response.data == "Usuário não encontrado"){
+            if(response.data == "Código de verificação errado"){
                 //COLOCA ALERT NA TELA
-                toggleAlert(`error`, `Usuário não cadastrado`)
-            }else if(response.data == "Código enviado para o email informado"){
+                toggleAlert(`error`, `Código Inválido`)
+            }else if(response.data == "Código de verificação correto"){
                 //COLOCA ALERT NA TELA
-                toggleAlert(`success`, `Email enviado`)
+                toggleAlert(`success`, `Autenticação completa`)
                 //REDIRECIONA O USUÁRIO PARA A PRÓXIMA PÁGINA
-                navigate('/confirm-code')
+                navigate('/switch-password')
             }
 
         })
