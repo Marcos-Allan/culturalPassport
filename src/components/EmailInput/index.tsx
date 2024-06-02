@@ -109,7 +109,7 @@ export default function EmailInput(props: Props) {
                 ref={input}
                 onChange={props.event && props.event}
                 id="emailInput"
-                type="email"
+                // type="email"
                 value={props.value && props.value}
                 onBlur={handleValidateEmail}
                 placeholder="Digite seu endereço de email"

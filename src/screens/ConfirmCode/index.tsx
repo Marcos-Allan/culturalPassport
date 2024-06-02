@@ -1,5 +1,5 @@
 //IMPORTAÇÃO DAS BIBLIOTECAS    
-import { useEffect } from 'react'
+import { useEffect, useState, ChangeEvent } from 'react'
 import { useNavigate } from 'react-router-dom';
 
 //IMPORTAÇÃO DOS COMPONENTES
@@ -14,6 +14,7 @@ import Menu from '../../components/Menu';
 
 //IMPORTAÇÃO DO PROVEDOR PARA PEGAR AS VARIÁVEIS GLOBAIS
 import { useMyContext } from '../../provider/geral';
+import instance from '../../utils/axios';
 
 export default function ConfirmCode() {
 
@@ -24,7 +25,12 @@ export default function ConfirmCode() {
     const states:any = useMyContext()
 
     //DESESTRUTURA AS VARIAVEIS ESPECIFICADAS
-    const { userS } = states
+    const { userS, toggleLoading, toggleAlert } = states
+
+    //
+    const [inputCodeValue, SetInputCodeValue] = useState<string>('')
+    const [stateCode, setStateCode] = useState<boolean>(false)
+    const [formValidate, setFormValidate] = useState<boolean>(true)
 
     //FUNÇÃO CHAMADA AO RECARREGAR A PÁGINA
     useEffect(() => {
@@ -34,7 +40,73 @@ export default function ConfirmCode() {
             //REDIRECIONA ELE PARA A PÁGINA DE MATÉRIAS
             navigate('/materias')
         }
-    })
+    },[])
+
+    //FUNÇÃO RESPONSÁVEL POR ENVIAR CÓDIGO PARA O EMAIL DO USUÁRIO
+    function verifyCode() {
+
+        //MUDA O ESTADO DE CARREGAMENTO DA APLICAÇÃO PARA true
+        toggleLoading(true)
+
+        instance.get(`/verifycode/${inputCodeValue}`)
+        .then(function (response) {
+            //MUDA O ESTADO DE CARREGAMENTO DA APLICAÇÃO PARA false
+            toggleLoading(false)
+
+            //ESCREVE NO CONSOLE DO SITE 
+            console.log(response.data)
+
+            //VERIFICA SE A CONTA EXISTE NO BANCO DE DADOS
+            if(response.data == "Usuário não encontrado"){
+                //COLOCA ALERT NA TELA
+                toggleAlert(`error`, `Usuário não cadastrado`)
+            }else if(response.data == "Código enviado para o email informado"){
+                //COLOCA ALERT NA TELA
+                toggleAlert(`success`, `Email enviado`)
+                //REDIRECIONA O USUÁRIO PARA A PRÓXIMA PÁGINA
+                navigate('/confirm-code')
+            }
+
+        })
+        .catch(function (error) {
+            //EXECUTA UMA FUNÇÃO QUANDO A REQUISIÇÃO FOR MAL SUCEDIDA
+            console.log('ocorreu algum erro: ', error);
+
+            //COLOCA ALERT NA TELA
+            toggleAlert(`error`, `lamentamos, erro interno no servidor`)
+            
+            //MUDA O ESTADO DE CARREGAMENTO DA APLICAÇÃO PARA false
+            toggleLoading(false)
+        })
+    }
+
+    //FUNÇÃO UTILIZADA PARA MUDAR O VALOR DA VARIAVEL COM BASE NO INPUT
+    function handleInputCodeChange(e:ChangeEvent<HTMLInputElement>) {
+        SetInputCodeValue(e.target.value)
+
+        //CHAMA UMA FUNÇÃO PARA VER A VALIDAÇÃO DO INPUT
+        validateInputEmail()
+    }
+
+    //FUNÇÃO RESPONSÁVEL POR VER SE O CAMPO ESTÁ NO PADRÃO
+    function validateInputEmail(){
+        //USA REGEX PARA VERIFICAR O PADRÃO DA STRING
+        const padraoCode = /[0-9]{5}/
+        
+        if(padraoCode.test(inputCodeValue) == true){
+            setStateCode(true)
+        }else{
+            setStateCode(false)
+        }
+    }
+
+    useEffect(() => {
+        if(stateCode == true){
+            setFormValidate(false)
+        }else{
+            setFormValidate(true)
+        }
+    },[stateCode])
 
     return(
         <>      
@@ -47,10 +119,11 @@ export default function ConfirmCode() {
             </Navbar>
             <Text text={`Digite o código que foi enviado por email`} />
 
-            <form className={`mt-8 items-center flex flex-col w-[90%]`}>
-                <EmailInput />
+            <form className={`mt-8 items-center flex flex-col w-[90%]`} onSubmit={(e) => e.preventDefault()}>
+                {/* <EmailInput value={inputCodeValue} event={} /> */}
+                <EmailInput value={inputCodeValue} event={handleInputCodeChange} checked={stateCode} />
                 <Text text={`Confirme o código enviado para o seu email para alterar a senha`} />
-                <Button route='/switch-password' text={`Confirmar`} />
+                <Button route='undefined' text={`Confirmar`} disabled={formValidate} event={verifyCode} />
             </form>
             <Menu />
         </>

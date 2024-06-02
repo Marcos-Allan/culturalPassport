@@ -81,6 +81,8 @@ export default function ForgoutPassword() {
                 //COLOCA ALERT NA TELA
                 toggleAlert(`error`, `Usuário não cadastrado`)
             }else if(response.data == "Código enviado para o email informado"){
+                //COLOCA ALERT NA TELA
+                toggleAlert(`success`, `Email enviado`)
                 //REDIRECIONA O USUÁRIO PARA A PRÓXIMA PÁGINA
                 navigate('/confirm-code')
             }
