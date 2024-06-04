@@ -153,7 +153,7 @@ export default function SignIn(){
             //REDIRECIONA ELE PARA A PÁGINA DE MATÉRIAS
             navigate('/materias')
         }
-    })
+    },[])
 
     return(
         <> 

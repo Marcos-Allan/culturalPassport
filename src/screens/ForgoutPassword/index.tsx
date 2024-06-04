@@ -35,7 +35,7 @@ export default function ForgoutPassword() {
             //REDIRECIONA ELE PARA A PÁGINA DE MATÉRIAS
             navigate('/materias')
         }
-    })
+    },[])
 
     //UTILIZA O HOOK useState
     const [inputEmailValue, setInputEmailValue] = useState<string>('')

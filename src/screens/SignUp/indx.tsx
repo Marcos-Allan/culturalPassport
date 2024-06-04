@@ -167,7 +167,7 @@ export default function SignUp(){
             //REDIRECIONA ELE PARA A PÁGINA DE MATÉRIAS
             navigate('/materias')
         }
-    })
+    },[])
 
     return(
         <>

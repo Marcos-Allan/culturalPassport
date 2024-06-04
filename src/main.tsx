@@ -18,17 +18,17 @@ import ForgoutPassword from './screens/ForgoutPassword/index.tsx';
 import ConfirmCode from './screens/ConfirmCode/index.tsx';
 import SwitchPassword from './screens/SwitchPassword/index.tsx';
 import ErrorPage from './screens/ErrorPage/index.tsx';
+import LoadingPage from './components/LoadingPage';
+import MyPerfil from './screens/MyPerfil/index.tsx';
+import Materias from './screens/Materias/index.tsx';
+import Notifications from './screens/Notifications/index.tsx';
 
 //IMPORTAÇÃO DO PROVEDOR QUE GUARDA AS VÁRIAVEIS DE ESTADO GLOBAL
 import { Provider } from './provider/index.tsx';
 
 //IMPORTAÇÃO DOS COMPONENTES PRESENTES EM TODAS AS PÁGINAS
-// import Menu from './components/Menu/index.tsx';
-import LoadingPage from './components/LoadingPage';
-import Alert from './components/Alert/index.tsx';
-import MyPerfil from './screens/MyPerfil/index.tsx';
 import ScreenPage from './components/ScreenPage/index.tsx';
-import Materias from './screens/Materias/index.tsx';
+import Alert from './components/Alert/index.tsx';
 
 //ARQUIVO DE CONFIGURAÇÃO DAS ROTAS
 const router = createBrowserRouter([
@@ -75,6 +75,11 @@ const router = createBrowserRouter([
   {
     path: "materias",
     element: <Materias />,
+    errorElement: <ErrorPage />
+  },
+  {
+    path: "notifications",
+    element: <Notifications />,
     errorElement: <ErrorPage />
   },
 ])

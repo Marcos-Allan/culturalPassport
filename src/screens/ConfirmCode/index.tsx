@@ -100,7 +100,9 @@ export default function ConfirmCode() {
         }
     }
 
+    //FUNÇÃO CHAMADA TODA VEZ QUE RECARREGA A PÁGINA
     useEffect(() => {
+        //VERIFICA SE O INPUT ESTÁ NO PADRÃO
         if(stateCode == true){
             setFormValidate(false)
         }else{

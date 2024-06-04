@@ -37,7 +37,7 @@ export default function Signs(){
             //REDIRECIONA ELE PARA A PÁGINA DE MATÉRIAS
             navigate('/materias')
         }
-    })
+    },[])
 
     return(
         <>

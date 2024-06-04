@@ -33,7 +33,7 @@ export default function Materias() {
             //REDIRECIONA ELE PARA A PÁGINA DE MATÉRIAS
             navigate('/')
         }
-    })
+    },[])
 
     return(
         <>

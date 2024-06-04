@@ -34,7 +34,7 @@ export default function SwitchPassword() {
             //REDIRECIONA ELE PARA A PÁGINA DE MATÉRIAS
             navigate('/materias')
         }
-    })
+    },[])
     
     return(
         <>

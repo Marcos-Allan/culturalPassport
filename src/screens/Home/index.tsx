@@ -35,7 +35,7 @@ export default function Home(){
             //REDIRECIONA ELE PARA A PÁGINA DE MATÉRIAS
             navigate('/materias')
         }
-    })
+    },[])
 
     return(
         <>
