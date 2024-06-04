@@ -22,6 +22,7 @@ import LoadingPage from './components/LoadingPage';
 import MyPerfil from './screens/MyPerfil/index.tsx';
 import Materias from './screens/Materias/index.tsx';
 import Notifications from './screens/Notifications/index.tsx';
+import Chat from './screens/Chat/index.tsx';
 
 //IMPORTAÇÃO DO PROVEDOR QUE GUARDA AS VÁRIAVEIS DE ESTADO GLOBAL
 import { Provider } from './provider/index.tsx';
@@ -80,6 +81,11 @@ const router = createBrowserRouter([
   {
     path: "notifications",
     element: <Notifications />,
+    errorElement: <ErrorPage />
+  },
+  {
+    path: "chat",
+    element: <Chat />,
     errorElement: <ErrorPage />
   },
 ])
