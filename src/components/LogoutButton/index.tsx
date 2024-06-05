@@ -1,3 +1,6 @@
+//IMPORTAÇÃO DAS BIBLIOTECAS    
+import { useNavigate } from 'react-router-dom';
+
 //IMPORTAÇÃO DOS ICONES
 import { CiLogout } from "react-icons/ci";
 
@@ -8,6 +11,9 @@ import { getAuth, signOut } from 'firebase/auth';
 import { useMyContext } from "../../provider/geral"
 
 export default function LogoutButton() {
+
+    //UTILIZAÇÃO DO HOOK DE NAVEGAÇÃO 
+    const navigate = useNavigate()
 
     //UTILIZAÇÃO DO HOOK DE NAVEGAÇÃO 
     const states:any = useMyContext()
@@ -25,6 +31,9 @@ export default function LogoutButton() {
 
             //COLOCA O ALERT NA TELA
             toggleAlert('success', 'conta desconectada com sucesso')
+
+            //REDIRECIONA O USUÁRIO PARA A PÁGINA INICIAL
+            navigate('/')
             
         }).catch((error) => {
             console.error('Erro ao deslogar:', error)

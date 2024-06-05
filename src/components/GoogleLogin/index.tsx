@@ -56,7 +56,7 @@ export default function GoogleLogin() {
             toggleAlert(`success`, `seja bem-vindo(a) ${response.data.name}`)
             
             //REDIRECIONA O USUÁRIO PARA A PÁGINA INICIAL
-            navigate('/')
+            navigate('/materias')
         })
         .catch(function (error) {
             //EXECUTA UMA FUNÇÃO QUANDO A REQUISIÇÃO FOR MAL SUCEDIDA
@@ -78,58 +78,32 @@ export default function GoogleLogin() {
 
         getRedirectResult(auth)
         .then((result) => {
-            // This gives you a Google Access Token. You can use it to access Google APIs.
-            // const credential = GoogleAuthProvider.credentialFromResult(result);
-            // const token = credential ? credential.accessToken : null;
-    
-            // The signed-in user info.
-
             //PUXA OS DADOS DO USUÁRIO
             const user = result ? result.user : null;
             
             //VE SE O USUÁRIO FEZ LOGIN OU NÃO
             if(user){
+                //MUDA O ESTADO DE CARREGAMENTO DA APLICAÇÃO PARA false
+                toggleLoading(false)
+
                 //FAZ O LOGIN CASO A CONTA EXISTA E SE NÃO EE CRIA NO BANCO DE DADOS
                 signIn(String(user.email), String(user.displayName), String(user.photoURL))
-
-                //COLOCA ALERT NA TELA
-                toggleAlert(`success`, `seja bem-vindo(a) ${user.displayName}`)
-
-                //NAVEGA PARA A PÁGINA INICIAL
-                navigate('/materias')
                 
+            }else{
+                //MUDA O ESTADO DE CARREGAMENTO DA APLICAÇÃO PARA false
+                toggleLoading(false)
             }
 
-            //MUDA O ESTADO DE CARREGAMENTO DA APLICAÇÃO PARA false
-            toggleLoading(false)
 
-
-            //RETORNA true
-            return true
-
-            // IdP data available using getAdditionalUserInfo(result)
-            // ...
         }).catch((error) => {
             //RETORNA O ERRO PARA O USUÁRIO
             console.log('erro de autenticação: ', error)
-
-            // Handle Errors here.
-            // const errorCode = error.code;
-            // const errorMessage = error.message;
-            // // The email of the user's account used.
-            // const email = error.customData.email;
-            // // The AuthCredential type that was used.
-            // const credential = GoogleAuthProvider.credentialFromError(error);
-            // ...
             
             //MUDA O ESTADO DE CARREGAMENTO DA APLICAÇÃO PARA false
             toggleLoading(false)
 
             //COLOCA ALERT NA TELA
             toggleAlert(`error`, `Lamentamos, ocorreu algum erro inesperado`)
-
-            //RETORNA false
-            return false
         });
     }
 
@@ -137,6 +111,8 @@ export default function GoogleLogin() {
     useEffect(() => {
         //MUDA O ESTADO DE CARREGAMENTO DA APLICAÇÃO PARA false
         toggleLoading(false)
+
+        //CHAMA A FUNÇÃO PARA PEGAR O RESULTADO DO LOGIN COM O GOOGLE
         getLoginResult()
     },[])
 
