@@ -23,6 +23,7 @@ import TitlePage from "../../components/TitlePage";
 import MenuBUtton from "../../components/MenuButton";
 import Menu from "../../components/Menu";
 import Button from '../../components/Button';
+import BottomNavigation from '../../components/BottomNavigation';
 
 export default function MyPerfil() {
 
@@ -202,6 +203,8 @@ export default function MyPerfil() {
                 />
             </div>
             <Button event={updateUser} text='Atualizar' route='undefined' />
+
+            <BottomNavigation />
             <Menu />
         </>
 

@@ -52,12 +52,12 @@ export default function Chat() {
                 {/* MENSAGEM CASO A MENSAGEM FOR DE OUTRO USUÁRIO */}
                 <div className={`self-start border-2 ${theme == 'light' ? 'border-my-gray' : 'border-my-gray-black' } p-1 max-w-[200px] rounded-[10px] rounded-es-[0px]`}>
                     <span className={`text-[#3d4efe] font-black text-[14px]`}>Marcos A</span>
-                    <p className={`text-[16px] font-light ${theme == 'light' ? 'text-my-black' : 'text-my-white'} pt-1`}>Mano fizemo um sistema de chat sozinho sem ajuda</p>
+                    <p className={`text-[16px] font-light ${theme == 'light' ? 'text-my-black' : 'text-my-white'} pt-1`}>O ego vai te fazer se sentir bem, ou talvez bem mal por não ter ninguém</p>
                 </div>
                 
                 {/* MENSAGEM CASO A MENSAGEM FOR SUA */}
                 <div className={`self-end border-2 border-my-gray p-1 max-w-[200px] rounded-[10px] rounded-ee-[0px]`}>
-                    <p className={`text-[16px] font-light ${theme == 'light' ? 'text-my-black' : 'text-my-white'}`}>poisé mano SOZINHO como sempre</p>
+                    <p className={`text-[16px] font-light ${theme == 'light' ? 'text-my-black' : 'text-my-white'}`}>o WIU é foda</p>
                 </div>
             </div>
 
