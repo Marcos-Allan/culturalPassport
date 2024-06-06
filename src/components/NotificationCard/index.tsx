@@ -22,9 +22,9 @@ export default function NotificationCard(props: Props) {
     return(
         <div className={`w-[90%] flex flex-row items-center justify-between p-2 rounded-[6px] border-2 ${theme == 'light' ? 'border-my-gray' : 'border-my-gray-black'}`}>
             
-            <div className={`flex flex-row justify-start items-center truncate w-[35%] me-6`}>
+            <div className={`flex flex-row justify-start items-center truncate w-[35%] me-3`}>
                 <IoIosNotificationsOutline className={`text-my-secondary text-[38px]`} />
-                <p className={`capitalize ${theme == 'light' ? 'text-my-black' : 'text-my-white'}`}>{props.materia}</p>
+                <p className={`truncate capitalize text-[12px] ${theme == 'light' ? 'text-my-black' : 'text-my-white'}`}>{props.materia}</p>
             </div>
 
             <div className={`flex justify-start items-center w-[65%]`}>

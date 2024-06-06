@@ -47,11 +47,11 @@ export default function Button(props: Props) {
                         }
                     `}
                 >
-                <p
-                    className="capitalize"
-                >
-                    {props.text}
-                </p>
+                    <p
+                        className="capitalize"
+                    >
+                        {props.text}
+                    </p>
                 </Link>
             ):(
                 //EXECUTA A FUNÇÃO PASSADA POR PROPS

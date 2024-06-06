@@ -79,6 +79,7 @@ export default function MyPerfil() {
         })
     }
 
+    //FUNÇÃO CHAMADA TODA VEZ QUE RECARREGA A PÁGINA
     useEffect(() => {
         setName(userS.name)
         setImg(userS.img)
@@ -127,15 +128,16 @@ export default function MyPerfil() {
 
             {userS.logged == true && (
                 //COLOCA OS DADOS DE FOTO E NOME DO USUÁRIO NA TELA
-                <div className={`flex items-center gap-[10px] m-3 mb-0`}>
+                <div className={`w-[90%] flex items-center gap-[10px] mb-0 mt-4`}>
                     <img
                         src={img}
                         alt=""
-                        className={`rounded-[50%] mb-2 w-20 h-20 border-[1px] ${theme == 'light' ? 'border-my-terciary' : 'border-my-quartenary'} p-1`}
+                        className={`rounded-[50%] mb-2 w-[80px] h-[80px] border-[1px] p-1 ${theme == 'light' ? 'border-my-terciary' : 'border-my-quartenary'}`}
                     />
+
                     <input
                         onChange={(e) => setName(e.target.value)}
-                        className={`text-[22px] font-bold capitalize bg-transparent border-2 p-1 ps-2 rounded-[15px] outline-none
+                        className={`text-[22px] w-full font-bold capitalize bg-transparent border-2 p-1 ps-2 rounded-[15px] outline-none
                         ${theme == 'light'
                         ? 'text-my-black border-my-terciary'
                         : 'text-my-white border-my-quartenary'}
@@ -146,8 +148,8 @@ export default function MyPerfil() {
             )}
 
             <h1
-                className={`
-                    ${theme == 'light' ? 'text-my-black' : 'text-my-white'} text-[30px] mb-5
+                className={`text-[30px] mb-5 font-bold
+                    ${theme == 'light' ? 'text-my-black' : 'text-my-white'}
                 `}
             >Avatares
             </h1>

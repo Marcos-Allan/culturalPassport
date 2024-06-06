@@ -33,7 +33,7 @@ export default function EmailInput(props: Props) {
 
         //VÊ SE O VALOR DO INPUT EXISTE
         if(props.value){
-            //VERIFICA SE O VALOR DO INPUT ESTÁ NO PADRÃO DA REGEX padraoEmail
+            //VERIFICA SE O VALOR DO INPUT ESTÁ NO PADRÃO DA REGEX
             if(props.checked == true){
                 //PEGA AS REFERÊNCIAS ATUAIS DOS ELEMENTOS
                 if(input.current && label.current && message.current && span.current){

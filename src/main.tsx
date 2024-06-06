@@ -31,6 +31,7 @@ import { Provider } from './provider/index.tsx';
 //IMPORTAÇÃO DOS COMPONENTES PRESENTES EM TODAS AS PÁGINAS
 import ScreenPage from './components/ScreenPage/index.tsx';
 import Alert from './components/Alert/index.tsx';
+import Exercises from './screens/Exercises/index.tsx';
 
 //ARQUIVO DE CONFIGURAÇÃO DAS ROTAS
 const router = createBrowserRouter([
@@ -92,6 +93,11 @@ const router = createBrowserRouter([
   {
     path: "achievements",
     element: <Achievements />,
+    errorElement: <ErrorPage />
+  },
+  {
+    path: "exercises",
+    element: <Exercises />,
     errorElement: <ErrorPage />
   },
 ])

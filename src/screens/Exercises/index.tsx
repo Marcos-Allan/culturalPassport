@@ -9,12 +9,13 @@ import MenuBUtton from "../../components/MenuButton";
 import Navbar from "../../components/Navbar";
 import Return from "../../components/Return";
 import TitlePage from "../../components/TitlePage";
-import ConquestCard from '../../components/ConquestCard';
+import Text from '../../components/Text';
+import ExerciseCard from '../../components/ExerciseCard';
 
 //IMPORTAÇÃO DO PROVEDOR PARA PEGAR AS VARIÁVEIS GLOBAIS
 import { useMyContext } from '../../provider/geral';
 
-export default function Achievements() {
+export default function Exercises() {
 
     //UTILIZAÇÃO DO HOOK DE NAVEGAÇÃO 
     const navigate = useNavigate()
@@ -40,14 +41,22 @@ export default function Achievements() {
             <Navbar>
                 <Return />
                 <TitlePage
-                    text={`Conquistas`}
+                    text={`Exercicios`}
                 />
                 <MenuBUtton />
             </Navbar>
 
-            <ConquestCard level={2} message='próxima meta 365 dias' porcentage={80} title='Day o Cool' />
-            <ConquestCard level={3} message='próxima meta 10x ao dia' porcentage={100} title='First fap' />
 
+            <Text text='Passeios' />
+
+            <ExerciseCard concluded={false} materia='Português' title='museu do ipiranga' type='travel' />
+            <ExerciseCard concluded={true} materia='história' title='museu do terraplanismo' type='travel' />
+            
+            <Text text='Simulados' />
+            
+            <ExerciseCard concluded={false} materia='enem' title='fazer simulado de matemática' type='exercise' />
+            <ExerciseCard concluded={true} materia='enem' title='fazer simulado de história' type='exercise' />
+            
             <BottomNavigation />
             
             <Menu />

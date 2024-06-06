@@ -154,7 +154,7 @@ export default function SignUp(){
             //EXECUTA UMA FUNÇÃO QUANDO A REQUISIÇÃO FOR MAL SUCEDIDA
             console.log('ocorreu algum erro: ', error)
 
-            //
+            //COLOCA ALERT NA TELA
             toggleAlert('error', 'erro de servidor')
         })
     }

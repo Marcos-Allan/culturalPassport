@@ -52,6 +52,7 @@ export default function SwitchPassword() {
                 <PasswordInput hidden={false} placeholder="Senha" text="Confirmação da Senha" />
                 <Button route='/sign-in' text={`confirmar`} />
             </form>
+            
             <Menu />
         </>
     )

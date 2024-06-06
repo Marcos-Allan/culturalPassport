@@ -35,7 +35,7 @@ export default function Alert() {
         //VERIFICA SE O TIPO DO MODAL FOI DEFINIDO
         if(message.type == 'undefined'){
             if(msg.current){
-                //MUDA O ESTADO E DISPLAY DELA PARA NENHUM(DEIXA INVISIVEL E INTANGÍVEL)
+                //MUDA O ESTADO DE VISIBILIDADE DELE
                 msg.current.style.display = 'none'
             }
             return 
@@ -52,13 +52,12 @@ export default function Alert() {
                     setBackground('#84cd8e')
                     break;
                     
-                    
                     default:
                     //MUDA A COR DA BARRA DE BACKGROUND
                     setBackground('#64a7f3')
                     break;
             }
-            //RESETA A BARRA PARA POSIÇÃO INICIAL E DA PLAY NA ANIMAÇÃO
+            //RESETA A BARRA PARA POSIÇÃO INICIAL E DA INICIO A ANIMAÇÃO
             api.start({
                 from: { 
                     width: `100%`,
@@ -70,7 +69,7 @@ export default function Alert() {
 
             //PEGA A CAIXA DO ALERT NO ESTADO ATUAL
             if(msg.current){
-                //MUDA O ESTADO E DISPLAY DELA PARA BLOCK
+                //MUDA O ESTADO DE VISIBILIDADE DELE E A INTANGIBILIDADE
                 msg.current.style.display = 'block'
             }
 
@@ -86,7 +85,7 @@ export default function Alert() {
                 setTimeout(() => {
                     //PEGA A CAIXA DO ALERT NO ESTADO ATUAL
                     if(msg.current){
-                        //MUDA O ESTADO E DISPLAY DELA PARA NENHUM(DEIXA INVISIVEL E INTANGÍVEL)
+                        //MUDA O ESTADO DE VISIBILIDADE DELE E A INTANGIBILIDADE
                         msg.current.style.display = 'none'
                     }
                 }, 400);
@@ -95,7 +94,7 @@ export default function Alert() {
         }
     }
     
-    //FUNÇÃO CHAMADA QUANDO A PÁGINA É RECARREGADA, E QUANDO TEM ALTERAÇÃO NO ESTADO DE message
+    //FUNÇÃO CHAMADA QUANDO A PÁGINA É RECARREGADA, E QUANDO TEM ALTERAÇÃO NO ESTADO DA MENSAGEM DO ALERT
     useEffect(() => {
         //MUDA A VISIBILIDADE DO MODAL
         hideAlert()

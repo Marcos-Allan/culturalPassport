@@ -5,13 +5,13 @@ import TitlePage from "../../components/TitlePage";
 import MenuBUtton from "../../components/MenuButton";
 import Text from "../../components/Text";
 import Button from "../../components/Button";
+import Menu from "../../components/Menu";
 
 //IMPORTAÇÃO DOS ICONES
 import { IoSadOutline } from "react-icons/io5";
 
 //IMPORTAÇÃO DO PROVEDOR PARA PEGAR AS VARIÁVEIS GLOBAIS
 import { useMyContext } from "../../provider/geral";
-import Menu from "../../components/Menu";
 
 export default function ErrorPage() {
 

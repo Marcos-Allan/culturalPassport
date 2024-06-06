@@ -14,6 +14,8 @@ import Menu from '../../components/Menu';
 
 //IMPORTAÇÃO DO PROVEDOR PARA PEGAR AS VARIÁVEIS GLOBAIS
 import { useMyContext } from '../../provider/geral';
+
+//CONFIGURAÇÃO DA BASE URL DO AXIOS
 import instance from '../../utils/axios';
 
 export default function ConfirmCode() {
@@ -27,7 +29,7 @@ export default function ConfirmCode() {
     //DESESTRUTURA AS VARIAVEIS ESPECIFICADAS
     const { userS, toggleLoading, toggleAlert } = states
 
-    //
+    //CRIA OS ESTADOS DO COMPONENTE
     const [inputCodeValue, SetInputCodeValue] = useState<string>('')
     const [stateCode, setStateCode] = useState<boolean>(false)
     const [formValidate, setFormValidate] = useState<boolean>(true)

@@ -37,7 +37,7 @@ export default function ForgoutPassword() {
         }
     },[])
 
-    //UTILIZA O HOOK useState
+    //CRIA OS ESTADOS DO COMPONENTE
     const [inputEmailValue, setInputEmailValue] = useState<string>('')
     const [stateEmail, setStateEmail] = useState<boolean>(false)
     const [formValidate, setFormValidate] = useState<boolean>(true)
@@ -100,7 +100,9 @@ export default function ForgoutPassword() {
         })
     }
 
+    //FUNÇÃO CHAMADA TODA VEZ QUE RECARREGA A PÁGINA
     useEffect(() => {
+        //VERIFICA SE O INPUT ESTÁ NO PADRÃO
         if(stateEmail == true){
             setFormValidate(false)
         }else{

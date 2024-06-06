@@ -6,9 +6,7 @@ import { useLocation } from 'react-router-dom';
 import { GoHome } from "react-icons/go";
 import { GrTrophy } from "react-icons/gr";
 import { FaRegAddressBook } from "react-icons/fa";
-import { IoChatbubbleOutline } from "react-icons/io5";
-import { IoNotificationsOutline } from "react-icons/io5";
-import { IoPersonOutline } from "react-icons/io5";
+import { IoChatbubbleOutline, IoNotificationsOutline, IoPersonOutline } from "react-icons/io5";
 
 export default function BottomNavigation() {
 
@@ -75,7 +73,7 @@ export default function BottomNavigation() {
                 className={`flex flex-col items-center justify-center gap-[5px]`}
                 onClick={() => navigate('/my-perfil')}
             >
-                <div className={`flex items-center justify-center rounded-[50%] ${location.pathname == '/profile' && 'bg-my-terciary'}`}>
+                <div className={`flex items-center justify-center rounded-[50%] ${location.pathname == '/my-perfil' && 'bg-my-terciary'}`}>
                     <IoPersonOutline className={`text-[36px] text-my-white p-[6px]`} />
                 </div>
                 <p className={`text-[10px] text-my-white`}>Perfil</p>

@@ -78,10 +78,10 @@ export default function GoogleLogin() {
 
         getRedirectResult(auth)
         .then((result) => {
-            //PUXA OS DADOS DO USUÁRIO
+            //PEGA OS DADOS DO USUÁRIO
             const user = result ? result.user : null;
             
-            //VE SE O USUÁRIO FEZ LOGIN OU NÃO
+            //VERIFICA SE O USUÁRIO FEZ LOGIN
             if(user){
                 //MUDA O ESTADO DE CARREGAMENTO DA APLICAÇÃO PARA false
                 toggleLoading(false)
@@ -93,7 +93,6 @@ export default function GoogleLogin() {
                 //MUDA O ESTADO DE CARREGAMENTO DA APLICAÇÃO PARA false
                 toggleLoading(false)
             }
-
 
         }).catch((error) => {
             //RETORNA O ERRO PARA O USUÁRIO

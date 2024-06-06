@@ -17,6 +17,29 @@ export default function ConquestCard(props: Props) {
     //DESESTRUTURA AS VARIAVEIS ESPECIFICADAS
     const { theme } = states
 
+    //FUNÇÃO RESPONSÁVEL POR RENDERIZAR AS BARRAS DE LEVEL
+    function renderLevel(quantity: number) {
+        //INICIA ARRAY VAZIO
+        const level = []
+
+        //FAZ LOOP PELA QUANTIDADE FORNECIDA PELA FUNÇÃO
+        for(let i = 0; i < quantity; i++) {
+
+            //ADICIONA UM COMPONENTE NO ARRAY
+            level.push(
+                <div
+                    key={i}
+                    className={`h-[10px] flex-grow-[1] rounded-[2px]
+                    ${theme == 'light' ? 'bg-my-gray' : 'bg-my-gray-black'}    
+                `}/>
+            )
+
+        }
+
+        //RETORNA O COMPONENTE A QUANTIDADE DE VEZES FORNECIDA PELA FUNÇÃO
+        return level
+    }
+
     return(
         <div
             className={`w-[90%] my-2 p-3 border-2 flex h-[180px] gap-[6px] rounded-[8px]
@@ -27,42 +50,8 @@ export default function ConquestCard(props: Props) {
                 className={`h-full w-[40%] flex flex-row p-2 items-end gap-1 rounded-[5px]
                 ${theme == 'light' ? 'bg-my-secondary' : 'bg-my-quartenary'}
             `}>
-                {props.level == 1 && (
-                    <div
-                        className={`h-[10px] flex-grow-[1] rounded-[2px]
-                        ${theme == 'light' ? 'bg-my-gray' : 'bg-my-gray-black'}
-                    `}></div>
-                )}
-                {props.level == 2 && (
-                    <>
-                        <div
-                            className={`h-[10px] flex-grow-[1] rounded-[2px]
-                            ${theme == 'light' ? 'bg-my-gray' : 'bg-my-gray-black'}
-                        `}></div>
-                        <div
-                            className={`h-[10px] flex-grow-[1] rounded-[2px]
-                            ${theme == 'light' ? 'bg-my-gray' : 'bg-my-gray-black'}
-                        `}></div>
-                    </>
-                )}
-                {props.level == 3 && (
-                    <>
-                        <div
-                            className={`h-[10px] flex-grow-[1] rounded-[2px]
-                            ${theme == 'light' ? 'bg-my-gray' : 'bg-my-gray-black'}
-                        `}></div>
-                        <div
-                            className={`h-[10px] flex-grow-[1] rounded-[2px]
-                            ${theme == 'light' ? 'bg-my-gray' : 'bg-my-gray-black'}
-                        `}></div>
-                        <div
-                            className={`h-[10px] flex-grow-[1] rounded-[2px]
-                            ${theme == 'light' ? 'bg-my-gray' : 'bg-my-gray-black'}
-                        `}></div>
-                    </>
-                )}
-
-                
+                {/* CHAMA A FUNÇÃO QUE RENDERIZA OS LEVELS DEPENDENDO DA QUANTIDADE ESPECIFICADA */}
+                {renderLevel(props.level)} 
             </div>
 
             <div className={`flex-grow-[1] flex flex-col h-full justify-between bg-transparent p-2 rounded-[5px]`}>
