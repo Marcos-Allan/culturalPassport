@@ -65,7 +65,6 @@ export default function SignIn(){
     //UTILIZA O HOOK useState
     const [inputEmailValue, setInputEmailValue] = useState<string>('')
     const [inputPasswordValue, setInputPasswordValue] = useState<string>('')
-    
     const [statePassword, setStatePassword] = useState<boolean>(false)
     const [stateEmail, setStateEmail] = useState<boolean>(false)
     const [formValidate, setFormValidate] = useState<boolean>(true)

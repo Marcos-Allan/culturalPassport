@@ -28,7 +28,7 @@
  */
 
 //IMPORTAÇÃO DAS BIBLIOTECAS    
-import { useEffect } from 'react'
+import { useState, useEffect, ChangeEvent } from 'react'
 import { useNavigate } from 'react-router-dom';
 
 //IMPORTAÇÃO DOS COMPONENTES
@@ -43,6 +43,7 @@ import Menu from '../../components/Menu';
 
 //IMPORTAÇÃO DO PROVEDOR PARA PEGAR AS VARIÁVEIS GLOBAIS
 import { useMyContext } from '../../provider/geral';
+import instance from '../../utils/axios';
 
 export default function SwitchPassword() {
 
@@ -53,7 +54,92 @@ export default function SwitchPassword() {
     const states:any = useMyContext()
 
     //DESESTRUTURA AS VARIAVEIS ESPECIFICADAS
-    const { userS } = states
+    const { userS, toggleLoading, toggleAlert } = states
+
+    //UTILIZA O HOOK useState
+    const [inputPasswordValue, setInputPasswordValue] = useState<string>('')
+    const [inputConfirmPasswordValue, setInputConfirmPasswordValue] = useState<string>('')
+    const [statePassword, setStatePassword] = useState<boolean>(false)
+    const [stateConfirmPassword, setStateConfirmPassword] = useState<boolean>(false)
+    const [formValidate, setFormValidate] = useState<boolean>(true)
+
+    //FUNÇÃO UTILIZADA PARA MUDAR O VALOR DA VARIAVEL COM BASE NO INPUT
+    function handleInputPasswordChange(e:ChangeEvent<HTMLInputElement>) {
+        setInputPasswordValue(e.target.value)
+
+        //CHAMA UMA FUNÇÃO PARA VER A VALIDAÇÃO DO INPUT
+        validateInputPassword()
+    }
+    
+    //FUNÇÃO UTILIZADA PARA MUDAR O VALOR DA VARIAVEL COM BASE NO INPUT
+    function handleInputConfirmPasswordChange(e:ChangeEvent<HTMLInputElement>) {
+        setInputConfirmPasswordValue(e.target.value)
+
+        //CHAMA UMA FUNÇÃO PARA VER A VALIDAÇÃO DO INPUT
+        validateInputConfirmPassword()
+    }
+
+    //FUNÇÃO RESPONSÁVEL POR VER SE O CAMPO ESTÁ NO PADRÃO
+    function validateInputPassword(){
+        //USA REGEX PARA VERIFICAR O PADRÃO DA STRING
+        const padraoPassword = /^[\w._-]{6,10}$/i
+
+        if(padraoPassword.test(inputPasswordValue) == true){
+            setStatePassword(true)
+        }else{
+            setStatePassword(false)
+        }
+    }
+    
+    //FUNÇÃO RESPONSÁVEL POR VER SE O CAMPO ESTÁ NO PADRÃO
+    function validateInputConfirmPassword(){
+        //USA REGEX PARA VERIFICAR O PADRÃO DA STRING
+        const padraoConfirmPassword = new RegExp(`\^${inputPasswordValue.slice(0, -1)}$`)
+
+        if(padraoConfirmPassword.test(inputConfirmPasswordValue) == true){
+            setStateConfirmPassword(true)
+        }else{
+            setStateConfirmPassword(false)
+        }
+    }
+
+    useEffect(() => {
+        if(statePassword == true && stateConfirmPassword == true){
+            setFormValidate(false)
+        }else{
+            setFormValidate(true)
+        }
+    },[statePassword, stateConfirmPassword]) 
+
+    function updateUser() {
+        //MUDA O ESTADO DE CARREGAMENTO DA APLICAÇÃO PARA true
+        toggleLoading(true)
+        
+        instance.put(`/users/update/${userS.id}`, {
+            password: inputPasswordValue
+        }).then((response) => {
+            //MUDA O ESTADO DE CARREGAMENTO DA APLICAÇÃO PARA false
+            toggleLoading(false)
+            
+            //MOSTRA OS DADOS DA REQUISIÇÃO
+            console.log(response.data)
+
+            //COLOCA ALERT NA TELA
+            toggleAlert(`success`, `Senha alterada com sucesso`)
+
+            //REDIRECIONA O USUÁRIO PARA A PRÓXIMA PÁGINA
+            navigate('/sign-in')
+        }).catch((error) => {
+            //ESCREVE NO CONSOLE O ERRO OCORRIDO
+            console.log(`Requisição feita com falhas ${error}`)
+            
+            //MUDA O ESTADO DE CARREGAMENTO DA APLICAÇÃO PARA false
+            toggleLoading(false)
+            
+            //COLOCA ALERT NA TELA
+            toggleAlert(`error`, `Ocorreu um erro interno no servidor`)
+        })
+    }
 
     //FUNÇÃO CHAMADA AO RECARREGAR A PÁGINA
     useEffect(() => {
@@ -76,10 +162,15 @@ export default function SwitchPassword() {
             </Navbar>
             <Text text={`Crie sua nova senha`} />
 
-            <form className={`mt-8 items-center flex flex-col w-[90%]`}>
-                <PasswordInput hidden={false} placeholder="Senha" text="Senha" />
+            <form className={`mt-8 items-center flex flex-col w-[90%]`} onSubmit={(e) => e.preventDefault()}>
+                {/* <PasswordInput hidden={false} placeholder="Senha" text="Senha" />
                 <PasswordInput hidden={false} placeholder="Senha" text="Confirmação da Senha" />
-                <Button route='/sign-in' text={`confirmar`} />
+                <Button route='/sign-in' text={`confirmar`} /> */}
+
+                <PasswordInput text="Password" placeholder="Digite uma senha" hidden={false} value={inputPasswordValue} event={handleInputPasswordChange} checked={statePassword} />
+                <PasswordInput text="Confirm Password" placeholder="Digite a confirmação da senha" hidden={false} value={inputConfirmPasswordValue} event={handleInputConfirmPasswordChange} checked={stateConfirmPassword} />
+                
+                <Button text="confirmar" route="undefined" event={updateUser} disabled={formValidate} />
             </form>
             
             <Menu />

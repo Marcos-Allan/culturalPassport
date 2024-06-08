@@ -54,7 +54,7 @@ export default function ForgoutPassword() {
     const states:any = useMyContext()
 
     //DESESTRUTURA AS VARIAVEIS ESPECIFICADAS
-    const { userS, toggleAlert, toggleLoading } = states
+    const { userS, toggleAlert, toggleLoading, toggleUser } = states
 
     //FUNÇÃO CHAMADA AO RECARREGAR A PÁGINA
     useEffect(() => {
@@ -109,9 +109,11 @@ export default function ForgoutPassword() {
             if(response.data == "Usuário não encontrado"){
                 //COLOCA ALERT NA TELA
                 toggleAlert(`error`, `Usuário não cadastrado`)
-            }else if(response.data == "Código enviado para o email informado"){
+            }else if(response.data.message == "Código enviado para o email informado"){
                 //COLOCA ALERT NA TELA
                 toggleAlert(`success`, `Email enviado`)
+                //RESGATA O ID DO USUÁRIO
+                toggleUser('', '', response.data.user._id, false)
                 //REDIRECIONA O USUÁRIO PARA A PRÓXIMA PÁGINA
                 navigate('/confirm-code')
             }
