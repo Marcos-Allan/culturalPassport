@@ -176,8 +176,8 @@ export default function SwitchPassword() {
 
                     <Text text={`Crie sua nova senha`} />
 
-                    <PasswordInput text="Password" placeholder="Digite uma senha" hidden={false} value={inputPasswordValue} event={handleInputPasswordChange} checked={statePassword} />
-                    <PasswordInput text="Confirm Password" placeholder="Digite a confirmação da senha" hidden={false} value={inputConfirmPasswordValue} event={handleInputConfirmPasswordChange} checked={stateConfirmPassword} />
+                    <PasswordInput text="Password" placeholder="Digite uma senha" hidden={false} value={inputPasswordValue} event={handleInputPasswordChange} checked={statePassword} placeholderLarge='Senha' />
+                    <PasswordInput text="Confirm Password" placeholder="Digite a confirmação da senha" hidden={false} value={inputConfirmPasswordValue} event={handleInputConfirmPasswordChange} checked={stateConfirmPassword} placeholderLarge='Confirmação da senha' />
                     
                     <Button text="confirmar" route="undefined" event={updateUser} disabled={formValidate} />
                 </form>

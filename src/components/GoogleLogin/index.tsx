@@ -145,26 +145,27 @@ export default function GoogleLogin() {
     },[])
 
     return(
-        <>
+        <div
+            onClick={() => {
+                //MUDA O ESTADO DE CARREGAMENTO DA APLICAÇÃO PARA true
+                toggleLoading(true)
+
+                //FAZ LOGIN COM REDIRECIONAMENTO PARA OUTRA PÁGINA
+                signInRedirect()
+            }}
+            className={`w-[50px] h-[50px] border rounded-[50%] flex justify-center items-center
+            ${theme == 'light' ? 'border-my-gray' : 'border-my-gray-black'}
+        `}>
             <FcGoogle
                 className={`
                     text-[70px]
                     sm:text-[50px]
-                    border
-                    rounded-[50%]
+                    lg:text-[50px]
                     p-3
                     sm:p-2
-                    ${theme == 'light' ? 'border-my-gray' : 'border-my-gray-black'}
                 `}
-                onClick={() => {
-                    //MUDA O ESTADO DE CARREGAMENTO DA APLICAÇÃO PARA true
-                    toggleLoading(true)
-
-                    //FAZ LOGIN COM REDIRECIONAMENTO PARA OUTRA PÁGINA
-                    signInRedirect()
-                }}
             />
-        </>
+        </div>
 
     )
 }

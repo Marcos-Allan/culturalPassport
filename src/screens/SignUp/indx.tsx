@@ -66,17 +66,41 @@ export default function SignUp(){
     //UTILIZA O HOOK useState
     const [inputEmailValue, setInputEmailValue] = useState<string>('')
     const [inputNameValue, setInputNameValue] = useState<string>('')
+    const [inputLastNameValue, setInputLastNameValue] = useState<string>('')
+    const [inputDateValue, setInputDateValue] = useState<string>('')
     const [inputPasswordValue, setInputPasswordValue] = useState<string>('')
     const [inputConfirmPasswordValue, setInputConfirmPasswordValue] = useState<string>('')
 
     const [statePassword, setStatePassword] = useState<boolean>(false)
     const [stateConfirmPassword, setStateConfirmPassword] = useState<boolean>(false)
     const [stateEmail, setStateEmail] = useState<boolean>(false)
+    const [stateName, setStateName] = useState<boolean>(false)
+    const [stateLastName, setStateLastName] = useState<boolean>(false)
+    const [stateDate, setStateDate] = useState<boolean>(false)
     const [formValidate, setFormValidate] = useState<boolean>(true)
 
     //FUNÇÃO UTILIZADA PARA MUDAR O VALOR DA VARIAVEL COM BASE NO INPUT
     function handleInputNameChange(e:ChangeEvent<HTMLInputElement>){
         setInputNameValue(e.target.value)
+
+        //CHAMA UMA FUNÇÃO PARA VER A VALIDAÇÃO DO INPUT
+        validateInputName()
+    }
+    
+    //FUNÇÃO UTILIZADA PARA MUDAR O VALOR DA VARIAVEL COM BASE NO INPUT
+    function handleInputLastNameChange(e:ChangeEvent<HTMLInputElement>){
+        setInputLastNameValue(e.target.value)
+
+        //CHAMA UMA FUNÇÃO PARA VER A VALIDAÇÃO DO INPUT
+        validateInputLastName()
+    }
+    
+    //FUNÇÃO UTILIZADA PARA MUDAR O VALOR DA VARIAVEL COM BASE NO INPUT
+    function handleInputDateChange(e:ChangeEvent<HTMLInputElement>){
+        setInputDateValue(e.target.value)
+
+        //CHAMA UMA FUNÇÃO PARA VER A VALIDAÇÃO DO INPUT
+        validateInputDate()
     }
 
     //FUNÇÃO UTILIZADA PARA MUDAR O VALOR DA VARIAVEL COM BASE NO INPUT
@@ -138,14 +162,50 @@ export default function SignUp(){
             setStateConfirmPassword(false)
         }
     }
+    
+    //FUNÇÃO RESPONSÁVEL POR VER SE O CAMPO ESTÁ NO PADRÃO
+    function validateInputName(){
+        //USA REGEX PARA VERIFICAR O PADRÃO DA STRING
+        const padraoName = /^[A-Za-z' -]{1,50}$/
+
+        if(padraoName.test(inputNameValue) == true){
+            setStateName(true)
+        }else{
+            setStateName(false)
+        }
+    }
+    
+    //FUNÇÃO RESPONSÁVEL POR VER SE O CAMPO ESTÁ NO PADRÃO
+    function validateInputLastName(){
+        //USA REGEX PARA VERIFICAR O PADRÃO DA STRING
+        const padraoLastName = /^[A-Za-z' -]{1,50}$/
+
+        if(padraoLastName.test(inputLastNameValue) == true){
+            setStateLastName(true)
+        }else{
+            setStateLastName(false)
+        }
+    }
+    
+    //FUNÇÃO RESPONSÁVEL POR VER SE O CAMPO ESTÁ NO PADRÃO
+    function validateInputDate(){
+        //USA REGEX PARA VERIFICAR O PADRÃO DA STRING
+        const padraoDate = /^(0[1-9]|[12][0-9]|3[01])\/(0[1-9]|1[0-2])\/(19|20)\d{1}$/
+
+        if(padraoDate.test(inputDateValue) == true){
+            setStateDate(true)
+        }else{
+            setStateDate(false)
+        }
+    }
 
     useEffect(() => {
-        if(stateEmail == true && statePassword == true && stateConfirmPassword == true){
+        if(stateEmail == true && statePassword == true && stateConfirmPassword == true && stateName == true && stateLastName == true && stateDate == true){
             setFormValidate(false)
         }else{
             setFormValidate(true)
         }
-    },[stateEmail, statePassword, stateConfirmPassword]) 
+    },[stateEmail, statePassword, stateConfirmPassword, stateName, stateLastName, stateDate]) 
 
     //FUNÇÃO RESPONSÁVEL POR CRAIR CONTA NO BANCO DE DADOS
     function signup(){
@@ -215,18 +275,17 @@ export default function SignUp(){
             <div className={`w-full flex justify-center h-[100vh]`}>
                 <img className={`hidden lg:flex h-full`} src={bg} alt="pilha de livros" />
 
-                <form className={`mt-8 items-center flex flex-col w-full lg:overflow-y-scroll`} onSubmit={(e) => e.preventDefault()}>
-                    <h1 className={`hidden lg:flex text-center text-[30px] font-bold`}>Cadastre-se</h1>
+                <form className={`mt-8 lg:mt-0 items-center flex lg:h-full flex-col w-full overflow-y-scroll mb-6 sm:mb-20`} onSubmit={(e) => e.preventDefault()}>
+                    <h1 className={`hidden lg:flex text-center text-[30px] font-bold mt-6`}>Cadastre-se</h1>
 
-                    <NameInput text="Name" placeholder="Digite seu nome" value={inputNameValue} event={handleInputNameChange} />
+                    <NameInput placeholder='Digite seu nome' placeholderLarge='Nome' text='Name' event={handleInputNameChange} value={inputNameValue} checked={stateName} />   
+                    <NameInput placeholder='Digite seu sobrenome' placeholderLarge='Sobrenome' text='Last Name' event={handleInputLastNameChange} value={inputLastNameValue} checked={stateLastName} />   
+                    <NameInput placeholder='Digite sua data de nascimento' placeholderLarge='Data de Nasc' text='Data de Nasc' event={handleInputDateChange} value={inputDateValue} checked={stateDate} /> 
 
-                    <NameInput text="Last Name" placeholder="Digite seu sobrenome" />
-                    <NameInput text="RA/RM" placeholder="Digite seu RA ou RM" />
+                    <EmailInput placeholder='Digite um endereço de email' placeholderLarge='Email' text='Email' event={handleInputEmailChange} value={inputEmailValue} checked={stateEmail} />   
 
-                    <EmailInput event={handleInputEmailChange} value={inputEmailValue} checked={stateEmail} />   
-
-                    <PasswordInput text="Password" placeholder="Digite uma senha" hidden={false} value={inputPasswordValue} event={handleInputPasswordChange} checked={statePassword} />
-                    <PasswordInput text="Confirm Password" placeholder="Digite a confirmação da senha" hidden={false} value={inputConfirmPasswordValue} event={handleInputConfirmPasswordChange} checked={stateConfirmPassword} />
+                    <PasswordInput text="Password" placeholder="Digite uma senha" placeholderLarge='Senha' hidden={false} value={inputPasswordValue} event={handleInputPasswordChange} checked={statePassword} />
+                    <PasswordInput text="Confirm Password" placeholder="Digite a confirmação da senha" placeholderLarge='Senha' hidden={false} value={inputConfirmPasswordValue} event={handleInputConfirmPasswordChange} checked={stateConfirmPassword} />
                     
                     <Button text="criar" route="undefined" event={signup} disabled={formValidate} />
                     

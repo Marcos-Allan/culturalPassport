@@ -160,11 +160,12 @@ export default function ForgoutPassword() {
                 <img className={`hidden lg:flex h-full`} src={bg} alt="pilha de livros" />
 
                 <form className={`mt-8 items-center flex flex-col w-[90%]`} onSubmit={(e) => e.preventDefault()}>
-                    <h1 className={`hidden lg:flex text-center text-[30px] font-bold`}>Esqueceu a senha?</h1>
+                    <h1 className={`hidden lg:flex text-center text-[30px] font-bold mb-16`}>Esqueceu a senha?</h1>
 
                     <Text text={`Digite o endereço de email no campo abaixo`} />
                     
-                    <EmailInput value={inputEmailValue} event={handleInputEmailChange} checked={stateEmail} />
+                    <EmailInput value={inputEmailValue} event={handleInputEmailChange} checked={stateEmail} placeholder='Digite seu email' placeholderLarge='Email' text='Email' />
+                    
                     <Text text={`enviaremos um código para o endereço de email digitado`} />
                         
                     <Button route='undefined' text={`Enviar`}  disabled={formValidate} event={sendEmail} />

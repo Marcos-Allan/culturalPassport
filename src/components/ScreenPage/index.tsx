@@ -49,7 +49,7 @@ export default function ScreenPage(props: Props) {
     return(
         <div
             className={`
-                w-screen h-screen flex justify-start items-center flex-col overflow-x-hidden lg:overflow-y-hidden pb-12 relative
+                w-screen h-screen flex justify-start items-center flex-col overflow-x-hidden sm:overflow-y-hidden pb-12 relative
                 ${theme == 'light' ? 'bg-my-white' : 'bg-my-black'}
             `}
             onClick={() => {

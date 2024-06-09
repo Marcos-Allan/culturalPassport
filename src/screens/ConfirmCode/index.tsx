@@ -164,7 +164,7 @@ export default function ConfirmCode() {
 
                     <Text text={`Digite o código que foi enviado por email`} />
 
-                    <EmailInput value={inputCodeValue} event={handleInputCodeChange} checked={stateCode} />
+                    <EmailInput value={inputCodeValue} event={handleInputCodeChange} checked={stateCode} placeholder='Digite o código' placeholderLarge='Código' text='Código' />
                     <Text text={`Confirme o código enviado para o seu email para alterar a senha`} />
                     <Button route='undefined' text={`Confirmar`} disabled={formValidate} event={verifyCode} />
                 </form>

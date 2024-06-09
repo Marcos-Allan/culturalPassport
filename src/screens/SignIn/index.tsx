@@ -199,11 +199,11 @@ export default function SignIn(){
             </div>
 
             <div className={`w-full flex justify-center h-[100vh]`}>
-                <form className={`mt-8 sm:mt-4 items-center lg:justify-center flex flex-col w-[90%]`} onSubmit={(e) => e.preventDefault()}>
-                    <h1 className={`hidden lg:flex text-center text-[30px] font-bold`}>Login</h1>
+                <form className={`mt-8 sm:mt-4 lg:mt-0 items-center lg:justify-start flex flex-col w-[100%] px-[5%] sm:overflow-y-scroll sm:pb-[80px] lg:pb-[30px] lg:px-[0%]`} onSubmit={(e) => e.preventDefault()}>
+                    <h1 className={`hidden lg:flex text-center text-[30px] font-bold mt-6 mb-8`}>Login</h1>
                     
-                    <EmailInput value={inputEmailValue} event={handleInputEmailChange} checked={stateEmail} />   
-                    <PasswordInput text="Password" placeholder="Digite uma senha" hidden={true} value={inputPasswordValue} event={handleInputPasswordChange} checked={statePassword}/>
+                    <EmailInput text='Email' placeholder='Digite seu email' placeholderLarge='Email' value={inputEmailValue} event={handleInputEmailChange} checked={stateEmail} />   
+                    <PasswordInput text="Senha" placeholder="Digite sua senha" placeholderLarge="Senha" hidden={true} value={inputPasswordValue} event={handleInputPasswordChange} checked={statePassword}/>
                     <PersonType />
 
                     <Button text="entrar" route="undefined" event={signIn} disabled={formValidate} />

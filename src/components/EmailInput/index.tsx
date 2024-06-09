@@ -28,7 +28,7 @@
  */
 
 //IMPORTAÇÃO DAS BIBLIOECAS
-import { useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 
 //IMPORTAÇÃO DO PROVEDOR PARA PEGAR AS VARIÁVEIS GLOBAIS
 import { useMyContext } from "../../provider/geral"
@@ -38,6 +38,9 @@ import { MdOutlineEmail } from "react-icons/md";
 
 //TIPAGEM DAS PROPS DO COMPONENTE
 interface Props {
+    text: string,
+    placeholder: string,
+    placeholderLarge: string,
     value?: string,
     checked?: boolean,
     event?: (e:React.ChangeEvent<HTMLInputElement>) => void,
@@ -50,6 +53,42 @@ export default function EmailInput(props: Props) {
     const label = useRef<HTMLLabelElement>(null) 
     const message = useRef<HTMLParagraphElement>(null) 
     const span = useRef<HTMLSpanElement>(null) 
+
+    //UTILIZAÇÃO DO HOOK useState
+    const [placeholderText, setPlaceholderText] = useState<string>('')
+
+    //FUNÇÃO RESPONSÁVEL POR TROCAR TEXTO DO PLACEHOLDER DEPENDENDO DO TAMANHO DA JANELA
+    const updatePlaceholder = () => {
+        //VERIFICA SE O TAMANHO DA JANELA ATUAL É MENOR QUE 1024
+        if(window.innerWidth < 1024){
+            //TROCA O TEXTO DO PLACEHOLDER
+            setPlaceholderText(props.placeholder)
+            if(input.current){
+                input.current.style.borderStyle = `solid`
+                input.current.style.borderWidth = `1px`
+            }
+        }else{
+            //TROCA O TEXTO DO PLACEHOLDER
+            setPlaceholderText(props.placeholderLarge)
+            if(input.current){
+                input.current.style.border = `none`
+                input.current.style.borderBottomStyle = `solid`
+                input.current.style.borderBottomWidth = `1px`
+            }
+        }
+    }
+
+    //FUNÇÃO CHAMADA TODA VEZ QUE A PÁGINA É CARREGADA
+    useEffect(() => {
+        //CHAMA A FUNÇÃO QUE TROCA O TEXTO
+        updatePlaceholder()
+
+        //ADICIONA UM EVENTO DE REDIMENSIONAMENTO DE TELA NA JANELA
+        window.addEventListener('resize', updatePlaceholder)
+
+        //REMOVE O EVENTO DE REDIMENSIONAR A TELA DA JANELA AO FECHAR O COMPONENTE
+        return () => window.removeEventListener('resize', updatePlaceholder)
+    },[])
 
     //RESGATA AS VARIAVEIS GLOBAIS
     const states:any = useMyContext()
@@ -67,7 +106,11 @@ export default function EmailInput(props: Props) {
                 //PEGA AS REFERÊNCIAS ATUAIS DOS ELEMENTOS
                 if(input.current && label.current && message.current && span.current){
                     //MUDA O ESTILO COMO CORES DE LETRAS, ICONES E BORDAS DOS RESPECTIVOS ELEMENTOS 
-                    input.current.style.border = `1px solid #00ff00`
+                    if(placeholderText == 'Email'){
+                        input.current.style.borderBottom = `1px solid #00ff00`
+                    }else{
+                        input.current.style.border = `1px solid #00ff00`
+                    }
                     label.current.style.color = `#00ff00`
                     input.current.style.color = `#00ff00`
                     message.current.style.color = `#00ff00`
@@ -84,7 +127,11 @@ export default function EmailInput(props: Props) {
                 //PEGA AS REFERÊNCIAS ATUAIS DOS ELEMENTOS
                 if(input.current && label.current && message.current && span.current){
                     //MUDA O ESTILO COMO CORES DE LETRAS, ICONES E BORDAS DOS RESPECTIVOS ELEMENTOS 
-                    input.current.style.border = `1px solid #ff0000`
+                    if(placeholderText == 'Email'){
+                        input.current.style.borderBottom = `1px solid #ff0000`
+                    }else{
+                        input.current.style.border = `1px solid #ff0000`
+                    }
                     label.current.style.color = `#ff0000`
                     input.current.style.color = `#ff0000`
                     message.current.style.color = `#ff0000`
@@ -102,7 +149,6 @@ export default function EmailInput(props: Props) {
 
     return(
         <div className="w-[90%] sm:w-[60%] relative mb-1">
-            {/* INPUT DE EMAIL */}
             <label
             ref={label}
             className={`
@@ -110,11 +156,12 @@ export default function EmailInput(props: Props) {
                 text-[20px]
                 ms-2
                 mb-2
+                lg:hidden
                 ${theme == 'light' ? 'text-my-gray' : 'text-my-gray-black'}
             `}
             htmlFor="emailInput"
         >
-            Email
+            {props.text}
         </label>
 
         <div
@@ -129,6 +176,7 @@ export default function EmailInput(props: Props) {
                 ms-2
                 left-0
                 text-[24px]
+                lg:hidden
                 ${theme == 'light' ? 'text-my-gray' : 'text-my-gray-black'}    
             `}>
                 <MdOutlineEmail/>
@@ -138,17 +186,22 @@ export default function EmailInput(props: Props) {
                 ref={input}
                 onChange={props.event && props.event}
                 id="emailInput"
-                // type="email"
                 value={props.value && props.value}
                 onBlur={handleValidateEmail}
-                placeholder="Digite seu endereço de email"
+                placeholder={placeholderText}
                 className={`
                     w-full
                     text-[20px]
                     rounded-[16px]
+                    lg:rounded-[0px]
                     ps-[40px]
+                    lg:ps-[0px]
                     py-3
+                    lg:py-2
                     border
+                    lg:border-t-[0px]
+                    lg:border-s-[0px]
+                    lg:border-e-[0px]
                     ${theme == 'light'
                     ? 'text-my-gray placeholder-my-gray border-my-gray bg-my-white'
                     : 'text-my-gray-black placeholder-my-gray-black border-my-gray-black bg-my-black'
@@ -157,7 +210,7 @@ export default function EmailInput(props: Props) {
                 `}
             />
         </div>
-        <p ref={message} className={`w-full opacity-0 ps-2 absolute bottom-[-3%]`}>oioioi</p>
+        <p ref={message} className={`w-full opacity-0 ps-2 lg:ps-0 absolute bottom-[-3%] lg:bottom-[-10%]`}>oioioi</p>
     </div>
     )
 }
