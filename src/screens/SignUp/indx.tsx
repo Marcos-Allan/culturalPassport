@@ -41,7 +41,7 @@ import { useMyContext } from "../../provider/geral"
 import Navbar from "../../components/Navbar/index.tsx"
 import Return from "../../components/Return/index.tsx"
 import TitlePage from "../../components/TitlePage/index.tsx"
-import MenuBUtton from '../../components/MenuButton/index.tsx'
+import MenuButton from '../../components/MenuButton/index.tsx'
 import NameInput from "../../components/NameInput/index.tsx"
 import EmailInput from "../../components/EmailInput/index.tsx"
 import PasswordInput from "../../components/PasswordInput/index.tsx"
@@ -49,6 +49,8 @@ import Button from "../../components/Button/index.tsx"
 import Linkin from "../../components/Linkin/index.tsx"
 import Menu from '../../components/Menu/index.tsx'
 
+//IMPORTAÇÃO DAS IMAGENS
+import bg from '../../assets/02bg.png'
 
 export default function SignUp(){
 
@@ -200,30 +202,38 @@ export default function SignUp(){
 
     return(
         <>
-            <Navbar>
-                <Return />
-                <TitlePage
-                    text={`cadastrar`}
-                />
-                <MenuBUtton />
-            </Navbar>
+            <div className='lg:hidden w-full flex justify-center items-center'>
+                <Navbar>
+                    <Return />
+                    <TitlePage
+                        text={`cadastrar`}
+                    />
+                    <MenuButton />
+                </Navbar>
+            </div>
 
-            <form className={`mt-8 items-center flex flex-col w-full`} onSubmit={(e) => e.preventDefault()}>
-                
-                <NameInput text="Name" placeholder="Digite seu nome" value={inputNameValue} event={handleInputNameChange} />
+            <div className={`w-full flex justify-center h-[100vh]`}>
+                <img className={`hidden lg:flex h-full`} src={bg} alt="pilha de livros" />
 
-                <NameInput text="Last Name" placeholder="Digite seu sobrenome" />
-                <NameInput text="RA/RM" placeholder="Digite seu RA ou RM" />
+                <form className={`mt-8 items-center flex flex-col w-full lg:overflow-y-scroll`} onSubmit={(e) => e.preventDefault()}>
+                    <h1 className={`hidden lg:flex text-center text-[30px] font-bold`}>Cadastre-se</h1>
 
-                <EmailInput event={handleInputEmailChange} value={inputEmailValue} checked={stateEmail} />   
+                    <NameInput text="Name" placeholder="Digite seu nome" value={inputNameValue} event={handleInputNameChange} />
 
-                <PasswordInput text="Password" placeholder="Digite uma senha" hidden={false} value={inputPasswordValue} event={handleInputPasswordChange} checked={statePassword} />
-                <PasswordInput text="Confirm Password" placeholder="Digite a confirmação da senha" hidden={false} value={inputConfirmPasswordValue} event={handleInputConfirmPasswordChange} checked={stateConfirmPassword} />
-                
-                <Button text="criar" route="undefined" event={signup} disabled={formValidate} />
-            </form>
-            
-            <Linkin route="/sign-in" text="Já possui uma conta?" />
+                    <NameInput text="Last Name" placeholder="Digite seu sobrenome" />
+                    <NameInput text="RA/RM" placeholder="Digite seu RA ou RM" />
+
+                    <EmailInput event={handleInputEmailChange} value={inputEmailValue} checked={stateEmail} />   
+
+                    <PasswordInput text="Password" placeholder="Digite uma senha" hidden={false} value={inputPasswordValue} event={handleInputPasswordChange} checked={statePassword} />
+                    <PasswordInput text="Confirm Password" placeholder="Digite a confirmação da senha" hidden={false} value={inputConfirmPasswordValue} event={handleInputConfirmPasswordChange} checked={stateConfirmPassword} />
+                    
+                    <Button text="criar" route="undefined" event={signup} disabled={formValidate} />
+                    
+                    <Linkin route="/sign-in" text="Já possui uma conta?" />
+                </form>
+
+            </div>
             <Menu />
         </>
     )

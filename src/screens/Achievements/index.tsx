@@ -34,7 +34,7 @@ import { useNavigate } from 'react-router-dom';
 //IMPORTAÇÃO DOS COMPONENTES
 import BottomNavigation from "../../components/BottomNavigation";
 import Menu from "../../components/Menu";
-import MenuBUtton from "../../components/MenuButton";
+import MenuButton from "../../components/MenuButton";
 import Navbar from "../../components/Navbar";
 import Return from "../../components/Return";
 import TitlePage from "../../components/TitlePage";
@@ -71,7 +71,7 @@ export default function Achievements() {
                 <TitlePage
                     text={`Conquistas`}
                 />
-                <MenuBUtton />
+                <MenuButton />
             </Navbar>
 
             <ConquestCard level={2} message='próxima meta 365 dias' porcentage={80} title='Day o Cool' />

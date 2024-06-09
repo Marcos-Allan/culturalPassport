@@ -34,7 +34,7 @@ import { useNavigate } from 'react-router-dom';
 //IMPORTAÇÃO DOS COMPONENTES
 import Navbar from "../../components/Navbar/index.tsx";
 import TitlePage from "../../components/TitlePage/index.tsx"
-import MenuBUtton from "../../components/MenuButton/index.tsx";
+import MenuButton from "../../components/MenuButton/index.tsx";
 import Button from "../../components/Button/index.tsx"
 import Text from "../../components/Text/index.tsx";
 import Menu from "../../components/Menu/index.tsx";
@@ -70,7 +70,7 @@ export default function Home(){
         <>
             <Navbar>
                 <TitlePage text="Bem Vindo Estudante" />
-                <MenuBUtton />
+                <MenuButton />
             </Navbar>
 
             <Text

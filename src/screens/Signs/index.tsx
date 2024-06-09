@@ -35,7 +35,7 @@ import { useNavigate } from 'react-router-dom';
 import Navbar from "../../components/Navbar/index.tsx";
 import Return from "../../components/Return/index.tsx";
 import TitlePage from "../../components/TitlePage/index.tsx"
-import MenuBUtton from "../../components/MenuButton/index.tsx";
+import MenuButton from "../../components/MenuButton/index.tsx";
 import Text from "../../components/Text/index.tsx";
 import Button from "../../components/Button/index.tsx"
 import Menu from "../../components/Menu/index.tsx";
@@ -75,7 +75,7 @@ export default function Signs(){
                 <TitlePage
                     text={`salve seu progresso`}
                 />
-                <MenuBUtton />
+                <MenuButton />
             </Navbar>
             
             <Text

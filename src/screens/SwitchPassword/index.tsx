@@ -35,7 +35,7 @@ import { useNavigate } from 'react-router-dom';
 import Navbar from "../../components/Navbar";
 import Return from "../../components/Return";
 import TitlePage from '../../components/TitlePage'
-import MenuBUtton from '../../components/MenuButton';
+import MenuButton from '../../components/MenuButton';
 import Text from '../../components/Text'
 import PasswordInput from "../../components/PasswordInput";
 import Button from '../../components/Button'
@@ -43,7 +43,12 @@ import Menu from '../../components/Menu';
 
 //IMPORTAÇÃO DO PROVEDOR PARA PEGAR AS VARIÁVEIS GLOBAIS
 import { useMyContext } from '../../provider/geral';
+
+//CONFIGURAÇÃO DA BASE URL DO AXIOS
 import instance from '../../utils/axios';
+
+//IMPORTAÇÃO DAS IMAGENS
+import bg from '../../assets/03bg.png'
 
 export default function SwitchPassword() {
 
@@ -153,26 +158,30 @@ export default function SwitchPassword() {
     
     return(
         <>
-            <Navbar>
-                <Return />
-                <TitlePage
-                    text={`Trocar a Senha`}
-                />
-                <MenuBUtton />
-            </Navbar>
-            <Text text={`Crie sua nova senha`} />
-
-            <form className={`mt-8 items-center flex flex-col w-[90%]`} onSubmit={(e) => e.preventDefault()}>
-                {/* <PasswordInput hidden={false} placeholder="Senha" text="Senha" />
-                <PasswordInput hidden={false} placeholder="Senha" text="Confirmação da Senha" />
-                <Button route='/sign-in' text={`confirmar`} /> */}
-
-                <PasswordInput text="Password" placeholder="Digite uma senha" hidden={false} value={inputPasswordValue} event={handleInputPasswordChange} checked={statePassword} />
-                <PasswordInput text="Confirm Password" placeholder="Digite a confirmação da senha" hidden={false} value={inputConfirmPasswordValue} event={handleInputConfirmPasswordChange} checked={stateConfirmPassword} />
-                
-                <Button text="confirmar" route="undefined" event={updateUser} disabled={formValidate} />
-            </form>
+            <div className='lg:hidden w-full flex justify-center items-center'>
+                <Navbar>
+                    <Return />
+                    <TitlePage
+                        text={`Trocar a Senha`}
+                    />
+                    <MenuButton />
+                </Navbar>
+            </div>
             
+            <div className={`w-full flex justify-center h-[100vh]`}>
+                <img className={`hidden lg:flex h-full`} src={bg} alt="pilha de livros" />
+
+                <form className={`mt-8 items-center flex flex-col w-[90%]`} onSubmit={(e) => e.preventDefault()}>
+                    <h1 className={`hidden lg:flex text-center text-[30px] font-bold`}>Trocar a senha</h1>
+
+                    <Text text={`Crie sua nova senha`} />
+
+                    <PasswordInput text="Password" placeholder="Digite uma senha" hidden={false} value={inputPasswordValue} event={handleInputPasswordChange} checked={statePassword} />
+                    <PasswordInput text="Confirm Password" placeholder="Digite a confirmação da senha" hidden={false} value={inputConfirmPasswordValue} event={handleInputConfirmPasswordChange} checked={stateConfirmPassword} />
+                    
+                    <Button text="confirmar" route="undefined" event={updateUser} disabled={formValidate} />
+                </form>
+            </div>  
             <Menu />
         </>
     )

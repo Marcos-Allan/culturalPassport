@@ -38,7 +38,7 @@ import instance from '../../utils/axios';
 import Navbar from "../../components/Navbar";
 import Return from "../../components/Return";
 import TitlePage from "../../components/TitlePage";
-import MenuBUtton from '../../components/MenuButton';
+import MenuButton from '../../components/MenuButton';
 import EmailInput from "../../components/EmailInput";
 import PasswordInput from "../../components/PasswordInput";
 import PersonType from "../../components/PersonType";
@@ -47,6 +47,9 @@ import Button from "../../components/Button";
 import Separation from "../../components/Separation";
 import GoogleLogin from "../../components/GoogleLogin";
 import Menu from '../../components/Menu';
+
+//IMPORTAÇÃO DAS IMAGENS
+import bg from '../../assets/01bg.png'
 
 //IMPORTAÇÃO DO PROVEDOR PARA PEGAR AS VARIÁVEIS GLOBAIS
 import { useMyContext } from '../../provider/geral';
@@ -184,31 +187,39 @@ export default function SignIn(){
     },[])
 
     return(
-        <> 
-            <Navbar>   
-                <Return />
-                <TitlePage
-                    text={`login`}
-                />
-                <MenuBUtton />
-            </Navbar>
+        <>
+            <div className='lg:hidden w-full flex justify-center items-center'>
+                <Navbar>   
+                    <Return />
+                    <TitlePage
+                        text={`login`}
+                        />
+                    <MenuButton />
+                </Navbar>
+            </div>
 
-            <form className={`mt-8 sm:mt-4 items-center flex flex-col w-[90%]`} onSubmit={(e) => e.preventDefault()}>
-                
-                <EmailInput value={inputEmailValue} event={handleInputEmailChange} checked={stateEmail} />   
-                <PasswordInput text="Password" placeholder="Digite uma senha" hidden={true} value={inputPasswordValue} event={handleInputPasswordChange} checked={statePassword}/>
-                <PersonType />
+            <div className={`w-full flex justify-center h-[100vh]`}>
+                <form className={`mt-8 sm:mt-4 items-center lg:justify-center flex flex-col w-[90%]`} onSubmit={(e) => e.preventDefault()}>
+                    <h1 className={`hidden lg:flex text-center text-[30px] font-bold`}>Login</h1>
+                    
+                    <EmailInput value={inputEmailValue} event={handleInputEmailChange} checked={stateEmail} />   
+                    <PasswordInput text="Password" placeholder="Digite uma senha" hidden={true} value={inputPasswordValue} event={handleInputPasswordChange} checked={statePassword}/>
+                    <PersonType />
 
-                <Button text="entrar" route="undefined" event={signIn} disabled={formValidate} />
-                
-                <Linkin route="/forgout-passowrd" text="Esqueceu sua senha?" />
+                    <Button text="entrar" route="undefined" event={signIn} disabled={formValidate} />
+                    
+                    <Linkin route="/forgout-password" text="Esqueceu sua senha?" />
 
-                <Linkin route="/sign-up" text="Crie sua conta" />
+                    <Linkin route="/sign-up" text="Crie sua conta" />
 
-                <Separation />
+                    <Separation />
 
-                <GoogleLogin />
-            </form>
+                    <GoogleLogin />
+                </form>
+
+                <img className={`hidden lg:flex h-full`} src={bg} alt="livros com óculos em cima" />
+
+            </div>
             <Menu />
         </>
     )

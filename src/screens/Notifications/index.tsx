@@ -34,7 +34,7 @@ import { useNavigate } from 'react-router-dom';
 //IMPORTAÇÃO DOS COMPONENTES
 import BottomNavigation from "../../components/BottomNavigation";
 import Menu from "../../components/Menu";
-import MenuBUtton from "../../components/MenuButton";
+import MenuButton from "../../components/MenuButton";
 import Navbar from "../../components/Navbar";
 import Return from "../../components/Return";
 import TitlePage from "../../components/TitlePage";
@@ -97,7 +97,7 @@ export default function Notifications() {
                 <TitlePage
                     text={`Notificações`}
                 />
-                <MenuBUtton />
+                <MenuButton />
             </Navbar>
 
             <div className={`w-full sm:w-[70%] mt-5 flex flex-col justify-center items-center gap-[15px] pb-[60px]`}>

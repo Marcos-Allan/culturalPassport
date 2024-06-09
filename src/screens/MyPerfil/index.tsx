@@ -49,7 +49,7 @@ import avatar_6 from "../../../public/avatar-6.jpg"
 import Navbar from "../../components/Navbar";
 import Return from "../../components/Return";
 import TitlePage from "../../components/TitlePage";
-import MenuBUtton from "../../components/MenuButton";
+import MenuButton from "../../components/MenuButton";
 import Menu from "../../components/Menu";
 import Button from '../../components/Button';
 import BottomNavigation from '../../components/BottomNavigation';
@@ -152,7 +152,7 @@ export default function MyPerfil() {
             <Navbar>   
                 <Return />
                 <TitlePage text={`perfil`} />
-                <MenuBUtton />
+                <MenuButton />
             </Navbar>
 
             {userS.logged == true && (

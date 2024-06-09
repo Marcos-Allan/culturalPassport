@@ -85,7 +85,7 @@ const router = createBrowserRouter([
     errorElement: <ErrorPage />
   },
   {
-    path: "forgout-passowrd",
+    path: "forgout-password",
     element: <ForgoutPassword />,
     errorElement: <ErrorPage />
   },

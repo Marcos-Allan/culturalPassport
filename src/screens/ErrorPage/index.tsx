@@ -31,7 +31,7 @@
 import Navbar from "../../components/Navbar";
 import Return from "../../components/Return";
 import TitlePage from "../../components/TitlePage";
-import MenuBUtton from "../../components/MenuButton";
+import MenuButton from "../../components/MenuButton";
 import Text from "../../components/Text";
 import Button from "../../components/Button";
 import Menu from "../../components/Menu";
@@ -55,7 +55,7 @@ export default function ErrorPage() {
             <Navbar>
                 <Return />
                 <TitlePage text="Erro" />
-                <MenuBUtton />
+                <MenuButton />
             </Navbar>
 
             

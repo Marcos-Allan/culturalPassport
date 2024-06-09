@@ -36,7 +36,7 @@ import instance from '../../utils/axios';
 import Navbar from "../../components/Navbar";
 import Return from "../../components/Return";
 import TitlePage from '../../components/TitlePage'
-import MenuBUtton from '../../components/MenuButton'
+import MenuButton from '../../components/MenuButton'
 import Text from '../../components/Text'
 import EmailInput from '../../components/EmailInput'
 import Button from '../../components/Button'
@@ -44,6 +44,9 @@ import Menu from '../../components/Menu';
 
 //IMPORTAÇÃO DO PROVEDOR PARA PEGAR AS VARIÁVEIS GLOBAIS
 import { useMyContext } from '../../provider/geral';
+
+//IMPORTAÇÃO DAS IMAGENS
+import bg from '../../assets/03bg.png'
 
 export default function ForgoutPassword() {
 
@@ -143,23 +146,30 @@ export default function ForgoutPassword() {
 
     return(
         <>
-            <Navbar>
-                <Return />
-                <TitlePage
-                    text={`esqueceu a senha`}
-                />
-                <MenuBUtton />
-            </Navbar>
+            <div className='lg:hidden w-full flex justify-center items-center'>
+                <Navbar>
+                    <Return />
+                    <TitlePage
+                        text={`esqueceu a senha`}
+                    />
+                    <MenuButton />
+                </Navbar>
+            </div>
 
-            <Text text={`Digite o endereço de email no campo abaixo`} />
+            <div className={`w-full flex justify-center h-[100vh]`}>
+                <img className={`hidden lg:flex h-full`} src={bg} alt="pilha de livros" />
 
-            <form className={`mt-8 items-center flex flex-col w-[90%]`} onSubmit={(e) => e.preventDefault()}>
-                
-                <EmailInput value={inputEmailValue} event={handleInputEmailChange} checked={stateEmail} />
-                <Text text={`enviaremos um código para o endereço de email digitado`} />
+                <form className={`mt-8 items-center flex flex-col w-[90%]`} onSubmit={(e) => e.preventDefault()}>
+                    <h1 className={`hidden lg:flex text-center text-[30px] font-bold`}>Esqueceu a senha?</h1>
+
+                    <Text text={`Digite o endereço de email no campo abaixo`} />
                     
-                <Button route='undefined' text={`Enviar`}  disabled={formValidate} event={sendEmail} />
-            </form>
+                    <EmailInput value={inputEmailValue} event={handleInputEmailChange} checked={stateEmail} />
+                    <Text text={`enviaremos um código para o endereço de email digitado`} />
+                        
+                    <Button route='undefined' text={`Enviar`}  disabled={formValidate} event={sendEmail} />
+                </form>
+            </div>
             <Menu />
         </>
     )

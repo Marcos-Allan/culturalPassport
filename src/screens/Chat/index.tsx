@@ -37,7 +37,7 @@ import { IoMdSend, IoIosAdd } from 'react-icons/io'
 //IMPORTAÇÃO DOS COMPONENTES
 import BottomNavigation from "../../components/BottomNavigation";
 import Menu from "../../components/Menu";
-import MenuBUtton from "../../components/MenuButton";
+import MenuButton from "../../components/MenuButton";
 import Navbar from "../../components/Navbar";
 import Return from "../../components/Return";
 import TitlePage from "../../components/TitlePage";
@@ -73,7 +73,7 @@ export default function Chat() {
                 <TitlePage
                     text={`Chat`}
                 />
-                <MenuBUtton />
+                <MenuButton />
             </Navbar>
 
             <div className={`${theme == 'light' ? 'bg-my-white' : 'bg-my-black'} w-[90%] pt-[30px] h-[calc(100%-190px)] flex flex-col gap-[20px]`}>

@@ -33,7 +33,7 @@ import { IoMenu, IoCloseOutline } from "react-icons/io5";
 //IMPORTAÇÃO DO PROVEDOR PARA PEGAR AS VARIÁVEIS GLOBAIS
 import { useMyContext } from "../../provider/geral"
 
-export default function MenuBUtton() {
+export default function MenuButton() {
 
     //UTILIZAÇÃO DO HOOK DE NAVEGAÇÃO 
     const states:any = useMyContext()

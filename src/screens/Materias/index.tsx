@@ -33,7 +33,7 @@ import { useNavigate } from 'react-router-dom';
 
 //IMPORTAÇÃO DOS COMPONENTES
 import Menu from "../../components/Menu";
-import MenuBUtton from "../../components/MenuButton";
+import MenuButton from "../../components/MenuButton";
 import Navbar from "../../components/Navbar";
 import Return from "../../components/Return";
 import TitlePage from "../../components/TitlePage";
@@ -71,7 +71,7 @@ export default function Materias() {
                 <TitlePage
                     text={`Materias`}
                 />
-                <MenuBUtton />
+                <MenuButton />
             </Navbar>
 
             <div className={`w-full sm:w-[70%] flex flex-col sm:flex-row flex-wrap justify-center items-center sm:gap-[20px] pb-[80px]`}>

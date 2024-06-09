@@ -35,7 +35,7 @@ import { useNavigate } from 'react-router-dom';
 import Navbar from "../../components/Navbar";
 import Return from "../../components/Return";
 import TitlePage from '../../components/TitlePage'
-import MenuBUtton from '../../components/MenuButton'
+import MenuButton from '../../components/MenuButton'
 import Text from '../../components/Text'
 import EmailInput from '../../components/EmailInput'
 import Button from '../../components/Button'
@@ -46,6 +46,9 @@ import { useMyContext } from '../../provider/geral';
 
 //CONFIGURAÇÃO DA BASE URL DO AXIOS
 import instance from '../../utils/axios';
+
+//IMPORTAÇÃO DAS IMAGENS
+import bg from '../../assets/03bg.png'
 
 export default function ConfirmCode() {
 
@@ -143,21 +146,29 @@ export default function ConfirmCode() {
 
     return(
         <>      
-            <Navbar>
-                <Return />
-                <TitlePage
-                    text={`Confirmar código`}
-                />
-                <MenuBUtton />
-            </Navbar>
-            <Text text={`Digite o código que foi enviado por email`} />
+            <div className='lg:hidden w-full flex justify-center items-center'>
+                <Navbar>
+                    <Return />
+                    <TitlePage
+                        text={`Confirmar código`}
+                    />
+                    <MenuButton />
+                </Navbar>
+            </div>
 
-            <form className={`mt-8 items-center flex flex-col w-[90%]`} onSubmit={(e) => e.preventDefault()}>
-                {/* <EmailInput value={inputCodeValue} event={} /> */}
-                <EmailInput value={inputCodeValue} event={handleInputCodeChange} checked={stateCode} />
-                <Text text={`Confirme o código enviado para o seu email para alterar a senha`} />
-                <Button route='undefined' text={`Confirmar`} disabled={formValidate} event={verifyCode} />
-            </form>
+            <div className={`w-full flex justify-center h-[100vh]`}>
+                <img className={`hidden lg:flex h-full`} src={bg} alt="pilha de livros" />
+
+                <form className={`mt-8 items-center flex flex-col w-[90%]`} onSubmit={(e) => e.preventDefault()}>
+                    <h1 className={`hidden lg:flex text-center text-[30px] font-bold`}>Confirmar o código</h1>
+
+                    <Text text={`Digite o código que foi enviado por email`} />
+
+                    <EmailInput value={inputCodeValue} event={handleInputCodeChange} checked={stateCode} />
+                    <Text text={`Confirme o código enviado para o seu email para alterar a senha`} />
+                    <Button route='undefined' text={`Confirmar`} disabled={formValidate} event={verifyCode} />
+                </form>
+            </div>
             <Menu />
         </>
     )
