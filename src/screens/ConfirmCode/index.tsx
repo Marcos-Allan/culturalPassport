@@ -37,7 +37,7 @@ import Return from "../../components/Return";
 import TitlePage from '../../components/TitlePage'
 import MenuButton from '../../components/MenuButton'
 import Text from '../../components/Text'
-import EmailInput from '../../components/EmailInput'
+import Input from '../../components/Input';
 import Button from '../../components/Button'
 import Menu from '../../components/Menu';
 
@@ -159,12 +159,23 @@ export default function ConfirmCode() {
             <div className={`w-full flex justify-center h-[100vh]`}>
                 <img className={`hidden lg:flex h-full`} src={bg} alt="pilha de livros" />
 
-                <form className={`mt-8 items-center flex flex-col w-[90%]`} onSubmit={(e) => e.preventDefault()}>
-                    <h1 className={`hidden lg:flex text-center text-[30px] font-bold`}>Confirmar o código</h1>
+                <form className={`mt-8 items-center flex flex-col w-[90%] gap-[16px]`} onSubmit={(e) => e.preventDefault()}>
+                    <h1 className={`hidden lg:flex text-center text-[30px] font-bold mb-16`}>Confirmar o código</h1>
 
                     <Text text={`Digite o código que foi enviado por email`} />
 
-                    <EmailInput value={inputCodeValue} event={handleInputCodeChange} checked={stateCode} placeholder='Digite o código' placeholderLarge='Código' text='Código' />
+                    <Input
+                        value={inputCodeValue}
+                        event={handleInputCodeChange}
+                        checked={stateCode}
+                        placeholder='Digite o código'
+                        placeholderLarge='Código'
+                        text='Código'
+                        icon='password'
+                        messageCorrect='código dentro do padrão'
+                        messageError='formato do código inválido'
+                    />
+
                     <Text text={`Confirme o código enviado para o seu email para alterar a senha`} />
                     <Button route='undefined' text={`Confirmar`} disabled={formValidate} event={verifyCode} />
                 </form>

@@ -42,9 +42,7 @@ import Navbar from "../../components/Navbar/index.tsx"
 import Return from "../../components/Return/index.tsx"
 import TitlePage from "../../components/TitlePage/index.tsx"
 import MenuButton from '../../components/MenuButton/index.tsx'
-import NameInput from "../../components/NameInput/index.tsx"
-import EmailInput from "../../components/EmailInput/index.tsx"
-import PasswordInput from "../../components/PasswordInput/index.tsx"
+import Input from '../../components/Input/index.tsx'
 import Button from "../../components/Button/index.tsx"
 import Linkin from "../../components/Linkin/index.tsx"
 import Menu from '../../components/Menu/index.tsx'
@@ -278,14 +276,78 @@ export default function SignUp(){
                 <form className={`mt-8 lg:mt-0 items-center flex lg:h-full flex-col w-full overflow-y-scroll mb-6 sm:mb-20`} onSubmit={(e) => e.preventDefault()}>
                     <h1 className={`hidden lg:flex text-center text-[30px] font-bold mt-6`}>Cadastre-se</h1>
 
-                    <NameInput placeholder='Digite seu nome' placeholderLarge='Nome' text='Name' event={handleInputNameChange} value={inputNameValue} checked={stateName} />   
-                    <NameInput placeholder='Digite seu sobrenome' placeholderLarge='Sobrenome' text='Last Name' event={handleInputLastNameChange} value={inputLastNameValue} checked={stateLastName} />   
-                    <NameInput placeholder='Digite sua data de nascimento' placeholderLarge='Data de Nasc' text='Data de Nasc' event={handleInputDateChange} value={inputDateValue} checked={stateDate} /> 
+                    <Input
+                        placeholder='Digite seu nome'
+                        placeholderLarge='Nome'
+                        text='Nome'
+                        event={handleInputNameChange}
+                        value={inputNameValue}
+                        checked={stateName}
+                        icon='person'
+                        messageCorrect='nome aceito'
+                        messageError='nome inválido'
+                    />   
 
-                    <EmailInput placeholder='Digite um endereço de email' placeholderLarge='Email' text='Email' event={handleInputEmailChange} value={inputEmailValue} checked={stateEmail} />   
+                    <Input
+                        placeholder='Digite seu sobrenome'
+                        placeholderLarge='Sobrenome' 
+                        text='Sobrenome'
+                        event={handleInputLastNameChange}
+                        value={inputLastNameValue}
+                        checked={stateLastName}
+                        icon='person'
+                        messageCorrect='sobrenome aceito'
+                        messageError='sobrenome inválido'
+                    />   
+                    
+                    <Input
+                        placeholder='Digite sua data de nascimento'
+                        placeholderLarge='Data de Nasc'
+                        text='Data de Nasc'
+                        event={handleInputDateChange}
+                        value={inputDateValue}
+                        checked={stateDate}
+                        icon='person'
+                        messageCorrect='data dentro do padrão'
+                        messageError='formato inválido'
+                    /> 
 
-                    <PasswordInput text="Password" placeholder="Digite uma senha" placeholderLarge='Senha' hidden={false} value={inputPasswordValue} event={handleInputPasswordChange} checked={statePassword} />
-                    <PasswordInput text="Confirm Password" placeholder="Digite a confirmação da senha" placeholderLarge='Senha' hidden={false} value={inputConfirmPasswordValue} event={handleInputConfirmPasswordChange} checked={stateConfirmPassword} />
+                    <Input
+                        placeholder='Digite um endereço de email'
+                        placeholderLarge='Email'
+                        text='Email'
+                        event={handleInputEmailChange}
+                        value={inputEmailValue}
+                        checked={stateEmail}
+                        icon='email'
+                        messageCorrect='email dentro do padrão'
+                        messageError='email fora do padrão'
+                    />   
+
+                    <Input
+                        text="Senha"
+                        placeholder="Digite uma senha"
+                        placeholderLarge='Senha'
+                        hidden={true}
+                        value={inputPasswordValue}
+                        event={handleInputPasswordChange} 
+                        checked={statePassword}
+                        icon='password'
+                        messageCorrect='senha dentro dos padrões'
+                        messageError='senha precisa ter pelo menos 6 caracteres'
+                    />
+                    <Input
+                        text="Confirma a Senha"
+                        placeholder="Digite a confirmação da senha"
+                        placeholderLarge='Confirme a Senha'
+                        hidden={true}
+                        value={inputConfirmPasswordValue}
+                        event={handleInputConfirmPasswordChange}
+                        checked={stateConfirmPassword}
+                        icon='password'
+                        messageCorrect='senhas estão iguais'
+                        messageError='as senhas não são iguais'
+                    />
                     
                     <Button text="criar" route="undefined" event={signup} disabled={formValidate} />
                     

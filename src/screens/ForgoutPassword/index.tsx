@@ -38,7 +38,7 @@ import Return from "../../components/Return";
 import TitlePage from '../../components/TitlePage'
 import MenuButton from '../../components/MenuButton'
 import Text from '../../components/Text'
-import EmailInput from '../../components/EmailInput'
+import Input from '../../components/Input';
 import Button from '../../components/Button'
 import Menu from '../../components/Menu';
 
@@ -159,12 +159,22 @@ export default function ForgoutPassword() {
             <div className={`w-full flex justify-center h-[100vh]`}>
                 <img className={`hidden lg:flex h-full`} src={bg} alt="pilha de livros" />
 
-                <form className={`mt-8 items-center flex flex-col w-[90%]`} onSubmit={(e) => e.preventDefault()}>
+                <form className={`mt-8 items-center flex flex-col w-[90%] gap-[16px]`} onSubmit={(e) => e.preventDefault()}>
                     <h1 className={`hidden lg:flex text-center text-[30px] font-bold mb-16`}>Esqueceu a senha?</h1>
 
                     <Text text={`Digite o endereço de email no campo abaixo`} />
                     
-                    <EmailInput value={inputEmailValue} event={handleInputEmailChange} checked={stateEmail} placeholder='Digite seu email' placeholderLarge='Email' text='Email' />
+                    <Input
+                        value={inputEmailValue}
+                        event={handleInputEmailChange}
+                        checked={stateEmail}
+                        placeholder='Digite seu email'
+                        placeholderLarge='Email' 
+                        text='Email'
+                        icon='email'
+                        messageCorrect='email dentro do padrão'
+                        messageError='email fora do padrão'
+                    />
                     
                     <Text text={`enviaremos um código para o endereço de email digitado`} />
                         

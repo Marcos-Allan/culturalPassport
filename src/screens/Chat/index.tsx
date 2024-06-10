@@ -76,7 +76,7 @@ export default function Chat() {
                 <MenuButton />
             </Navbar>
 
-            <div className={`${theme == 'light' ? 'bg-my-white' : 'bg-my-black'} w-[90%] pt-[30px] h-[calc(100%-190px)] flex flex-col gap-[20px]`}>
+            <div className={`${theme == 'light' ? 'bg-my-white' : 'bg-my-black'} w-[90%] sm:w-[60%] pt-[30px] h-[calc(100%-190px)] flex flex-col gap-[20px]`}>
                 
                 {/* MENSAGEM CASO A MENSAGEM FOR DE OUTRO USUÁRIO */}
                 <div className={`self-start border-2 ${theme == 'light' ? 'border-my-gray' : 'border-my-gray-black' } p-1 max-w-[200px] rounded-[10px] rounded-es-[0px]`}>
@@ -90,7 +90,7 @@ export default function Chat() {
                 </div>
             </div>
 
-            <form className={`fixed bottom-[95px] border-2 border-my-secondary rounded-[20px] w-[95%] mt-1 flex flex-row items-center gap-1`} onSubmit={(e) => e.preventDefault()}>
+            <form className={`fixed bottom-[95px] border-2 border-my-secondary rounded-[20px] w-[95%] sm:w-[60%] mt-1 flex flex-row items-center gap-1`} onSubmit={(e) => e.preventDefault()}>
                 
                 <div className={`rounded-[50%] flex items-center justify-center p-1 bg-my-secondary ms-1`}>
                     <IoIosAdd className={`text-[24px] text-my-white`} />

@@ -39,8 +39,7 @@ import Navbar from "../../components/Navbar";
 import Return from "../../components/Return";
 import TitlePage from "../../components/TitlePage";
 import MenuButton from '../../components/MenuButton';
-import EmailInput from "../../components/EmailInput";
-import PasswordInput from "../../components/PasswordInput";
+import Input from '../../components/Input';
 import PersonType from "../../components/PersonType";
 import Linkin from "../../components/Linkin";
 import Button from "../../components/Button";
@@ -202,8 +201,29 @@ export default function SignIn(){
                 <form className={`mt-8 sm:mt-4 lg:mt-0 items-center lg:justify-start flex flex-col w-[100%] px-[5%] sm:overflow-y-scroll sm:pb-[80px] lg:pb-[30px] lg:px-[0%]`} onSubmit={(e) => e.preventDefault()}>
                     <h1 className={`hidden lg:flex text-center text-[30px] font-bold mt-6 mb-8`}>Login</h1>
                     
-                    <EmailInput text='Email' placeholder='Digite seu email' placeholderLarge='Email' value={inputEmailValue} event={handleInputEmailChange} checked={stateEmail} />   
-                    <PasswordInput text="Senha" placeholder="Digite sua senha" placeholderLarge="Senha" hidden={true} value={inputPasswordValue} event={handleInputPasswordChange} checked={statePassword}/>
+                    <Input
+                        text='Email'
+                        placeholder='Digite seu email'
+                        placeholderLarge='Email'
+                        value={inputEmailValue}
+                        event={handleInputEmailChange}
+                        checked={stateEmail}
+                        icon='email'
+                        messageCorrect='Email dentro do padrão'
+                        messageError='Email fora do padrão'
+                    />   
+                    <Input
+                        text="Senha" 
+                        placeholder="Digite sua senha"
+                        placeholderLarge="Senha"
+                        hidden={true}
+                        value={inputPasswordValue}
+                        event={handleInputPasswordChange}
+                        checked={statePassword}
+                        icon='password'
+                        messageCorrect='Senha dentro do padrão'
+                        messageError='Senha precisa ter pelo menos 6 caracteres'
+                    />
                     <PersonType />
 
                     <Button text="entrar" route="undefined" event={signIn} disabled={formValidate} />

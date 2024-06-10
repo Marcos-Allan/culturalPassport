@@ -157,7 +157,7 @@ export default function MyPerfil() {
 
             {userS.logged == true && (
                 //COLOCA OS DADOS DE FOTO E NOME DO USUÁRIO NA TELA
-                <div className={`w-[90%] flex items-center gap-[10px] mb-0 mt-4`}>
+                <div className={`w-[90%] sm:w-[60%] flex items-center gap-[10px] mb-0 mt-4`}>
                     <img
                         src={img}
                         alt=""

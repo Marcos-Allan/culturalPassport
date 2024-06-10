@@ -153,7 +153,7 @@ export default function GoogleLogin() {
                 //FAZ LOGIN COM REDIRECIONAMENTO PARA OUTRA PÁGINA
                 signInRedirect()
             }}
-            className={`w-[50px] h-[50px] border rounded-[50%] flex justify-center items-center
+            className={`w-[80px] h-[80px] sm:w-[60px] sm:h-[60px] lg:w-[60px] lg:h-[60px] border rounded-[50%] flex justify-center items-center
             ${theme == 'light' ? 'border-my-gray' : 'border-my-gray-black'}
         `}>
             <FcGoogle

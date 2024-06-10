@@ -37,7 +37,7 @@ import Return from "../../components/Return";
 import TitlePage from '../../components/TitlePage'
 import MenuButton from '../../components/MenuButton';
 import Text from '../../components/Text'
-import PasswordInput from "../../components/PasswordInput";
+import Input from '../../components/Input';
 import Button from '../../components/Button'
 import Menu from '../../components/Menu';
 
@@ -171,13 +171,35 @@ export default function SwitchPassword() {
             <div className={`w-full flex justify-center h-[100vh]`}>
                 <img className={`hidden lg:flex h-full`} src={bg} alt="pilha de livros" />
 
-                <form className={`mt-8 items-center flex flex-col w-[90%]`} onSubmit={(e) => e.preventDefault()}>
-                    <h1 className={`hidden lg:flex text-center text-[30px] font-bold`}>Trocar a senha</h1>
+                <form className={`mt-8 items-center flex flex-col w-[90%] gap-[16px]`} onSubmit={(e) => e.preventDefault()}>
+                    <h1 className={`hidden lg:flex text-center text-[30px] font-bold mb-16`}>Trocar a senha</h1>
 
                     <Text text={`Crie sua nova senha`} />
 
-                    <PasswordInput text="Password" placeholder="Digite uma senha" hidden={false} value={inputPasswordValue} event={handleInputPasswordChange} checked={statePassword} placeholderLarge='Senha' />
-                    <PasswordInput text="Confirm Password" placeholder="Digite a confirmação da senha" hidden={false} value={inputConfirmPasswordValue} event={handleInputConfirmPasswordChange} checked={stateConfirmPassword} placeholderLarge='Confirmação da senha' />
+                    <Input
+                        text="Senha"
+                        placeholder="Digite sua nova senha"
+                        hidden={false}
+                        value={inputPasswordValue}
+                        event={handleInputPasswordChange}
+                        checked={statePassword}
+                        placeholderLarge='Senha'
+                        icon='password'
+                        messageCorrect='nova senha aceita'
+                        messageError='senha fora do padrão'
+                        />
+                    <Input
+                        text="Confirm Password"
+                        placeholder="Digite a confirmação da senha"
+                        hidden={false}
+                        value={inputConfirmPasswordValue}
+                        event={handleInputConfirmPasswordChange}
+                        checked={stateConfirmPassword}
+                        placeholderLarge='Confirmação da senha'
+                        icon='password'
+                        messageCorrect='senhas iguais'
+                        messageError='senhas não confere'
+                    />
                     
                     <Button text="confirmar" route="undefined" event={updateUser} disabled={formValidate} />
                 </form>

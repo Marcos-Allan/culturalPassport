@@ -32,7 +32,7 @@ import { useState, useRef, useEffect } from "react";
 
 //IMPORTAÇÃO DOS ICONES
 import { IoEyeOutline, IoEyeOffOutline } from "react-icons/io5";
-import { MdOutlineLock } from "react-icons/md";
+import { MdOutlineLock, MdOutlineEmail, MdOutlinePerson } from "react-icons/md";
 
 //IMPORTAÇÃO DO PROVEDOR PARA PEGAR AS VARIÁVEIS GLOBAIS
 import { useMyContext } from "../../provider/geral"
@@ -42,13 +42,16 @@ interface Props {
     text: string,
     placeholder: string,
     placeholderLarge: string,
-    hidden: boolean,
+    hidden?: boolean,
     value?: string,
     checked?: boolean,
+    icon: string,
+    messageCorrect: string,
+    messageError: string,
     event?: (e:React.ChangeEvent<HTMLInputElement>) => void,
 }
 
-export default function PasswordInput(props: Props) {
+export default function Input(props: Props) {
 
     //PEGA A REFERÊNCIA A ELEMENTOS 
     const passwordInputVisible = useRef<HTMLInputElement>(null)
@@ -112,7 +115,7 @@ export default function PasswordInput(props: Props) {
                 //PEGA AS REFERÊNCIAS ATUAIS DOS ELEMENTOS
                 if(passwordInputVisible.current && label.current && message.current && span.current && spanOne.current){
                     //MUDA O ESTILO COMO CORES DE LETRAS, ICONES E BORDAS DOS RESPECTIVOS ELEMENTOS 
-                    if(placeholderText == 'Senha'){
+                    if(placeholderText == props.placeholderLarge){
                         passwordInputVisible.current.style.borderBottom = `1px solid #00ff00`
                     }else{
                         passwordInputVisible.current.style.border = `1px solid #00ff00`
@@ -126,15 +129,18 @@ export default function PasswordInput(props: Props) {
                     //MUDA A OPACIDADE DA MENSAGEM PARA
                     message.current.style.opacity = `100%`
 
+                    //DEIXA O PADÃO DO TEXTO COM A PRIMEIRA LETRA EM CAIXA ALTA
+                    message.current.style.textTransform = 'capitalize'
+                    
                     //ALTERA O TEXTO DA MENSAGEM
-                    message.current.innerText = `Senha dentro do padrão`
+                    message.current.innerText = props.messageCorrect
                 }
                 //VERIFICA SE O VALOR DO INPUT NÃO ESTÁ NO PADRÃO DA REGEX padraoEmail
             }else{
                 //PEGA AS REFERÊNCIAS ATUAIS DOS ELEMENTOS
                 if(passwordInputVisible.current && label.current && message.current && span.current && spanOne.current){
                     //MUDA O ESTILO COMO CORES DE LETRAS, ICONES E BORDAS DOS RESPECTIVOS ELEMENTOS 
-                    if(placeholderText == 'Senha'){
+                    if(placeholderText == props.placeholderLarge){
                         passwordInputVisible.current.style.borderBottom = `1px solid #ff0000`
                     }else{
                         passwordInputVisible.current.style.border = `1px solid #ff0000`
@@ -148,8 +154,11 @@ export default function PasswordInput(props: Props) {
                     //MUDA A OPACIDADE DA MENSAGEM PARA
                     message.current.style.opacity = `100%`
 
+                    //DEIXA O PADÃO DO TEXTO COM A PRIMEIRA LETRA EM CAIXA ALTA
+                    message.current.style.textTransform = 'capitalize'
+
                     //ALTERA O TEXTO DA MENSAGEM
-                    message.current.innerText = `A senha deve ter entre 6 e 10 caracteres`
+                    message.current.innerText = props.messageError
                 }
             }
         }
@@ -206,7 +215,9 @@ export default function PasswordInput(props: Props) {
                     lg:hidden
                     ${theme == 'light' ? 'text-my-gray' : 'text-my-gray-black'}`}
                 >
-                    <MdOutlineLock />
+                    {props.icon == 'password' && (<MdOutlineLock />)}
+                    {props.icon == 'email' && (<MdOutlineEmail />)}
+                    {props.icon == 'person' && (<MdOutlinePerson />)}
                 </span>
 
                 <span
@@ -220,7 +231,7 @@ export default function PasswordInput(props: Props) {
                     `}
                     onClick={() => toggleIsVisiblePassword()}
                 >
-                    {props.hidden == true && (
+                    {props.hidden && props.hidden == true && (
                         <>
                             {isVisible == true ? (
                                 <IoEyeOutline />

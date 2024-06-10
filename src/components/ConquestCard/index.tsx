@@ -71,7 +71,7 @@ export default function ConquestCard(props: Props) {
 
     return(
         <div
-            className={`w-[90%] my-2 p-3 border-2 flex h-[180px] gap-[6px] rounded-[8px]
+            className={`w-[90%] sm:w-[60%] my-2 p-3 border-2 flex h-[180px] gap-[6px] rounded-[8px]
             ${theme == 'light' ? 'border-my-secondary' : 'border-my-quartenary'}
         `}>
             
