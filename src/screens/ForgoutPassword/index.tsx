@@ -46,7 +46,7 @@ import Menu from '../../components/Menu';
 import { useMyContext } from '../../provider/geral';
 
 //IMPORTAÇÃO DAS IMAGENS
-import bg from '../../assets/03bg.png'
+import bg from '../../assets/imgs/03bg.png'
 
 export default function ForgoutPassword() {
 

@@ -71,10 +71,15 @@ export default function Button(props: Props) {
                         lg:rounded-[24px]
                         focus:bg-transparent
                         focus:outline-none
+                        hover:bg-transparent
+                        hover:outline-none
                         border-[2px]
+                        transition-all
+                        duration-[0.2s]
+                        cursor-pointer
                         ${theme == 'light'
-                            ? 'bg-my-primary text-my-white border-my-primary focus:text-my-primary'
-                            : 'bg-my-secondary text-my-black border-my-secondary focus:text-my-secondary'
+                            ? `bg-my-primary text-my-white border-my-primary focus:text-my-primary hover:text-my-primary`
+                            : `bg-my-secondary text-my-black border-my-secondary focus:text-my-secondary hover:text-my-secondary`
                         }
                     `}
                 >
@@ -109,10 +114,17 @@ export default function Button(props: Props) {
                         sm:text-[16px]
                         font-medium
                         capitalize
-                        focus:bg-transparent focus:outline-none border-[2px]
+                        border-[2px]
+                        focus:bg-transparent
+                        focus:outline-none
+                        transition-all
+                        duration-[0.2s]
+                        ${props.disabled != true && 'hover:outline-none hover:bg-transparent cursor-pointer'}
                         ${theme == 'light'
-                            ? 'bg-my-primary disabled:bg-my-gray text-my-white border-my-primary disabled:border-my-gray focus:text-my-primary'
-                            : 'bg-my-secondary disabled:bg-my-gray-black text-my-black border-my-secondary disabled:border-my-gray-black focus:text-my-secondary'
+                            ? `bg-my-primary disabled:bg-my-gray text-my-white border-my-primary disabled:border-my-gray focus:text-my-primary
+                                ${props.disabled != true && 'hover:text-my-primary'}`
+                            : `bg-my-secondary disabled:bg-my-gray-black text-my-black border-my-secondary disabled:border-my-gray-black focus:text-my-secondary
+                                ${props.disabled != true && 'hover:text-my-secondary'}`
                         }
                     `}
                     value={props.text}

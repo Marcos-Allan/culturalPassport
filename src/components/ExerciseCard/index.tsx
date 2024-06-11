@@ -51,7 +51,7 @@ export default function ExerciseCard(props: Props) {
     const { theme } = states
 
     return(
-        <div className={`w-[90%] sm:w-[60%] border-2 my-2 ${theme == 'light' ? 'border-my-gray' : 'border-my-gray-black'} p-3 rounded-[16px] flex items-center justify-center`}>
+        <div className={`w-[90%] sm:w-[60%] border-2 my-2 ${theme == 'light' ? 'border-my-gray' : 'border-my-gray-black'} p-3 rounded-[16px] flex items-center justify-center hover:scale-[0.92] cursor-pointer transition-all duration-[.2s]`}>
                 
             <div className={`flex-grow-[1] flex flex-col`}>
                 <h1 className={`capitalize font-bold text-[20px] ${theme == 'light' ? 'text-my-black' : 'text-my-white'}`}>{props.title}</h1>

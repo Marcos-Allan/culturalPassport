@@ -40,7 +40,7 @@ import Text from "../../components/Text/index.tsx";
 import Menu from "../../components/Menu/index.tsx";
 
 //IMPORTAÇÃO DA IMAGEM USADA NA TELA
-import Person from '../../assets/person_1.png'
+import Person from '../../assets/imgs/person_1.png'
 
 //IMPORTAÇÃO DO PROVEDOR PARA PEGAR AS VARIÁVEIS GLOBAIS
 import { useMyContext } from '../../provider/geral';

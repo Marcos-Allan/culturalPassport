@@ -43,25 +43,26 @@ export default function ToggleTheme() {
 
     return(
         <div
-            className={`w-[80%] flex py-3`}
+            className={`w-[80%] flex py-3 hover:text-my-secondary transition-all duration-[.2s] cursor-pointer ${theme == 'light' ? 'text-my-white' : 'text-my-black'}`}
             onClick={() => toggleTheme()}
+
         >
             {/* VERIFICA SE O TEMA ESTÁ NO MODO dark OU light */}
             {theme == 'light' ? (
                 //BOTA O ICONE DE SOL SE ESTIVER NO MODO LIGHT
                 <>
                     <IoSunny
-                        className={`text-my-white text-[30px]`}
-                        />
-                    <p className="text-my-white text-[18px] font-semibold capitalize flex-grow-[1] text-left ps-[50px]">light mode</p>
+                        className={`text-[30px]`}
+                    />
+                    <p className="text-[18px] font-semibold capitalize flex-grow-[1] text-left ps-[50px]">light mode</p>
                 </>
             ):(
                 //BOTA O ICONE DE LUA SE ESTIVER NO MODO DARK
                 <>
                     <IoMoon
-                        className={`text-my-black text-[30px]`}
+                        className={`text-[30px]`}
                     />
-                    <p className="text-my-black text-[18px] font-semibold capitalize flex-grow-[1] text-left ps-[50px]">dark mode</p>
+                    <p className="text-[18px] font-semibold capitalize flex-grow-[1] text-left ps-[50px]">dark mode</p>
                 </>
             )}
         </div>

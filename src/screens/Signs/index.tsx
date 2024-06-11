@@ -42,7 +42,7 @@ import Menu from "../../components/Menu/index.tsx";
 import DividersButton from "../../components/DividersButton/index.tsx";
 
 //IMPORTAÇÃO DA IMAGEM USADA NA PÁGINA
-import Person from '../../assets/person_2.png'
+import Person from '../../assets/imgs/person_2.png'
 
 //IMPORTAÇÃO DO PROVEDOR PARA PEGAR AS VARIÁVEIS GLOBAIS
 import { useMyContext } from '../../provider/geral';

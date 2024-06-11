@@ -56,7 +56,7 @@ export default function Return() {
         <IoArrowBackOutline
             onClick={previousPage}
             className={`
-            text-[55px] sm:text-[44px] pt-4
+            text-[55px] sm:text-[44px] pt-4 hover:scale-[1.2] transition-all duration-[.2s] cursor-pointer
                 ${theme == 'light'
                 ? 'text-my-black'
                 : 'text-my-white'

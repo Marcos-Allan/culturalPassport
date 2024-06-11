@@ -48,7 +48,7 @@ import GoogleLogin from "../../components/GoogleLogin";
 import Menu from '../../components/Menu';
 
 //IMPORTAÇÃO DAS IMAGENS
-import bg from '../../assets/01bg.png'
+import bg from '../../assets/imgs/01bg.png'
 
 //IMPORTAÇÃO DO PROVEDOR PARA PEGAR AS VARIÁVEIS GLOBAIS
 import { useMyContext } from '../../provider/geral';

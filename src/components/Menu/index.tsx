@@ -35,6 +35,7 @@ import { useMyContext } from "../../provider/geral"
 
 //IMPORTAÇÃO DOS ICONES 
 import { IoCloseOutline } from "react-icons/io5";
+import { MdOutlineEdit } from "react-icons/md"
 
 //IMPORTAÇÃO DOS COMPONENTES
 import ToggleTheme from "../ToggleTheme";
@@ -62,7 +63,7 @@ export default function Menu() {
         >
             <IoCloseOutline
                 className={`
-                    absolute top-0 end-0 text-[36px] m-2
+                    absolute top-0 end-0 text-[36px] m-2 hover:scale-[1.2] transition-all duration-[.2s] cursor-pointer
                     ${theme == 'light' ? 'text-my-white' : 'text-my-black'}
                 `}
                 onClick={() => toggleMenuOpen()}
@@ -73,13 +74,21 @@ export default function Menu() {
                 //COLOCA OS DADOS DE FOTO E NOME DO USUÁRIO NA TELA
                 <div
                     className={`flex items-center gap-[10px] absolute top-0 left-0 m-3`}
-                    onClick={() => navigate('/my-perfil')}
                 >
+
+                    <div
+                        className={`absolute top-[0px] left-[58px] w-[25px] h-[25px] rounded-[50%] flex items-center justify-center cursor-pointer hover:scale-[1.2] transition-all duration-[.2s] ${theme == 'light' ? 'bg-my-quartenary' : 'bg-my-terciary'}`}
+                        onClick={() => navigate('/my-perfil')}
+                    >
+                        <MdOutlineEdit className={`pb-[3px] text-[20px] text-my-white`}/>
+                    </div>
+
                     <img
                         src={userS.img}
                         alt=""
                         className={`rounded-[50%] mb-2 w-20 h-20 border-[1px] ${theme == 'light' ? 'border-my-quartenary' : 'border-my-terciary'} p-1`}
                     />
+
                     <p className={`text-[22px] font-bold capitalize
                         ${theme == 'light' ? 'text-my-white' : 'text-my-black'}
                     `}>{userS.name}</p>

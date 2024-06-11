@@ -38,12 +38,12 @@ import instance from '../../utils/axios';
 import { useMyContext } from "../../provider/geral"
 
 //IMPORTAÇÃO DAS IMAGENS
-import avatar_1 from "../../../public/avatar-1.jpg"
-import avatar_2 from "../../../public/avatar-2.jpg"
-import avatar_3 from "../../../public/avatar-3.jpg"
-import avatar_4 from "../../../public/avatar-4.jpg"
-import avatar_5 from "../../../public/avatar-5.jpg"
-import avatar_6 from "../../../public/avatar-6.jpg"
+import avatar_1 from "../../assets/imgs/avatar-1.jpg"
+import avatar_2 from "../../assets/imgs/avatar-2.jpg"
+import avatar_3 from "../../assets/imgs/avatar-3.jpg"
+import avatar_4 from "../../assets/imgs/avatar-4.jpg"
+import avatar_5 from "../../assets/imgs/avatar-5.jpg"
+import avatar_6 from "../../assets/imgs/avatar-6.jpg"
 
 //IMPORTAÇÃO DOS COMPONENTES
 import Navbar from "../../components/Navbar";
@@ -151,7 +151,7 @@ export default function MyPerfil() {
         <>
             <Navbar>   
                 <Return />
-                <TitlePage text={`perfil`} />
+                <TitlePage text={`meu perfil`} />
                 <MenuButton />
             </Navbar>
 
@@ -188,7 +188,7 @@ export default function MyPerfil() {
                     onClick={() => toggleImg(1)}
                     className={`
                         w-[90px] rounded-[50%] border-2 p-1
-                        ${img == avatar_1 ? `${theme == 'light' ? 'border-my-terciary' : 'border-my-quartenary'}` : `border-transparent`}
+                        ${img == avatar_1 ? `${theme == 'light' ? 'border-my-terciary translate-y-[-16px]' : 'border-my-quartenary translate-y-[-16px]'}` : `border-transparent hover:translate-y-[-16px] transition-all duration-[.3s] cursor-pointer`}
                     `}
                     src={avatar_1} alt=""
                 />
@@ -196,7 +196,7 @@ export default function MyPerfil() {
                     onClick={() => toggleImg(2)}
                     className={`
                         w-[90px] rounded-[50%] border-2 p-1
-                        ${img == avatar_2 ? `${theme == 'light' ? 'border-my-terciary' : 'border-my-quartenary'}` : `border-transparent`}
+                        ${img == avatar_2 ? `${theme == 'light' ? 'border-my-terciary translate-y-[-16px]' : 'border-my-quartenary translate-y-[-16px]'}` : `border-transparent hover:translate-y-[-16px] transition-all duration-[.3s] cursor-pointer`}
                     `}
                     src={avatar_2} alt=""
                 />
@@ -204,7 +204,7 @@ export default function MyPerfil() {
                     onClick={() => toggleImg(3)}
                     className={`
                         w-[90px] rounded-[50%] border-2 p-1
-                        ${img == avatar_3 ? `${theme == 'light' ? 'border-my-terciary' : 'border-my-quartenary'}` : `border-transparent`}
+                        ${img == avatar_3 ? `${theme == 'light' ? 'border-my-terciary translate-y-[-16px]' : 'border-my-quartenary translate-y-[-16px]'}` : `border-transparent hover:translate-y-[-16px] transition-all duration-[.3s] cursor-pointer`}
                     `}
                     src={avatar_3} alt=""
                 />
@@ -212,7 +212,7 @@ export default function MyPerfil() {
                     onClick={() => toggleImg(4)}
                     className={`
                         w-[90px] rounded-[50%] border-2 p-1
-                        ${img == avatar_4 ? `${theme == 'light' ? 'border-my-terciary' : 'border-my-quartenary'}` : `border-transparent`}
+                        ${img == avatar_4 ? `${theme == 'light' ? 'border-my-terciary translate-y-[-16px]' : 'border-my-quartenary translate-y-[-16px]'}` : `border-transparent hover:translate-y-[-16px] transition-all duration-[.3s] cursor-pointer`}
                     `}
                     src={avatar_4} alt=""
                 />
@@ -220,7 +220,7 @@ export default function MyPerfil() {
                     onClick={() => toggleImg(5)}
                     className={`
                         w-[90px] rounded-[50%] border-2 p-1
-                        ${img == avatar_5 ? `${theme == 'light' ? 'border-my-terciary' : 'border-my-quartenary'}` : `border-transparent`}
+                        ${img == avatar_5 ? `${theme == 'light' ? 'border-my-terciary translate-y-[-16px]' : 'border-my-quartenary translate-y-[-16px]'}` : `border-transparent hover:translate-y-[-16px] transition-all duration-[.3s] cursor-pointer`}
                     `}
                     src={avatar_5} alt=""
                 />
@@ -228,7 +228,7 @@ export default function MyPerfil() {
                     onClick={() => toggleImg(6)}
                     className={`
                         w-[90px] rounded-[50%] border-2 p-1
-                        ${img == avatar_6 ? `${theme == 'light' ? 'border-my-terciary' : 'border-my-quartenary'}` : `border-transparent`}
+                        ${img == avatar_6 ? `${theme == 'light' ? 'border-my-terciary translate-y-[-16px]' : 'border-my-quartenary translate-y-[-16px]'}` : `border-transparent hover:translate-y-[-16px] transition-all duration-[.3s] cursor-pointer`}
                     `}
                     src={avatar_6} alt=""
                 />

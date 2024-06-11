@@ -48,15 +48,15 @@ export default function MenuButton() {
                 //MUDA O ICONE DO MENU SE O MENU ESTIVER ABERTO
                 <>
                     <IoCloseOutline 
-                        className={`mt-4 text-[40px] sm:text-[34px] ${theme == 'light' ? 'text-my-black' : 'text-my-white'} z-[40]`}
+                        className={`mt-4 text-[40px] sm:text-[34px] ${theme == 'light' ? 'text-my-black' : 'text-my-white'} z-[2] hover:scale-[1.2] transition-all duration-[.2s] cursor-pointer`}
                         onClick={() => toggleMenuOpen()}
-                        />
+                    />
                 </>
             ):(
                 //MUDA O ICONE DO MENU SE O MENU ESTIVER FECHADO
                 <div className={`relative`}>
                     <IoMenu
-                        className={`mt-4 text-[40px] sm:text-[34px] ${theme == 'light' ? 'text-my-black' : 'text-my-white'} z-[40]`}
+                        className={`mt-4 text-[40px] sm:text-[34px] ${theme == 'light' ? 'text-my-black' : 'text-my-white'} z-[2] hover:scale-[1.2] transition-all duration-[.2s] cursor-pointer`}
                         onClick={() => toggleMenuOpen()}
                     />
                     {/* VERIFICA SE O ESTADO DA VARIAVEL GLOBAL userS.logged É IGUAL A TRUE */}

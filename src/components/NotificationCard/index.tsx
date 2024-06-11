@@ -61,7 +61,7 @@ export default function NotificationCard(props: Props) {
                 <p className={`truncate capitalize text-left text-[14px] ${theme == 'light' ? 'text-my-black' : 'text-my-white'}`}>{props.content}</p>
             </div>
 
-            <IoIosCloseCircle className={`text-my-secondary text-[38px]`}
+            <IoIosCloseCircle className={`text-my-secondary text-[38px] cursor-pointer hover:text-[#ff2424] hover:scale-[1.2] transition-all duration-[.2s] hover:rotate-180`}
                 onClick={() => {
                     props.event && props.event()
                 }}

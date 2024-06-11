@@ -48,7 +48,7 @@ import Linkin from "../../components/Linkin/index.tsx"
 import Menu from '../../components/Menu/index.tsx'
 
 //IMPORTAÇÃO DAS IMAGENS
-import bg from '../../assets/02bg.png'
+import bg from '../../assets/imgs/02bg.png'
 
 export default function SignUp(){
 

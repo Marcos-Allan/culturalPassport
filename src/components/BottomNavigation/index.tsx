@@ -52,8 +52,8 @@ export default function BottomNavigation() {
                 className={`flex flex-col items-center justify-center gap-[5px]`}
                 onClick={() => navigate('/materias')}
             >
-                <div className={`flex items-center justify-center rounded-[50%] ${location.pathname == '/materias' && 'bg-my-terciary'}`}>
-                    <GoHome className={`text-[36px] text-my-white p-[6px]`} />
+                <div className={`flex items-center justify-center rounded-[50%] hover:bg-my-white hover:text-my-secondary text-my-white transition-all duration-[.2s] cursor-pointer ${location.pathname == '/materias' && 'bg-my-terciary'}`}>
+                    <GoHome className={`text-[36px] p-[6px]`} />
                 </div>
                 <p className={`text-[10px] text-my-white`}>Inicio</p>
             </div>
@@ -62,8 +62,8 @@ export default function BottomNavigation() {
                 className={`flex flex-col items-center justify-center gap-[5px]`}
                 onClick={() => navigate('/achievements')}
             >
-                <div className={`flex items-center justify-center rounded-[50%] ${location.pathname == '/achievements' && 'bg-my-terciary'}`}>
-                    <GrTrophy className={`text-[36px] text-my-white p-[6px]`} />
+                <div className={`flex items-center justify-center rounded-[50%] hover:bg-my-white hover:text-my-secondary text-my-white transition-all duration-[.2s] cursor-pointer ${location.pathname == '/achievements' && 'bg-my-terciary'}`}>
+                    <GrTrophy className={`text-[36px] p-[6px]`} />
                 </div>
                 <p className={`text-[10px] text-my-white`}>Conquistas</p>
             </div>
@@ -72,8 +72,8 @@ export default function BottomNavigation() {
                 className={`flex flex-col items-center justify-center gap-[5px]`}
                 onClick={() => navigate('/exercises')}
             >
-                <div className={`flex items-center justify-center rounded-[50%] ${location.pathname == '/exercises' && 'bg-my-terciary'}`}>
-                    <FaRegAddressBook className={`text-[36px] text-my-white p-[6px] `} />
+                <div className={`flex items-center justify-center rounded-[50%] hover:bg-my-white hover:text-my-secondary text-my-white transition-all duration-[.2s] cursor-pointer ${location.pathname == '/exercises' && 'bg-my-terciary'}`}>
+                    <FaRegAddressBook className={`text-[36px] p-[6px] `} />
                 </div>
                 <p className={`text-[10px] text-my-white`}>Exercicios</p>
             </div>
@@ -82,8 +82,8 @@ export default function BottomNavigation() {
                 className={`flex flex-col items-center justify-center gap-[5px]`}
                 onClick={() => navigate('/chat')}
             >
-                <div className={`flex items-center justify-center rounded-[50%] ${location.pathname == '/chat' && 'bg-my-terciary'}`}>
-                    <IoChatbubbleOutline className={`text-[36px] text-my-white p-[6px]`} />
+                <div className={`flex items-center justify-center rounded-[50%] hover:bg-my-white hover:text-my-secondary text-my-white transition-all duration-[.2s] cursor-pointer ${location.pathname == '/chat' && 'bg-my-terciary'}`}>
+                    <IoChatbubbleOutline className={`text-[36px] p-[6px]`} />
                 </div>
                 <p className={`text-[10px] text-my-white`}>Chat</p>
             </div>
@@ -92,8 +92,8 @@ export default function BottomNavigation() {
                 className={`flex flex-col items-center justify-center gap-[5px]`}
                 onClick={() => navigate('/notifications')}
             >
-                <div className={`flex items-center justify-center rounded-[50%] ${location.pathname == '/notifications' && 'bg-my-terciary'}`}>
-                    <IoNotificationsOutline className={`text-[36px] text-my-white p-[6px]`} />
+                <div className={`flex items-center justify-center rounded-[50%] hover:bg-my-white hover:text-my-secondary text-my-white transition-all duration-[.2s] cursor-pointer ${location.pathname == '/notifications' && 'bg-my-terciary'}`}>
+                    <IoNotificationsOutline className={`text-[36px] p-[6px]`} />
                 </div>
                 <p className={`text-[10px] text-my-white`}>Notificação</p>
             </div>
@@ -102,8 +102,8 @@ export default function BottomNavigation() {
                 className={`flex flex-col items-center justify-center gap-[5px]`}
                 onClick={() => navigate('/my-perfil')}
             >
-                <div className={`flex items-center justify-center rounded-[50%] ${location.pathname == '/my-perfil' && 'bg-my-terciary'}`}>
-                    <IoPersonOutline className={`text-[36px] text-my-white p-[6px]`} />
+                <div className={`flex items-center justify-center rounded-[50%] hover:bg-my-white hover:text-my-secondary text-my-white transition-all duration-[.2s] cursor-pointer ${location.pathname == '/my-perfil' && 'bg-my-terciary'}`}>
+                    <IoPersonOutline className={`text-[36px] p-[6px]`} />
                 </div>
                 <p className={`text-[10px] text-my-white`}>Perfil</p>
             </div>

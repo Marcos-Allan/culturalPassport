@@ -54,6 +54,10 @@ export default function Linkin(props: Props) {
                 font-medium
                 text-[20px]
                 sm:text-[16px]
+                hover:underline
+                focus:underline
+                focus:outline-none
+                focus:border-none
                 ${theme == 'light' ? 'text-my-primary' : 'text-my-secondary'}
             `}
         >
