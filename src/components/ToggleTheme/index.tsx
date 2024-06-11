@@ -53,7 +53,7 @@ export default function ToggleTheme() {
                     <IoSunny
                         className={`text-my-white text-[30px]`}
                         />
-                    <p className="text-my-white text-[18px] font-semibold capitalize flex-grow-[1] text-right">light mode</p>
+                    <p className="text-my-white text-[18px] font-semibold capitalize flex-grow-[1] text-left ps-[50px]">light mode</p>
                 </>
             ):(
                 //BOTA O ICONE DE LUA SE ESTIVER NO MODO DARK
@@ -61,7 +61,7 @@ export default function ToggleTheme() {
                     <IoMoon
                         className={`text-my-black text-[30px]`}
                     />
-                    <p className="text-my-black text-[18px] font-semibold capitalize flex-grow-[1] text-right">dark mode</p>
+                    <p className="text-my-black text-[18px] font-semibold capitalize flex-grow-[1] text-left ps-[50px]">dark mode</p>
                 </>
             )}
         </div>

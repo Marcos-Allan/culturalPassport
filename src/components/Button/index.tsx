@@ -67,8 +67,7 @@ export default function Button(props: Props) {
                         capitalize
                         w-[90%]
                         sm:w-[60%]
-                        lg:w-auto
-                        lg:px-14
+                        lg:w-[25%]
                         lg:rounded-[24px]
                         focus:bg-transparent
                         focus:outline-none
@@ -96,7 +95,7 @@ export default function Button(props: Props) {
                     className={`
                         w-[90%]
                         sm:w-[60%]
-                        lg:w-auto
+                        lg:w-[25%]
                         my-2
                         sm:my-1
                         rounded-[8px]

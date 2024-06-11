@@ -59,7 +59,7 @@ export default function SignUp(){
     const states:any = useMyContext()
 
     //DESESTRUTURA AS VARIAVEIS ESPECIFICADAS
-    const { toggleLoading, toggleAlert, userS } = states
+    const { toggleLoading, toggleAlert, userS, theme } = states
 
     //UTILIZA O HOOK useState
     const [inputEmailValue, setInputEmailValue] = useState<string>('')
@@ -273,8 +273,8 @@ export default function SignUp(){
             <div className={`w-full flex justify-center h-[100vh]`}>
                 <img className={`hidden lg:flex h-full`} src={bg} alt="pilha de livros" />
 
-                <form className={`mt-8 lg:mt-0 items-center flex lg:h-full flex-col w-full overflow-y-scroll mb-6 sm:mb-20`} onSubmit={(e) => e.preventDefault()}>
-                    <h1 className={`hidden lg:flex text-center text-[30px] font-bold mt-6`}>Cadastre-se</h1>
+                <form className={`mt-8 lg:mt-0 items-center flex lg:h-full flex-col w-full overflow-y-scroll mb-6 sm:mb-20 relative scrollbar scrollbar-track-transparent ${theme == 'light' ? 'scrollbar-thumb-my-secondary' : 'scrollbar-thumb-my-terciary'}`} onSubmit={(e) => e.preventDefault()}>
+                    <h1 className={`hidden lg:flex text-center text-[30px] font-bold mt-6 ${theme == 'light' ? 'text-my-black' : 'text-my-white'}`}>Cadastre-se</h1>
 
                     <Input
                         placeholder='Digite seu nome'
@@ -352,6 +352,10 @@ export default function SignUp(){
                     <Button text="criar" route="undefined" event={signup} disabled={formValidate} />
                     
                     <Linkin route="/sign-in" text="Já possui uma conta?" />
+
+                    <div className={`hidden lg:block absolute top-0 right-0 me-5`}>
+                        <MenuButton />
+                    </div>
                 </form>
 
             </div>

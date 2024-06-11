@@ -49,7 +49,7 @@ export default function NotificationCard(props: Props) {
     const { theme } = states
 
     return(
-        <div className={`w-[90%] flex flex-row items-center justify-between p-2 rounded-[6px] border-2 ${theme == 'light' ? 'border-my-gray' : 'border-my-gray-black'}`}>
+        <div className={`w-[95%] flex flex-row items-center justify-between p-2 rounded-[6px] border-2 ${theme == 'light' ? 'border-my-gray' : 'border-my-gray-black'}`}>
             
             <div className={`flex flex-row justify-start items-center truncate w-[35%] me-3`}>
                 <IoIosNotificationsOutline className={`text-my-secondary text-[38px]`} />

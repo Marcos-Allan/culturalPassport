@@ -100,7 +100,7 @@ export default function Notifications() {
                 <MenuButton />
             </Navbar>
 
-            <div className={`w-full sm:w-[70%] mt-5 flex flex-col justify-center items-center gap-[15px] pb-[60px]`}>
+            <div className={`w-[90%] sm:w-[60%] mt-5 flex flex-col justify-start items-center gap-[15px] mb-[50px] lg:mb-0 overflow-y-scroll scrollbar scrollbar-track-transparent scrollbar-thumb-my-secondary`}>
                 {notification.map((not) => (
                     <NotificationCard materia={not.materia} content={not.content} event={() => removeNotify({materia: not.materia, content: not.content })} />
                 ))}

@@ -130,12 +130,12 @@ export default function Alert() {
     }, [message])
 
     return(
-        <div className={`w-full sm:w-[60%] flex flex-col items-center p-2 pt-4 absolute top-0`}>
+        <div className={`w-full flex flex-col items-center p-2 pt-4 absolute top-0`}>
             <div
                 ref={msg}
                 className={`
                 ${theme == 'light' ? 'bg-my-white border-my-terciary' : 'bg-my-black border-my-quartenary'}
-                w-[95%] border-2 rounded-[8px] px-3 py-2 pb-3 relative overflow-hidden ${opacity == 0 ? 'opacity-0' : 'opacity-100'} transition-opacity duration-[400ms]
+                w-[95%] sm:w-[60%] border-2 rounded-[8px] px-3 py-2 pb-3 relative overflow-hidden ${opacity == 0 ? 'opacity-0' : 'opacity-100'} transition-opacity duration-[400ms]
             `}>
                 <p className={`text-center capitalize ${theme == 'light' ? 'text-my-black' : 'text-my-white'}`}>{message.text}</p>
 

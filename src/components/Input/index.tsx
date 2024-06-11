@@ -32,7 +32,7 @@ import { useState, useRef, useEffect } from "react";
 
 //IMPORTAÇÃO DOS ICONES
 import { IoEyeOutline, IoEyeOffOutline } from "react-icons/io5";
-import { MdOutlineLock, MdOutlineEmail, MdOutlinePerson } from "react-icons/md";
+import { MdOutlineLock, MdOutlineEmail, MdOutlinePerson, MdOutlinePhoneIphone } from "react-icons/md";
 
 //IMPORTAÇÃO DO PROVEDOR PARA PEGAR AS VARIÁVEIS GLOBAIS
 import { useMyContext } from "../../provider/geral"
@@ -218,6 +218,7 @@ export default function Input(props: Props) {
                     {props.icon == 'password' && (<MdOutlineLock />)}
                     {props.icon == 'email' && (<MdOutlineEmail />)}
                     {props.icon == 'person' && (<MdOutlinePerson />)}
+                    {props.icon == 'code' && (<MdOutlinePhoneIphone />)}
                 </span>
 
                 <span

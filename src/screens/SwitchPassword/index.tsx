@@ -59,7 +59,7 @@ export default function SwitchPassword() {
     const states:any = useMyContext()
 
     //DESESTRUTURA AS VARIAVEIS ESPECIFICADAS
-    const { userS, toggleLoading, toggleAlert } = states
+    const { userS, toggleLoading, toggleAlert, theme } = states
 
     //UTILIZA O HOOK useState
     const [inputPasswordValue, setInputPasswordValue] = useState<string>('')
@@ -171,15 +171,15 @@ export default function SwitchPassword() {
             <div className={`w-full flex justify-center h-[100vh]`}>
                 <img className={`hidden lg:flex h-full`} src={bg} alt="pilha de livros" />
 
-                <form className={`mt-8 items-center flex flex-col w-[90%] gap-[16px]`} onSubmit={(e) => e.preventDefault()}>
-                    <h1 className={`hidden lg:flex text-center text-[30px] font-bold mb-16`}>Trocar a senha</h1>
+                <form className={`mt-8 items-center flex flex-col w-[90%] gap-[16px] relative`} onSubmit={(e) => e.preventDefault()}>
+                    <h1 className={`hidden lg:flex text-center text-[30px] font-bold mb-16 ${theme == 'light' ? 'text-my-black' : 'text-my-white'}`}>Trocar a senha</h1>
 
                     <Text text={`Crie sua nova senha`} />
 
                     <Input
                         text="Senha"
                         placeholder="Digite sua nova senha"
-                        hidden={false}
+                        hidden={true}
                         value={inputPasswordValue}
                         event={handleInputPasswordChange}
                         checked={statePassword}
@@ -191,7 +191,7 @@ export default function SwitchPassword() {
                     <Input
                         text="Confirm Password"
                         placeholder="Digite a confirmação da senha"
-                        hidden={false}
+                        hidden={true}
                         value={inputConfirmPasswordValue}
                         event={handleInputConfirmPasswordChange}
                         checked={stateConfirmPassword}
@@ -201,7 +201,11 @@ export default function SwitchPassword() {
                         messageError='senhas não confere'
                     />
                     
-                    <Button text="confirmar" route="undefined" event={updateUser} disabled={formValidate} />
+                    <Button text="trocar" route="undefined" event={updateUser} disabled={formValidate} />
+
+                    <div className={`hidden lg:block absolute top-0 right-0 mt-[-8px] me-5`}>
+                        <MenuButton />
+                    </div>
                 </form>
             </div>  
             <Menu />

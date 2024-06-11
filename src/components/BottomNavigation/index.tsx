@@ -46,7 +46,7 @@ export default function BottomNavigation() {
     const location = useLocation();
 
     return(
-        <div className={`fixed bottom-0 w-full sm:px-[20%] h-[80px] px-3 bg-my-secondary flex justify-around items-center`}>
+        <div className={`fixed bottom-0 w-full sm:px-[20%] h-[80px] px-3 bg-my-secondary flex justify-around items-center lg:h-full lg:w-[80px] lg:top-0 lg:left-0 lg:px-3 lg:flex-col`}>
             
             <div
                 className={`flex flex-col items-center justify-center gap-[5px]`}

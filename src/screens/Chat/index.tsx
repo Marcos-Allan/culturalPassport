@@ -90,7 +90,7 @@ export default function Chat() {
                 </div>
             </div>
 
-            <form className={`fixed bottom-[95px] border-2 border-my-secondary rounded-[20px] w-[95%] sm:w-[60%] mt-1 flex flex-row items-center gap-1`} onSubmit={(e) => e.preventDefault()}>
+            <form className={`fixed bottom-[95px]  lg:bottom-[30px] border-2 border-my-secondary rounded-[20px] w-[95%] sm:w-[60%] mt-1 flex flex-row items-center gap-1`} onSubmit={(e) => e.preventDefault()}>
                 
                 <div className={`rounded-[50%] flex items-center justify-center p-1 bg-my-secondary ms-1`}>
                     <IoIosAdd className={`text-[24px] text-my-white`} />

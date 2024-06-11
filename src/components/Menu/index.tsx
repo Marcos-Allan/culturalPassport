@@ -54,9 +54,9 @@ export default function Menu() {
     return(
         <div
             className={`
-                flex items-center flex-col absolute top-0 w-[280px] h-full pt-32
+                flex items-center flex-col absolute top-0 w-[280px] sm:w-[360px] lg:w-[425px] h-full ${userS.logged == true ? 'pt-32' : 'pt-1'} sm:rounded-tr-[16px] sm:rounded-br-[16px] lg:pe-32
                 ${theme == 'light' ? 'bg-my-black text-my-white' : 'bg-my-white text-my-black'}
-                ${menuOpen == true ? 'left-0' : 'left-[-280px]'}
+                ${menuOpen == true ? 'left-0' : 'left-[-280px] sm:left-[-360px] lg:left-[-425px]'}
                 transition-[left] duration-[0.6s]
             `}
         >

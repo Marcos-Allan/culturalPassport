@@ -59,7 +59,7 @@ export default function ConfirmCode() {
     const states:any = useMyContext()
 
     //DESESTRUTURA AS VARIAVEIS ESPECIFICADAS
-    const { userS, toggleLoading, toggleAlert } = states
+    const { userS, toggleLoading, toggleAlert, theme } = states
 
     //CRIA OS ESTADOS DO COMPONENTE
     const [inputCodeValue, SetInputCodeValue] = useState<string>('')
@@ -159,8 +159,8 @@ export default function ConfirmCode() {
             <div className={`w-full flex justify-center h-[100vh]`}>
                 <img className={`hidden lg:flex h-full`} src={bg} alt="pilha de livros" />
 
-                <form className={`mt-8 items-center flex flex-col w-[90%] gap-[16px]`} onSubmit={(e) => e.preventDefault()}>
-                    <h1 className={`hidden lg:flex text-center text-[30px] font-bold mb-16`}>Confirmar o código</h1>
+                <form className={`mt-8 items-center flex flex-col w-[90%] gap-[16px] relative`} onSubmit={(e) => e.preventDefault()}>
+                    <h1 className={`hidden lg:flex text-center text-[30px] font-bold mb-16 ${theme == 'light' ? 'text-my-black' : 'text-my-white'}`}>Confirmar o código</h1>
 
                     <Text text={`Digite o código que foi enviado por email`} />
 
@@ -171,13 +171,18 @@ export default function ConfirmCode() {
                         placeholder='Digite o código'
                         placeholderLarge='Código'
                         text='Código'
-                        icon='password'
+                        icon='code'
                         messageCorrect='código dentro do padrão'
                         messageError='formato do código inválido'
                     />
 
                     <Text text={`Confirme o código enviado para o seu email para alterar a senha`} />
-                    <Button route='undefined' text={`Confirmar`} disabled={formValidate} event={verifyCode} />
+                    
+                    <Button route='undefined' text={`enviar`} disabled={formValidate} event={verifyCode} />
+
+                    <div className={`hidden lg:block absolute top-0 right-0 mt-[-8px] me-5`}>
+                        <MenuButton />
+                    </div>
                 </form>
             </div>
             <Menu />

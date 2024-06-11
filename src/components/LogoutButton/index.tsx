@@ -79,7 +79,7 @@ export default function LogoutButton() {
             onClick={() => handleLogout()}
         >
             <CiLogout className={`${theme == 'light' ? 'text-my-white' : 'text-my-black'} text-[30px]`} />
-            <p className={`${theme == 'light' ? 'text-my-white' : 'text-my-black'} text-[18px] font-semibold capitalize flex-grow-[1] text-right`}>logout</p>
+            <p className={`${theme == 'light' ? 'text-my-white' : 'text-my-black'} text-[18px] font-semibold capitalize flex-grow-[1] text-left ps-[50px]`}>logout</p>
         </div>
     )
 }

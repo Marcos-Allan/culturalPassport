@@ -62,7 +62,7 @@ export default function SignIn(){
     const states:any = useMyContext()
 
     //DESESTRUTURA AS VARIAVEIS ESPECIFICADAS
-    const { userS, toggleUser, toggleLoading, toggleAlert } = states
+    const { userS, toggleUser, toggleLoading, toggleAlert, theme } = states
 
     //UTILIZA O HOOK useState
     const [inputEmailValue, setInputEmailValue] = useState<string>('')
@@ -198,8 +198,8 @@ export default function SignIn(){
             </div>
 
             <div className={`w-full flex justify-center h-[100vh]`}>
-                <form className={`mt-8 sm:mt-4 lg:mt-0 items-center lg:justify-start flex flex-col w-[100%] px-[5%] sm:overflow-y-scroll sm:pb-[80px] lg:pb-[30px] lg:px-[0%]`} onSubmit={(e) => e.preventDefault()}>
-                    <h1 className={`hidden lg:flex text-center text-[30px] font-bold mt-6 mb-8`}>Login</h1>
+                <form className={`mt-8 sm:mt-4 lg:mt-0 items-center lg:justify-start flex flex-col w-[100%] px-[5%] sm:overflow-y-scroll sm:pb-[80px] lg:pb-[30px] lg:px-[0%] relative scrollbar-none`} onSubmit={(e) => e.preventDefault()}>
+                    <h1 className={`hidden lg:flex text-center text-[30px] font-bold mt-6 mb-8 ${theme == 'light' ? 'text-my-black' : 'text-my-white'}`}>Login</h1>
                     
                     <Input
                         text='Email'
@@ -235,6 +235,10 @@ export default function SignIn(){
                     <Separation />
 
                     <GoogleLogin />
+                    
+                    <div className={`hidden lg:block absolute top-0 right-0 me-5`}>
+                        <MenuButton />
+                    </div>
                 </form>
 
                 <img className={`hidden lg:flex h-full`} src={bg} alt="livros com óculos em cima" />
