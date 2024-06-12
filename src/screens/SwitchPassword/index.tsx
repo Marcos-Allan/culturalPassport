@@ -190,7 +190,7 @@ export default function SwitchPassword() {
                         />
                     <Input
                         text="Confirm Password"
-                        placeholder="Digite a confirmação da senha"
+                        placeholder="Confirme a senha"
                         hidden={true}
                         value={inputConfirmPasswordValue}
                         event={handleInputConfirmPasswordChange}

@@ -338,7 +338,7 @@ export default function SignUp(){
                     />
                     <Input
                         text="Confirma a Senha"
-                        placeholder="Digite a confirmação da senha"
+                        placeholder="Confirme a senha"
                         placeholderLarge='Confirme a Senha'
                         hidden={true}
                         value={inputConfirmPasswordValue}

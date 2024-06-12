@@ -228,6 +228,10 @@ export default function Input(props: Props) {
                     me-2
                     right-0
                     text-[24px]
+                    cursor-pointer
+                    hover:scale-[1.1]
+                    transition-all
+                    duration-[.3s]
                     ${theme == 'light' ? 'text-my-gray' : 'text-my-gray-black'}
                     `}
                     onClick={() => toggleIsVisiblePassword()}
