@@ -203,8 +203,12 @@ export default function SwitchPassword() {
                     
                     <Button text="trocar" route="undefined" event={updateUser} disabled={formValidate} />
 
-                    <div className={`hidden lg:block absolute top-0 right-0 mt-[-8px] me-5`}>
+                    <div className={`hidden lg:block absolute top-0 right-0 mt-[-8px] me-8`}>
                         <MenuButton />
+                    </div>
+                    
+                    <div className={`hidden lg:block absolute top-0 left-0 mt-[-8px] ms-8`}>
+                        <Return />
                     </div>
                 </form>
             </div>  

@@ -69,21 +69,25 @@ export default function Home(){
     return(
         <>
             <Navbar>
-                <TitlePage text="Bem Vindo Estudante" />
+                <TitlePage text="Bem Vindo Estudante" space={true} />
                 <MenuButton />
             </Navbar>
+            
+            <div className={`w-full flex flex-col items-center lg:flex-row lg:justify-center lg:items-center lg:h-full lg:w-[60%]`}>
+                <Text
+                    text="Seja muito bem-vindo ao nosso app de estudos. Se prepare para os vestibulares com simulados e conteúdos diversos"
+                />
 
-            <Text
-                text="Seja muito bem-vindo ao nosso app de estudos. Se prepare para os vestibulares com simulados e conteúdos diversos"
-            />
-
-            <img
-                src={Person}
-                className={`w-full sm:w-[30%]`}
-                alt=""
-            />
+                <div className={`w-full flex flex-col items-center lg:w-[90%]`}>
+                    <img
+                        src={Person}
+                        className={`w-full sm:w-[60%] sm:max-w-[400px] lg:w-[100%] lg:max-w-[450px]`}
+                        alt=""
+                    />  
                         
-            <Button text="iniciar" route="/signs" />
+                    <Button text="iniciar" route="/signs" />
+                </div>
+            </div>
             <Menu />
         </>
     )

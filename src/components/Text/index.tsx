@@ -46,7 +46,7 @@ export default function Text(props: Props) {
     return(
         <p
             className={`
-                w-[90%] sm:w-[60%] my-3 sm:my-1 text-[22px] sm:text-[20px]
+                w-[90%] sm:w-[60%] my-3 sm:my-1 text-[22px] sm:text-[20px] lg:text-[24px]
                 ${theme == 'light' ? 'text-my-gray' : 'text-my-gray-black'}
             `}
         >

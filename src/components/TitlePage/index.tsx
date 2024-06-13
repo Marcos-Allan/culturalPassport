@@ -32,7 +32,8 @@ import { useMyContext } from "../../provider/geral"
 
 //TIPAGEM DAS PROPS DO COMPONENTE
 interface Props {
-    text: string
+    text: string,
+    space?: boolean,
 }
 
 export default function TitlePage(props: Props) {
@@ -44,8 +45,9 @@ export default function TitlePage(props: Props) {
     const { theme } = states
 
     return(
-        <h1 className={`text-center w-[90%] pt-4 text-[26px] sm:text-[28px] font-bold capitalize
+        <h1 className={`text-center flex-grow-[1] pt-4 text-[26px] sm:text-[28px] font-bold capitalize
             ${theme == 'light' ? 'text-my-black' : 'text-my-white'}
+            ${props.space && 'lg:pe-[80px]'}
         `}>{props.text}</h1>
     )
 }

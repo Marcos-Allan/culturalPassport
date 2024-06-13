@@ -40,7 +40,6 @@ import Return from "../../components/Return";
 import TitlePage from "../../components/TitlePage";
 import MenuButton from '../../components/MenuButton';
 import Input from '../../components/Input';
-import PersonType from "../../components/PersonType";
 import Linkin from "../../components/Linkin";
 import Button from "../../components/Button";
 import Separation from "../../components/Separation";
@@ -198,8 +197,15 @@ export default function SignIn(){
             </div>
 
             <div className={`w-full flex justify-center h-[100vh]`}>
-                <form className={`mt-8 sm:mt-4 lg:mt-0 items-center lg:justify-start flex flex-col w-[100%] px-[5%] sm:overflow-y-scroll sm:pb-[80px] lg:pb-[30px] lg:px-[0%] relative scrollbar-none`} onSubmit={(e) => e.preventDefault()}>
+                <form className={`mt-8 sm:mt-4 lg:mt-0 items-center lg:justify-center flex flex-col w-[100%] px-[5%] sm:overflow-y-scroll sm:pb-[80px] lg:pb-[50px] lg:px-[0%] relative scrollbar-none lg:gap-[10px]`} onSubmit={(e) => e.preventDefault()}>
                     <h1 className={`hidden lg:flex text-center text-[30px] font-bold mt-6 mb-8 ${theme == 'light' ? 'text-my-black' : 'text-my-white'}`}>Login</h1>
+                    {/* <Navbar>   
+                        <Return />
+                        <TitlePage
+                        text={`login`}
+                        />
+                        <MenuButton />
+                    </Navbar> */}
                     
                     <Input
                         text='Email'
@@ -224,7 +230,6 @@ export default function SignIn(){
                         messageCorrect='Senha dentro do padrão'
                         messageError='Senha precisa ter pelo menos 6 caracteres'
                     />
-                    <PersonType />
 
                     <Button text="entrar" route="undefined" event={signIn} disabled={formValidate} />
                     
@@ -236,8 +241,12 @@ export default function SignIn(){
 
                     <GoogleLogin />
                     
-                    <div className={`hidden lg:block absolute top-0 right-0 me-5`}>
+                    <div className={`hidden lg:block absolute top-0 right-0 mt-[10px] me-8`}>
                         <MenuButton />
+                    </div>
+                    
+                    <div className={`hidden lg:block absolute top-0 left-0 mt-[10px] ms-8`}>
+                        <Return />
                     </div>
                 </form>
 

@@ -37,7 +37,7 @@ interface Props {
 
 export default function DividersButton(props: Props) {
     return(
-        <div className={`w-[90%] sm:w-[60%] flex flex-col sm:flex-row justify-center items-center sm:gap-[10px]`}>
+        <div className={`w-[90%] sm:w-[60%] flex flex-col sm:flex-row lg:flex-row lg:w-full justify-center items-center sm:gap-[10px]`}>
             {props.children}
         </div>
     )

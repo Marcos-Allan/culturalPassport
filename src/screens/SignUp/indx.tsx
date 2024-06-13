@@ -273,88 +273,98 @@ export default function SignUp(){
             <div className={`w-full flex justify-center h-[100vh]`}>
                 <img className={`hidden lg:flex h-full`} src={bg} alt="pilha de livros" />
 
-                <form className={`mt-8 lg:mt-0 items-center flex lg:h-full flex-col w-full overflow-y-scroll mb-6 sm:mb-20 relative scrollbar scrollbar-track-transparent ${theme == 'light' ? 'scrollbar-thumb-my-secondary' : 'scrollbar-thumb-my-terciary'}`} onSubmit={(e) => e.preventDefault()}>
+                <form className={`mt-8 sm:mt-0 lg:mt-0 items-center flex lg:h-full flex-col w-full overflow-y-scroll mb-6 sm:mb-20 lg:gap-[10px] relative scrollbar-none`} onSubmit={(e) => e.preventDefault()}>
                     <h1 className={`hidden lg:flex text-center text-[30px] font-bold mt-6 ${theme == 'light' ? 'text-my-black' : 'text-my-white'}`}>Cadastre-se</h1>
 
-                    <Input
-                        placeholder='Digite seu nome'
-                        placeholderLarge='Nome'
-                        text='Nome'
-                        event={handleInputNameChange}
-                        value={inputNameValue}
-                        checked={stateName}
-                        icon='person'
-                        messageCorrect='nome aceito'
-                        messageError='nome inválido'
-                    />   
+                    <div className={`w-full flex items-center flex-col lg:flex-row lg:gap-[30px] lg:w-[80%] lg:mt-[70px]`}>
+                        <Input
+                            placeholder='Digite seu nome'
+                            placeholderLarge='Nome'
+                            text='Nome'
+                            event={handleInputNameChange}
+                            value={inputNameValue}
+                            checked={stateName}
+                            icon='person'
+                            messageCorrect='nome aceito'
+                            messageError='nome inválido'
+                        />   
 
-                    <Input
-                        placeholder='Digite seu sobrenome'
-                        placeholderLarge='Sobrenome' 
-                        text='Sobrenome'
-                        event={handleInputLastNameChange}
-                        value={inputLastNameValue}
-                        checked={stateLastName}
-                        icon='person'
-                        messageCorrect='sobrenome aceito'
-                        messageError='sobrenome inválido'
-                    />   
-                    
-                    <Input
-                        placeholder='Digite sua data de nascimento'
-                        placeholderLarge='Data de Nasc'
-                        text='Data de Nasc'
-                        event={handleInputDateChange}
-                        value={inputDateValue}
-                        checked={stateDate}
-                        icon='person'
-                        messageCorrect='data dentro do padrão'
-                        messageError='formato inválido'
-                    /> 
+                        <Input
+                            placeholder='Digite seu sobrenome'
+                            placeholderLarge='Sobrenome' 
+                            text='Sobrenome'
+                            event={handleInputLastNameChange}
+                            value={inputLastNameValue}
+                            checked={stateLastName}
+                            icon='person'
+                            messageCorrect='sobrenome aceito'
+                            messageError='sobrenome inválido'
+                        />   
+                    </div>
+                    <div className={`w-full flex items-center flex-col lg:flex-row lg:gap-[30px] lg:w-[80%]`}>
+                        <Input
+                            placeholder='Digite sua data de nascimento'
+                            placeholderLarge='Data de Nasc'
+                            text='Data de Nasc'
+                            event={handleInputDateChange}
+                            value={inputDateValue}
+                            checked={stateDate}
+                            icon='person'
+                            messageCorrect='data dentro do padrão'
+                            messageError='formato inválido'
+                        /> 
 
-                    <Input
-                        placeholder='Digite um endereço de email'
-                        placeholderLarge='Email'
-                        text='Email'
-                        event={handleInputEmailChange}
-                        value={inputEmailValue}
-                        checked={stateEmail}
-                        icon='email'
-                        messageCorrect='email dentro do padrão'
-                        messageError='email fora do padrão'
-                    />   
+                        <Input
+                            placeholder='Digite um endereço de email'
+                            placeholderLarge='Email'
+                            text='Email'
+                            event={handleInputEmailChange}
+                            value={inputEmailValue}
+                            checked={stateEmail}
+                            icon='email'
+                            messageCorrect='email dentro do padrão'
+                            messageError='email fora do padrão'
+                        />   
+                    </div>
+                    <div className={`w-full flex items-center flex-col lg:flex-row lg:gap-[30px] lg:w-[80%]`}>
+                        <Input
+                            text="Senha"
+                            placeholder="Digite uma senha"
+                            placeholderLarge='Senha'
+                            hidden={true}
+                            value={inputPasswordValue}
+                            event={handleInputPasswordChange} 
+                            checked={statePassword}
+                            icon='password'
+                            messageCorrect='senha dentro dos padrões'
+                            messageError='senha precisa ter pelo menos 6 caracteres'
+                        />
+                        <Input
+                            text="Confirma a Senha"
+                            placeholder="Confirme a senha"
+                            placeholderLarge='Confirme a Senha'
+                            hidden={true}
+                            value={inputConfirmPasswordValue}
+                            event={handleInputConfirmPasswordChange}
+                            checked={stateConfirmPassword}
+                            icon='password'
+                            messageCorrect='senhas estão iguais'
+                            messageError='as senhas não são iguais'
+                        />
+                    </div>
 
-                    <Input
-                        text="Senha"
-                        placeholder="Digite uma senha"
-                        placeholderLarge='Senha'
-                        hidden={true}
-                        value={inputPasswordValue}
-                        event={handleInputPasswordChange} 
-                        checked={statePassword}
-                        icon='password'
-                        messageCorrect='senha dentro dos padrões'
-                        messageError='senha precisa ter pelo menos 6 caracteres'
-                    />
-                    <Input
-                        text="Confirma a Senha"
-                        placeholder="Confirme a senha"
-                        placeholderLarge='Confirme a Senha'
-                        hidden={true}
-                        value={inputConfirmPasswordValue}
-                        event={handleInputConfirmPasswordChange}
-                        checked={stateConfirmPassword}
-                        icon='password'
-                        messageCorrect='senhas estão iguais'
-                        messageError='as senhas não são iguais'
-                    />
-                    
-                    <Button text="criar" route="undefined" event={signup} disabled={formValidate} />
+                    <div className={`w-full flex justify-center lg:mt-[90px]`}>
+                        <Button text="criar" route="undefined" event={signup} disabled={formValidate} />
+                    </div>
                     
                     <Linkin route="/sign-in" text="Já possui uma conta?" />
 
-                    <div className={`hidden lg:block absolute top-0 right-0 me-5`}>
+                    <div className={`hidden lg:block absolute top-0 right-0 mt-[10px] me-8`}>
                         <MenuButton />
+                    </div>
+                    
+                    <div className={`hidden lg:block absolute top-0 left-0 mt-[10px] ms-8`}>
+                        <Return />
                     </div>
                 </form>
 

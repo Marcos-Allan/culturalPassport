@@ -78,19 +78,22 @@ export default function Signs(){
                 <MenuButton />
             </Navbar>
             
-            <Text
-                text="Faça login ou cadastre-se para não perder seus dados"
-            />
-
-            <img
-                src={Person}
-                className="w-[93%] sm:w-[30%]"
-                alt=""
-            />
-            <DividersButton>
-                <Button text="login" route="/sign-in" />
-                <Button text="criar conta" route="/sign-up" />
-            </DividersButton>
+            <div className={`w-full flex flex-col items-center lg:flex-row lg:justify-center lg:items-center lg:h-full lg:w-[60%]`}>
+                <Text
+                    text="Faça login ou cadastre-se para não perder seus dados"
+                />
+                <div className={`w-full flex flex-col items-center lg:w-[90%]`}>
+                    <img
+                        src={Person}
+                        className={`w-[93%] sm:w-[30%] sm:max-w-[400px] lg:w-[100%] lg:max-w-[450px]`}
+                        alt=""
+                    />
+                    <DividersButton>
+                        <Button text="fazer login" route="/sign-in" />
+                        <Button text="criar conta" route="/sign-up" />
+                    </DividersButton>
+                </div>
+            </div>
             <Menu />
         </>
     )
