@@ -59,7 +59,7 @@ export default function SwitchPassword() {
     const states:any = useMyContext()
 
     //DESESTRUTURA AS VARIAVEIS ESPECIFICADAS
-    const { userS, toggleLoading, toggleAlert, theme } = states
+    const { userS, toggleLoading, toggleAlert } = states
 
     //UTILIZA O HOOK useState
     const [inputPasswordValue, setInputPasswordValue] = useState<string>('')
@@ -172,7 +172,15 @@ export default function SwitchPassword() {
                 <img className={`hidden lg:flex h-full`} src={bg} alt="pilha de livros" />
 
                 <form className={`mt-8 items-center flex flex-col w-[90%] gap-[16px] relative`} onSubmit={(e) => e.preventDefault()}>
-                    <h1 className={`hidden lg:flex text-center text-[30px] font-bold mb-16 ${theme == 'light' ? 'text-my-black' : 'text-my-white'}`}>Trocar a senha</h1>
+                    <div className={`hidden w-full lg:flex justify-center mb-16`}>
+                        <Navbar>
+                            <Return />
+                            <TitlePage
+                                text={`trocar a senha`}
+                            />
+                            <MenuButton />
+                        </Navbar>
+                    </div>
 
                     <Text text={`Crie sua nova senha`} />
 
@@ -203,13 +211,6 @@ export default function SwitchPassword() {
                     
                     <Button text="trocar" route="undefined" event={updateUser} disabled={formValidate} />
 
-                    <div className={`hidden lg:block absolute top-0 right-0 mt-[-8px] me-8`}>
-                        <MenuButton />
-                    </div>
-                    
-                    <div className={`hidden lg:block absolute top-0 left-0 mt-[-8px] ms-8`}>
-                        <Return />
-                    </div>
                 </form>
             </div>  
             <Menu />

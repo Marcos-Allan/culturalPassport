@@ -61,7 +61,7 @@ export default function SignIn(){
     const states:any = useMyContext()
 
     //DESESTRUTURA AS VARIAVEIS ESPECIFICADAS
-    const { userS, toggleUser, toggleLoading, toggleAlert, theme } = states
+    const { userS, toggleUser, toggleLoading, toggleAlert } = states
 
     //UTILIZA O HOOK useState
     const [inputEmailValue, setInputEmailValue] = useState<string>('')
@@ -198,14 +198,15 @@ export default function SignIn(){
 
             <div className={`w-full flex justify-center h-[100vh]`}>
                 <form className={`mt-8 sm:mt-4 lg:mt-0 items-center lg:justify-center flex flex-col w-[100%] px-[5%] sm:overflow-y-scroll sm:pb-[80px] lg:pb-[50px] lg:px-[0%] relative scrollbar-none lg:gap-[10px]`} onSubmit={(e) => e.preventDefault()}>
-                    <h1 className={`hidden lg:flex text-center text-[30px] font-bold mt-6 mb-8 ${theme == 'light' ? 'text-my-black' : 'text-my-white'}`}>Login</h1>
-                    {/* <Navbar>   
-                        <Return />
-                        <TitlePage
-                        text={`login`}
-                        />
-                        <MenuButton />
-                    </Navbar> */}
+                    <div className={`hidden w-full lg:flex justify-center mt-6 mb-8`}>
+                        <Navbar>
+                            <Return />
+                            <TitlePage
+                                text={`login`}
+                            />
+                            <MenuButton />
+                        </Navbar>
+                    </div>
                     
                     <Input
                         text='Email'
@@ -240,14 +241,6 @@ export default function SignIn(){
                     <Separation />
 
                     <GoogleLogin />
-                    
-                    <div className={`hidden lg:block absolute top-0 right-0 mt-[10px] me-8`}>
-                        <MenuButton />
-                    </div>
-                    
-                    <div className={`hidden lg:block absolute top-0 left-0 mt-[10px] ms-8`}>
-                        <Return />
-                    </div>
                 </form>
 
                 <img className={`hidden lg:flex h-full`} src={bg} alt="livros com óculos em cima" />

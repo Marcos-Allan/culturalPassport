@@ -59,7 +59,7 @@ export default function SignUp(){
     const states:any = useMyContext()
 
     //DESESTRUTURA AS VARIAVEIS ESPECIFICADAS
-    const { toggleLoading, toggleAlert, userS, theme } = states
+    const { toggleLoading, toggleAlert, userS } = states
 
     //UTILIZA O HOOK useState
     const [inputEmailValue, setInputEmailValue] = useState<string>('')
@@ -274,9 +274,17 @@ export default function SignUp(){
                 <img className={`hidden lg:flex h-full`} src={bg} alt="pilha de livros" />
 
                 <form className={`mt-8 sm:mt-0 lg:mt-0 items-center flex lg:h-full flex-col w-full overflow-y-scroll mb-6 sm:mb-20 lg:gap-[10px] relative scrollbar-none`} onSubmit={(e) => e.preventDefault()}>
-                    <h1 className={`hidden lg:flex text-center text-[30px] font-bold mt-6 ${theme == 'light' ? 'text-my-black' : 'text-my-white'}`}>Cadastre-se</h1>
+                    <div className={`hidden w-full lg:flex justify-center mt-6`}>
+                        <Navbar>
+                            <Return />
+                            <TitlePage
+                                text={`cadastrar-se`}
+                            />
+                            <MenuButton />
+                        </Navbar>
+                    </div>
 
-                    <div className={`w-full flex items-center flex-col lg:flex-row lg:gap-[30px] lg:w-[80%] lg:mt-[70px]`}>
+                    <div className={`w-full flex items-center flex-col lg:flex-row lg:gap-[30px] lg:w-[60%] lg:mt-[70px]`}>
                         <Input
                             placeholder='Digite seu nome'
                             placeholderLarge='Nome'
@@ -301,7 +309,7 @@ export default function SignUp(){
                             messageError='sobrenome inválido'
                         />   
                     </div>
-                    <div className={`w-full flex items-center flex-col lg:flex-row lg:gap-[30px] lg:w-[80%]`}>
+                    <div className={`w-full flex items-center flex-col lg:flex-row lg:gap-[30px] lg:w-[60%]`}>
                         <Input
                             placeholder='Digite sua data de nascimento'
                             placeholderLarge='Data de Nasc'
@@ -326,7 +334,7 @@ export default function SignUp(){
                             messageError='email fora do padrão'
                         />   
                     </div>
-                    <div className={`w-full flex items-center flex-col lg:flex-row lg:gap-[30px] lg:w-[80%]`}>
+                    <div className={`w-full flex items-center flex-col lg:flex-row lg:gap-[30px] lg:w-[60%]`}>
                         <Input
                             text="Senha"
                             placeholder="Digite uma senha"
@@ -358,14 +366,6 @@ export default function SignUp(){
                     </div>
                     
                     <Linkin route="/sign-in" text="Já possui uma conta?" />
-
-                    <div className={`hidden lg:block absolute top-0 right-0 mt-[10px] me-8`}>
-                        <MenuButton />
-                    </div>
-                    
-                    <div className={`hidden lg:block absolute top-0 left-0 mt-[10px] ms-8`}>
-                        <Return />
-                    </div>
                 </form>
 
             </div>

@@ -57,7 +57,7 @@ export default function ForgoutPassword() {
     const states:any = useMyContext()
 
     //DESESTRUTURA AS VARIAVEIS ESPECIFICADAS
-    const { userS, toggleAlert, toggleLoading, toggleUser, theme } = states
+    const { userS, toggleAlert, toggleLoading, toggleUser } = states
 
     //FUNÇÃO CHAMADA AO RECARREGAR A PÁGINA
     useEffect(() => {
@@ -161,7 +161,15 @@ export default function ForgoutPassword() {
 
                 <form className={`mt-8 items-center flex flex-col w-[90%] gap-[16px] relative`}
                     onSubmit={(e) => e.preventDefault()}>
-                    <h1 className={`hidden lg:flex text-center text-[30px] font-bold mb-16 ${theme == 'light' ? 'text-my-black' : 'text-my-white'}`}>Esqueceu a senha?</h1>
+                    <div className={`hidden w-full lg:flex justify-center mb-16`}>
+                        <Navbar>
+                            <Return />
+                            <TitlePage
+                                text={`Esqueceu a senha?`}
+                            />
+                            <MenuButton />
+                        </Navbar>
+                    </div>
 
                     <Text text={`Digite o endereço de email no campo abaixo`} />
                     
@@ -180,14 +188,7 @@ export default function ForgoutPassword() {
                     <Text text={`enviaremos um código para o endereço de email digitado`} />
                         
                     <Button route='undefined' text={`Enviar`}  disabled={formValidate} event={sendEmail} />
-                    
-                    <div className={`hidden lg:block absolute top-0 right-0 mt-[-8px] me-8`}>
-                        <MenuButton />
-                    </div>
-                    
-                    <div className={`hidden lg:block absolute top-0 left-0 mt-[-8px] ms-8`}>
-                        <Return />
-                    </div>
+
                 </form>
             </div>
             <Menu />
