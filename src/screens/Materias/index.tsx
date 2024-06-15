@@ -28,7 +28,7 @@
  */
 
 //IMPORTAÇÃO DAS BIBLIOTECAS    
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 
 //IMPORTAÇÃO DOS COMPONENTES
@@ -48,6 +48,9 @@ export default function Materias() {
     //UTILIZAÇÃO DO HOOK DE NAVEGAÇÃO 
     const navigate = useNavigate()
 
+    //UTILIZA O HOOK DO useState
+    const [matters, setMatters] = useState<any[]>([])
+    
     //RESGATA AS VARIAVEIS GLOBAIS
     const states:any = useMyContext()
 
@@ -62,6 +65,19 @@ export default function Materias() {
             //REDIRECIONA ELE PARA A PÁGINA DE MATÉRIAS
             navigate('/')
         }
+
+        //DEFINE O ARRAY COM AS MATÉRIAS
+        setMatters([
+            { titleMateria: 'fisíca',  background: 0 },
+            { titleMateria: 'história',  background: 1 },
+            { titleMateria: 'inglês',  background: 2 },
+            { titleMateria: 'geografia',  background: 3 },
+            { titleMateria: 'artes',  background: 4 },
+            { titleMateria: 'português',  background: 5 },
+            { titleMateria: 'química',  background: 6 },
+            { titleMateria: 'biologia',  background: 7 },
+            { titleMateria: 'matemática',  background: 8 },
+        ])
     },[])
 
     return(
@@ -74,19 +90,10 @@ export default function Materias() {
                 <MenuButton />
             </Navbar>
 
-            <div className={`w-full sm:w-[70%] flex flex-col sm:flex-row flex-wrap justify-center items-center sm:gap-[20px] pb-[80px]`}>
-                
-                <MaterialCard ContentMateria={'Geometria Plana'} TitleMateria={'Matemática'} background={0} />
-
-                <MaterialCard ContentMateria={'Reprodução Sexuada'} TitleMateria={'Biologia'} background={1} />
-                
-                <MaterialCard ContentMateria={'Ondulatória'} TitleMateria={'Fisíca'} background={2} />
-                
-                <MaterialCard ContentMateria={'Ambiguidade'} TitleMateria={'Português'} background={3} />
-                
-                <MaterialCard ContentMateria={'Guerra Fria'} TitleMateria={'História'} background={4} />
-                
-                <MaterialCard ContentMateria={'Tabela Periódica'} TitleMateria={'Quimica'} background={5} />
+            <div className={`w-full sm:w-[70%] flex flex-col sm:flex-row flex-wrap justify-center items-center sm:gap-[20px] pb-[80px]`}>    
+                {matters.map((mat, i) => (
+                    <MaterialCard titleMateria={mat.titleMateria} background={mat.background} key={i} />
+                ))}
             </div>
             
             <BottomNavigation />

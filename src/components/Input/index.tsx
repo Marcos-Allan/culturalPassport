@@ -95,6 +95,10 @@ export default function Input(props: Props) {
         //REMOVE O EVENTO DE REDIMENSIONAR A TELA DA JANELA AO FECHAR O COMPONENTE
         return () => window.removeEventListener('resize', updatePlaceholder)
     },[])
+
+    useEffect(() => {
+        setRandomNumber(getRandomNumber(0, 10000))
+    },[])
     
     //RESGATA AS VARIAVEIS GLOBAIS
     const states:any = useMyContext()
@@ -104,6 +108,7 @@ export default function Input(props: Props) {
 
     //UTILIZA O HOOK useState
     const [isVisible, setIsVisible] = useState<boolean>(false)
+    const [randomNumber, setRandomNumber] = useState<number>(0)
 
     //FUNÇÃO QUE VERIFICA SE O CAMPO ESTÁ DENTRO DO PADRÃO
     function handleValidatePassword() {
@@ -182,6 +187,14 @@ export default function Input(props: Props) {
         }
     }
 
+    //FUNÇÃO RESPONSÁVEL POR GERAR NÚMERO ALEATÓRIO 
+    function getRandomNumber(min: number, max:number){
+        const numberMin = Math.ceil(min)
+        const numberMax = Math.floor(max)
+
+        return Math.floor(Math.random() * (numberMax - numberMin + 1)) + numberMin
+    }
+
     return(
         <div className="w-[90%] sm:w-[60%] relative">
             <label
@@ -192,9 +205,10 @@ export default function Input(props: Props) {
                     ms-2
                     mb-2
                     lg:hidden
+                    cursor-pointer
                     ${theme == 'light' ? 'text-my-gray' : 'text-my-gray-black'}
                 `}
-                htmlFor="passwordInput"
+                htmlFor={`input-${randomNumber}`}
             >
                 {props.text}
             </label>
@@ -252,7 +266,8 @@ export default function Input(props: Props) {
                     onChange={props.event && props.event}
                     placeholder={placeholderText}
                     value={props.value && props.value}
-                    id="passwordInput"
+                    id={`input-${randomNumber}`}
+                    autoComplete='oio'
                     type={`${props.hidden == true ? 'password' : 'text'}`}
                     className={`
                         w-full

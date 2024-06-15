@@ -28,7 +28,7 @@
  */
 
 //IMPORTAÇÃO DAS BIBLIOTECAS    
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 
 //IMPORTAÇÃO DOS COMPONENTES
@@ -54,6 +54,9 @@ export default function Achievements() {
     //DESESTRUTURA AS VARIAVEIS ESPECIFICADAS
     const { userS } = states
 
+    //UTILIZA O HOOK DO useState
+    const [conquests, setConquests] = useState<any[]>([])
+
     //FUNÇÃO CHAMADA AO RECARREGAR A PÁGINA
     useEffect(() => {
         //VERIFICA SE O USUÁRIO ESTÁ LOGADO
@@ -62,7 +65,15 @@ export default function Achievements() {
             //REDIRECIONA ELE PARA A PÁGINA DE MATÉRIAS
             navigate('/')
         }
+
+        //DEFINE O ARRAY COM AS CONQUISTAS
+        setConquests([
+            { level: 2, message: 'próxima meta 365 dias', porcentage: 80, title: 'Day o cool' },
+            { level: 3, message: 'próxima meta 10x ao dia', porcentage: 100, title: 'First fap' },
+        ])
     },[])
+
+    
 
     return(
         <>
@@ -73,9 +84,10 @@ export default function Achievements() {
                 />
                 <MenuButton />
             </Navbar>
-
-            <ConquestCard level={2} message='próxima meta 365 dias' porcentage={80} title='Day o Cool' />
-            <ConquestCard level={3} message='próxima meta 10x ao dia' porcentage={100} title='First fap' />
+            
+            {conquests.map((conq, i) => (
+                <ConquestCard level={conq.level} message={conq.message} porcentage={conq.porcentage} title={conq.title} key={i} />
+            ))}
 
             <BottomNavigation />
             

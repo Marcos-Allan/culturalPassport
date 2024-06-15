@@ -75,7 +75,7 @@ export default function Notifications() {
 
     //FUNÇÃO CHAMADA AO RECARREGAR A PÁGINA
     useEffect(() => {
-        //DEFINE O ARRAY COM AS MATÉRIAS
+        //DEFINE O ARRAY COM AS NOTIFICAÇÕES
         setNotification([
             { materia: 'quimica', content: 'aprender a fazer sal'},
             { materia: 'pdtcc', content: 'SCRUM'},
@@ -101,8 +101,8 @@ export default function Notifications() {
             </Navbar>
 
             <div className={`w-[90%] sm:w-[60%] mt-5 flex flex-col justify-start items-center gap-[15px] mb-[50px] lg:mb-0 overflow-y-scroll scrollbar scrollbar-track-transparent scrollbar-thumb-my-secondary`}>
-                {notification.map((not) => (
-                    <NotificationCard materia={not.materia} content={not.content} event={() => removeNotify({materia: not.materia, content: not.content })} />
+                {notification.map((not, i) => (
+                    <NotificationCard materia={not.materia} content={not.content} event={() => removeNotify({materia: not.materia, content: not.content })} key={i} />
                 ))}
             </div>
 

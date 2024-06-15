@@ -52,7 +52,19 @@ export default function BottomNavigation() {
                 className={`flex flex-col items-center justify-center gap-[5px]`}
                 onClick={() => navigate('/materias')}
             >
-                <div className={`flex items-center justify-center rounded-[50%] hover:bg-my-white hover:text-my-secondary text-my-white transition-all duration-[.2s] cursor-pointer ${location.pathname == '/materias' && 'bg-my-terciary'}`}>
+                <div className={`flex items-center justify-center rounded-[50%] hover:bg-my-white hover:text-my-secondary text-my-white transition-all duration-[.2s] cursor-pointer
+                    ${location.pathname == '/materias'
+                    || location.pathname == '/materias/fis%C3%ADca'
+                    || location.pathname == '/materias/hist%C3%B3ria'
+                    || location.pathname == '/materias/ingl%C3%AAs'
+                    || location.pathname == '/materias/geografia'
+                    || location.pathname == '/materias/artes'
+                    || location.pathname == '/materias/portugu%C3%AAs'
+                    || location.pathname == '/materias/qu%C3%ADmica'
+                    || location.pathname == '/materias/biologia'
+                    || location.pathname == '/materias/matem%C3%A1tica'
+                    ? 'bg-my-terciary' : ''}
+                `}>
                     <GoHome className={`text-[36px] p-[6px]`} />
                 </div>
                 <p className={`text-[10px] text-my-white`}>Inicio</p>

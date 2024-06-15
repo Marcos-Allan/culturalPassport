@@ -28,7 +28,7 @@
  */
 
 //IMPORTAÇÃO DAS BIBLIOTECAS    
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 
 //IMPORTAÇÃO DOS COMPONENTES
@@ -55,6 +55,9 @@ export default function Exercises() {
     //DESESTRUTURA AS VARIAVEIS ESPECIFICADAS
     const { userS } = states
 
+    //UTILIZA O HOOK DO useState
+    const [conquests, setExercises] = useState<any[]>([])
+
     //FUNÇÃO CHAMADA AO RECARREGAR A PÁGINA
     useEffect(() => {
         //VERIFICA SE O USUÁRIO ESTÁ LOGADO
@@ -63,6 +66,14 @@ export default function Exercises() {
             //REDIRECIONA ELE PARA A PÁGINA DE MATÉRIAS
             navigate('/')
         }
+
+        //DEFINE O ARRAY COM AS CONQUISTAS
+        setExercises([
+            { concluded: false, materia: 'português', title: 'museu do ipiranga', type: 'travel' },
+            { concluded: true, materia: 'história', title: 'museu do terraplanismo', type: 'travel' },
+            { concluded: false, materia: 'enem', title: 'fazer simulado de matemática', type: 'exercise' },
+            { concluded: true, materia: 'enem', title: 'fazer simulado de história', type: 'exercise' },
+        ])
     },[])
 
     return(
@@ -77,14 +88,14 @@ export default function Exercises() {
 
 
             <Text text='Passeios' />
-
-            <ExerciseCard concluded={false} materia='Português' title='museu do ipiranga' type='travel' />
-            <ExerciseCard concluded={true} materia='história' title='museu do terraplanismo' type='travel' />
+            {conquests.map((exerc, i) => 
+                exerc.type == 'travel' ? (<ExerciseCard concluded={exerc.concluded} materia={exerc.materia} title={exerc.title} type={exerc.type} key={i} />):(<></>)
+            )}
             
             <Text text='Simulados' />
-            
-            <ExerciseCard concluded={false} materia='enem' title='fazer simulado de matemática' type='exercise' />
-            <ExerciseCard concluded={true} materia='enem' title='fazer simulado de história' type='exercise' />
+            {conquests.map((exerc, i) => 
+                exerc.type == 'exercise' ? (<ExerciseCard concluded={exerc.concluded} materia={exerc.materia} title={exerc.title} type={exerc.type} key={i} />):(<></>)
+            )}
             
             <BottomNavigation />
             

@@ -29,44 +29,50 @@
 
 //IMPORTAÇÃO DAS BIBLIOTECAS
 import { useState, useEffect } from 'react'
+import { useNavigate } from 'react-router-dom';
 
 //TIPAGEM DAS PROPRIEDADES DO COMPONENTE
 interface Props {
     background: Number,
-    TitleMateria: String,
-    ContentMateria: String,
+    titleMateria: String,
 }
 
 export default function MaterialCard(props: Props) {
+    
     //USO DO HOOK useState
     const [colors, setColors] = useState<String[]>([
-        '#527fef',
-        '#38da56',
-        '#52bd9b',
-        '#987dd0',
-        '#c47e3d',
+        '#52bd9b', //0
+        '#c47e3d', //1
+        '#e41c1c', //2
+        '#eeee1b', //3
+        '#e843f1', //4
+        '#987dd0', //5
+        '#c66193', //6
+        '#38da56', //7
     ])
 
+    //FUNÇÃO CHAMADA AO RECARREGAR A PÁGINA
     useEffect(() => {
-        setColors((colors) => [...colors, '#c6619e'])
+        //COLOCA UMA NOVA COR NO ARRAY DE CORES
+        setColors((colors) => [...colors, '#527fef'])
     },[])
+
+    //UTILIZAÇÃO DO HOOK DE NAVEGAÇÃO 
+    const navigate = useNavigate()
     
     return(
         <div
-            className={`relative mt-[30px] w-[90%] sm:w-3/12 h-[100px] rounded-[8px] p-3 hover:scale-[1.1] cursor-pointer transition-all duration-[.2s]`}
+            className={`relative mt-[30px] w-[90%] sm:w-3/12 h-[100px] rounded-[8px] p-3 hover:scale-[0.9] lg:hover:scale-[1.1] cursor-pointer transition-all duration-[.2s]`}
             style={{ backgroundColor: `${colors[Number(props.background)]}` }}
+            onClick={() => navigate(`/materias/${props.titleMateria.toLowerCase()}`)}
         >
-
-            <p className={`text-[22px] text-my-white font-semibold`}>{props.TitleMateria}</p>
-
-            <p className={`text-[10px] text-my-white font-semibold`}>{props.ContentMateria}</p>
+            <p className={`text-[22px] text-my-white font-semibold capitalize`}>{props.titleMateria}</p>
 
             <div
                 className={`rounded-[50%] w-[50px] h-[50px] absolute bottom-[-12%] right-[5%] border-[3px] bg-my-white
                 `}
                 style={{ borderColor: `${colors[Number(props.background)]}` }}
             >
-
             </div>
             
         </div>

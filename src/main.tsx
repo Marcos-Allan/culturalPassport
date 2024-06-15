@@ -61,6 +61,7 @@ import { Provider } from './provider/index.tsx';
 import ScreenPage from './components/ScreenPage/index.tsx';
 import Alert from './components/Alert/index.tsx';
 import Exercises from './screens/Exercises/index.tsx';
+import Matter from './screens/Matter/index.tsx';
 
 //ARQUIVO DE CONFIGURAÇÃO DAS ROTAS
 const router = createBrowserRouter([
@@ -127,6 +128,11 @@ const router = createBrowserRouter([
   {
     path: "exercises",
     element: <Exercises />,
+    errorElement: <ErrorPage />
+  },
+  {
+    path: "materias/:matter",
+    element: <Matter />,
     errorElement: <ErrorPage />
   },
 ])
