@@ -78,8 +78,6 @@ export default function Notifications() {
         //DEFINE O ARRAY COM AS NOTIFICAÇÕES
         setNotification([
             { materia: 'quimica', content: 'aprender a fazer sal'},
-            { materia: 'pdtcc', content: 'SCRUM'},
-            { materia: 'quimica', content: 'pdtcc'},
             { materia: 'matemática', content: 'porcentagem'},
             { materia: 'português', content: 'verbos'},
             { materia: 'filosofia', content: 'sócrates'},
