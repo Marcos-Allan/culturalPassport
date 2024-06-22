@@ -27,6 +27,9 @@
  * By using the Software, you agree to these terms and conditions.
  */
 
+//IMPORTAÇÃO DAS BIBLIOTECAS
+import { useEffect, useState } from "react";
+
 //IMPORTAÇÃO DOS COMPONENTES
 import Navbar from "../../components/Navbar";
 import Return from "../../components/Return";
@@ -48,7 +51,23 @@ export default function ErrorPage() {
     const states:any = useMyContext()
 
     //DESESTRUTURA AS VARIAVEIS ESPECIFICADAS
-    const { theme } = states
+    const { theme, userS } = states
+
+    //UTILIZAÇÃO DO HOOK useState
+    const [route, setRoute] = useState<string>('')
+
+    //FUNÇÃO CHAMADA AO RECARREGAR A PÁGINA
+    useEffect(() => {
+        //VERIFICA SE O USUÁRIO ESTÁ LOGADO
+        if(userS.logged == false){
+
+            //SETA A ROTA PADRÃO PARA "/"
+            setRoute('/')
+        }else{
+            //SETA A ROTA PADRÃO PARA "/materias"
+            setRoute('/materias')
+        }
+    },[])
 
     return(
         <>
@@ -68,7 +87,7 @@ export default function ErrorPage() {
                 `}
             />
             
-            <Button route="/" text="Voltar" />
+            <Button route={route} text="Voltar" />
             <Menu />
         </>
     )

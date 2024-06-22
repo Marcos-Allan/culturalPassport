@@ -37,6 +37,7 @@ import { useMyContext } from '../../provider/geral';
 interface Props {
     materia: string,
     content: string,
+    isClosed: boolean,
     event?: () => any
 }
 
@@ -49,7 +50,10 @@ export default function NotificationCard(props: Props) {
     const { theme } = states
 
     return(
-        <div className={`w-[95%] flex flex-row items-center justify-between p-2 rounded-[6px] border-2 ${theme == 'light' ? 'border-my-gray' : 'border-my-gray-black'}`}>
+        <div
+            className={`w-[95%] flex flex-row items-center justify-between p-2 rounded-[6px] border-2 ${theme == 'light' ? 'border-my-gray' : 'border-my-gray-black'} transition-all duration-[.4s]
+            ${props.isClosed == true && 'translate-x-[-110%]'}
+        `}>
             
             <div className={`flex flex-row justify-start items-center truncate w-[35%] me-3`}>
                 <IoIosNotificationsOutline className={`text-my-secondary text-[38px]`} />
@@ -64,6 +68,7 @@ export default function NotificationCard(props: Props) {
             <IoIosCloseCircle className={`text-my-secondary text-[38px] cursor-pointer hover:text-[#ff2424] hover:scale-[1.2] transition-all duration-[.2s] hover:rotate-180`}
                 onClick={() => {
                     props.event && props.event()
+                    // setIsClosed(true)
                 }}
             />
         </div>

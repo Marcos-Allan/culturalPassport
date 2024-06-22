@@ -17,7 +17,7 @@ import { useMyContext } from '../../provider/geral';
 export default function Matter() {
 
     //USO DO HOOK useParams
-    const { matter } = useParams()
+    const { matter, exam } = useParams()
 
     //UTILIZAÇÃO DO HOOK DE NAVEGAÇÃO 
     const navigate = useNavigate()
@@ -149,7 +149,7 @@ export default function Matter() {
             //REDIRECIONA ELE PARA A PÁGINA DE MATÉRIAS
             navigate('/')
         }
-
+        
         //DEFINE O ARRAY COM OS CONTEUDOS
         getContent(location.pathname.split('/')[2])
     },[])
@@ -164,12 +164,12 @@ export default function Matter() {
                 <MenuButton />
             </Navbar>
 
-            <p className={`mt-8 mb-5 text-[18px]`}>Conteudos que mais caem no ENEM</p>
+            <p className={`mt-8 mb-5 text-[18px]`}>Conteudos que mais caem no {exam?.toUpperCase()}</p>
 
-            <div className={`w-[90%] sm:w-[70%] flex items-center flex-col`}>
+            <div className={`w-[90%] sm:px-12 sm:w-[70%] mb-[40px] lg:mb-0 flex items-center flex-col overflow-y-scroll scrollbar scrollbar-track-transparent scrollbar-thumb-my-secondary`}>
                 {content.map((cont, i) => (
                     <ContentCard background={cont.background} title={cont.title} key={i} />
-                    ))}
+                ))}
             </div>
             
             <BottomNavigation />

@@ -62,6 +62,7 @@ import ScreenPage from './components/ScreenPage/index.tsx';
 import Alert from './components/Alert/index.tsx';
 import Exercises from './screens/Exercises/index.tsx';
 import Matter from './screens/Matter/index.tsx';
+import Exams from './screens/Exams/index.tsx';
 
 //ARQUIVO DE CONFIGURAÇÃO DAS ROTAS
 const router = createBrowserRouter([
@@ -132,9 +133,14 @@ const router = createBrowserRouter([
   },
   {
     path: "materias/:matter",
-    element: <Matter />,
+    element: <Exams />,
     errorElement: <ErrorPage />
   },
+  {
+    path: "materias/:matter/:exam",
+    element: <Matter />,
+    errorElement: <ErrorPage />
+  }
 ])
 
 //RENDRIZADOR DAS PÁGINAS

@@ -39,9 +39,13 @@ import Navbar from "../../components/Navbar";
 import Return from "../../components/Return";
 import TitlePage from "../../components/TitlePage";
 import NotificationCard from '../../components/NotificationCard';
+import Text from '../../components/Text';
 
 //IMPORTAÇÃO DO PROVEDOR PARA PEGAR AS VARIÁVEIS GLOBAIS
 import { useMyContext } from '../../provider/geral';
+
+//IMPORTAÇÃO DOS ICONES
+import { IoMdHappy } from "react-icons/io";
 
 export default function Notifications() {
 
@@ -52,7 +56,7 @@ export default function Notifications() {
     const states:any = useMyContext()
 
     //DESESTRUTURA AS VARIAVEIS ESPECIFICADAS
-    const { userS } = states
+    const { userS, theme } = states
 
     //FUNÇÃO CHAMADA AO RECARREGAR A PÁGINA
     useEffect(() => {
@@ -68,23 +72,31 @@ export default function Notifications() {
     const [notification, setNotification] = useState<any[]>([])
 
     //FUNÇÃO RESPONSÁVEL POR REMOVER A NOTIFICAÇÃO DA TELA
-    function removeNotify(itemRemoved : { materia: string, content: string }) {
-        setNotification((nots) =>
-        nots.filter(item => item.content !== itemRemoved.content))
+    function removeNotify(itemRemoved : { materia: string, content: string, isClosed: boolean }) {
+        const updatedArr = notification.map((not) => 
+            not.content === itemRemoved.content ? { ...not, isClosed: true } : not
+        )
+
+        setNotification(updatedArr)
+
+        setTimeout(() => {
+            setNotification((nots) =>
+            nots.filter(item => item.content !== itemRemoved.content))
+        }, 400);
     }
 
     //FUNÇÃO CHAMADA AO RECARREGAR A PÁGINA
     useEffect(() => {
         //DEFINE O ARRAY COM AS NOTIFICAÇÕES
         setNotification([
-            { materia: 'quimica', content: 'aprender a fazer sal'},
-            { materia: 'matemática', content: 'porcentagem'},
-            { materia: 'português', content: 'verbos'},
-            { materia: 'filosofia', content: 'sócrates'},
-            { materia: 'sociologia', content: 'socialismo x comunismo'},
-            { materia: 'biologia', content: 'oviviparo'},
-            { materia: 'quimica', content: 'química orgânica'},
-            { materia: 'geografia', content: 'poluição ambiental'}
+            { materia: 'quimica', content: 'aprender a fazer sal', isClosed: false},
+            { materia: 'matemática', content: 'porcentagem', isClosed: false},
+            { materia: 'português', content: 'verbos', isClosed: false},
+            { materia: 'filosofia', content: 'sócrates', isClosed: false},
+            { materia: 'sociologia', content: 'socialismo x comunismo', isClosed: false},
+            { materia: 'biologia', content: 'oviviparo', isClosed: false},
+            { materia: 'quimica', content: 'química orgânica', isClosed: false},
+            { materia: 'geografia', content: 'poluição ambiental', isClosed: false}
         ])
     },[])
 
@@ -98,10 +110,22 @@ export default function Notifications() {
                 <MenuButton />
             </Navbar>
 
-            <div className={`w-[90%] sm:w-[60%] mt-5 flex flex-col justify-start items-center gap-[15px] mb-[50px] lg:mb-0 overflow-y-scroll scrollbar scrollbar-track-transparent scrollbar-thumb-my-secondary`}>
-                {notification.map((not, i) => (
-                    <NotificationCard materia={not.materia} content={not.content} event={() => removeNotify({materia: not.materia, content: not.content })} key={i} />
-                ))}
+            <div className={`w-[90%] sm:w-[60%] mt-5 flex flex-col justify-start items-center gap-[15px] mb-[50px] lg:mb-0 ${notification.length >= 1 && 'overflow-y-scroll scrollbar scrollbar-track-transparent scrollbar-thumb-my-secondary'}`}>
+                {notification.length >= 1 ? notification.map((not, i) => (
+                    <NotificationCard materia={not.materia} content={not.content}
+                        event={() => removeNotify({materia: not.materia, content: not.content, isClosed: not.isClosed })} key={i} isClosed={not.isClosed}
+                    />
+                )):(
+                    <div className='w-full flex flex-col items-center'>
+                        
+                        <Text text='Nenhuma Notificação Recebida'/>
+                        <IoMdHappy
+                            className={`text-[120px]
+                            ${theme == 'light' ? 'text-my-gray' : 'text-my-gray-black'}`}
+                        />
+                        
+                    </div>
+                )}
             </div>
 
             <BottomNavigation />

@@ -45,6 +45,11 @@ export default function BottomNavigation() {
     //VERIFICA A ROTA ATUAL
     const location = useLocation();
 
+    //FUNÇÃO RESPONSÁVEL POR VER SE A PALAVRA CONTÉM A STRING DESEJADA
+    function containsWord(text:string) {
+        return text.toLowerCase().includes('materias')
+    }
+
     return(
         <div className={`fixed bottom-0 w-full sm:px-[20%] h-[80px] px-3 bg-my-secondary flex justify-around items-center lg:h-full lg:w-[80px] lg:top-0 lg:left-0 lg:px-3 lg:flex-col`}>
             
@@ -53,17 +58,7 @@ export default function BottomNavigation() {
                 onClick={() => navigate('/materias')}
             >
                 <div className={`flex items-center justify-center rounded-[50%] hover:bg-my-white hover:text-my-secondary text-my-white transition-all duration-[.2s] cursor-pointer
-                    ${location.pathname == '/materias'
-                    || location.pathname == '/materias/fis%C3%ADca'
-                    || location.pathname == '/materias/hist%C3%B3ria'
-                    || location.pathname == '/materias/ingl%C3%AAs'
-                    || location.pathname == '/materias/geografia'
-                    || location.pathname == '/materias/artes'
-                    || location.pathname == '/materias/portugu%C3%AAs'
-                    || location.pathname == '/materias/qu%C3%ADmica'
-                    || location.pathname == '/materias/biologia'
-                    || location.pathname == '/materias/matem%C3%A1tica'
-                    ? 'bg-my-terciary' : ''}
+                    ${containsWord(location.pathname) ? 'bg-my-terciary' : ''}
                 `}>
                     <GoHome className={`text-[36px] p-[6px]`} />
                 </div>

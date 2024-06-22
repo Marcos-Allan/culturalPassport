@@ -87,12 +87,14 @@ export default function Exercises() {
             </Navbar>
 
 
-            <Text text='Passeios' />
+            <Text text='Passeios' position='left' />
+
             {conquests.map((exerc, i) => 
                 exerc.type == 'travel' ? (<ExerciseCard concluded={exerc.concluded} materia={exerc.materia} title={exerc.title} type={exerc.type} key={i} />):(<></>)
             )}
             
-            <Text text='Simulados' />
+            <Text text='Simulados' position='left' />
+            
             {conquests.map((exerc, i) => 
                 exerc.type == 'exercise' ? (<ExerciseCard concluded={exerc.concluded} materia={exerc.materia} title={exerc.title} type={exerc.type} key={i} />):(<></>)
             )}

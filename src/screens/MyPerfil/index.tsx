@@ -53,6 +53,8 @@ import MenuButton from "../../components/MenuButton";
 import Menu from "../../components/Menu";
 import Button from '../../components/Button';
 import BottomNavigation from '../../components/BottomNavigation';
+import AvatarImage from '../../components/AvatarImage';
+import InfoStudentCard from '../../components/InfoStudentCard';
 
 export default function MyPerfil() {
 
@@ -149,91 +151,68 @@ export default function MyPerfil() {
 
     return(
         <>
-            <Navbar>   
-                <Return />
-                <TitlePage text={`meu perfil`} />
-                <MenuButton />
-            </Navbar>
+            <div className={`w-full flex flex-col items-center overflow-y-scroll scrollbar lg:scrollbar-track-transparent lg:scrollbar-thumb-my-secondary`}>
+                <Navbar>   
+                    <Return />
+                    <TitlePage text={`meu perfil`} />
+                    <MenuButton />
+                </Navbar>
 
-            {userS.logged == true && (
-                //COLOCA OS DADOS DE FOTO E NOME DO USUÁRIO NA TELA
-                <div className={`w-[90%] sm:w-[60%] flex items-center gap-[10px] mb-0 mt-4`}>
-                    <img
-                        src={img}
-                        alt=""
-                        className={`rounded-[50%] mb-2 w-[80px] h-[80px] border-[1px] p-1 ${theme == 'light' ? 'border-my-terciary' : 'border-my-quartenary'}`}
-                    />
+                {userS.logged == true && (
+                    //COLOCA OS DADOS DE FOTO E NOME DO USUÁRIO NA TELA
+                    <div className={`w-[90%] sm:w-[60%] flex items-center gap-[10px] mb-0 mt-4`}>
+                        <img
+                            src={img}
+                            alt=""
+                            className={`rounded-[50%] mb-2 w-[80px] h-[80px] border-[1px] p-1 ${theme == 'light' ? 'border-my-terciary' : 'border-my-quartenary'}`}
+                        />
 
-                    <input
-                        onChange={(e) => setName(e.target.value)}
-                        className={`text-[22px] w-full font-bold capitalize bg-transparent border-2 p-1 ps-2 rounded-[15px] outline-none
-                        ${theme == 'light'
-                        ? 'text-my-black border-my-terciary'
-                        : 'text-my-white border-my-quartenary'}
-                        `}
-                        value={name}
-                    />
+                        <input
+                            onChange={(e) => setName(e.target.value)}
+                            className={`text-[22px] w-full font-bold capitalize bg-transparent border-2 p-1 ps-2 rounded-[15px] outline-none
+                            ${theme == 'light'
+                            ? 'text-my-black border-my-terciary'
+                            : 'text-my-white border-my-quartenary'}
+                            `}
+                            value={name}
+                        />
+                    </div>
+                )}
+
+                <h1
+                    className={`text-[30px] mb-5 font-bold
+                        ${theme == 'light' ? 'text-my-black' : 'text-my-white'}
+                    `}
+                >Avatares
+                </h1>
+
+                <div className={`px-14 mb-8 w-full sm:w-[60%] flex justify-center flex-wrap gap-[20px]`}>
+                    
+                    <AvatarImage active={img == avatar_1 ? true : false} img={avatar_1} event={() => toggleImg(1)} />
+                    <AvatarImage active={img == avatar_2 ? true : false} img={avatar_2} event={() => toggleImg(2)} />
+                    <AvatarImage active={img == avatar_3 ? true : false} img={avatar_3} event={() => toggleImg(3)} />
+                    <AvatarImage active={img == avatar_4 ? true : false} img={avatar_4} event={() => toggleImg(4)} />
+                    <AvatarImage active={img == avatar_5 ? true : false} img={avatar_5} event={() => toggleImg(5)} />
+                    <AvatarImage active={img == avatar_6 ? true : false} img={avatar_6} event={() => toggleImg(6)} />
+
                 </div>
-            )}
 
-            <h1
-                className={`text-[30px] mb-5 font-bold
-                    ${theme == 'light' ? 'text-my-black' : 'text-my-white'}
-                `}
-            >Avatares
-            </h1>
+                <Button event={updateUser} text='Atualizar' route='undefined' />
+                
+                <div className='w-[90%] sm:w-[60%] mb-[90px] lg:mb-0'>
+                    <h2
+                        className={`
+                            w-full text-center
+                            text-[26px] my-6 rounded-[32px]
+                            ${theme == 'light' ? 'text-my-black' : 'text-my-white'}
+                        `}>Informações Pessoais</h2>
 
-            <div className={`px-14 mb-8 w-full sm:w-[60%] flex justify-center flex-wrap gap-[20px]`}>
-                <img
-                    onClick={() => toggleImg(1)}
-                    className={`
-                        w-[90px] rounded-[50%] border-2 p-1
-                        ${img == avatar_1 ? `${theme == 'light' ? 'border-my-terciary translate-y-[-16px]' : 'border-my-quartenary translate-y-[-16px]'}` : `border-transparent hover:translate-y-[-16px] transition-all duration-[.3s] cursor-pointer`}
-                    `}
-                    src={avatar_1} alt=""
-                />
-                <img
-                    onClick={() => toggleImg(2)}
-                    className={`
-                        w-[90px] rounded-[50%] border-2 p-1
-                        ${img == avatar_2 ? `${theme == 'light' ? 'border-my-terciary translate-y-[-16px]' : 'border-my-quartenary translate-y-[-16px]'}` : `border-transparent hover:translate-y-[-16px] transition-all duration-[.3s] cursor-pointer`}
-                    `}
-                    src={avatar_2} alt=""
-                />
-                <img
-                    onClick={() => toggleImg(3)}
-                    className={`
-                        w-[90px] rounded-[50%] border-2 p-1
-                        ${img == avatar_3 ? `${theme == 'light' ? 'border-my-terciary translate-y-[-16px]' : 'border-my-quartenary translate-y-[-16px]'}` : `border-transparent hover:translate-y-[-16px] transition-all duration-[.3s] cursor-pointer`}
-                    `}
-                    src={avatar_3} alt=""
-                />
-                <img
-                    onClick={() => toggleImg(4)}
-                    className={`
-                        w-[90px] rounded-[50%] border-2 p-1
-                        ${img == avatar_4 ? `${theme == 'light' ? 'border-my-terciary translate-y-[-16px]' : 'border-my-quartenary translate-y-[-16px]'}` : `border-transparent hover:translate-y-[-16px] transition-all duration-[.3s] cursor-pointer`}
-                    `}
-                    src={avatar_4} alt=""
-                />
-                <img
-                    onClick={() => toggleImg(5)}
-                    className={`
-                        w-[90px] rounded-[50%] border-2 p-1
-                        ${img == avatar_5 ? `${theme == 'light' ? 'border-my-terciary translate-y-[-16px]' : 'border-my-quartenary translate-y-[-16px]'}` : `border-transparent hover:translate-y-[-16px] transition-all duration-[.3s] cursor-pointer`}
-                    `}
-                    src={avatar_5} alt=""
-                />
-                <img
-                    onClick={() => toggleImg(6)}
-                    className={`
-                        w-[90px] rounded-[50%] border-2 p-1
-                        ${img == avatar_6 ? `${theme == 'light' ? 'border-my-terciary translate-y-[-16px]' : 'border-my-quartenary translate-y-[-16px]'}` : `border-transparent hover:translate-y-[-16px] transition-all duration-[.3s] cursor-pointer`}
-                    `}
-                    src={avatar_6} alt=""
-                />
+                    <InfoStudentCard prop='Escola' value='ETEC paulistano' />
+                    <InfoStudentCard prop='RM' value='22043' />
+                    <InfoStudentCard prop='Data de Nascimento' value='11/06/2006' />
+                    <InfoStudentCard prop='CPF' value='393.223.189-43' />
+                </div>
             </div>
-            <Button event={updateUser} text='Atualizar' route='undefined' />
 
             <BottomNavigation />
             <Menu />

@@ -32,7 +32,8 @@ import { useMyContext } from "../../provider/geral"
 
 //TIPAGEM DAS PROPS DO COMPONENTE
 interface Props {
-    text: string
+    text: string,
+    position?: string
 }
 
 export default function Text(props: Props) {
@@ -47,6 +48,9 @@ export default function Text(props: Props) {
         <p
             className={`
                 w-[90%] sm:w-[60%] my-3 sm:my-1 text-[22px] sm:text-[20px] lg:text-[24px]
+                ${props.position && props.position == 'left' && 'text-left'}
+                ${props.position && props.position == 'right' && 'text-right'}
+                ${!props.position && 'text-center'}
                 ${theme == 'light' ? 'text-my-gray' : 'text-my-gray-black'}
             `}
         >
