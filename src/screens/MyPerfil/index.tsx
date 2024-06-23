@@ -61,6 +61,7 @@ export default function MyPerfil() {
     //UTILIZAÇÃO DO HOOK DE NAVEGAÇÃO 
     const navigate = useNavigate()
 
+    //UTILIZA O HOOK useState
     const [img, setImg] = useState<string>('')
     const [name, setName] = useState<string>()
 
@@ -83,6 +84,7 @@ export default function MyPerfil() {
         //MUDA O ESTADO DE CARREGAMENTO DA APLICAÇÃO PARA true
         toggleLoading(true)
         
+        //FAZ UMA REQUISIÇÃO DO TIPO put PARA ATUALIZAR OS DADOS DO USUÁRIO
         instance.put(`/users/update/${userS.id}`, {
             name: name,
             img: img,
@@ -116,6 +118,7 @@ export default function MyPerfil() {
         setImg(userS.img)
     },[])
 
+    //FUNÇÃO RESPONSÁVEL POR TROCAR A IMAGEM DO USUÁRIO
     function toggleImg(index:number){
      
     switch (index) {
@@ -159,7 +162,6 @@ export default function MyPerfil() {
                 </Navbar>
 
                 {userS.logged == true && (
-                    //COLOCA OS DADOS DE FOTO E NOME DO USUÁRIO NA TELA
                     <div className={`w-[90%] sm:w-[60%] flex items-center gap-[10px] mb-0 mt-4`}>
                         <img
                             src={img}

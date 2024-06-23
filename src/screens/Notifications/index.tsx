@@ -73,13 +73,17 @@ export default function Notifications() {
 
     //FUNÇÃO RESPONSÁVEL POR REMOVER A NOTIFICAÇÃO DA TELA
     function removeNotify(itemRemoved : { materia: string, content: string, isClosed: boolean }) {
+        //VÊ QUAL ITEM VAI SER REMOVIDO E ADICIONA A ANIMAÇÃO DE REMOÇÃO
         const updatedArr = notification.map((not) => 
             not.content === itemRemoved.content ? { ...not, isClosed: true } : not
         )
 
+        //ATUALIZA A LISTA DE NOTIFICAÇÕES COM AS MODIFICAÇÕES
         setNotification(updatedArr)
 
+        //FUNÇÃO CHAMADA DEPOIS DE .4 SEGUNDOS
         setTimeout(() => {
+            //REMOVE A NOTIFICAÇÃO DO ARRAY
             setNotification((nots) =>
             nots.filter(item => item.content !== itemRemoved.content))
         }, 400);

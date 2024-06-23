@@ -89,6 +89,7 @@ export default function SwitchPassword() {
         //USA REGEX PARA VERIFICAR O PADRÃO DA STRING
         const padraoPassword = /^[\w._-]{6,10}$/i
 
+        //VERIFICA SE O INPUT ESTÁ DENTRO DO PADRÃO DO REGEX
         if(padraoPassword.test(inputPasswordValue) == true){
             setStatePassword(true)
         }else{
@@ -101,6 +102,7 @@ export default function SwitchPassword() {
         //USA REGEX PARA VERIFICAR O PADRÃO DA STRING
         const padraoConfirmPassword = new RegExp(`\^${inputPasswordValue.slice(0, -1)}$`)
 
+        //VERIFICA SE O INPUT ESTÁ DENTRO DO PADRÃO DO REGEX
         if(padraoConfirmPassword.test(inputConfirmPasswordValue) == true){
             setStateConfirmPassword(true)
         }else{
@@ -108,7 +110,9 @@ export default function SwitchPassword() {
         }
     }
 
+    //FUNÇÃO CHAMADA AO RECARREGAR A PÁGINA OU QUANDO HAVER MUDANÇAS NOS ESTADOS
     useEffect(() => {
+        //VERIFICA SE OS ESTADOS DOS INPUTS ESTÃO CERTOS
         if(statePassword == true && stateConfirmPassword == true){
             setFormValidate(false)
         }else{
@@ -120,6 +124,7 @@ export default function SwitchPassword() {
         //MUDA O ESTADO DE CARREGAMENTO DA APLICAÇÃO PARA true
         toggleLoading(true)
         
+        //FAZ UMA REQUISIÇÃO DO TIPO put PARA ATUALIZAR OS DADOS DO USUÁRIO
         instance.put(`/users/update/${userS.id}`, {
             password: inputPasswordValue
         }).then((response) => {
@@ -195,7 +200,7 @@ export default function SwitchPassword() {
                         icon='password'
                         messageCorrect='nova senha aceita'
                         messageError='senha fora do padrão'
-                        />
+                    />
                     <Input
                         text="Confirm Password"
                         placeholder="Confirme a senha"

@@ -1,6 +1,6 @@
 //IMPORTAÇÃO DAS BIBLIOTECAS
 import { useEffect, useState } from 'react'
-import { useParams, useLocation, useNavigate } from 'react-router-dom';
+import { useParams, useLocation, useNavigate, Link } from 'react-router-dom';
 
 //IMPORTAÇÃO DOS COMPONENTES
 import MenuButton from "../../components/MenuButton";
@@ -171,6 +171,10 @@ export default function Matter() {
                     <ContentCard background={cont.background} title={cont.title} key={i} />
                 ))}
             </div>
+
+            {matter == 'fisíca' && (
+                <Link to={`/materias/${matter}/test`} className={`w-auto p-3 absolute bottom-[100px] right-[20px] rounded-[20px] bg-my-secondary text-my-white`}>Fazer prova</Link>
+            )}
             
             <BottomNavigation />
             

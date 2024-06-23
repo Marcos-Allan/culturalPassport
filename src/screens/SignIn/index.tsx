@@ -91,6 +91,7 @@ export default function SignIn(){
         //USA REGEX PARA VERIFICAR O PADRÃO DA STRING
         const padraoEmail = /^[\w._-]+@[\w._-]+\.[\w]{2,}/i
         
+        //VERIFICA SE O INPUT ESTÁ DENTRO DO PADRÃO DO REGEX
         if(padraoEmail.test(inputEmailValue) == true){
             setStateEmail(true)
         }else{
@@ -103,6 +104,7 @@ export default function SignIn(){
         //USA REGEX PARA VERIFICAR O PADRÃO DA STRING
         const padraoPassword = /^[\w._-]{6,10}$/i
 
+        //VERIFICA SE O INPUT ESTÁ DENTRO DO PADRÃO DO REGEX
         if(padraoPassword.test(inputPasswordValue) == true){
             setStatePassword(true)
         }else{
@@ -166,7 +168,9 @@ export default function SignIn(){
         toggleLoading(false)
     },[])
 
+    //FUNÇÃO CHAMADA AO RECARREGAR A PÁGINA OU QUANDO HAVER MUDANÇAS NOS ESTADOS
     useEffect(() => {
+        //VERIFICA SE OS ESTADOS DOS INPUTS ESTÃO CERTOS
         if(stateEmail == true && statePassword == true){
             setFormValidate(false)
         }else{

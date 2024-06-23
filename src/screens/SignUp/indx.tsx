@@ -68,7 +68,6 @@ export default function SignUp(){
     const [inputDateValue, setInputDateValue] = useState<string>('')
     const [inputPasswordValue, setInputPasswordValue] = useState<string>('')
     const [inputConfirmPasswordValue, setInputConfirmPasswordValue] = useState<string>('')
-
     const [statePassword, setStatePassword] = useState<boolean>(false)
     const [stateConfirmPassword, setStateConfirmPassword] = useState<boolean>(false)
     const [stateEmail, setStateEmail] = useState<boolean>(false)
@@ -130,6 +129,7 @@ export default function SignUp(){
         //USA REGEX PARA VERIFICAR O PADRÃO DA STRING
         const padraoEmail = /^[\w._-]+@[\w._-]+\.[\w]{2,}/i
         
+        //VERIFICA SE O INPUT ESTÁ DENTRO DO PADRÃO DO REGEX
         if(padraoEmail.test(inputEmailValue) == true){
             setStateEmail(true)
         }else{
@@ -142,6 +142,7 @@ export default function SignUp(){
         //USA REGEX PARA VERIFICAR O PADRÃO DA STRING
         const padraoPassword = /^[\w._-]{6,10}$/i
 
+        //VERIFICA SE O INPUT ESTÁ DENTRO DO PADRÃO DO REGEX
         if(padraoPassword.test(inputPasswordValue) == true){
             setStatePassword(true)
         }else{
@@ -154,6 +155,7 @@ export default function SignUp(){
         //USA REGEX PARA VERIFICAR O PADRÃO DA STRING
         const padraoConfirmPassword = new RegExp(`\^${inputPasswordValue.slice(0, -1)}$`)
 
+        //VERIFICA SE O INPUT ESTÁ DENTRO DO PADRÃO DO REGEX
         if(padraoConfirmPassword.test(inputConfirmPasswordValue) == true){
             setStateConfirmPassword(true)
         }else{
@@ -166,6 +168,7 @@ export default function SignUp(){
         //USA REGEX PARA VERIFICAR O PADRÃO DA STRING
         const padraoName = /^[A-Za-z' -]{1,50}$/
 
+        //VERIFICA SE O INPUT ESTÁ DENTRO DO PADRÃO DO REGEX
         if(padraoName.test(inputNameValue) == true){
             setStateName(true)
         }else{
@@ -178,6 +181,7 @@ export default function SignUp(){
         //USA REGEX PARA VERIFICAR O PADRÃO DA STRING
         const padraoLastName = /^[A-Za-z' -]{1,50}$/
 
+        //VERIFICA SE O INPUT ESTÁ DENTRO DO PADRÃO DO REGEX
         if(padraoLastName.test(inputLastNameValue) == true){
             setStateLastName(true)
         }else{
@@ -190,6 +194,7 @@ export default function SignUp(){
         //USA REGEX PARA VERIFICAR O PADRÃO DA STRING
         const padraoDate = /^(0[1-9]|[12][0-9]|3[01])\/(0[1-9]|1[0-2])\/(19|20)\d{1}$/
 
+        //VERIFICA SE O INPUT ESTÁ DENTRO DO PADRÃO DO REGEX
         if(padraoDate.test(inputDateValue) == true){
             setStateDate(true)
         }else{
@@ -197,7 +202,9 @@ export default function SignUp(){
         }
     }
 
+    //FUNÇÃO CHAMADA AO RECARREGAR A PÁGINA OU QUANDO HAVER MUDANÇAS NOS ESTADOS
     useEffect(() => {
+        //VERIFICA SE OS ESTADOS DOS INPUTS ESTÃO CERTOS
         if(stateEmail == true && statePassword == true && stateConfirmPassword == true && stateName == true && stateLastName == true && stateDate == true){
             setFormValidate(false)
         }else{
@@ -321,7 +328,6 @@ export default function SignUp(){
                             messageCorrect='data dentro do padrão'
                             messageError='formato inválido'
                         /> 
-
                         <Input
                             placeholder='Digite um endereço de email'
                             placeholderLarge='Email'
