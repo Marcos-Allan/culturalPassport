@@ -29,7 +29,7 @@ export default function Matter() {
     const states:any = useMyContext()
 
     //DESESTRUTURA AS VARIAVEIS ESPECIFICADAS
-    const { userS } = states
+    const { userS, theme } = states
 
     //UTILIZAÇÃO DO HOOK useState
     const [content, setContent] = useState<any[]>([])
@@ -170,11 +170,14 @@ export default function Matter() {
                 {content.map((cont, i) => (
                     <ContentCard background={cont.background} title={cont.title} key={i} />
                 ))}
+
+                {matter == 'fisíca' && (
+                    <Link to={`/materias/${matter}/test`}
+                    className={`ms-auto w-auto border-[1px] p-3 rounded-[20px] transition-all duration-[.3s] bg-transparent hover:text-my-secondary hover:border-my-secondary ${theme == 'light' ? 'text-my-black border-my-black' : 'text-my-white border-my-white'}
+                    `}>Fazer prova</Link>
+                )}
             </div>
 
-            {matter == 'fisíca' && (
-                <Link to={`/materias/${matter}/test`} className={`w-auto p-3 absolute bottom-[100px] right-[20px] rounded-[20px] bg-my-secondary text-my-white`}>Fazer prova</Link>
-            )}
             
             <BottomNavigation />
             

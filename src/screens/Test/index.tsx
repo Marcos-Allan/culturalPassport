@@ -32,6 +32,8 @@ export default function Test() {
     //UTILIZAÇÃO DO HOOK useState
     const [questIndex, setQuestIndex] = useState<number>(0)
     const [questFinalized, setQuestFinalized] = useState<boolean>(false)
+    const [percentageFinalized, setPercentageFinalized] = useState<number>(0)
+    const [yourPercent, setYourPercent] = useState<number>(0)
     const [questions, setQuestions] = useState<any[]>([
         { content: 'Mecânica', answer: 'Um carro viaja com velocidade constante de 72 km/h em uma rodovia. Qual é a distância percorrida pelo carro em 2 horas',
             questions: [
@@ -96,19 +98,25 @@ export default function Test() {
             }
         ])
     },[])
-
+    
+    //FUNÇÃO RESPONSÁVEL POR IR PARA A PÁGINA POSTERIOR
     function nextQuestion() {
         if(Number(questIndex + 2) >= Number(questions.length)){
             setQuestFinalized(true)
         }else{
+            //VAI PARA A PRÓXIMA QUESTÃO
             setQuestIndex(questIndex + 1)
+            //AUMENTA A PORCENTAGEM QUE O USUÁRIO FEZ DA PROVA
+            setYourPercent(percentageFinalized * questIndex + 1)
         }
     }
     
+    //FUNÇÃO RESPONSÁVEL POR VOLTAR PARA A PÁGINA ANTERIOR
     function prevQuestion() {
         if(Number(questIndex) == 0){
             setQuestFinalized(true)
         }else{
+            //VOLTA PARA A QUESTÃO ANTERIOR
             setQuestIndex(questIndex - 1)
         }
     }
@@ -121,6 +129,12 @@ export default function Test() {
             //REDIRECIONA ELE PARA A PÁGINA DE MATÉRIAS
             navigate('/')
         }
+
+        //VERIFICA A QUANTIDADE DE PORCENTAGEM QUE CADA QUESTÃO VALE
+        setPercentageFinalized(100 / questions.length)
+
+        //SETA A PORCENTAGEM FEITA DA PROVA
+        setYourPercent(0)
     },[])
 
     return(
@@ -131,19 +145,19 @@ export default function Test() {
                         <TitlePage text={`${matter}`} />
                     </Navbar>
                     
-                    {questFinalized == false && (
-                        <div className={`w-[90%] border-2 ${theme == 'light' ? 'border-my-black' : 'border-my-white'} h-[40px] rounded-[30px] relative overflow-hidden`}>
-                            <div className={`h-full bg-my-secondary w-[90%] rounded-tr-[20px] rounded-br-[20px]`}></div>
-                        </div>
-                    )}
 
-                    <div className={`w-[90%] flex items-center flex-col`}>
+                    <div className={`w-[90%] sm:w-[60%] flex items-center justify-start flex-col`}>
+                        {questFinalized == false && (
+                            <div className={`w-full border-2 ${theme == 'light' ? 'border-my-black' : 'border-my-white'} h-[40px] rounded-[30px] relative overflow-hidden`}>
+                                <div style={{ width: `${yourPercent}%` }} className={`h-[40px] bg-my-secondary w-[20%] rounded-tr-[20px] rounded-br-[20px]`}></div>
+                            </div>
+                        )}
                         {questFinalized == false ? (
                             <>
-                                <div className={`flex flex-col items-center border-[1px] ${theme == 'light' ? 'border-my-black' : 'border-my-white'} my-2 mt-5 p-3 pt-1 rounded-[20px]`}>
+                                <div className={`flex flex-col items-center border-[1px] ${theme == 'light' ? 'border-my-black' : 'border-my-white'} my-2 mt-5 p-3 pt-1 rounded-[20px] h-[160px] overflow-y-scroll scrollbar scrollbar-track-transparent scrollbar-thumb-my-secondary`}>
                                     <h1 className={`text-[24px] font-medium ${theme == 'light' ? 'text-my-black' : 'text-my-white'}`}>{questIndex + 1} - {questions[questIndex].content}</h1>
                                     <div className={`w-full h-[1px] ${theme == 'light' ? 'bg-my-gray' : 'bg-my-gray-black'} my-2 lg:hidden`}/>
-                                    <p className={`text-[22px] ${theme == 'light' ? 'text-my-black' : 'text-my-white'}`}>{questions[questIndex].answer}</p>
+                                    <p className={`text-[22px] ${theme == 'light' ? 'text-my-black' : 'text-my-white'} `}>{questions[questIndex].answer}</p>
                                 </div>
 
                                 <ol
@@ -164,13 +178,15 @@ export default function Test() {
 
                                 <div className={`w-full flex mt-4 ${questIndex >= 1 ? 'justify-between' : 'justify-end'}`}>
                                     {questIndex >= 1 && (
-                                        <div className={`flex bg-my-secondary items-center justify-between gap-[10px] px-3 py-2 rounded-[30px] text-my-white`} onClick={prevQuestion}>
+                                        <div className={`flex bg-my-secondary items-center justify-between gap-[10px] px-3 py-2 rounded-[30px] text-my-white  border-[1px] border-my-secondary cursor-pointer
+                                        hover:bg-transparent hover:text-my-secondary hover:border-my-secondary transition-all duration-[.3s]`} onClick={prevQuestion}>
                                             <IoIosArrowBack className={`text-[18px]`} />
                                             <p className={`capitalize font-medium text-[16px] flex-grow-[1]`}>questão anterior</p>
                                         </div>
                                     )}
 
-                                    <div className={`flex self-end bg-my-secondary items-center justify-between gap-[10px] px-3 py-2 rounded-[30px] text-my-white`} onClick={nextQuestion}>
+                                    <div className={`flex self-end bg-my-secondary items-center justify-between gap-[10px] px-3 py-2 rounded-[30px] text-my-white border-[1px] border-my-secondary cursor-pointer
+                                    hover:bg-transparent hover:text-my-secondary hover:border-my-secondary transition-all duration-[.3s]`} onClick={nextQuestion}>
                                         <p className={`capitalize font-medium text-[16px] flex-grow-[1]`}>{questIndex + 2 == questions.length ?'finalizar' : 'próxima questão'}</p>
                                         <IoIosArrowForward className={`text-[18px]`} />
                                     </div>
