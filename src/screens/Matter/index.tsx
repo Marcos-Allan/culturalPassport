@@ -166,7 +166,7 @@ export default function Matter() {
 
             <p className={`mt-8 mb-5 text-[18px]`}>Conteudos que mais caem no {exam?.toUpperCase()}</p>
 
-            <div className={`w-[90%] sm:px-12 sm:w-[70%] mb-[40px] lg:mb-0 flex items-center flex-col overflow-y-scroll scrollbar scrollbar-track-transparent scrollbar-thumb-my-secondary`}>
+            <div className={`w-[90%] h-auto sm:px-12 sm:w-[70%] mb-[100px] lg:mb-0 flex items-center flex-col overflow-y-scroll scrollbar scrollbar-track-transparent scrollbar-thumb-my-secondary`}>
                 {content.map((cont, i) => (
                     <ContentCard background={cont.background} title={cont.title} key={i} />
                 ))}
