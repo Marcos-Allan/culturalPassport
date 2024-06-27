@@ -154,7 +154,7 @@ export default function MyPerfil() {
 
     return(
         <>
-            <div className={`w-full flex flex-col items-center overflow-y-scroll scrollbar lg:scrollbar-track-transparent lg:scrollbar-thumb-my-secondary`}>
+            <div className={`w-full flex flex-col items-center overflow-y-scroll lg:scrollbar lg:scrollbar-track-transparent lg:scrollbar-thumb-my-secondary`}>
                 <Navbar>   
                     <Return />
                     <TitlePage text={`meu perfil`} />
