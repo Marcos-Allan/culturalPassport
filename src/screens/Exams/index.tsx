@@ -73,7 +73,7 @@ export default function Exams() {
                 <MenuButton />
             </Navbar>
 
-            <p className={`mt-8 mb-5 text-[18px]`}>Escolha um vestibular de sua preferência</p>
+            <p className={`mt-8 mb-5 text-[18px]`}>Escolha um vestibular de sua preferência pato</p>
 
             <div className={`w-[90%] h-auto sm:px-12 sm:w-[70%] mb-[100px] lg:mb-0 flex items-center flex-col overflow-y-scroll scrollbar scrollbar-track-transparent scrollbar-thumb-my-secondary`}>
                 {content.map((cont, i) => (
