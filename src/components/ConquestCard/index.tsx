@@ -104,7 +104,8 @@ export default function ConquestCard(props: Props) {
                         ${theme == 'light' ? 'bg-my-gray' : 'bg-my-gray-black'}
                     `}>
                         <div
-                            className={`h-full w-[${Number(props.porcentage)}%]
+                            style={{ width: `${Number(props.porcentage)}%` }}
+                            className={`h-full
                             ${theme == 'light' ? 'bg-my-secondary' : 'bg-my-quartenary'}
                         `}></div>
                     </div>

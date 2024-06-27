@@ -70,6 +70,7 @@ export default function Achievements() {
         setConquests([
             { level: 2, message: 'próxima meta 365 dias', porcentage: 80, title: 'Day o cool' },
             { level: 3, message: 'próxima meta 10x ao dia', porcentage: 100, title: 'First fap' },
+            { level: 2, message: 'sobreviver mais um dia', porcentage: 30, title: 'Survival day' },
         ])
     },[])
 
