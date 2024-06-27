@@ -90,7 +90,7 @@ export default function Materias() {
                 <MenuButton />
             </Navbar>
 
-            <div className={`w-full h-auto sm:w-[70%] flex flex-col sm:flex-row sm:flex-wrap justify-start sm:justify-center items-center sm:gap-[20px] mb-[80px] overflow-y-scroll scrollbar scrollbar-track-transparent scrollbar-thumb-my-secondary`}>    
+            <div className={`w-full h-auto sm:w-[70%] flex flex-col sm:flex-row sm:flex-wrap justify-start sm:justify-center items-center sm:gap-[20px] mb-[100px] overflow-y-scroll scrollbar scrollbar-track-transparent scrollbar-thumb-my-secondary`}>    
                 {matters.map((mat, i) => (
                     <MaterialCard titleMateria={mat.titleMateria} background={mat.background} key={i} />
                 ))}
