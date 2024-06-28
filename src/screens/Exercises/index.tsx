@@ -70,9 +70,20 @@ export default function Exercises() {
         //DEFINE O ARRAY COM AS CONQUISTAS
         setExercises([
             { concluded: false, materia: 'português', title: 'museu do ipiranga', type: 'travel' },
-            { concluded: true, materia: 'história', title: 'museu do terraplanismo', type: 'travel' },
+            { concluded: true, materia: 'geografia', title: 'museu do ipiranga', type: 'travel' },
+            { concluded: false, materia: 'filosofia', title: 'museu do ipiranga', type: 'travel' },
+            { concluded: false, materia: 'inglês', title: 'museu do ipiranga', type: 'travel' },
+            { concluded: true, materia: 'história', title: 'museu do ipiranga', type: 'travel' },
+            { concluded: true, materia: 'biologia', title: 'museu do terraplanismo', type: 'travel' },
+            { concluded: false, materia: 'português', title: 'museu do ipiranga', type: 'travel' },
+            { concluded: true, materia: 'fuvest', title: 'fazer simulado de matemática', type: 'exercise' },
             { concluded: false, materia: 'enem', title: 'fazer simulado de matemática', type: 'exercise' },
-            { concluded: true, materia: 'enem', title: 'fazer simulado de história', type: 'exercise' },
+            { concluded: false, materia: 'fuvest', title: 'fazer simulado de matemática', type: 'exercise' },
+            { concluded: true, materia: 'fuvest', title: 'fazer simulado de matemática', type: 'exercise' },
+            { concluded: true, materia: 'unesp', title: 'fazer simulado de matemática', type: 'exercise' },
+            { concluded: false, materia: 'ufpa', title: 'fazer simulado de matemática', type: 'exercise' },
+            { concluded: false, materia: 'unesp', title: 'fazer simulado de matemática', type: 'exercise' },
+            { concluded: true, materia: 'uerj', title: 'fazer simulado de história', type: 'exercise' },
         ])
     },[])
 
@@ -86,18 +97,19 @@ export default function Exercises() {
                 <MenuButton />
             </Navbar>
 
+            <div className={`w-full flex flex-col justify-start items-center mb-[100px] sm:mb-[40px] lg:mb-0 overflow-y-scroll overflow-visible scrollbar scrollbar-track-transparent scrollbar-thumb-my-secondary`}>    
+                <Text text='Passeios' position='left' />
 
-            <Text text='Passeios' position='left' />
-
-            {conquests.map((exerc, i) => 
-                exerc.type == 'travel' ? (<ExerciseCard concluded={exerc.concluded} materia={exerc.materia} title={exerc.title} type={exerc.type} key={i} />):(<></>)
-            )}
-            
-            <Text text='Simulados' position='left' />
-            
-            {conquests.map((exerc, i) => 
-                exerc.type == 'exercise' ? (<ExerciseCard concluded={exerc.concluded} materia={exerc.materia} title={exerc.title} type={exerc.type} key={i} />):(<></>)
-            )}
+                {conquests.map((exerc, i) => 
+                    exerc.type == 'travel' ? (<ExerciseCard concluded={exerc.concluded} materia={exerc.materia} title={exerc.title} type={exerc.type} key={i} />):(<></>)
+                )}
+                
+                <Text text='Simulados' position='left' />
+                
+                {conquests.map((exerc, i) => 
+                    exerc.type == 'exercise' ? (<ExerciseCard concluded={exerc.concluded} materia={exerc.materia} title={exerc.title} type={exerc.type} key={i} />):(<></>)
+                )}
+            </div>
             
             <BottomNavigation />
             

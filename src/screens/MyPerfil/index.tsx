@@ -154,12 +154,12 @@ export default function MyPerfil() {
 
     return(
         <>
-            <div className={`w-full flex flex-col items-center overflow-y-scroll lg:scrollbar lg:scrollbar-track-transparent lg:scrollbar-thumb-my-secondary`}>
-                <Navbar>   
-                    <Return />
-                    <TitlePage text={`meu perfil`} />
-                    <MenuButton />
-                </Navbar>
+            <Navbar>   
+                <Return />
+                <TitlePage text={`meu perfil`} />
+                <MenuButton />
+            </Navbar>
+            <div className={`w-full flex flex-col items-center overflow-y-scroll scrollbar scrollbar-track-transparent scrollbar-thumb-my-secondary`}>
 
                 {userS.logged == true && (
                     <div className={`w-[90%] sm:w-[60%] flex items-center gap-[10px] mb-0 mt-4`}>
@@ -201,7 +201,7 @@ export default function MyPerfil() {
 
                 <Button event={updateUser} text='Atualizar' route='undefined' />
                 
-                <div className='w-[90%] sm:w-[60%] mb-[90px] lg:mb-0'>
+                <div className='w-[90%] sm:w-[60%] mb-[90px] sm:mb-[30px] lg:mb-0'>
                     <h2
                         className={`
                             w-full text-center

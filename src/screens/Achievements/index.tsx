@@ -71,6 +71,12 @@ export default function Achievements() {
             { level: 2, message: 'próxima meta 365 dias', porcentage: 80, title: 'Day o cool' },
             { level: 3, message: 'próxima meta 10x ao dia', porcentage: 100, title: 'First fap' },
             { level: 2, message: 'sobreviver mais um dia', porcentage: 30, title: 'Survival day' },
+            { level: 2, message: 'sobreviver mais um dia', porcentage: 30, title: 'Survival day' },
+            { level: 2, message: 'sobreviver mais um dia', porcentage: 30, title: 'Survival day' },
+            { level: 2, message: 'sobreviver mais um dia', porcentage: 30, title: 'Survival day' },
+            { level: 2, message: 'sobreviver mais um dia', porcentage: 30, title: 'Survival day' },
+            { level: 2, message: 'sobreviver mais um dia', porcentage: 30, title: 'Survival day' },
+            { level: 2, message: 'sobreviver mais um dia', porcentage: 30, title: 'Winner !!' },
         ])
     },[])
 
@@ -86,9 +92,11 @@ export default function Achievements() {
                 <MenuButton />
             </Navbar>
             
-            {conquests.map((conq, i) => (
-                <ConquestCard level={conq.level} message={conq.message} porcentage={conq.porcentage} title={conq.title} key={i} />
-            ))}
+            <div className={`w-full flex flex-col justify-start items-center sm:gap-[20px] mb-[100px] sm:mb-[40px] lg:mb-0 overflow-y-scroll scrollbar scrollbar-track-transparent scrollbar-thumb-my-secondary`}>    
+                {conquests.map((conq, i) => (
+                    <ConquestCard level={conq.level} message={conq.message} porcentage={conq.porcentage} title={conq.title} key={i} />
+                ))}
+            </div>
 
             <BottomNavigation />
             

@@ -100,7 +100,12 @@ export default function Notifications() {
             { materia: 'sociologia', content: 'socialismo x comunismo', isClosed: false},
             { materia: 'biologia', content: 'oviviparo', isClosed: false},
             { materia: 'quimica', content: 'química orgânica', isClosed: false},
-            { materia: 'geografia', content: 'poluição ambiental', isClosed: false}
+            { materia: 'geografia', content: 'poluição ambiental', isClosed: false},
+            { materia: 'quimica', content: 'poluição ambiental', isClosed: false},
+            { materia: 'português', content: 'poluição ambiental', isClosed: false},
+            { materia: 'filosofia', content: 'poluição ambiental', isClosed: false},
+            { materia: 'sociologia', content: 'poluição ambiental', isClosed: false},
+            { materia: 'biologia', content: 'poluição ambiental', isClosed: false},
         ])
     },[])
 
@@ -114,7 +119,7 @@ export default function Notifications() {
                 <MenuButton />
             </Navbar>
 
-            <div className={`w-[90%] sm:w-[60%] mt-5 flex flex-col justify-start items-center gap-[15px] mb-[50px] lg:mb-0 ${notification.length >= 1 && 'overflow-y-scroll scrollbar scrollbar-track-transparent scrollbar-thumb-my-secondary'}`}>
+            <div className={`w-[90%] sm:w-[60%] mt-5 flex flex-col justify-start items-center gap-[15px] mb-[100px] sm:mb-[40px] lg:mb-0 ${notification.length >= 1 && 'overflow-y-scroll scrollbar scrollbar-track-transparent scrollbar-thumb-my-secondary'}`}>
                 {notification.length >= 1 ? notification.map((not, i) => (
                     <NotificationCard materia={not.materia} content={not.content}
                         event={() => removeNotify({materia: not.materia, content: not.content, isClosed: not.isClosed })} key={i} isClosed={not.isClosed}
