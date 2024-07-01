@@ -38,12 +38,12 @@ import instance from '../../utils/axios';
 import { useMyContext } from "../../provider/geral"
 
 //IMPORTAÇÃO DAS IMAGENS
-import avatar_1 from "../../assets/imgs/avatar-1.jpg"
-import avatar_2 from "../../assets/imgs/avatar-2.jpg"
-import avatar_3 from "../../assets/imgs/avatar-3.jpg"
-import avatar_4 from "../../assets/imgs/avatar-4.jpg"
-import avatar_5 from "../../assets/imgs/avatar-5.jpg"
-import avatar_6 from "../../assets/imgs/avatar-6.jpg"
+import avatar_1 from "../../../public/avatar-1.jpg"
+import avatar_2 from "../../../public/avatar-2.jpg"
+import avatar_3 from "../../../public/avatar-3.jpg"
+import avatar_4 from "../../../public/avatar-4.jpg"
+import avatar_5 from "../../../public/avatar-5.jpg"
+import avatar_6 from "../../../public/avatar-6.jpg"
 
 //IMPORTAÇÃO DOS COMPONENTES
 import Navbar from "../../components/Navbar";
@@ -123,27 +123,27 @@ export default function MyPerfil() {
      
     switch (index) {
         case 1:
-            setImg(avatar_1)   
+            setImg('https://cultural-passport.vercel.app/avatar-1.jpg')
         break;
         
         case 2:
-            setImg(avatar_2)   
+            setImg('https://cultural-passport.vercel.app/avatar-2.jpg')
         break;
         
         case 3:
-            setImg(avatar_3)   
+            setImg('https://cultural-passport.vercel.app/avatar-3.jpg')
         break;
         
         case 4:
-            setImg(avatar_4)   
+            setImg('https://cultural-passport.vercel.app/avatar-4.jpg')
         break;
         
         case 5:
-            setImg(avatar_5)   
+            setImg('https://cultural-passport.vercel.app/avatar-5.jpg')
         break;
         
         case 6:
-            setImg(avatar_6)   
+            setImg('https://cultural-passport.vercel.app/avatar-6.jpg')
         break;
     
         default:
