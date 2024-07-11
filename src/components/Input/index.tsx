@@ -195,6 +195,10 @@ export default function Input(props: Props) {
         return Math.floor(Math.random() * (numberMax - numberMin + 1)) + numberMin
     }
 
+    useEffect(() => {
+        handleValidatePassword()
+    },[props.value, props.checked])
+
     return(
         <div className="w-[90%] sm:w-[60%] relative">
             <label

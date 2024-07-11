@@ -53,6 +53,11 @@ import Materias from './screens/Materias/index.tsx';
 import Notifications from './screens/Notifications/index.tsx';
 import Chat from './screens/Chat/index.tsx';
 import Achievements from './screens/Achievements/index.tsx';
+import Exercises from './screens/Exercises/index.tsx';
+import Matter from './screens/Matter/index.tsx';
+import Exams from './screens/Exams/index.tsx';
+import Test from './screens/Test/index.tsx';
+import Content from './screens/Content/index.tsx';
 
 //IMPORTAÇÃO DO PROVEDOR QUE GUARDA AS VÁRIAVEIS DE ESTADO GLOBAL
 import { Provider } from './provider/index.tsx';
@@ -60,10 +65,6 @@ import { Provider } from './provider/index.tsx';
 //IMPORTAÇÃO DOS COMPONENTES PRESENTES EM TODAS AS PÁGINAS
 import ScreenPage from './components/ScreenPage/index.tsx';
 import Alert from './components/Alert/index.tsx';
-import Exercises from './screens/Exercises/index.tsx';
-import Matter from './screens/Matter/index.tsx';
-import Exams from './screens/Exams/index.tsx';
-import Test from './screens/Test/index.tsx';
 
 //ARQUIVO DE CONFIGURAÇÃO DAS ROTAS
 const router = createBrowserRouter([
@@ -145,6 +146,11 @@ const router = createBrowserRouter([
   {
     path: "materias/:matter/test",
     element: <Test />,
+    errorElement: <ErrorPage />
+  },
+  {
+    path: "materias/:matter/content/:content",
+    element: <Content />,
     errorElement: <ErrorPage />
   }
 ])
