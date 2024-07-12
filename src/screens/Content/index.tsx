@@ -12,9 +12,7 @@ import Menu from '../../components/Menu';
 
 //IMPORTAÇÃO DO PROVEDOR PARA PEGAR AS VARIÁVEIS GLOBAIS
 import { useMyContext } from '../../provider/geral';
-import instance from '../../utils/axios';
 import MarkdownRenderer from '../../components/MarkdownRenderer';
-import axios from 'axios';
 
 export default function Content() {
 
@@ -34,9 +32,7 @@ export default function Content() {
     const { userS } = states
 
     //UTILIZAÇÃO DO HOOK useState
-    const [contentText, setContentText] = useState<string>()
     const [contentMatter, setContentMatter] = useState<string>()
-    const [contentFB, setContentFB] = useState<string>()
 
     //FUNÇÃO CHAMADA AO RECARREGAR A PÁGINA
     useEffect(() => {
@@ -47,49 +43,17 @@ export default function Content() {
             navigate('/')
         }
 
-        console.log(contentText)
-
-        setContentFB('https://firebasestorage.googleapis.com/v0/b/cultural-passport-78148.appspot.com/o/images%2Favatar-3.jpg?alt=media&token=b4a7632e-4803-4129-937b-4517744e23c1')
+        // 'https://firebasestorage.googleapis.com/v0/b/cultural-passport-78148.appspot.com/o/images%2Favatar-3.jpg?alt=media&token=b4a7632e-4803-4129-937b-4517744e23c1'
 
     },[])
 
     function getContent(){
-        instance.get(`/content/${content}`)
-        .then(function (response) {
-            console.log(response.data)
-            
-            if(response.data == "Conteudo não encontrado"){
-                setContentText('false')
-                alert('conteudo não encontrado')
-            }else{
-                console.log('value:' + response.data.archive.replace(/\\/g, '/'))
-
-                const urlFuncional = 'https://raw.githubusercontent.com/github/linguist/master/README.md'
-                
-                // setContentMatter(`https://backendculturalpassport-1.onrender.com/${response.data.archive.replace(/\\/g, '/')}`)
-                setContentText(urlFuncional)
-
-                // axios.get(`https://backendculturalpassport-1.onrender.com/${response.data.archive.replace(/\\/g, '/')}`)
-                axios.get(urlFuncional)
-                .then(function (response) {
-                    console.log(response.data)
-                    setContentMatter(response.data)
-                })
-                .catch(function (error) {
-                    console.log('msgErro: ', error)
-                })
-            }
-        })
-        .catch( function (error) {
-            console.log(error)
-        })
+        setContentMatter(`https://backendculturalpassport-1.onrender.com/content/${content?.toLowerCase()}.md`)
     }
 
     useEffect(() => {
         getContent()
     },[])
-
-
 
     return(
         <>
@@ -104,15 +68,7 @@ export default function Content() {
             <p className={`mt-8 mb-5 text-[18px]`}>Conteudos de {content?.toUpperCase()}</p>
 
             <div className={`w-[90%] sm:px-12 sm:w-[70%] mb-[100px] sm:mb-[40px] lg:mb-0 flex items-center flex-col overflow-y-scroll scrollbar scrollbar-track-transparent scrollbar-thumb-my-secondary`}>
-                
-                {contentMatter && (
-                    <>
-                        {/* <p>URL atualizada: <br />https://firebasestorage.googleapis.com/v0/b/cultural-passport-78148.appspot.com/o/content%2FPorcentagem.md?alt=media&token=b4a7632e-4803-4129-937b-4517744e23c1</p> */}
-                        <MarkdownRenderer url={"https://firebasestorage.googleapis.com/v0/b/cultural-passport-78148.appspot.com/o/content%2FPorcentagem.md?alt=media&token=b4a7632e-4803-4129-937b-4517744e23c1"} />
-                        <img src={contentFB} alt="" className='w-[100px] h-[100px]' />
-                    </>
-                )}
-                {/* <iframe style={{ color: '#ff0000', backgroundColor: '#00000055' }} id='meuIframe' src={`https://backendculturalpassport-1.onrender.com/uploads/1720653724923.md`}></iframe> */}
+                <MarkdownRenderer url={`${contentMatter}`} />
             </div>
 
             
