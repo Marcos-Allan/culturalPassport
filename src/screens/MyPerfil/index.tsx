@@ -28,11 +28,18 @@
  */
 
 //IMPORTAÇÃO DAS BIBLIOTECAS
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { useNavigate } from 'react-router-dom';
 
 //CONFIGURAÇÃO DA BASE URL DO AXIOS
 import instance from '../../utils/axios';
+
+//IMPORTAÇÃO DAS BIBLIOTECAS DO FIREBASE
+import { ref, uploadBytesResumable, getDownloadURL } from 'firebase/storage';
+import { storage } from '../../utils/firebase';
+
+//IMPORTAÇÃO DOS ICONES
+import { MdImage } from "react-icons/md";
 
 //IMPORTAÇÃO DO PROVEDOR PARA PEGAR AS VARIÁVEIS GLOBAIS
 import { useMyContext } from "../../provider/geral"
@@ -57,6 +64,9 @@ import AvatarImage from '../../components/AvatarImage';
 import InfoStudentCard from '../../components/InfoStudentCard';
 
 export default function MyPerfil() {
+    //FAZ REFERENCIA A UM ELEMENTO
+    const inputFileRef = useRef<HTMLInputElement | null>(null)
+
 
     //UTILIZAÇÃO DO HOOK DE NAVEGAÇÃO 
     const navigate = useNavigate()
@@ -64,6 +74,8 @@ export default function MyPerfil() {
     //UTILIZA O HOOK useState
     const [img, setImg] = useState<string>('')
     const [name, setName] = useState<string>()
+    const [imgURL, setImgURL] = useState<string>('')
+    const [progress, setProgress] = useState<any>(0)
 
     //FUNÇÃO CHAMADA QUANDO A PAGINA É CARREGADA
     useEffect(() => {
@@ -80,36 +92,121 @@ export default function MyPerfil() {
     //RESGATA AS VARIAVEIS GLOBAIS
     const { theme, userS, toggleLoading, toggleAlert, toggleUser } = states
 
-    function updateUser() {
+    const handleFileIMG = () => {
+        const file = inputFileRef.current?.files?.[0]
+
+        if(file){
+            const reader = new FileReader()
+            reader.onloadend = () => {
+                setImg(reader.result as string)
+                setImgURL(reader.result as string)
+            }
+            reader.readAsDataURL(file)
+        }
+    }
+
+    // FUNÇÃO RESPONSÁVEL POR DAR UPLOAD NA IMAGEM
+    async function handleUpload() {
+        //CRIA UMA PROMISSE 
+        return new Promise((resolve, reject) => {
+            //PEGA O ARQUIVO QUE FOI SELECIONADO
+            const file = inputFileRef.current?.files?.[0];
+
+            //VERIFICA SE NÃO TEM IMAGEM
+            if (!file) {
+                //RESOLVE A PROMEISSE PASSANDO A IMAGEM COMO PARÂMETRO
+                resolve(img);
+            } else {
+                const storageRef = ref(storage, `images/${file.name}`);
+                const uploadTask = uploadBytesResumable(storageRef, file);
+
+                uploadTask.on(
+                    "state_changed",
+                    snapshot => {
+                        //PEGA A PORCENTAGEM DO UPLOAD DA IMAGEM
+                        const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+
+                        //SETA O PROGRESSO EM PORCENTAGEM
+                        setProgress(progress);
+                    },
+                    error => {
+                        //DA UM ALERTA CASO OCORRA UM ERRO
+                        alert(error);
+                        
+                        //FINALIZA A PROMISSE ABORTANDO E PASSANDO O ERRO OCORRIDO COMO PARÂMETRO
+                        reject(error);
+                    },
+                    () => {
+                        //PEGA A URL DA IMAGEM QUE FOI SALVA NO BANCO DE DADOS
+                        getDownloadURL(uploadTask.snapshot.ref)
+                            .then(url => {
+                                //SETA A URL DA IMAGEM
+                                setImgURL(url);
+                                setImg(url);
+
+                                //RESOLVE A PROMESSA PASSANDO A IMAGEM COMO PARÂMETRO
+                                resolve(url);
+                            })
+                            .catch(error => {
+                                //DA UM ALERTA CASO OCORRA UM ERRO
+                                alert(error);
+
+                                //FINALIZA A PROMISSE ABORTANDO E PASSANDO O ERRO OCORRIDO COMO PARÂMETRO
+                                reject(error);
+                            });
+                    }
+                );
+            }
+        });
+    }
+
+    //FUNÇÃO RESPONSÁVEL POR ATUALIZAR OS DADOS DO USUÁRIO
+    async function updateUser() {
         //MUDA O ESTADO DE CARREGAMENTO DA APLICAÇÃO PARA true
-        toggleLoading(true)
-        
-        //FAZ UMA REQUISIÇÃO DO TIPO put PARA ATUALIZAR OS DADOS DO USUÁRIO
-        instance.put(`/users/update/${userS.id}`, {
-            name: name,
-            img: img,
-        }).then((response) => {
+        toggleLoading(true);
+
+        try {
+            //FAZ UPLOAD DA IMAGEM QUE O USUÁRIO ESCOLHEU E AGUARDA A CONCLUSÃO
+            const imageURL = await handleUpload();
+
+            //FAZ UMA REQUISIÇÃO DO TIPO put PARA ATUALIZAR OS DADOS DO USUÁRIO
+            const response = await instance.put(`/users/update/${userS.id}`, {
+                name: name,
+                img: imageURL,
+            });
+
             //MUDA O ESTADO DE CARREGAMENTO DA APLICAÇÃO PARA false
-            toggleLoading(false)
-            
+            toggleLoading(false);
+
             //MOSTRA OS DADOS DA REQUISIÇÃO
-            console.log(response.data)
+            console.log(response.data);
 
-            //REGISTRA O NOME E A FOTO E O ID DO DO USUARIO LOGADO PARA MOSTRAR NO FRONT-END
-            toggleUser(response.data.name, response.data.img, response.data._id)
+            //REGISTRA O NOME E A FOTO E O ID DO USUARIO LOGADO PARA MOSTRAR NO FRONT-END
+            toggleUser(response.data.name, response.data.img, response.data._id);
 
             //COLOCA ALERT NA TELA
-            toggleAlert(`success`, `Alteração feita com sucesso`)
-        }).catch((error) => {
+            toggleAlert(`success`, `Alteração feita com sucesso`);
+
+            //LIMPA O INPUT DE ARQUIVOS
+            if (inputFileRef.current) {
+                inputFileRef.current.value = "";
+            }
+
+            //RESETA A URL DA IMAGEM
+            setImgURL('')
+            
+            //RESETA A PORCENTAGEM DO PROGRESSO
+            setProgress(0)
+        } catch (error) {
             //ESCREVE NO CONSOLE O ERRO OCORRIDO
-            console.log(`Requisição feita com falhas ${error}`)
-            
+            console.log(`Requisição feita com falhas ${error}`);
+
             //MUDA O ESTADO DE CARREGAMENTO DA APLICAÇÃO PARA false
-            toggleLoading(false)
-            
+            toggleLoading(false);
+
             //COLOCA ALERT NA TELA
-            toggleAlert(`error`, `Ocorreu um erro interno no servidor`)
-        })
+            toggleAlert(`error`, `Ocorreu um erro interno no servidor`);
+        }
     }
 
     //FUNÇÃO CHAMADA TODA VEZ QUE RECARREGA A PÁGINA
@@ -180,6 +277,51 @@ export default function MyPerfil() {
                         />
                     </div>
                 )}
+
+                <div className={`w-[90%] sm:w-[60%] flex flex-row items-center justify-center relative`}>
+                    <label className='w-[90%]' htmlFor='fileArchive'>
+                        <div className={`w-full my-[20px] flex flex-row items-center justify-between`}>
+                            <MdImage
+                                className={`
+                                    hover:scale-[1.1]
+                                    transition-all
+                                    duration-[.3s]
+                                    cursor-pointer
+                                    text-[64px]
+                                    rounded-[50%]
+                                    border-[2px]
+                                    p-2
+                                    ${imgURL ? 'text-[#00ff00] border-[#00ff00]' : `${theme == 'light' ? 'text-my-gray border-my-gray' : 'text-my-gray-black border-my-gray-black'}`}
+                                    ${theme == 'light' ? '' : ''}
+                                `}
+                            />
+                            <p
+                                className={`
+                                    text-[20px]
+                                    font-extralight
+                                    hover:scale-[1.1]
+                                    transition-all
+                                    duration-[.3s]
+                                    cursor-pointer
+                                    ${imgURL ? 'text-[#00ff00]' : `${theme == 'light' ? 'text-my-gray' : 'text-my-gray-black'}`}
+                                `}  
+                            >{imgURL ? 'imagem selecionada' : 'Nenhuma imagem selecionada'}</p>
+                            <p
+                                className={`
+                                text-[22px]
+                                font-semibold
+                                hover:scale-[1.1]
+                                transition-all
+                                duration-[.3s]
+                                cursor-pointer
+                                    ${progress == 100 ? 'text-[#00ff00]' : `${theme == 'light' ? 'text-my-gray' : 'text-my-gray-black'}`}
+                                `}
+                                >{progress}%</p>
+                        </div>
+                    </label>
+                    <input ref={inputFileRef} className='hidden' type="file" name="fileArchive" id="fileArchive" onChange={handleFileIMG} />
+                    {/* {imgURL && <img src={imgURL} alt='imagem que fez upload' width={'200px'} height={'200px'} />} */}
+                </div>
 
                 <h1
                     className={`text-[30px] mb-5 font-bold

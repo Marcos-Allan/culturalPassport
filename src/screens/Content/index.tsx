@@ -1,5 +1,5 @@
 //IMPORTAÇÃO DAS BIBLIOTECAS
-import { useEffect, useState } from 'react'
+import { FormEvent, useEffect, useState } from 'react'
 import { useParams, useLocation, useNavigate, Link } from 'react-router-dom';
 
 //IMPORTAÇÃO DOS COMPONENTES
@@ -15,6 +15,10 @@ import { useMyContext } from '../../provider/geral';
 import instance from '../../utils/axios';
 import MarkdownRenderer from '../../components/MarkdownRenderer';
 import axios from 'axios';
+
+//IMPORTAÇÃO DAS BIBLIOTECAS DO FIREBASE
+import { ref, uploadBytesResumable, getDownloadURL } from 'firebase/storage';
+import { storage } from '../../utils/firebase';
 
 export default function Content() {
 
@@ -36,6 +40,7 @@ export default function Content() {
     //UTILIZAÇÃO DO HOOK useState
     const [contentText, setContentText] = useState<string>()
     const [contentMatter, setContentMatter] = useState<string>()
+    const [contentFB, setContentFB] = useState<string>()
 
     //FUNÇÃO CHAMADA AO RECARREGAR A PÁGINA
     useEffect(() => {
@@ -45,6 +50,9 @@ export default function Content() {
             //REDIRECIONA ELE PARA A PÁGINA DE MATÉRIAS
             navigate('/')
         }
+
+        setContentFB('https://firebasestorage.googleapis.com/v0/b/cultural-passport-78148.appspot.com/o/images%2Favatar-3.jpg?alt=media&token=b4a7632e-4803-4129-937b-4517744e23c1')
+
     },[])
 
     function getContent(){
@@ -98,14 +106,15 @@ export default function Content() {
             <p className={`mt-8 mb-5 text-[18px]`}>Conteudos de {content?.toUpperCase()}</p>
 
             <div className={`w-[90%] sm:px-12 sm:w-[70%] mb-[100px] sm:mb-[40px] lg:mb-0 flex items-center flex-col overflow-y-scroll scrollbar scrollbar-track-transparent scrollbar-thumb-my-secondary`}>
+                
                 {contentMatter && (
                     <>
-                        {/* <p>URL atualizada: <br />{contentMatter}</p> */}
-                        {/* <MarkdownRenderer url={contentMatter} /> */}
-                        <img src="https://backendculturalpassport-1.onrender.com/uploads/1720627147541.jpg" alt="" className='w-[100px] h-[100px]' />
+                        {/* <p>URL atualizada: <br />https://firebasestorage.googleapis.com/v0/b/cultural-passport-78148.appspot.com/o/content%2FPorcentagem.md?alt=media&token=b4a7632e-4803-4129-937b-4517744e23c1</p> */}
+                        <MarkdownRenderer url={"https://firebasestorage.googleapis.com/v0/b/cultural-passport-78148.appspot.com/o/content%2FPorcentagem.md?alt=media&token=b4a7632e-4803-4129-937b-4517744e23c1"} />
+                        <img src={contentFB} alt="" className='w-[100px] h-[100px]' />
                     </>
                 )}
-                <iframe style={{ color: '#ff0000', backgroundColor: '#00000055' }} id='meuIframe' src={`https://backendculturalpassport-1.onrender.com/uploads/1720653724923.md`}></iframe>
+                {/* <iframe style={{ color: '#ff0000', backgroundColor: '#00000055' }} id='meuIframe' src={`https://backendculturalpassport-1.onrender.com/uploads/1720653724923.md`}></iframe> */}
             </div>
 
             
