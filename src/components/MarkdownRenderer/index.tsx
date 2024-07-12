@@ -6,6 +6,10 @@ const MarkdownRenderer = ({ url }: { url:any}) => {
 
     const [markdown, setMarkdown] = useState<string>(url)
 
+    useEffect(() => {
+        setMarkdown('oi')
+    })
+
     // useEffect(() => {
     //     const fetchMarkdown = async () => {
     //         try {

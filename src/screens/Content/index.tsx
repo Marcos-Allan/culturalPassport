@@ -1,6 +1,6 @@
 //IMPORTAÇÃO DAS BIBLIOTECAS
-import { FormEvent, useEffect, useState } from 'react'
-import { useParams, useLocation, useNavigate, Link } from 'react-router-dom';
+import { useEffect, useState } from 'react'
+import { useParams, useNavigate } from 'react-router-dom';
 
 //IMPORTAÇÃO DOS COMPONENTES
 import MenuButton from "../../components/MenuButton";
@@ -16,10 +16,6 @@ import instance from '../../utils/axios';
 import MarkdownRenderer from '../../components/MarkdownRenderer';
 import axios from 'axios';
 
-//IMPORTAÇÃO DAS BIBLIOTECAS DO FIREBASE
-import { ref, uploadBytesResumable, getDownloadURL } from 'firebase/storage';
-import { storage } from '../../utils/firebase';
-
 export default function Content() {
 
     //USO DO HOOK useParams
@@ -29,13 +25,13 @@ export default function Content() {
     const navigate = useNavigate()
 
     //VERIFICA A ROTA ATUAL
-    const location = useLocation();
+    // const location = useLocation();
 
     //RESGATA AS VARIAVEIS GLOBAIS
     const states:any = useMyContext()
 
     //DESESTRUTURA AS VARIAVEIS ESPECIFICADAS
-    const { userS, theme } = states
+    const { userS } = states
 
     //UTILIZAÇÃO DO HOOK useState
     const [contentText, setContentText] = useState<string>()
@@ -50,6 +46,8 @@ export default function Content() {
             //REDIRECIONA ELE PARA A PÁGINA DE MATÉRIAS
             navigate('/')
         }
+
+        console.log(contentText)
 
         setContentFB('https://firebasestorage.googleapis.com/v0/b/cultural-passport-78148.appspot.com/o/images%2Favatar-3.jpg?alt=media&token=b4a7632e-4803-4129-937b-4517744e23c1')
 
