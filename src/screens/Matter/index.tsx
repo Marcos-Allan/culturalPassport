@@ -154,6 +154,16 @@ export default function Matter() {
         getContent(location.pathname.split('/')[2])
     },[])
 
+    //FUNÇÃO PARA REDIRECIONAR PARA OUTRA PÁGINA
+    function redirect(cont:string){
+
+        //FORMATA O CAMPO PARA DEIXAR APENAS AS INICIAIS DO VESTIBULAR
+        const content = cont.split(' ')[0].toLowerCase()
+
+        //NAVEGA PARA A PRÓXIMA PÁGINA
+        navigate(`/materias/${matter}/content/${content}`)
+    }
+
     return(
         <>
             <Navbar>
@@ -168,7 +178,7 @@ export default function Matter() {
 
             <div className={`w-[90%] sm:px-12 sm:w-[70%] mb-[100px] sm:mb-[40px] lg:mb-0 flex items-center flex-col overflow-y-scroll scrollbar scrollbar-track-transparent scrollbar-thumb-my-secondary`}>
                 {content.map((cont, i) => (
-                    <ContentCard background={cont.background} title={cont.title} key={i} />
+                    <ContentCard background={cont.background} title={cont.title} event={() => redirect(cont.title)} key={i} />
                 ))}
 
                 {matter == 'fisíca' && (

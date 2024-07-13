@@ -165,6 +165,7 @@ export default function SignIn(){
 
     //FUNÇÃO CHAMADA TODA VEZ QUE A PÁGINA É RECARREGADA
     useEffect(() => {
+        //MUDA O ESTADO DE CARREGAMENTO DA APLICAÇÃO PARA false
         toggleLoading(false)
     },[])
 

@@ -54,7 +54,7 @@ export default function Home(){
     const states:any = useMyContext()
 
     //DESESTRUTURA AS VARIAVEIS ESPECIFICADAS
-    const { userS } = states
+    const { userS, toggleLoading } = states
 
     //FUNÇÃO CHAMADA AO RECARREGAR A PÁGINA
     useEffect(() => {
@@ -64,6 +64,12 @@ export default function Home(){
             //REDIRECIONA ELE PARA A PÁGINA DE MATÉRIAS
             navigate('/materias')
         }
+    },[])
+    
+    //FUNÇÃO CHAMADA AO RECARREGAR A PÁGINA
+    useEffect(() => {
+        //MUDA O ESTADO DE CARREGAMENTO DA APLICAÇÃO PARA true
+        toggleLoading(false)
     },[])
 
     return(
