@@ -1,9 +1,12 @@
 //IMPORTAÇÃO DAS BIBLIOTECAS
 import { useState, useEffect } from 'react'
-import ReactMarkdown from 'react-markdown'
-import remarkGfm from 'remark-gfm'
 import axios from 'axios'
-
+import ReactMarkdown from 'react-markdown';
+import remarkGfm from 'remark-gfm';
+import remarkMath from 'remark-math';
+import rehypeRaw from 'rehype-raw';
+import rehypeKatex from 'rehype-katex';
+import 'katex/dist/katex.min.css';
 
 //IMPORTAÇÃO DO PROVEDOR PARA PEGAR AS VARIÁVEIS GLOBAIS
 import { useMyContext } from '../../provider/geral';
@@ -62,7 +65,11 @@ const MarkdownRenderer = ({ url }: { url:any}) => {
         <div className='w-full flex flex-col justify-center items-center'>
             {markdown == "" && <Text text='Estamos caregando o conteudo, por favor seja paciente' />}
             <div className={`w-full flex flex-col items-start justify-start ${theme == 'light' ? 'tetx-my-black' : 'text-my-white'}`}>
-                <ReactMarkdown children={markdown} remarkPlugins={[remarkGfm]} />
+                <ReactMarkdown
+                    children={markdown}
+                    remarkPlugins={[remarkGfm, remarkMath]}
+                    rehypePlugins={[rehypeRaw, rehypeKatex]}
+                />
             </div>
         </div>
     )

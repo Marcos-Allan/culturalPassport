@@ -127,12 +127,15 @@ export default function Matter() {
                 case 'matem%C3%A1tica':
                     //MAEMÁTICA
                     setContent([
-                        { title: 'analise combinatória', background: 0 },
-                        { title: 'porcentagem', background: 1 },
-                        { title: 'geometria plana e geometria espacial', background: 2 },
-                        { title: 'razão e proporção', background: 3 },
-                        { title: 'equações e funções', background: 4 },
-                        { title: 'estatística e probabilidade', background: 5 }
+                        { title: 'porcentagem', background: 0 },
+                        { title: 'equações', background: 1 },
+                        { title: 'funções', background: 2 },
+                        { title: 'PA progressão aritimética', background: 3 },
+                        { title: 'PG progressão geométrica', background: 4 },
+                        { title: 'analise combinatória', background: 5 },
+                        { title: 'geometria plana e geometria espacial', background: 6 },
+                        { title: 'razão e proporção', background: 7 },
+                        { title: 'estatística e probabilidade', background: 8 },
                     ])
                 break;
         

@@ -14,10 +14,11 @@ import MarkdownRenderer from '../../components/MarkdownRenderer';
 //IMPORTAÇÃO DO PROVEDOR PARA PEGAR AS VARIÁVEIS GLOBAIS
 import { useMyContext } from '../../provider/geral';
 
+
 export default function Content() {
 
     //USO DO HOOK useParams
-    const { matter, content } = useParams()
+    const { content } = useParams()
 
     //UTILIZAÇÃO DO HOOK DE NAVEGAÇÃO 
     const navigate = useNavigate()
@@ -56,7 +57,7 @@ export default function Content() {
             <Navbar>
                 <Return />
                 <TitlePage
-                    text={`${matter} content`}
+                    text={`content`}
                 />
                 <MenuButton />
             </Navbar>
