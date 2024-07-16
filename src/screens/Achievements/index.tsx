@@ -39,9 +39,13 @@ import Navbar from "../../components/Navbar";
 import Return from "../../components/Return";
 import TitlePage from "../../components/TitlePage";
 import ConquestCard from '../../components/ConquestCard';
+import Text from '../../components/Text';
 
 //IMPORTAÇÃO DO PROVEDOR PARA PEGAR AS VARIÁVEIS GLOBAIS
 import { useMyContext } from '../../provider/geral';
+
+//IMPORTAÇÃO DOS ICONES
+import { IoMdSad } from "react-icons/io";
 
 export default function Achievements() {
 
@@ -52,7 +56,7 @@ export default function Achievements() {
     const states:any = useMyContext()
 
     //DESESTRUTURA AS VARIAVEIS ESPECIFICADAS
-    const { userS } = states
+    const { userS, theme } = states
 
     //UTILIZA O HOOK DO useState
     const [conquests, setConquests] = useState<any[]>([])
@@ -68,19 +72,12 @@ export default function Achievements() {
 
         //DEFINE O ARRAY COM AS CONQUISTAS
         setConquests([
-            { level: 2, message: 'próxima meta 365 dias', porcentage: 80, title: 'Day o cool' },
-            { level: 3, message: 'próxima meta 10x ao dia', porcentage: 100, title: 'First fap' },
-            { level: 2, message: 'sobreviver mais um dia', porcentage: 30, title: 'Survival day' },
-            { level: 2, message: 'sobreviver mais um dia', porcentage: 30, title: 'Survival day' },
-            { level: 2, message: 'sobreviver mais um dia', porcentage: 30, title: 'Survival day' },
-            { level: 2, message: 'sobreviver mais um dia', porcentage: 30, title: 'Survival day' },
-            { level: 2, message: 'sobreviver mais um dia', porcentage: 30, title: 'Survival day' },
-            { level: 2, message: 'sobreviver mais um dia', porcentage: 30, title: 'Survival day' },
-            { level: 2, message: 'sobreviver mais um dia', porcentage: 30, title: 'Winner !!' },
+            // { level: 2, message: 'próxima meta 365 dias', porcentage: 80, title: 'Day o cool' },
+            // { level: 3, message: 'próxima meta 10x ao dia', porcentage: 100, title: 'First fap' },
+            // { level: 2, message: 'sobreviver mais um dia', porcentage: 30, title: 'Survival day' },
+            // { level: 2, message: 'sobreviver mais um dia', porcentage: 30, title: 'Winner !!' },
         ])
     },[])
-
-    
 
     return(
         <>
@@ -93,9 +90,18 @@ export default function Achievements() {
             </Navbar>
             
             <div className={`w-full flex flex-col justify-start items-center sm:gap-[20px] mb-[100px] sm:mb-[40px] lg:mb-0 overflow-y-scroll scrollbar scrollbar-track-transparent scrollbar-thumb-my-secondary`}>    
-                {conquests.map((conq, i) => (
+                {conquests.length >= 1 ? conquests.map((conq, i) => (
                     <ConquestCard level={conq.level} message={conq.message} porcentage={conq.porcentage} title={conq.title} key={i} />
-                ))}
+                )):(
+                    <>
+                        <Text text='Nenhuma conquista concluida ainda'/>
+                        <IoMdSad
+                            className={`text-[120px]
+                                ${theme == 'light' ? 'text-my-gray' : 'text-my-gray-black'}
+                            `}
+                        />
+                    </>
+                )}
             </div>
 
             <BottomNavigation />

@@ -44,6 +44,9 @@ import ExerciseCard from '../../components/ExerciseCard';
 //IMPORTAÇÃO DO PROVEDOR PARA PEGAR AS VARIÁVEIS GLOBAIS
 import { useMyContext } from '../../provider/geral';
 
+//IMPORTAÇÃO DOS ICONES
+import { IoMdSad } from "react-icons/io";
+
 export default function Exercises() {
 
     //UTILIZAÇÃO DO HOOK DE NAVEGAÇÃO 
@@ -53,10 +56,12 @@ export default function Exercises() {
     const states:any = useMyContext()
 
     //DESESTRUTURA AS VARIAVEIS ESPECIFICADAS
-    const { userS } = states
+    const { userS, theme } = states
 
     //UTILIZA O HOOK DO useState
-    const [conquests, setExercises] = useState<any[]>([])
+    const [exercises, setExercises] = useState<any[]>([])
+    const [simulations, setSimulations] = useState<any[]>([])
+    const [travels, setTravels] = useState<any[]>([])
 
     //FUNÇÃO CHAMADA AO RECARREGAR A PÁGINA
     useEffect(() => {
@@ -69,22 +74,17 @@ export default function Exercises() {
 
         //DEFINE O ARRAY COM AS CONQUISTAS
         setExercises([
-            { concluded: false, materia: 'português', title: 'museu do ipiranga', type: 'travel' },
-            { concluded: true, materia: 'geografia', title: 'museu do ipiranga', type: 'travel' },
-            { concluded: false, materia: 'filosofia', title: 'museu do ipiranga', type: 'travel' },
-            { concluded: false, materia: 'inglês', title: 'museu do ipiranga', type: 'travel' },
-            { concluded: true, materia: 'história', title: 'museu do ipiranga', type: 'travel' },
-            { concluded: true, materia: 'biologia', title: 'museu do terraplanismo', type: 'travel' },
-            { concluded: false, materia: 'português', title: 'museu do ipiranga', type: 'travel' },
-            { concluded: true, materia: 'fuvest', title: 'fazer simulado de matemática', type: 'exercise' },
-            { concluded: false, materia: 'enem', title: 'fazer simulado de matemática', type: 'exercise' },
-            { concluded: false, materia: 'fuvest', title: 'fazer simulado de matemática', type: 'exercise' },
-            { concluded: true, materia: 'fuvest', title: 'fazer simulado de matemática', type: 'exercise' },
-            { concluded: true, materia: 'unesp', title: 'fazer simulado de matemática', type: 'exercise' },
-            { concluded: false, materia: 'ufpa', title: 'fazer simulado de matemática', type: 'exercise' },
-            { concluded: false, materia: 'unesp', title: 'fazer simulado de matemática', type: 'exercise' },
-            { concluded: true, materia: 'uerj', title: 'fazer simulado de história', type: 'exercise' },
+            // { concluded: false, materia: 'português', title: 'museu do ipiranga', type: 'travel' },
+            // { concluded: true, materia: 'geografia', title: 'museu do ipiranga', type: 'travel' },
+            // { concluded: true, materia: 'fuvest', title: 'fazer simulado de matemática', type: 'simulation' },
+            // { concluded: false, materia: 'enem', title: 'fazer simulado de matemática', type: 'simulation' },
         ])
+
+        const simulations_c = exercises.filter(exerc => exerc.type == 'simulation')
+        const travels_c = exercises.filter(exerc => exerc.type == 'travel')
+
+        setSimulations(simulations_c)
+        setTravels(travels_c)
     },[])
 
     return(
@@ -100,14 +100,35 @@ export default function Exercises() {
             <div className={`w-full flex flex-col justify-start items-center mb-[100px] sm:mb-[40px] lg:mb-0 overflow-y-scroll overflow-visible scrollbar scrollbar-track-transparent scrollbar-thumb-my-secondary`}>    
                 <Text text='Passeios' position='left' />
 
-                {conquests.map((exerc, i) => 
-                    exerc.type == 'travel' ? (<ExerciseCard concluded={exerc.concluded} materia={exerc.materia} title={exerc.title} type={exerc.type} key={i} />):(<></>)
+                {travels.length >= 1 ? travels.map((exerc, i) => (
+                    <ExerciseCard
+                        concluded={exerc.concluded}
+                        materia={exerc.materia}
+                        title={exerc.title}
+                        type={exerc.type} key={i}
+                    />
+                )):(
+                    <Text text='Nenhum passeio disponivel no momento'/>
                 )}
                 
                 <Text text='Simulados' position='left' />
                 
-                {conquests.map((exerc, i) => 
-                    exerc.type == 'exercise' ? (<ExerciseCard concluded={exerc.concluded} materia={exerc.materia} title={exerc.title} type={exerc.type} key={i} />):(<></>)
+                {simulations.length >= 1 ? simulations.map((exerc, i) => (
+                    <ExerciseCard
+                        concluded={exerc.concluded}
+                        materia={exerc.materia}
+                        title={exerc.title}
+                        type={exerc.type} key={i}
+                    />
+                )):(
+                    <Text text='Nenhum simulado disponivel no momento'/>
+                )}
+                {travels.length == 0 && simulations.length == 0 && (
+                    <IoMdSad
+                        className={`text-[120px]
+                            ${theme == 'light' ? 'text-my-gray' : 'text-my-gray-black'}
+                        `}
+                    />
                 )}
             </div>
             

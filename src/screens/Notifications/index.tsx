@@ -45,7 +45,7 @@ import Text from '../../components/Text';
 import { useMyContext } from '../../provider/geral';
 
 //IMPORTAÇÃO DOS ICONES
-import { IoMdHappy } from "react-icons/io";
+import { IoMdSad } from "react-icons/io";
 
 export default function Notifications() {
 
@@ -93,19 +93,19 @@ export default function Notifications() {
     useEffect(() => {
         //DEFINE O ARRAY COM AS NOTIFICAÇÕES
         setNotification([
-            { materia: 'quimica', content: 'aprender a fazer sal', isClosed: false},
-            { materia: 'matemática', content: 'porcentagem', isClosed: false},
-            { materia: 'português', content: 'verbos', isClosed: false},
-            { materia: 'filosofia', content: 'sócrates', isClosed: false},
-            { materia: 'sociologia', content: 'socialismo x comunismo', isClosed: false},
-            { materia: 'biologia', content: 'oviviparo', isClosed: false},
-            { materia: 'quimica', content: 'química orgânica', isClosed: false},
-            { materia: 'geografia', content: 'poluição ambiental', isClosed: false},
-            { materia: 'quimica', content: 'poluição ambiental', isClosed: false},
-            { materia: 'português', content: 'poluição ambiental', isClosed: false},
-            { materia: 'filosofia', content: 'poluição ambiental', isClosed: false},
-            { materia: 'sociologia', content: 'poluição ambiental', isClosed: false},
-            { materia: 'biologia', content: 'poluição ambiental', isClosed: false},
+            // { materia: 'quimica', content: 'aprender a fazer sal', isClosed: false},
+            // { materia: 'matemática', content: 'porcentagem', isClosed: false},
+            // { materia: 'português', content: 'verbos', isClosed: false},
+            // { materia: 'filosofia', content: 'sócrates', isClosed: false},
+            // { materia: 'sociologia', content: 'socialismo x comunismo', isClosed: false},
+            // { materia: 'biologia', content: 'oviviparo', isClosed: false},
+            // { materia: 'quimica', content: 'química orgânica', isClosed: false},
+            // { materia: 'geografia', content: 'poluição ambiental', isClosed: false},
+            // { materia: 'quimica', content: 'poluição ambiental', isClosed: false},
+            // { materia: 'português', content: 'poluição ambiental', isClosed: false},
+            // { materia: 'filosofia', content: 'poluição ambiental', isClosed: false},
+            // { materia: 'sociologia', content: 'poluição ambiental', isClosed: false},
+            // { materia: 'biologia', content: 'poluição ambiental', isClosed: false},
         ])
     },[])
 
@@ -128,7 +128,7 @@ export default function Notifications() {
                     <div className='w-full flex flex-col items-center'>
                         
                         <Text text='Nenhuma Notificação Recebida'/>
-                        <IoMdHappy
+                        <IoMdSad
                             className={`text-[120px]
                             ${theme == 'light' ? 'text-my-gray' : 'text-my-gray-black'}`}
                         />

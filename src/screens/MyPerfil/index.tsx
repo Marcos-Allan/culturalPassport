@@ -35,7 +35,7 @@ import { useNavigate } from 'react-router-dom';
 import instance from '../../utils/axios';
 
 //IMPORTAÇÃO DAS BIBLIOTECAS DO FIREBASE
-import { ref, uploadBytesResumable, getDownloadURL } from 'firebase/storage';
+import { ref, uploadBytesResumable, getDownloadURL, listAll } from 'firebase/storage';
 import { storage } from '../../utils/firebase';
 
 //IMPORTAÇÃO DOS ICONES
@@ -51,6 +51,8 @@ import avatar_3 from "../../../public/avatar-3.jpg"
 import avatar_4 from "../../../public/avatar-4.jpg"
 import avatar_5 from "../../../public/avatar-5.jpg"
 import avatar_6 from "../../../public/avatar-6.jpg"
+import avatar_7 from "../../../public/avatar-7.jpg"
+import avatar_8 from "../../../public/avatar-8.jpg"
 
 //IMPORTAÇÃO DOS COMPONENTES
 import Navbar from "../../components/Navbar";
@@ -73,8 +75,9 @@ export default function MyPerfil() {
 
     //UTILIZA O HOOK useState
     const [img, setImg] = useState<string>('')
+    const [imgs, setImgs] = useState<string[]>([])
     const [name, setName] = useState<string>()
-    const [imgURL, setImgURL] = useState<string>('')
+    const [imgURL, setImgURL] = useState<string>('imagens')
     const [progress, setProgress] = useState<any>(0)
 
     //FUNÇÃO CHAMADA QUANDO A PAGINA É CARREGADA
@@ -92,15 +95,51 @@ export default function MyPerfil() {
     //RESGATA AS VARIAVEIS GLOBAIS
     const { theme, userS, toggleLoading, toggleAlert, toggleUser } = states
 
+    //FUNÇÃO RESPONSÁVEL POR LISTAR OS AVATARES
+    const fetchImages = async () => {
+        //FAZ UMA REFERÊNCIA AO LOCAL DE AVATARES SALVOS NA NUVEM
+        const storageRef = ref(storage, '/images/avatars');
+        try {
+            //PEGA AS IMAGENS DENTRO DA PASTA ESPECIFICADA
+            const result = await listAll(storageRef);
+
+            //PEGA A URL DOS AVATARES
+            const urlPromises = result.items.map((imageRef) => getDownloadURL(imageRef));
+
+            //ESPERA TODOS OS AVATARES SEREM 
+            const urls = await Promise.all(urlPromises);
+            
+            //SETA AS URLS DAS IMAGENS
+            setImgs(urls);
+        } catch (error) {
+            console.error('Erro ao listar imagens:', error);
+        }
+    };
+
+    useEffect(() => {
+        fetchImages();
+    }, []);
+
+    //FUNÇÃO RESPONSÁVEL POR PEGAR A IMAGEM DOS ARQUIVOS DO USUÁRIO
     const handleFileIMG = () => {
+
+        //PEGA O ARQUIVO ESCOLHIDO
         const file = inputFileRef.current?.files?.[0]
 
+        //VERIFICA SE TEM ARQUIVO
         if(file){
+            //LÊ O ARQUIVO ESCOLHIDO
             const reader = new FileReader()
+
+            //EXECUTA A FUNÇÃO ASSIM QUE O ARQUIVO É CARREGADO
             reader.onloadend = () => {
+                //SETA AS IMAGENS COMO URL
                 setImg(reader.result as string)
+                
+                //SETA AS IMAGENS COMO URL
                 setImgURL(reader.result as string)
             }
+            //LÊ A URL DO ARQUIVO
             reader.readAsDataURL(file)
         }
     }
@@ -217,30 +256,40 @@ export default function MyPerfil() {
 
     //FUNÇÃO RESPONSÁVEL POR TROCAR A IMAGEM DO USUÁRIO
     function toggleImg(index:number){
+
+    fetchImages();
      
     switch (index) {
         case 1:
-            setImg('https://cultural-passport.vercel.app/avatar-1.jpg')
+            setImg(imgs[0])
         break;
         
         case 2:
-            setImg('https://cultural-passport.vercel.app/avatar-2.jpg')
+            setImg(imgs[1])
         break;
         
         case 3:
-            setImg('https://cultural-passport.vercel.app/avatar-3.jpg')
+            setImg(imgs[2])
         break;
         
         case 4:
-            setImg('https://cultural-passport.vercel.app/avatar-4.jpg')
+            setImg(imgs[3])
         break;
         
         case 5:
-            setImg('https://cultural-passport.vercel.app/avatar-5.jpg')
+            setImg(imgs[4])
         break;
         
         case 6:
-            setImg('https://cultural-passport.vercel.app/avatar-6.jpg')
+            setImg(imgs[5])
+        break;
+        
+        case 7:
+            setImg(imgs[6])
+        break;
+    
+        case 8:
+            setImg(imgs[7])
         break;
     
         default:
@@ -257,7 +306,7 @@ export default function MyPerfil() {
                 <MenuButton />
             </Navbar>
             <div className={`w-full flex flex-col items-center overflow-y-scroll scrollbar scrollbar-track-transparent scrollbar-thumb-my-secondary`}>
-
+                
                 {userS.logged == true && (
                     <div className={`w-[90%] sm:w-[60%] flex items-center gap-[10px] mb-0 mt-4`}>
                         <img
@@ -297,6 +346,8 @@ export default function MyPerfil() {
                             />
                             <p
                                 className={`
+                                    pl-[20px]
+                                    sm:pl-0
                                     text-[20px]
                                     font-extralight
                                     hover:scale-[1.1]
@@ -330,14 +381,16 @@ export default function MyPerfil() {
                 >Avatares
                 </h1>
 
-                <div className={`px-14 mb-8 w-full sm:w-[60%] flex justify-center flex-wrap gap-[20px]`}>
+                <div className={`px-14 mb-8 w-full sm:w-[60%] flex justify-center flex-wrap gap-[10px]`}>
                     
-                    <AvatarImage active={img == avatar_1 ? true : false} img={avatar_1} event={() => toggleImg(1)} />
-                    <AvatarImage active={img == avatar_2 ? true : false} img={avatar_2} event={() => toggleImg(2)} />
-                    <AvatarImage active={img == avatar_3 ? true : false} img={avatar_3} event={() => toggleImg(3)} />
-                    <AvatarImage active={img == avatar_4 ? true : false} img={avatar_4} event={() => toggleImg(4)} />
-                    <AvatarImage active={img == avatar_5 ? true : false} img={avatar_5} event={() => toggleImg(5)} />
-                    <AvatarImage active={img == avatar_6 ? true : false} img={avatar_6} event={() => toggleImg(6)} />
+                    <AvatarImage active={img == avatar_1 ? true : false} img={imgs[0]} event={() => toggleImg(1)} />
+                    <AvatarImage active={img == avatar_2 ? true : false} img={imgs[1]} event={() => toggleImg(2)} />
+                    <AvatarImage active={img == avatar_3 ? true : false} img={imgs[2]} event={() => toggleImg(3)} />
+                    <AvatarImage active={img == avatar_4 ? true : false} img={imgs[3]} event={() => toggleImg(4)} />
+                    <AvatarImage active={img == avatar_5 ? true : false} img={imgs[4]} event={() => toggleImg(5)} />
+                    <AvatarImage active={img == avatar_6 ? true : false} img={imgs[5]} event={() => toggleImg(6)} />
+                    <AvatarImage active={img == avatar_7 ? true : false} img={imgs[6]} event={() => toggleImg(7)} />
+                    <AvatarImage active={img == avatar_8 ? true : false} img={imgs[7]} event={() => toggleImg(8)} />
 
                 </div>
 
