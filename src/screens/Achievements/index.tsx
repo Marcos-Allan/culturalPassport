@@ -88,6 +88,8 @@ export default function Achievements() {
         //DEFINE O ARRAY COM AS CONQUISTAS
         getAchievements()
 
+        console.log(userS)
+
     },[])
 
     return(

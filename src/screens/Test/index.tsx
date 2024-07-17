@@ -27,7 +27,7 @@ export default function Test() {
     const states:any = useMyContext()
 
     //DESESTRUTURA AS VARIAVEIS ESPECIFICADAS
-    const { theme, userS } = states
+    const { theme, userS, toggleUser } = states
 
     //UTILIZAÇÃO DO HOOK useState
     const [questIndex, setQuestIndex] = useState<number>(0)
@@ -101,6 +101,10 @@ export default function Test() {
     
     //FUNÇÃO RESPONSÁVEL POR IR PARA A PÁGINA POSTERIOR
     function nextQuestion() {
+        
+        toggleUser(userS.name, userS.img, userS._id, userS.simulations, 1)
+        
+        console.log(userS)
         if(Number(questIndex + 2) >= Number(questions.length)){
             setQuestFinalized(true)
         }else{
@@ -208,7 +212,10 @@ export default function Test() {
                     <TitlePage text='Desculpe'/>
                     <Text text='Sentimos muito Infelizmente não temos provas desta matéria' />
                     <RiEmotionSadFill className={`text-[140px] ${theme == 'light' ? 'text-my-gray' : 'text-my-gray-black'}`} />
-                    <Button route='/materias' text='Voltar' />
+                    <Button route='/materias' text='Voltar' event={() => {
+                        //REGISTRA O NOME E A FOTO E O ID DO DO USUARIO LOGADO PARA MOSTRAR NO FRONT-END
+                        console.log(userS)
+                    }} />
                 </div>
             )}
         </>

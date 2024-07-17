@@ -45,7 +45,7 @@ export default function ConquestCard(props: Props) {
     const states:any = useMyContext()
 
     //DESESTRUTURA AS VARIAVEIS ESPECIFICADAS
-    const { theme } = states
+    const { theme, userS } = states
 
     //FUNÇÃO RESPONSÁVEL POR RENDERIZAR AS BARRAS DE LEVEL
     function renderLevel(quantity: number) {
@@ -77,7 +77,7 @@ export default function ConquestCard(props: Props) {
         `}>
             
             <div
-                style={{ backgroundImage: `url('${props.backImg}')`, filter: 'grayscale(100%)' }}
+                style={{ backgroundImage: `url('${props.backImg}')`, filter: `${props.title == "No caminho certo" && userS.simulationsConcludeds == 1 ? '' : 'grayscale(100%)'}` }}
                 className={`bg-cover bg-center  h-full w-[40%] flex flex-row p-2 items-end gap-1 rounded-[5px]
                 
             `}>
@@ -106,7 +106,7 @@ export default function ConquestCard(props: Props) {
                         ${theme == 'light' ? 'bg-my-gray' : 'bg-my-gray-black'}
                     `}>
                         <div
-                            style={{ width: `${Number(props.porcentage)}%` }}
+                            style={{ width: `${props.title == "No caminho certo" && userS.simulationsConcludeds == 1 ? 100 : Number(props.porcentage)}%` }}
                             className={`h-full
                             ${theme == 'light' ? 'bg-my-secondary' : 'bg-my-quartenary'}
                         `}></div>
@@ -115,7 +115,7 @@ export default function ConquestCard(props: Props) {
                     <p
                         className={`text-[14px]
                         ${theme == 'light' ? 'text-my-gray' : 'text-my-gray-black'}
-                    `}>{props.porcentage}%</p>
+                    `}>{`${props.title == "No caminho certo" && userS.simulationsConcludeds == 1 ? 100 : props.porcentage}`}%</p>
 
                 </div>
 
