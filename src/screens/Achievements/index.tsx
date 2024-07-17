@@ -47,6 +47,9 @@ import { useMyContext } from '../../provider/geral';
 //IMPORTAÇÃO DOS ICONES
 import { IoMdSad } from "react-icons/io";
 
+//CONFIGURAÇÃO DA BASE URL DO AXIOS
+import instance from '../../utils/axios';
+
 export default function Achievements() {
 
     //UTILIZAÇÃO DO HOOK DE NAVEGAÇÃO 
@@ -61,6 +64,18 @@ export default function Achievements() {
     //UTILIZA O HOOK DO useState
     const [conquests, setConquests] = useState<any[]>([])
 
+    //FUNÇÃO RESPONSÁVEL POR PEGAR AS CONQUISTAS DO BD
+    function getAchievements() {
+        instance.get('/achievement/achievements')
+        .then(function (response) {
+            setConquests(response.data)
+            console.log(response.data)
+        })
+        .catch(function (error) {
+            console.log(error)
+        })
+    }
+
     //FUNÇÃO CHAMADA AO RECARREGAR A PÁGINA
     useEffect(() => {
         //VERIFICA SE O USUÁRIO ESTÁ LOGADO
@@ -71,12 +86,8 @@ export default function Achievements() {
         }
 
         //DEFINE O ARRAY COM AS CONQUISTAS
-        setConquests([
-            // { level: 2, message: 'próxima meta 365 dias', porcentage: 80, title: 'Day o cool' },
-            // { level: 3, message: 'próxima meta 10x ao dia', porcentage: 100, title: 'First fap' },
-            // { level: 2, message: 'sobreviver mais um dia', porcentage: 30, title: 'Survival day' },
-            // { level: 2, message: 'sobreviver mais um dia', porcentage: 30, title: 'Winner !!' },
-        ])
+        getAchievements()
+
     },[])
 
     return(
@@ -91,7 +102,7 @@ export default function Achievements() {
             
             <div className={`w-full flex flex-col justify-start items-center sm:gap-[20px] mb-[100px] sm:mb-[40px] lg:mb-0 overflow-y-scroll scrollbar scrollbar-track-transparent scrollbar-thumb-my-secondary`}>    
                 {conquests.length >= 1 ? conquests.map((conq, i) => (
-                    <ConquestCard level={conq.level} message={conq.message} porcentage={conq.porcentage} title={conq.title} key={i} />
+                    <ConquestCard level={conq.level} message={conq.message} porcentage={conq.porcentage} backImg={conq.imgURL} title={conq.title} key={i} />
                 )):(
                     <>
                         <Text text='Nenhuma conquista concluida ainda'/>

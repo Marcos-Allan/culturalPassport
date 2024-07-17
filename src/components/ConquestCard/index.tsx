@@ -36,6 +36,7 @@ interface Props {
     porcentage: number,
     title: string,
     message: string,
+    backImg: string,
 }
 
 export default function ConquestCard(props: Props) {
@@ -59,7 +60,7 @@ export default function ConquestCard(props: Props) {
                 <div
                     key={i}
                     className={`h-[10px] flex-grow-[1] rounded-[2px]
-                    ${theme == 'light' ? 'bg-my-gray' : 'bg-my-gray-black'}    
+                    bg-my-white-opacity   
                 `}/>
             )
 
@@ -76,8 +77,9 @@ export default function ConquestCard(props: Props) {
         `}>
             
             <div
-                className={`h-full w-[40%] flex flex-row p-2 items-end gap-1 rounded-[5px]
-                ${theme == 'light' ? 'bg-my-secondary' : 'bg-my-quartenary'}
+                style={{ backgroundImage: `url('${props.backImg}')`, filter: 'grayscale(100%)' }}
+                className={`bg-cover bg-center  h-full w-[40%] flex flex-row p-2 items-end gap-1 rounded-[5px]
+                
             `}>
                 {/* CHAMA A FUNÇÃO QUE RENDERIZA OS LEVELS DEPENDENDO DA QUANTIDADE ESPECIFICADA */}
                 {renderLevel(props.level)} 
