@@ -101,10 +101,6 @@ export default function Test() {
     
     //FUNÇÃO RESPONSÁVEL POR IR PARA A PÁGINA POSTERIOR
     function nextQuestion() {
-        
-        toggleUser(userS.name, userS.img, userS._id, userS.simulations, 1)
-        
-        console.log(userS)
         if(Number(questIndex + 2) >= Number(questions.length)){
             setQuestFinalized(true)
         }else{
@@ -201,20 +197,32 @@ export default function Test() {
                                 <TitlePage text='Parabéns'/>
                                 <p className={`${theme == 'light' ? 'text-my-black' : 'text-my-white'}`}>Parabens Prova finalizada</p>
                                 <RiEmotionHappyFill className={`text-[140px] ${theme == 'light' ? 'text-my-gray' : 'text-my-gray-black'}`} />
-                                <Button route='/materias' text='Voltar' />
+                                <Button route='undefined' text='Voltar' event={() => {
+                                    //DA UM ALERT NA TELA 
+                                    if(userS){
+                                        console.log(userS)
+                                    }
+                                    
+                                    //REDIRECIONA ELE PARA A PÁGINA DE MATÉRIAS
+                                    navigate('/materias')
+                                }} />
                             </>
                         )}
 
                     </div>
                 </>
             ) : (
-                <div className={`mt-5 flex flex-col items-center`}>
+                <div className={`mt-5 flex flex-col items-start`}>
                     <TitlePage text='Desculpe'/>
                     <Text text='Sentimos muito Infelizmente não temos provas desta matéria' />
                     <RiEmotionSadFill className={`text-[140px] ${theme == 'light' ? 'text-my-gray' : 'text-my-gray-black'}`} />
-                    <Button route='/materias' text='Voltar' event={() => {
-                        //REGISTRA O NOME E A FOTO E O ID DO DO USUARIO LOGADO PARA MOSTRAR NO FRONT-END
-                        console.log(userS)
+                    <Button route='undefined' text='Porra' event={() => {
+                        
+                        //DA UM ALERT NA TELA 
+                        alert('userS')
+                        
+                        //REDIRECIONA ELE PARA A PÁGINA DE MATÉRIAS
+                        // navigate('/materias')
                     }} />
                 </div>
             )}

@@ -58,6 +58,7 @@ export const MyProvider = ({ children } : { children: React.ReactNode }) => {
     const [userS, setUserS] = useState<User>({ logged: false, name: '', img: '', id: '', simulations: [], simulationsConcludeds: 0 })
     const [loading, setLoading] = useState<boolean>(false)
     const [message, setMessage] = useState<Alert>({ type: 'undefined', text: 'Alerta simples' })
+    const [isCronogram, setIsCronogram] = useState<boolean>(false)
 
     //FUNÇÃO RESPONSAVEL POR TROCAR E SALVAR NO localStorage O TEMA ESCOLHIDO PELO USUÁRIO
     const toggleTheme = () => {
@@ -80,15 +81,19 @@ export const MyProvider = ({ children } : { children: React.ReactNode }) => {
     const toggleLoading = (state:boolean) => {
         setLoading(state)
     }
-
+    
     //FUNÇÃO RESPONSÁVEL POR DETERMINAR O TIPO E O TEXTO DO ALERTA
     const toggleAlert = (type: string, text: string ) => {
         setMessage({ type: type, text: text })
     }
-
+    
+    //FUNÇÃO RESPONSAVEL POR TROCAR O ESTADO DE LOADING DA APLICAÇÃO
+    const toggleCronogram = (state:boolean) => {
+        setIsCronogram(state)
+    }
     //RETORNA TUDO PARA SER USADO EM TODO O SITE
     return (
-        <MyContext.Provider value={{ theme, toggleTheme, menuOpen, toggleMenuOpen, userS, toggleUser, loading, toggleLoading, message, toggleAlert }}>
+        <MyContext.Provider value={{ theme, toggleTheme, menuOpen, toggleMenuOpen, userS, toggleUser, loading, toggleLoading, message, toggleAlert, isCronogram, toggleCronogram }}>
             {children}
         </MyContext.Provider>
     )
