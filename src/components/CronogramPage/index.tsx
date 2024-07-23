@@ -34,7 +34,8 @@ import { useState, useEffect } from 'react'
 import { useMyContext } from "../../provider/geral"
 
 //IMPORTAÇÃO DOS ICONES
-import { IoAdd, IoArrowForward } from "react-icons/io5";
+import {  IoArrowForward } from "react-icons/io5";
+import { IoMdTrash } from "react-icons/io";
 
 export default function CronogramPage() {
 
@@ -42,7 +43,7 @@ export default function CronogramPage() {
     const states:any = useMyContext()
 
     //DESESTRUTURA AS VARIAVEIS ESPECIFICADAS
-    const { theme, userS, isCronogram } = states
+    const { theme, userS, isCronogram, toggleCronogram } = states
 
     //UTILIZAÇÃO DO HOOK useState
     const [matters, setMatters] = useState<any[]>([])
@@ -118,7 +119,7 @@ export default function CronogramPage() {
                         </div>
                         {cronogram.length > 8 ? (
                          <IoArrowForward
-                             onClick={() => alert('cronograma definido')}
+                             onClick={() => toggleCronogram(true)}
                              className={`
                              absolute right-[0%] top-[0%] text-[20px] m-1 hover:scale-[1.2] transition-all duration-[.2s] cursor-pointer
                                  ${theme == 'light'
@@ -128,7 +129,7 @@ export default function CronogramPage() {
                              `}
                          />
                          ):(
-                            <IoAdd
+                            <IoMdTrash
                                 onClick={() => setCronogram([])}
                                 className={`
                                 absolute right-[0%] top-[0%] text-[20px] m-1 hover:scale-[1.2] transition-all duration-[.2s] cursor-pointer

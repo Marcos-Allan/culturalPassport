@@ -70,15 +70,23 @@ export default function ConquestCard(props: Props) {
         return level
     }
 
+    //FUNÇÃO RESPONSÁVEL POR VER SE A CONQUISTA FOI CONCLUIDA OU NÃO
+    const checkAchievement = (param:string) => {
+        return userS.simulations.some((item:any) => item.title === param)
+    };
+
     return(
         <div
             className={`w-[90%] sm:w-[60%] my-2 p-3 border-2 flex min-h-[180px] gap-[6px] rounded-[8px] hover:scale-[0.92] cursor-pointer transition-all duration-[.2s]
             ${theme == 'light' ? 'border-my-secondary' : 'border-my-quartenary'}
         `}>
             
+            {/* ${props.title == "No caminho certo" && userS.simulationsConcludeds == 1 ? '' : 'grayscale(100%)'} */}
             <div
-                style={{ backgroundImage: `url('${props.backImg}')`, filter: `${props.title == "No caminho certo" && userS.simulationsConcludeds == 1 ? '' : 'grayscale(100%)'}` }}
-                className={`bg-cover bg-center  h-full w-[40%] flex flex-row p-2 items-end gap-1 rounded-[5px]
+                style={{ backgroundImage: `url('${props.backImg}')`, filter: `
+                    ${checkAchievement(props.title) == true ? '' : 'grayscale(100%)'}
+                ` }}
+                className={`bg-cover bg-center  h-full min-w-[40%] flex flex-row p-2 items-end gap-1 rounded-[5px]
                 
             `}>
                 {/* CHAMA A FUNÇÃO QUE RENDERIZA OS LEVELS DEPENDENDO DA QUANTIDADE ESPECIFICADA */}
@@ -105,17 +113,23 @@ export default function ConquestCard(props: Props) {
                         className={`align-bottom w-[80%] h-[10px]
                         ${theme == 'light' ? 'bg-my-gray' : 'bg-my-gray-black'}
                     `}>
+                        {/* `${props.title == "No caminho certo" && userS.simulationsConcludeds == 1 ? 100 : Number(props.porcentage)}%` */}
                         <div
-                            style={{ width: `${props.title == "No caminho certo" && userS.simulationsConcludeds == 1 ? 100 : Number(props.porcentage)}%` }}
+                            style={{ width: 
+                                `${checkAchievement(props.title) == true ? 100 : Number(props.porcentage)}`
+                             }}
                             className={`h-full
                             ${theme == 'light' ? 'bg-my-secondary' : 'bg-my-quartenary'}
                         `}></div>
                     </div>
                     
+                    {/* ${props.title == "No caminho certo" && userS.simulationsConcludeds == 1 ? 100 : props.porcentage} */}
                     <p
                         className={`text-[14px]
                         ${theme == 'light' ? 'text-my-gray' : 'text-my-gray-black'}
-                    `}>{`${props.title == "No caminho certo" && userS.simulationsConcludeds == 1 ? 100 : props.porcentage}`}%</p>
+                    `}>{`
+                        ${checkAchievement(props.title) == true? 100 : props.porcentage}
+                    `}%</p>
 
                 </div>
 

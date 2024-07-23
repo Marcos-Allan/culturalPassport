@@ -27,7 +27,7 @@ export default function Test() {
     const states:any = useMyContext()
 
     //DESESTRUTURA AS VARIAVEIS ESPECIFICADAS
-    const { theme, userS, toggleUser } = states
+    const { theme, userS } = states
 
     //UTILIZAÇÃO DO HOOK useState
     const [questIndex, setQuestIndex] = useState<number>(0)
@@ -202,7 +202,13 @@ export default function Test() {
                                     if(userS){
                                         console.log(userS)
                                     }
-                                    
+
+                                    userS.simulations.push({ title: "Isack Mentiu", message: "faça um simulado de fisíca com 80% ou mais de acertos" })
+
+                                    if(userS.simulations.length >= 1){
+                                        userS.simulations.push({ title: "No caminho certo", message: "complete um simulado" })
+                                    }
+
                                     //REDIRECIONA ELE PARA A PÁGINA DE MATÉRIAS
                                     navigate('/materias')
                                 }} />
