@@ -36,6 +36,7 @@ import { useMyContext } from "../../provider/geral"
 //IMPORTAÇÃO DOS ICONES
 import {  IoArrowForward } from "react-icons/io5";
 import { IoMdTrash } from "react-icons/io";
+import instance from '../../utils/axios';
 
 export default function CronogramPage() {
 
@@ -43,7 +44,7 @@ export default function CronogramPage() {
     const states:any = useMyContext()
 
     //DESESTRUTURA AS VARIAVEIS ESPECIFICADAS
-    const { theme, userS, isCronogram, toggleCronogram } = states
+    const { theme, userS, isCronogram, toggleCronogram, toggleLoading, toggleUser, toggleAlert } = states
 
     //UTILIZAÇÃO DO HOOK useState
     const [matters, setMatters] = useState<any[]>([])
@@ -82,9 +83,43 @@ export default function CronogramPage() {
         return cronogram.includes(matter)
     }
 
+    //FUNÇÃO RESPONSÁVEL POR ATUALIZAR OS DADOS DO USUÁRIO
+    async function updateUser() {
+        //MUDA O ESTADO DE CARREGAMENTO DA APLICAÇÃO PARA true
+        toggleLoading(true);
+
+        try {
+            //FAZ UMA REQUISIÇÃO DO TIPO put PARA ATUALIZAR OS DADOS DO USUÁRIO
+            const response = await instance.put(`/users/update/${userS.id}`, {
+                cronogram: cronogram,
+            });
+
+            //MUDA O ESTADO DE CARREGAMENTO DA APLICAÇÃO PARA false
+            toggleLoading(false);
+
+            //MOSTRA OS DADOS DA REQUISIÇÃO
+            console.log(response.data);
+
+            //REGISTRA O NOME E A FOTO E O ID DO USUARIO LOGADO PARA MOSTRAR NO FRONT-END
+            toggleUser(response.data.name, response.data.img, response.data._id, response.data.simulations, response.data.simulationsConcludeds, response.data.cronogram)
+
+            //COLOCA ALERT NA TELA
+            toggleAlert(`success`, `Alteração feita com sucesso`);
+        } catch (error) {
+            //ESCREVE NO CONSOLE O ERRO OCORRIDO
+            console.log(`Requisição feita com falhas ${error}`);
+
+            //MUDA O ESTADO DE CARREGAMENTO DA APLICAÇÃO PARA false
+            toggleLoading(false);
+
+            //COLOCA ALERT NA TELA
+            toggleAlert(`error`, `Ocorreu um erro interno no servidor`);
+        }
+    }
+
     return(
         <>
-            {userS.logged === true && isCronogram == false && (
+            {userS.logged === true && userS.cronogram.length == 0 && isCronogram == false && (
                 <div className={`
                     absolute top-0 left-0 w-screen h-screen flex flex-col justify-center items-center
                     ${theme == 'light' ? 'bg-my-black-opacity' : 'bg-my-white-opacity'}
@@ -119,7 +154,10 @@ export default function CronogramPage() {
                         </div>
                         {cronogram.length > 8 ? (
                          <IoArrowForward
-                             onClick={() => toggleCronogram(true)}
+                             onClick={() => {
+                                toggleCronogram(true)
+                                updateUser()
+                            }}
                              className={`
                              absolute right-[0%] top-[0%] text-[20px] m-1 hover:scale-[1.2] transition-all duration-[.2s] cursor-pointer
                                  ${theme == 'light'

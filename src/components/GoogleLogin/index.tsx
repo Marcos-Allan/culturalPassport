@@ -41,7 +41,7 @@ import { FcGoogle } from "react-icons/fc";
 import { useMyContext } from "../../provider/geral";
 
 //IMPORTAÇÃO DOS SERVIÇOS DO FIREBASE
-import { auth, getRedirectResult, provider, signInWithRedirect } from '../../utils/firebase.tsx'
+import { auth, provider, signInWithPopup } from '../../utils/firebase.tsx'
 
 export default function GoogleLogin() {
 
@@ -54,11 +54,6 @@ export default function GoogleLogin() {
     //DESESTRUTURA AS VARIAVEIS ESPECIFICADAS
     const { theme, toggleUser, toggleLoading, toggleAlert } = states
 
-    //FUNÇÃO QUE FAZ LOGIN COM O GOOGLE COM REDIRECIONAMENTO DE PÁGINA
-    function signInRedirect() {
-        signInWithRedirect(auth, provider);
-    }
-
     //FUNÇÃO RESPONSÁVEL PELO LOGIN COM EMAIL E SENHA
     function signIn(email:string, name:string, img:string) {
 
@@ -70,7 +65,7 @@ export default function GoogleLogin() {
             //MANDA OS DADOS PARA O BACKEND JUNTO COM A REQUISIÇÃO
             email: email,
             name: name,
-            img: img,
+            img: img
         })
         .then(function (response) {
             //EXECUTA UMA FUNÇÃO QUANDO A REQUISIÇÃO FOR BEM SUCEDIDA
@@ -78,8 +73,10 @@ export default function GoogleLogin() {
             //MUDA O ESTADO DE CARREGAMENTO DA APLICAÇÃO PARA false
             toggleLoading(false)
 
+            console.log('A: '+response.data)
+
             //REGISTRA O NOME E A FOTO DO USUARIO LOGADO PARA MOSTRAR NO FRONT-END
-            toggleUser(response.data.name, response.data.img, response.data._id)
+            toggleUser(response.data.name, response.data.img, response.data._id, response.data.simulations, response.data.simulationsConcludeds, response.data.cronogram)
 
             //COLOCA ALERT NA TELA
             toggleAlert(`success`, `seja bem-vindo(a) ${response.data.name}`)
@@ -100,48 +97,26 @@ export default function GoogleLogin() {
         
     }
     
-    //FUNÇÃO PARA PEGAR O RESULTADO DO LOGIN QUE FOI REDIRECIONADO
-    function getLoginResult() {
-        //MUDA O ESTADO DE CARREGAMENTO DA APLICAÇÃO PARA true
-        toggleLoading(true)
+    const handleGoogleLogin = async () => {
+        try {
+          //REALIZA O LOGIN VIA POPUP DO GOOGLE
+          const result = await signInWithPopup(auth, provider);
+          //OBTÈM OS DADOS DO USUÁRIO
+          const user = result.user;
+          // FAZ LOGIN COM A CONTA DO USÁRIO
+          if(result.user){
+            signIn(user.email || "", user.displayName || "", user.photoURL || "")
+          }
 
-        getRedirectResult(auth)
-        .then((result) => {
-            //PEGA OS DADOS DO USUÁRIO
-            const user = result ? result.user : null;
-            
-            //VERIFICA SE O USUÁRIO FEZ LOGIN
-            if(user){
-                //MUDA O ESTADO DE CARREGAMENTO DA APLICAÇÃO PARA false
-                toggleLoading(false)
-
-                //FAZ O LOGIN CASO A CONTA EXISTA E SE NÃO EE CRIA NO BANCO DE DADOS
-                signIn(String(user.email), String(user.displayName), String(user.photoURL))
-                
-            }else{
-                //MUDA O ESTADO DE CARREGAMENTO DA APLICAÇÃO PARA false
-                toggleLoading(false)
-            }
-
-        }).catch((error) => {
-            //RETORNA O ERRO PARA O USUÁRIO
-            console.log('erro de autenticação: ', error)
-            
-            //MUDA O ESTADO DE CARREGAMENTO DA APLICAÇÃO PARA false
-            toggleLoading(false)
-
-            //COLOCA ALERT NA TELA
-            toggleAlert(`error`, `Lamentamos, ocorreu algum erro inesperado`)
-        });
-    }
+        } catch (error) {
+          console.error("Erro durante o login:", error);
+        }
+      };
 
     //FUNÇÃO CHAMADA TODA VEZ QUE A PÁGINA É RECARREGADA
     useEffect(() => {
         //MUDA O ESTADO DE CARREGAMENTO DA APLICAÇÃO PARA false
         toggleLoading(false)
-
-        //CHAMA A FUNÇÃO PARA PEGAR O RESULTADO DO LOGIN COM O GOOGLE
-        getLoginResult()
     },[])
 
     return(
@@ -151,7 +126,7 @@ export default function GoogleLogin() {
                 toggleLoading(true)
 
                 //FAZ LOGIN COM REDIRECIONAMENTO PARA OUTRA PÁGINA
-                signInRedirect()
+                handleGoogleLogin()
             }}
             className={`w-[80px] h-[80px] sm:w-[52px] sm:h-[52px] lg:w-[52px] lg:h-[52px] border rounded-[50%] flex justify-center items-center lg:border-none cursor-pointer hover:scale-[1.2] transition-all duration-[.2s]
             ${theme == 'light' ? 'border-my-gray lg:bg-black' : 'border-my-gray-black lg:bg-my-white'}

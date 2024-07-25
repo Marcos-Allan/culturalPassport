@@ -134,7 +134,7 @@ export default function SignIn(){
             if(typeof response.data === "object"){
 
                 //REGISTRA O NOME E A FOTO E O ID DO DO USUARIO LOGADO PARA MOSTRAR NO FRONT-END
-                toggleUser(response.data.name, response.data.img, response.data._id, response.data.simulations, response.data.simulationsConcludeds)
+                toggleUser(response.data.name, response.data.img, response.data._id, response.data.simulations, response.data.simulationsConcludeds, response.data.cronogram)
 
                 console.log(response.data)
 
