@@ -65,7 +65,6 @@ import { Provider } from './provider/index.tsx';
 //IMPORTAÇÃO DOS COMPONENTES PRESENTES EM TODAS AS PÁGINAS
 import ScreenPage from './components/ScreenPage/index.tsx';
 import Alert from './components/Alert/index.tsx';
-import CronogramPage from './components/CronogramPage/index.tsx';
 
 //ARQUIVO DE CONFIGURAÇÃO DAS ROTAS
 const router = createBrowserRouter([
@@ -162,7 +161,6 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
     <Provider>
       <ScreenPage>
         <RouterProvider router={router} />
-        <CronogramPage />
         <LoadingPage />
         <Alert />
       </ScreenPage>

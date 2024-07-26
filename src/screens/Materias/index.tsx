@@ -42,6 +42,7 @@ import BottomNavigation from "../../components/BottomNavigation";
 
 //IMPORTAÇÃO DO PROVEDOR PARA PEGAR AS VARIÁVEIS GLOBAIS
 import { useMyContext } from '../../provider/geral';
+import CronogramPage from '../../components/CronogramPage';
 
 export default function Materias() {
 
@@ -95,6 +96,7 @@ export default function Materias() {
                     <MaterialCard titleMateria={mat.titleMateria} background={mat.background} key={i} />
                 ))}
             </div>
+            <CronogramPage />
             
             <BottomNavigation />
             

@@ -41,7 +41,7 @@ interface User {
     id: String,
     simulations: any,
     simulationsConcludeds: number,
-    cronogram: any,
+    cronogram: String,
 }
 
 //TIPAGEM DO ALERT
@@ -56,7 +56,7 @@ export const MyProvider = ({ children } : { children: React.ReactNode }) => {
     //CRIA ESTADO GLOBAL DE CADA VARIAVEL
     const [theme, setTheme] = useState<string | null>(localStorage.getItem('themePC'))
     const [menuOpen, setMenuOpen] = useState<boolean>(false)
-    const [userS, setUserS] = useState<User>({ logged: false, name: '', img: '', id: '', simulations: [], simulationsConcludeds: 0, cronogram: [] })
+    const [userS, setUserS] = useState<User>({ logged: false, name: '', img: '', id: '', simulations: [], simulationsConcludeds: 0, cronogram: '' })
     const [loading, setLoading] = useState<boolean>(false)
     const [message, setMessage] = useState<Alert>({ type: 'undefined', text: 'Alerta simples' })
     const [isCronogram, setIsCronogram] = useState<boolean>(false)
@@ -74,7 +74,7 @@ export const MyProvider = ({ children } : { children: React.ReactNode }) => {
     }
     
     //FUNÇÃO RESPONSAVEL POR ABRIR E FECHAR O MENU
-    const toggleUser = (name:string, img:string, id:string, simulations:any, simulationsConcludeds:number = 0, cronogram:any, logged:boolean = true) => {
+    const toggleUser = (name:string, img:string, id:string, simulations:any, simulationsConcludeds:number = 0, cronogram:string, logged:boolean = true) => {
         setUserS({ logged: logged, name: name, img: img, id: id, simulations: simulations, simulationsConcludeds: simulationsConcludeds, cronogram: cronogram })
     }
     

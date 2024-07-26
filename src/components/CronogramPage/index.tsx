@@ -48,7 +48,7 @@ export default function CronogramPage() {
 
     //UTILIZAÇÃO DO HOOK useState
     const [matters, setMatters] = useState<any[]>([])
-    const [cronogram, setCronogram] = useState<any[]>([])
+    const [cronogramS, setCronogramS] = useState<any[]>([])
 
     //FUNÇÃO CHAMADA TODA VEZ QUE A PÁGINA É RECARREGADA
     useEffect(() => {
@@ -69,7 +69,7 @@ export default function CronogramPage() {
 
     //FUNÇÃO QUE REMOVE OU TIRA A MATÉRIA DO CRONOGRAMA
     function setCro(matter:string) {
-        setCronogram((items) => {
+        setCronogramS((items) => {
             if(items.includes(matter)) {
                 return items.filter((item) => item !== matter)
             }else {
@@ -80,7 +80,7 @@ export default function CronogramPage() {
 
     //FUNÇÃO PARA VER SE O ITEM JÁ ESTÁ NO CRONOGRAMA
     function isInCronogram(matter:string){
-        return cronogram.includes(matter)
+        return cronogramS.includes(matter)
     }
 
     //FUNÇÃO RESPONSÁVEL POR ATUALIZAR OS DADOS DO USUÁRIO
@@ -88,38 +88,42 @@ export default function CronogramPage() {
         //MUDA O ESTADO DE CARREGAMENTO DA APLICAÇÃO PARA true
         toggleLoading(true);
 
-        try {
             //FAZ UMA REQUISIÇÃO DO TIPO put PARA ATUALIZAR OS DADOS DO USUÁRIO
-            const response = await instance.put(`/users/update/${userS.id}`, {
-                cronogram: cronogram,
-            });
+             instance.put(`/users/update/${userS.id}`, {
+                // cronogram: JSON.stringify(cronogramS),
+                name: 'Pinico',
+                cronogram: JSON.stringify(cronogramS)
+            })
+            .then(function(response) {
 
-            //MUDA O ESTADO DE CARREGAMENTO DA APLICAÇÃO PARA false
-            toggleLoading(false);
+                //MUDA O ESTADO DE CARREGAMENTO DA APLICAÇÃO PARA false
+                toggleLoading(false);
+    
+                //MOSTRA OS DADOS DA REQUISIÇÃO
+                console.log(response.data);
+    
+                //REGISTRA O NOME E A FOTO E O ID DO USUARIO LOGADO PARA MOSTRAR NO FRONT-END
+                toggleUser(response.data.name, response.data.img, response.data._id, response.data.simulations, response.data.simulationsConcludeds, response.data.cronogram)
+    
+                //COLOCA ALERT NA TELA
+                toggleAlert(`success`, `Alteração feita com sucesso`);
+            })
+            .catch(function(error) {
 
-            //MOSTRA OS DADOS DA REQUISIÇÃO
-            console.log(response.data);
-
-            //REGISTRA O NOME E A FOTO E O ID DO USUARIO LOGADO PARA MOSTRAR NO FRONT-END
-            toggleUser(response.data.name, response.data.img, response.data._id, response.data.simulations, response.data.simulationsConcludeds, response.data.cronogram)
-
-            //COLOCA ALERT NA TELA
-            toggleAlert(`success`, `Alteração feita com sucesso`);
-        } catch (error) {
-            //ESCREVE NO CONSOLE O ERRO OCORRIDO
-            console.log(`Requisição feita com falhas ${error}`);
-
-            //MUDA O ESTADO DE CARREGAMENTO DA APLICAÇÃO PARA false
-            toggleLoading(false);
-
-            //COLOCA ALERT NA TELA
-            toggleAlert(`error`, `Ocorreu um erro interno no servidor`);
-        }
+                //ESCREVE NO CONSOLE O ERRO OCORRIDO
+                console.log(`Requisição feita com falhas ${error}`);
+    
+                //MUDA O ESTADO DE CARREGAMENTO DA APLICAÇÃO PARA false
+                toggleLoading(false);
+    
+                //COLOCA ALERT NA TELA
+                toggleAlert(`error`, `Ocorreu um erro interno no servidor`);
+            })
     }
 
     return(
         <>
-            {userS.logged === true && userS.cronogram.length == 0 && isCronogram == false && (
+            {userS.logged === true && userS.cronogram == '' && isCronogram == false && (
                 <div className={`
                     absolute top-0 left-0 w-screen h-screen flex flex-col justify-center items-center
                     ${theme == 'light' ? 'bg-my-black-opacity' : 'bg-my-white-opacity'}
@@ -146,13 +150,13 @@ export default function CronogramPage() {
 
                         </div>
                         <div className={`${theme == 'light' ? 'bg-my-secondary' : 'bg-my-quartenary'} h-full w-4/12 p-2`}>
-                            {cronogram.length > 0 ? cronogram.map((mat, i) => (
+                            {cronogramS.length > 0 ? cronogramS.map((mat, i) => (
                                 <p className={`font-bold ${theme == 'light' ? 'text-my-white' : 'text-my-black'}`} onClick={() => setCro(mat)}>{i+1} - <span className='capitalize cursor-pointer hover:underline transition-all duration-[.3s]'>{mat}</span></p>
                             )):(
                                 <p className={`text-center font-bold ${theme == 'light' ? 'text-my-white' : 'text-my-black'}`} >Defina o seu cronograma</p>
                             )}
                         </div>
-                        {cronogram.length > 8 ? (
+                        {cronogramS.length > 8 ? (
                          <IoArrowForward
                              onClick={() => {
                                 toggleCronogram(true)
@@ -168,7 +172,7 @@ export default function CronogramPage() {
                          />
                          ):(
                             <IoMdTrash
-                                onClick={() => setCronogram([])}
+                                onClick={() => setCronogramS([])}
                                 className={`
                                 absolute right-[0%] top-[0%] text-[20px] m-1 hover:scale-[1.2] transition-all duration-[.2s] cursor-pointer
                                     ${theme == 'light'
