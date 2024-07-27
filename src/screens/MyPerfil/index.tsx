@@ -79,7 +79,7 @@ export default function MyPerfil() {
     const [name, setName] = useState<string>()
     const [imgURL, setImgURL] = useState<string>('imagens')
     const [progress, setProgress] = useState<any>(0)
-    const [days, setDays] = useState<string[]>(['"domingo"', '"segunda-feira"', '"terça-feira"', '"quarta-feira"', '"quinta-feira"', '"sexta-feira"', '"sábado"'])
+    const [days, setDays] = useState<string[]>([])
 
     //FUNÇÃO CHAMADA QUANDO A PAGINA É CARREGADA
     useEffect(() => {
@@ -127,6 +127,9 @@ export default function MyPerfil() {
         
         //COLOCA A FOTO DE PERFIL DO USUÁRIO
         setImg(userS.img)
+
+        //COLOCA OS DIAS DA SEMANA NO ARRAY
+        setDays(['"domingo"', '"segunda-feira"', '"terça-feira"', '"quarta-feira"', '"quinta-feira"', '"sexta-feira"', '"sábado"'])
     }, []);
 
     //FUNÇÃO RESPONSÁVEL POR PEGAR A IMAGEM DOS ARQUIVOS DO USUÁRIO
