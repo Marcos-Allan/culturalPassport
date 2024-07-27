@@ -41,7 +41,7 @@ interface User {
     id: String,
     simulations: any,
     simulationsConcludeds: number,
-    cronogram: String,
+    cronogram: any,
 }
 
 //TIPAGEM DO ALERT
@@ -56,10 +56,9 @@ export const MyProvider = ({ children } : { children: React.ReactNode }) => {
     //CRIA ESTADO GLOBAL DE CADA VARIAVEL
     const [theme, setTheme] = useState<string | null>(localStorage.getItem('themePC'))
     const [menuOpen, setMenuOpen] = useState<boolean>(false)
-    const [userS, setUserS] = useState<User>({ logged: false, name: '', img: '', id: '', simulations: [], simulationsConcludeds: 0, cronogram: '' })
+    const [userS, setUserS] = useState<User>({ logged: false, name: '', img: '', id: '', simulations: [], simulationsConcludeds: 0, cronogram: [] })
     const [loading, setLoading] = useState<boolean>(false)
     const [message, setMessage] = useState<Alert>({ type: 'undefined', text: 'Alerta simples' })
-    const [isCronogram, setIsCronogram] = useState<boolean>(false)
 
     //FUNÇÃO RESPONSAVEL POR TROCAR E SALVAR NO localStorage O TEMA ESCOLHIDO PELO USUÁRIO
     const toggleTheme = () => {
@@ -74,7 +73,7 @@ export const MyProvider = ({ children } : { children: React.ReactNode }) => {
     }
     
     //FUNÇÃO RESPONSAVEL POR ABRIR E FECHAR O MENU
-    const toggleUser = (name:string, img:string, id:string, simulations:any, simulationsConcludeds:number = 0, cronogram:string, logged:boolean = true) => {
+    const toggleUser = (name:string, img:string, id:string, simulations:any, simulationsConcludeds:number = 0, cronogram:any, logged:boolean = true) => {
         setUserS({ logged: logged, name: name, img: img, id: id, simulations: simulations, simulationsConcludeds: simulationsConcludeds, cronogram: cronogram })
     }
     
@@ -88,13 +87,9 @@ export const MyProvider = ({ children } : { children: React.ReactNode }) => {
         setMessage({ type: type, text: text })
     }
     
-    //FUNÇÃO RESPONSAVEL POR TROCAR O ESTADO DE LOADING DA APLICAÇÃO
-    const toggleCronogram = (state:boolean) => {
-        setIsCronogram(state)
-    }
     //RETORNA TUDO PARA SER USADO EM TODO O SITE
     return (
-        <MyContext.Provider value={{ theme, toggleTheme, menuOpen, toggleMenuOpen, userS, toggleUser, loading, toggleLoading, message, toggleAlert, isCronogram, toggleCronogram }}>
+        <MyContext.Provider value={{ theme, toggleTheme, menuOpen, toggleMenuOpen, userS, toggleUser, loading, toggleLoading, message, toggleAlert }}>
             {children}
         </MyContext.Provider>
     )

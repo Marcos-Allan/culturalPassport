@@ -51,6 +51,7 @@ export default function Materias() {
 
     //UTILIZA O HOOK DO useState
     const [matters, setMatters] = useState<any[]>([])
+    // const [mattersCRO, setMattersCRO] = useState<any[]>([])
     
     //RESGATA AS VARIAVEIS GLOBAIS
     const states:any = useMyContext()
@@ -79,6 +80,8 @@ export default function Materias() {
             { titleMateria: 'biologia',  background: 7 },
             { titleMateria: 'matemática',  background: 8 },
         ])
+
+        // setMattersCRO(userS.cronogram.split('[')[1].split(']')[0].split(','))
     },[])
 
     return(
@@ -96,6 +99,7 @@ export default function Materias() {
                     <MaterialCard titleMateria={mat.titleMateria} background={mat.background} key={i} />
                 ))}
             </div>
+
             <CronogramPage />
             
             <BottomNavigation />

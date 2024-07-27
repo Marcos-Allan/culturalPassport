@@ -79,6 +79,7 @@ export default function MyPerfil() {
     const [name, setName] = useState<string>()
     const [imgURL, setImgURL] = useState<string>('imagens')
     const [progress, setProgress] = useState<any>(0)
+    const [days, setDays] = useState<string[]>(['"domingo"', '"segunda-feira"', '"terça-feira"', '"quarta-feira"', '"quinta-feira"', '"sexta-feira"', '"sábado"'])
 
     //FUNÇÃO CHAMADA QUANDO A PAGINA É CARREGADA
     useEffect(() => {
@@ -116,8 +117,16 @@ export default function MyPerfil() {
         }
     };
 
+    //FUNÇÃO CHAMADA TODA VEZ QUE RECARREGA A PÁGINA
     useEffect(() => {
+        //LISTA OS AVATARES DO SISTEMA
         fetchImages();
+        
+        //COLOCA O NOME DO USUÁRIO DA CONTA
+        setName(userS.name)
+        
+        //COLOCA A FOTO DE PERFIL DO USUÁRIO
+        setImg(userS.img)
     }, []);
 
     //FUNÇÃO RESPONSÁVEL POR PEGAR A IMAGEM DOS ARQUIVOS DO USUÁRIO
@@ -220,8 +229,14 @@ export default function MyPerfil() {
             //MOSTRA OS DADOS DA REQUISIÇÃO
             console.log(response.data);
 
+            //FORMATA E SEPARA A STRING PARA VER MATÉRIA POR MATÉRIA DO CRONOGRAMA
+            const cronogram = response.data.cronogram.split('[')[1].split(']')[0].split(',')
+
+            //ESCREVE NO CONSOLE
+            console.log(cronogram)
+
             //REGISTRA O NOME E A FOTO E O ID DO USUARIO LOGADO PARA MOSTRAR NO FRONT-END
-            toggleUser(response.data.name, response.data.img, response.data._id);
+            toggleUser(response.data.name, response.data.img, response.data._id, response.data.simulations, response.data.simulationsConcludeds, cronogram)
 
             //COLOCA ALERT NA TELA
             toggleAlert(`success`, `Alteração feita com sucesso`);
@@ -248,15 +263,10 @@ export default function MyPerfil() {
         }
     }
 
-    //FUNÇÃO CHAMADA TODA VEZ QUE RECARREGA A PÁGINA
-    useEffect(() => {
-        setName(userS.name)
-        setImg(userS.img)
-    },[])
-
     //FUNÇÃO RESPONSÁVEL POR TROCAR A IMAGEM DO USUÁRIO
     function toggleImg(index:number){
 
+    //CHAMA A FUNÇÃO PARA LISTAR TODOS OS AVATARES DO SISTEMA
     fetchImages();
      
     switch (index) {
@@ -296,6 +306,15 @@ export default function MyPerfil() {
             break;
     } 
 
+    }
+
+    //FUNÇÃO RESPONSÁVEL POR VER SE O DIA DA SEMANA
+    function verifyDay(word:string) {
+        console.log('p:'+word)
+        const date = new Date()
+        // const wordFormated = word.replace(/"/g, '')
+        return word.includes(days[date.getDay()])
+        return true
     }
 
     return(
@@ -402,7 +421,70 @@ export default function MyPerfil() {
                             w-full text-center
                             text-[26px] my-6 rounded-[32px]
                             ${theme == 'light' ? 'text-my-black' : 'text-my-white'}
-                        `}>Informações Pessoais</h2>
+                        `}
+                    >Seu Cronograma</h2>
+                    
+                    <h3
+                        className={`
+                            w-full text-center capitalize mb-3 font-bold text-[20px]
+                            ${theme == 'light' ? 'text-my-secondary' : 'text-my-quartenary'}
+                        `}
+                    >
+                        {/* {days[new Date().getDay()]} */}
+                    </h3>
+
+                    <div
+                        className={`
+                            w-full flex flex-col items-center justify-center border-[1px] rounded-[8px] overflow-hidden
+                            ${theme == 'light' ? 'text-my-gray border-my-secondary' : 'text-my-gray-black border-my-quartenary'}
+                        `}
+                    >
+                        {userS.cronogram.map((mat:string, i:number) => (
+                            <div
+                            className={`
+                                w-full flex items-center justify-between border-[1px] py-2 px-1
+                                ${verifyDay(days[Number(i) <= 6 ? Number(i) : Number(i-7)]) == true
+                                    ? `border-[4px]
+                                ${theme == 'light' ? 'border-my-secondary' : 'border-my-quartenary'}` : `
+                                ${theme == 'light' ? 'text-my-gray border-my-gray' : 'text-my-gray-black border-my-gray-black'}`}
+                            `}
+                        >
+                            <p
+                                className={`
+                                    text-left w-[40%] pl-2
+                                    ${verifyDay(days[Number(i) <= 6 ? Number(i) : Number(i-7)]) == true ? `
+                                        ${theme == 'light' ? 'text-my-secondary font-bold' : 'text-my-quartenary font-bold'}` : `
+                                        ${theme == 'light' ? 'text-my-gray' : 'text-my-gray-black'}
+                                    `}
+                                `}
+                            >{i+1} - </p>
+                            
+                            <p
+                                className={`
+                                    text-left flex-grow-[1] uppercase
+                                    ${verifyDay(days[Number(i) <= 6 ? Number(i) : Number(i-7)]) == true ? `
+                                        ${theme == 'light' ? 'text-my-secondary font-bold' : 'text-my-quartenary font-bold'}` :`
+                                        ${theme == 'light' ? 'text-my-gray' : 'text-my-gray-black'}
+                                    `}
+                                `}
+                            >
+                                {i <= 6 ?
+                                days[i].slice(0, 3):
+                                days[i-7].slice(0, 3)}
+                            </p>
+
+                            <p
+                                className={`
+                                    text-left w-[30%] capitalize
+                                    ${theme == 'light' ? 'text-my-gray' : 'text-my-gray-black'}
+                                    ${verifyDay(days[Number(i) <= 6 ? Number(i) : Number(i-7)]) == true && `${theme == 'light' ? 'text-my-secondary font-bold' : 'text-my-quartenary font-bold'}`}
+                                `}
+                            >
+                                {String(mat)}
+                            </p>
+                        </div>
+                        ))}
+                    </div>
 
                     <InfoStudentCard prop='Escola' value='ETEC paulistano' />
                     <InfoStudentCard prop='RM' value='22043' />

@@ -44,7 +44,7 @@ export default function CronogramPage() {
     const states:any = useMyContext()
 
     //DESESTRUTURA AS VARIAVEIS ESPECIFICADAS
-    const { theme, userS, isCronogram, toggleCronogram, toggleLoading, toggleUser, toggleAlert } = states
+    const { theme, userS, toggleLoading, toggleUser, toggleAlert } = states
 
     //UTILIZAÇÃO DO HOOK useState
     const [matters, setMatters] = useState<any[]>([])
@@ -90,8 +90,6 @@ export default function CronogramPage() {
 
             //FAZ UMA REQUISIÇÃO DO TIPO put PARA ATUALIZAR OS DADOS DO USUÁRIO
              instance.put(`/users/update/${userS.id}`, {
-                // cronogram: JSON.stringify(cronogramS),
-                name: 'Pinico',
                 cronogram: JSON.stringify(cronogramS)
             })
             .then(function(response) {
@@ -101,9 +99,15 @@ export default function CronogramPage() {
     
                 //MOSTRA OS DADOS DA REQUISIÇÃO
                 console.log(response.data);
+
+                //FORMATA E SEPARA A STRING PARA VER MATÉRIA POR MATÉRIA DO CRONOGRAMA
+                const cronogram = response.data.cronogram.split('[')[1].split(']')[0].split(',')
+
+                //ESCREVE NO CONSOLE
+                console.log(cronogram)
     
                 //REGISTRA O NOME E A FOTO E O ID DO USUARIO LOGADO PARA MOSTRAR NO FRONT-END
-                toggleUser(response.data.name, response.data.img, response.data._id, response.data.simulations, response.data.simulationsConcludeds, response.data.cronogram)
+                toggleUser(response.data.name, response.data.img, response.data._id, response.data.simulations, response.data.simulationsConcludeds, cronogram)
     
                 //COLOCA ALERT NA TELA
                 toggleAlert(`success`, `Alteração feita com sucesso`);
@@ -123,7 +127,7 @@ export default function CronogramPage() {
 
     return(
         <>
-            {userS.logged === true && userS.cronogram == '' && isCronogram == false && (
+            {userS.logged === true && userS.cronogram.length < 1 && (
                 <div className={`
                     absolute top-0 left-0 w-screen h-screen flex flex-col justify-center items-center
                     ${theme == 'light' ? 'bg-my-black-opacity' : 'bg-my-white-opacity'}
@@ -159,7 +163,6 @@ export default function CronogramPage() {
                         {cronogramS.length > 8 ? (
                          <IoArrowForward
                              onClick={() => {
-                                toggleCronogram(true)
                                 updateUser()
                             }}
                              className={`
