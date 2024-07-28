@@ -17,7 +17,7 @@ import { useMyContext } from '../../provider/geral';
 export default function Matter() {
 
     //USO DO HOOK useParams
-    const { matter, exam } = useParams()
+    const { matter } = useParams()
 
     //UTILIZAÇÃO DO HOOK DE NAVEGAÇÃO 
     const navigate = useNavigate()
@@ -177,7 +177,7 @@ export default function Matter() {
                 <MenuButton />
             </Navbar>
 
-            <p className={`mt-8 mb-5 text-[18px]`}>Conteudos que mais caem no {exam?.toUpperCase()}</p>
+            <p className={`mt-8 mb-5 text-[18px] ${theme == 'light' ? 'text-my-black' : 'text-my-white'}`}>Conteudos que mais caem nos vestibulares de {matter}</p>
 
             <div className={`w-[90%] sm:px-12 sm:w-[70%] mb-[100px] sm:mb-[40px] lg:mb-0 flex items-center flex-col overflow-y-scroll scrollbar scrollbar-track-transparent scrollbar-thumb-my-secondary`}>
                 {content.map((cont, i) => (
@@ -185,6 +185,12 @@ export default function Matter() {
                 ))}
 
                 {matter == 'fisíca' && (
+                    <Link to={`/materias/${matter}/test`}
+                    className={`ms-auto w-auto border-[1px] p-3 rounded-[20px] transition-all duration-[.3s] bg-transparent hover:text-my-secondary hover:border-my-secondary ${theme == 'light' ? 'text-my-black border-my-black' : 'text-my-white border-my-white'}
+                    `}>Fazer prova</Link>
+                )}
+                
+                {matter == 'matemática' && (
                     <Link to={`/materias/${matter}/test`}
                     className={`ms-auto w-auto border-[1px] p-3 rounded-[20px] transition-all duration-[.3s] bg-transparent hover:text-my-secondary hover:border-my-secondary ${theme == 'light' ? 'text-my-black border-my-black' : 'text-my-white border-my-white'}
                     `}>Fazer prova</Link>

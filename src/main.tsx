@@ -55,7 +55,6 @@ import Chat from './screens/Chat/index.tsx';
 import Achievements from './screens/Achievements/index.tsx';
 import Exercises from './screens/Exercises/index.tsx';
 import Matter from './screens/Matter/index.tsx';
-import Exams from './screens/Exams/index.tsx';
 import Test from './screens/Test/index.tsx';
 import Content from './screens/Content/index.tsx';
 
@@ -135,11 +134,6 @@ const router = createBrowserRouter([
   },
   {
     path: "materias/:matter",
-    element: <Exams />,
-    errorElement: <ErrorPage />
-  },
-  {
-    path: "materias/:matter/:exam",
     element: <Matter />,
     errorElement: <ErrorPage />
   },
