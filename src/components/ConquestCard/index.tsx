@@ -72,7 +72,7 @@ export default function ConquestCard(props: Props) {
 
     //FUNÇÃO RESPONSÁVEL POR VER SE A CONQUISTA FOI CONCLUIDA OU NÃO
     const checkAchievement = (param:string) => {
-        return userS.simulations.some((item:any) => item.title === param)
+        return userS.simulations.some((item:any) => item.name === param)
     };
 
     return(

@@ -25,40 +25,36 @@ const MarkdownRenderer = ({ url }: { url:any}) => {
     //UTILIZAÇÃO DO HOOK useState
     const [markdown, setMarkdown] = useState<string>('')
 
-    //FUNÇÃO RESPONSÁVEL POR FAZER UM LOOP ATÉ PEGAR O CONTEUDO 
-    async function fetchWithRetry(url:string, retries = 40, delay = 2000) {
-        for (let i = 0; i < retries; i++) {
-            try {
-                // PEGA A RESPOSTA DA REQUISIÇÃO
-                const response = await axios.get(url);
+    //FUNÇÃO RESPONSÁVEL POR PEGAR O CONTEUDO
+    async function getContent(url:string){
+        //MUDA O ESTADO DE CARREGAMENTO DA APLICAÇÃO PARA true
+        toggleLoading(true);
+
+        axios.get(url, {
+            //DETERMINA O TEMPO MÁXIMO DA REQUISIÇÃO
+            timeout: 15000,
+        })
+        .then(function (response) {
+            //MUDA O ESTADO DE CARREGAMENTO DA APLICAÇÃO PARA false
+            toggleLoading(false);
                 
-                // MUDA O ESTADO DE CARREGAMENTO DA APLICAÇÃO PARA false
-                toggleLoading(false);
-                
-                // SETA O VALOR DO CONTEÚDO DA REQUISIÇÃO
-                setMarkdown(response.data.content);
-                
-                // ENCERRA O LOOP RETORNANDO A RESPOSTA DA REQUISIÇÃO
-                return response.data.content;
-            } catch (error:any) {
-                // RETORNA O ERRO ESPECÍFICO OCORRIDO
-                if (error.response) {
-                    console.error(`Erro ${error.response.status}: ${error.response.statusText}`);
-                } else {
-                    console.error('Erro:', error.message);
-                }
+            //SETA O VALOR DO CONTEÚDO DA REQUISIÇÃO
+            setMarkdown(response.data.content);
+        })
+        .catch(function (error) {
+             // RETORNA O ERRO ESPECÍFICO OCORRIDO
+             if (error) {
+                console.error(`Erro: ${error}`);
+            } else {
+                console.error('Erro 2:', error);
             }
-            // FAZ UMA NOVA PROMESSA PARA REPETIR A FUNÇÃO
-            await new Promise(res => setTimeout(res, delay));
-        }
-    
-        // RETORNA ERRO DEPOIS DE MUITAS TENTATIVAS EXCEDIDAS
-        throw new Error('Falha após várias tentativas');
+        })
     }
 
     //FUNÇÃO CHAMADA TODA VEZ QUE A PÁGINA É RECARREGADA
     useEffect(() => {
-        fetchWithRetry(url)
+        // fetchWithRetry(url)
+        getContent(url)
     }, [url])
 
     return (

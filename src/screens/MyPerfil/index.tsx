@@ -79,7 +79,7 @@ export default function MyPerfil() {
     const [name, setName] = useState<string>()
     const [imgURL, setImgURL] = useState<string>('imagens')
     const [progress, setProgress] = useState<any>(0)
-    const [days, setDays] = useState<string[]>([])
+    const [days, setDays] = useState<string[]>(['domingo', 'segunda-feira', 'terça-feira', 'quarta-feira', 'quinta-feira', 'sexta-feira', 'sábado'])
 
     //FUNÇÃO CHAMADA QUANDO A PAGINA É CARREGADA
     useEffect(() => {
@@ -129,7 +129,7 @@ export default function MyPerfil() {
         setImg(userS.img)
 
         //COLOCA OS DIAS DA SEMANA NO ARRAY
-        setDays(['"domingo"', '"segunda-feira"', '"terça-feira"', '"quarta-feira"', '"quinta-feira"', '"sexta-feira"', '"sábado"'])
+        setDays(['domingo', 'segunda-feira', 'terça-feira', 'quarta-feira', 'quinta-feira', 'sexta-feira', 'sábado'])
     }, []);
 
     //FUNÇÃO RESPONSÁVEL POR PEGAR A IMAGEM DOS ARQUIVOS DO USUÁRIO
@@ -313,11 +313,15 @@ export default function MyPerfil() {
 
     //FUNÇÃO RESPONSÁVEL POR VER SE O DIA DA SEMANA
     function verifyDay(word:string) {
-        console.log('p:'+word)
+        //PEGA O OBJETO DATA DO SISTEMA
         const date = new Date()
-        // const wordFormated = word.replace(/"/g, '')
-        return word.includes(days[date.getDay()])
-        return true
+
+        //VERIFICA O DIA DA ATUAL E RETORNA true OU false
+        if(word == days[date.getDay()]){
+            return true
+        }else{
+            return false
+        }
     }
 
     return(
@@ -446,7 +450,7 @@ export default function MyPerfil() {
                             <div
                             className={`
                                 w-full flex items-center justify-between border-[1px] py-2 px-1
-                                ${verifyDay(days[Number(i) <= 6 ? Number(i) : Number(i-7)]) == true
+                                ${verifyDay(days[Number(i) <= 6 ? Number(i) : Number(i - 7)]) == true
                                     ? `border-[4px]
                                 ${theme == 'light' ? 'border-my-secondary' : 'border-my-quartenary'}` : `
                                 ${theme == 'light' ? 'text-my-gray border-my-gray' : 'text-my-gray-black border-my-gray-black'}`}
@@ -455,7 +459,7 @@ export default function MyPerfil() {
                             <p
                                 className={`
                                     text-left w-[40%] pl-2
-                                    ${verifyDay(days[Number(i) <= 6 ? Number(i) : Number(i-7)]) == true ? `
+                                    ${verifyDay(days[Number(i) <= 6 ? Number(i) : Number(i - 7)]) == true ? `
                                         ${theme == 'light' ? 'text-my-secondary font-bold' : 'text-my-quartenary font-bold'}` : `
                                         ${theme == 'light' ? 'text-my-gray' : 'text-my-gray-black'}
                                     `}
@@ -465,25 +469,27 @@ export default function MyPerfil() {
                             <p
                                 className={`
                                     text-left flex-grow-[1] uppercase
-                                    ${verifyDay(days[Number(i) <= 6 ? Number(i) : Number(i-7)]) == true ? `
+                                    ${verifyDay(days[Number(i) <= 6 ? Number(i) : Number(i - 7)]) == true ? `
                                         ${theme == 'light' ? 'text-my-secondary font-bold' : 'text-my-quartenary font-bold'}` :`
                                         ${theme == 'light' ? 'text-my-gray' : 'text-my-gray-black'}
                                     `}
                                 `}
                             >
-                                {i <= 6 ?
-                                days[i].slice(0, 3):
-                                days[i-7].slice(0, 3)}
+                                {i <= 6 ? (
+                                    <p>{String(days[i]).slice(0, 3)}</p>
+                                ) : (
+                                    <p>{String(days[i - 7]).slice(0, 3)}</p>
+                                )}
                             </p>
 
                             <p
                                 className={`
                                     text-left w-[30%] capitalize
                                     ${theme == 'light' ? 'text-my-gray' : 'text-my-gray-black'}
-                                    ${verifyDay(days[Number(i) <= 6 ? Number(i) : Number(i-7)]) == true && `${theme == 'light' ? 'text-my-secondary font-bold' : 'text-my-quartenary font-bold'}`}
+                                    ${verifyDay(days[Number(i) <= 6 ? Number(i) : Number(i - 7)]) == true && `${theme == 'light' ? 'text-my-secondary font-bold' : 'text-my-quartenary font-bold'}`}
                                 `}
                             >
-                                {String(mat)}
+                                {String(mat).replace(/"/g, '')}
                             </p>
                         </div>
                         ))}

@@ -14,6 +14,7 @@ import { useMyContext } from '../../provider/geral';
 import { IoIosArrowBack, IoIosArrowForward } from 'react-icons/io';
 import { RiEmotionHappyFill, RiEmotionSadFill } from 'react-icons/ri';
 import Text from '../../components/Text';
+import instance from '../../utils/axios';
 
 export default function Test() {
 
@@ -27,7 +28,7 @@ export default function Test() {
     const states:any = useMyContext()
 
     //DESESTRUTURA AS VARIAVEIS ESPECIFICADAS
-    const { theme, userS } = states
+    const { theme, userS, toggleLoading, toggleAlert, toggleUser } = states
 
     //UTILIZAÇÃO DO HOOK useState
     const [questIndex, setQuestIndex] = useState<number>(0)
@@ -121,6 +122,51 @@ export default function Test() {
         }
     }
 
+    //FUNÇÃO RESPONSÁVEL POR ATUALIZAR OS DADOS DO USUÁRIO
+    async function updateUser(conquest:any) {
+        //MUDA O ESTADO DE CARREGAMENTO DA APLICAÇÃO PARA true
+        toggleLoading(true);
+
+            //FAZ UMA REQUISIÇÃO DO TIPO put PARA ATUALIZAR OS DADOS DO USUÁRIO
+             instance.put(`/users/update/${userS.id}`, {
+                // cronogram: JSON.stringify(cronogramS)
+                simulation: conquest
+            })
+            .then(function(response) {
+
+                //MUDA O ESTADO DE CARREGAMENTO DA APLICAÇÃO PARA false
+                toggleLoading(false);
+    
+                //MOSTRA OS DADOS DA REQUISIÇÃO
+                console.log(response.data);
+
+                //FORMATA E SEPARA A STRING PARA VER MATÉRIA POR MATÉRIA DO CRONOGRAMA
+                const cronogram = response.data.cronogram.split('[')[1].split(']')[0].split(',')
+
+                // const simulationsConcluded = [response.data.cronogram]
+
+                //ESCREVE NO CONSOLE
+                console.log(cronogram)
+    
+                //REGISTRA O NOME E A FOTO E O ID DO USUARIO LOGADO PARA MOSTRAR NO FRONT-END
+                toggleUser(response.data.name, response.data.img, response.data._id, response.data.simulations, response.data.simulationsConcludeds, cronogram)
+    
+                //COLOCA ALERT NA TELA
+                toggleAlert(`success`, `Alteração feita com sucesso`);
+            })
+            .catch(function(error) {
+
+                //ESCREVE NO CONSOLE O ERRO OCORRIDO
+                console.log(`Requisição feita com falhas ${error}`);
+    
+                //MUDA O ESTADO DE CARREGAMENTO DA APLICAÇÃO PARA false
+                toggleLoading(false);
+    
+                //COLOCA ALERT NA TELA
+                toggleAlert(`error`, `Ocorreu um erro interno no servidor`);
+            })
+    }
+
     //FUNÇÃO CHAMADA AO RECARREGAR A PÁGINA
     useEffect(() => {
         //VERIFICA SE O USUÁRIO ESTÁ LOGADO
@@ -203,10 +249,10 @@ export default function Test() {
                                         console.log(userS)
                                     }
 
-                                    userS.simulations.push({ title: "Isack Mentiu", message: "faça um simulado de fisíca com 80% ou mais de acertos" })
+                                    updateUser({ name: "Isack Mentiu", concluded: true })
 
-                                    if(userS.simulations.length >= 1){
-                                        userS.simulations.push({ title: "No caminho certo", message: "complete um simulado" })
+                                    if(userS.simulationsConcludeds >= 1){
+                                        updateUser({ name: "No caminho certo", concluded: true })
                                     }
 
                                     //REDIRECIONA ELE PARA A PÁGINA DE MATÉRIAS
@@ -222,7 +268,7 @@ export default function Test() {
                     <TitlePage text='Desculpe'/>
                     <Text text='Sentimos muito Infelizmente não temos provas desta matéria' />
                     <RiEmotionSadFill className={`text-[140px] ${theme == 'light' ? 'text-my-gray' : 'text-my-gray-black'}`} />
-                    <Button route='undefined' text='Porra' event={() => {
+                    <Button route='undefined' text='Retornar' event={() => {
                         
                         //DA UM ALERT NA TELA 
                         alert('userS')
