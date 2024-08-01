@@ -20,7 +20,7 @@ const MarkdownRenderer = ({ url }: { url:any}) => {
     const states:any = useMyContext()
 
     //DESESTRUTURA AS VARIAVEIS ESPECIFICADAS
-    const { theme, toggleLoading } = states
+    const { theme, toggleLoading, toggleAlert } = states
 
     //UTILIZAÇÃO DO HOOK useState
     const [markdown, setMarkdown] = useState<string>('')
@@ -29,6 +29,30 @@ const MarkdownRenderer = ({ url }: { url:any}) => {
     async function getContent(url:string){
         //MUDA O ESTADO DE CARREGAMENTO DA APLICAÇÃO PARA true
         toggleLoading(true);
+
+        //INTERCEPTOR PARA LOGAR REQUISIÇÕES
+        axios.interceptors.request.use(request => {
+            return request;
+        }, error => {
+            return Promise.reject(error);
+        });
+
+        //INTERCEPTOR PARA LOGAR RESPOSTAS
+        axios.interceptors.response.use(response => {
+            console.log('Resposta:', response);
+            return response;
+        }, error => {
+            if (error.response && error.response.status === 404) {
+                //MUDA O ESTADO DE CARREGAMENTO DA APLICAÇÃO PARA false
+                toggleLoading(false);
+                
+                //COLOCA UM ALERT NA TELA
+                toggleAlert(`error`, `Conteúdo não encontrado`)
+            } else {
+                console.log('Erro na resposta:', error);
+            }
+            return Promise.reject(error);
+        });
 
         axios.get(url, {
             //DETERMINA O TEMPO MÁXIMO DA REQUISIÇÃO

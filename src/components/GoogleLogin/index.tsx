@@ -76,7 +76,7 @@ export default function GoogleLogin() {
             console.log('A: '+response.data)
 
             //FORMATA E SEPARA A STRING PARA VER MATÉRIA POR MATÉRIA DO CRONOGRAMA
-            const cronogram = response.data.cronogram.split('[')[1].split(']')[0].split(',')
+            const cronogram = response.data.cronogram == "" ? '' : response.data.cronogram.split('[')[1].split(']')[0].split(',')
 
             //ESCREVE NO CONSOLE
             console.log(cronogram)

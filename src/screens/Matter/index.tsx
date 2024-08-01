@@ -64,9 +64,9 @@ export default function Matter() {
                     //INGLÊS
                     setContent([
                         { title: 'tempos verbais em inglês', background: 0 },
-                        { title: 'voz passiva em ingles', background: 1 },
+                        { title: 'voz passiva em inglês', background: 1 },
                         { title: 'pronomes pessoais', background: 2 },
-                        { title: 'Linking words', background: 3 }
+                        { title: 'linking words', background: 3 }
                     ])
                     break;
                 case 'geografia':
@@ -160,11 +160,8 @@ export default function Matter() {
     //FUNÇÃO PARA REDIRECIONAR PARA OUTRA PÁGINA
     function redirect(cont:string){
 
-        //FORMATA O CAMPO PARA DEIXAR APENAS AS INICIAIS DO VESTIBULAR
-        const content = cont.split(' ')[0].toLowerCase()
-
         //NAVEGA PARA A PRÓXIMA PÁGINA
-        navigate(`/materias/${matter}/content/${content}`)
+        navigate(`/materias/${matter}/content/${cont}`)
     }
 
     return(
