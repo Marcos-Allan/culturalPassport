@@ -91,7 +91,7 @@ export default function Test() {
             setQuestions([])
 
             //PEGA O RESULTADO DAS QUESTO~ES
-            response.data.quests.map((quest:any, ind:number) => {
+            response.data.quests.map((quest:any) => {
 
                 //COLOCA ITEM POR ITEM NO ARRAY DO SIMULADO
                 setQuestions((quests) => [...quests, {
