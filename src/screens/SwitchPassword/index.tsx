@@ -190,6 +190,7 @@ export default function SwitchPassword() {
                     <Text text={`Crie sua nova senha`} />
 
                     <Input
+                        mask=''
                         text="Senha"
                         placeholder="Digite sua nova senha"
                         hidden={true}
@@ -202,6 +203,7 @@ export default function SwitchPassword() {
                         messageError='senha fora do padrão'
                     />
                     <Input
+                        mask=''
                         text="Confirm Password"
                         placeholder="Confirme a senha"
                         hidden={true}

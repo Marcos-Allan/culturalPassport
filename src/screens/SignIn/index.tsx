@@ -223,7 +223,8 @@ export default function SignIn(){
                     
                     <Input
                         text='Email'
-                        placeholder='Digite seu email'
+                        mask=""
+                        placeholder='Digite seu endereço de email'
                         placeholderLarge='Email'
                         value={inputEmailValue}
                         event={handleInputEmailChange}
@@ -233,7 +234,8 @@ export default function SignIn(){
                         messageError='Email fora do padrão'
                     />   
                     <Input
-                        text="Senha" 
+                        text="Senha"
+                        mask=''
                         placeholder="Digite sua senha"
                         placeholderLarge="Senha"
                         hidden={true}

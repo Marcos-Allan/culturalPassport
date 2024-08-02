@@ -116,7 +116,7 @@ export default function ForgoutPassword() {
                 //COLOCA ALERT NA TELA
                 toggleAlert(`success`, `Email enviado`)
                 //RESGATA O ID DO USUÁRIO
-                toggleUser('', '', response.data.user._id, false)
+                toggleUser('', '', response.data.user._id, [], 0, [], false)
                 //REDIRECIONA O USUÁRIO PARA A PRÓXIMA PÁGINA
                 navigate('/confirm-code')
             }
@@ -174,6 +174,7 @@ export default function ForgoutPassword() {
                     <Text text={`Digite o endereço de email no campo abaixo`} />
                     
                     <Input
+                        mask=''
                         value={inputEmailValue}
                         event={handleInputEmailChange}
                         checked={stateEmail}

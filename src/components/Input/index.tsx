@@ -29,6 +29,7 @@
 
 //IMPORTAÇÃO DAS BIBLIOTECAS
 import { useState, useRef, useEffect } from "react";
+import InputMask from "react-input-mask"
 
 //IMPORTAÇÃO DOS ICONES
 import { IoEyeOutline, IoEyeOffOutline } from "react-icons/io5";
@@ -42,6 +43,7 @@ interface Props {
     text: string,
     placeholder: string,
     placeholderLarge: string,
+    mask: string,
     hidden?: boolean,
     value?: string,
     checked?: boolean,
@@ -264,16 +266,19 @@ export default function Input(props: Props) {
                     )}
                 </span>
 
-                <input
-                    onBlur={handleValidatePassword}
-                    ref={passwordInputVisible}
+                <InputMask
+                    mask={props.mask}
                     onChange={props.event && props.event}
-                    placeholder={placeholderText}
+                    onBlur={handleValidatePassword}
                     value={props.value && props.value}
-                    id={`input-${randomNumber}`}
-                    autoComplete='oio'
-                    type={`${props.hidden == true ? 'password' : 'text'}`}
-                    className={`
+                    placeholder={placeholderText}
+                >
+                    <input
+                        id={`input-${randomNumber}`}
+                        autoComplete='oio'
+                        type={`${props.hidden == true ? 'password' : 'text'}`}
+                        ref={passwordInputVisible}
+                        className={`
                         w-full
                         text-[20px]
                         rounded-[16px]
@@ -290,8 +295,9 @@ export default function Input(props: Props) {
                         : 'text-my-gray-black placeholder-my-gray-black border-my-gray-black bg-my-black'
                         }
                         focus:outline-none
-                    `}
-                />
+                        `}
+                    />
+            </InputMask>
             </div>
             <p ref={message} className={`w-full ps-2 opacity-0 absolute bottom-[-3%]`}>oioioi</p>
         </div>

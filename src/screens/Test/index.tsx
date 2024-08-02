@@ -1,6 +1,13 @@
 //IMPORTAÇÃO DAS BIBLIOTECAS
 import { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
+import {
+    Chart as ChartJS,
+    ArcElement,
+    Tooltip,
+    Legend
+} from 'chart.js'
+import { Pie } from 'react-chartjs-2'
 
 //IMPORTAÇÃO DOS COMPONENTES
 import TitlePage from '../../components/TitlePage';
@@ -12,9 +19,15 @@ import { useMyContext } from '../../provider/geral';
 
 //IMPORTAÇÃO DOS ICONES
 import { IoIosArrowBack, IoIosArrowForward } from 'react-icons/io';
-import { RiEmotionHappyFill, RiEmotionSadFill } from 'react-icons/ri';
+import { RiEmotionSadFill } from 'react-icons/ri';
 import Text from '../../components/Text';
 import instance from '../../utils/axios';
+
+ChartJS.register(
+    ArcElement,
+    Tooltip,
+    Legend
+)
 
 export default function Test() {
 
@@ -38,6 +51,21 @@ export default function Test() {
     const [questions, setQuestions] = useState<any[]>([])
     const [yourResponse, setYourResponse] = useState<any[]>(['', '', '', '', ''])
     const [correctResponse, setCorrectResponse] = useState<any[]>([])
+    const [myCorrectResponse, setMyCorrectResponse] = useState<number>(0)
+
+    //FUNÇÃO RESPONSÁVEL POR VER QUANTAS QUESTÕES O USUÁRIO ACERTOU
+    function getResult(){
+        let data = 0
+        yourResponse.map((myResp:any, i:number) => {
+            console.log(myResp +"=="+correctResponse[i])
+            if(myResp == correctResponse[i]){
+                data++
+                console.log('acertamos mais uma')
+            }
+        })
+        setMyCorrectResponse(data)
+        return data
+    }
     
     //FUNÇÃO RESPONSÁVEL POR IR PARA A PÁGINA POSTERIOR
     function nextQuestion() {
@@ -48,9 +76,13 @@ export default function Test() {
         setYourPercent(percentageFinalized * (questIndex + 1))
 
         if(Number(questIndex + 1) >= Number(questions.length)){
+            //VÊ QUANTAS QUSTÕES O USUÁRIO ACERTOU
+            getResult()
+
             //FUNÇÃO CHAMADA DEPOIS DE 0.750 SEGUNDOS
             setTimeout(() => {
                 setQuestFinalized(true)
+                console.log('acertamos: '+myCorrectResponse)
             }, 750);
         }else{
             //VAI PARA A PRÓXIMA QUESTÃO
@@ -249,13 +281,13 @@ export default function Test() {
                                                     console.log(correctResponse)
                                                 }}
                                                 className={`
-                                                    text-[20px] border-[1px] py-2 my-1 px-3 rounded-[40px]
+                                                    text-[20px] border-[1px] py-2 my-1 px-3 rounded-[40px] cursor-pointer
                                                     ${quest.option == yourResponse[questIndex] ?
                                                         `${theme == 'light' ?'text-my-secondary border-my-secondary' : 'text-my-quartenary border-my-quartenary'}` :
                                                         `${theme == 'light' ?'text-my-black border-my-black' : 'text-my-white border-my-white'}`
                                                     }
                                                 `}
-                                            >55{quest.option}){quest.text}</li>
+                                            >{quest.option}){quest.text}</li>
                                         ))}
                                     </ol>
 
@@ -277,17 +309,44 @@ export default function Test() {
                                 </>
                             ) : (
                                 <div className='w-full flex flex-col items-center justify-start'>
-                                    <TitlePage text='Parabéns'/>
-                                    <p className={`${theme == 'light' ? 'text-my-black' : 'text-my-white'}`}>Parabens Prova finalizada</p>
-                                    <h1>Seu Gabarito</h1>
-                                    <ul>
-                                        {yourResponse.map((response:string, i:number) => (
-                                            <li className={`${response == correctResponse[i] ? 'text-[#00ff00]' : 'text-[#ff0000]'}`}>
-                                                {response} - {correctResponse[i]}
-                                            </li>
-                                        ))}
-                                    </ul>
-                                    <RiEmotionHappyFill className={`text-[140px] ${theme == 'light' ? 'text-my-gray' : 'text-my-gray-black'}`} />
+                                    <TitlePage text='Prova finalizada'/>
+                                    <div className={`w-[50%] flex items-center justify-center my-4`}>
+                                        <Pie
+                                            data = {{
+                                                labels: ['Acertos', 'Erros'],
+                                                datasets: [
+                                                    {
+                                                        data: [myCorrectResponse, (questions.length - myCorrectResponse)],
+                                                        borderColor: 'black',
+                                                        backgroundColor: [`${theme == 'light' ? '#445EF2' : '#05C7F2'}`, `${theme == 'light' ? '#263973' : '#010E26'}`]
+                                                    }
+                                                ]
+                                            }}
+                                            options = {{}}
+                                        ></Pie>
+                                    </div>
+                                    <h1 className={`mt-2 mb-4 text-[20px] font-bold ${theme == 'light' ? 'text-my-black' : 'text-my-white'}`}>Gabarito da prova</h1>
+                                    <div className={`flex flex-row justify-between items-center w-[45%] gap-[3px] mb-5`}>
+                                        <div className={`flex flex-col items-center justify-center flex-grow-[1] gap-[3px]`}>
+                                            <p className={`border-[1px] w-full font-bold text-center text-[12px]`}>Gabarito</p>
+                                            {yourResponse.map((response:string, i:number) => (
+                                                <p className={`border-[1px] w-full text-center ${response == correctResponse[i] ? 'text-[#00ff00] border-[#00ff00]' : 'text-[#ff0000] border-[#ff0000]'}`}>
+                                                    {response}
+                                                </p>
+                                            ))}
+                                        </div>
+                                        
+                                        <div className={`flex flex-col items-center justify-center flex-grow-[1] gap-[3px]`}>
+                                            <p className={`border-[1px] w-full font-bold text-center text-[12px]`}>Resposta</p>
+                                            {yourResponse.map((response:string, i:number) => (
+                                                <p className={`border-[1px] w-full text-center ${response == correctResponse[i] ? 'text-[#00ff00] border-[#00ff00]' : 'text-[#ff0000] border-[#ff0000]'}
+                                                `}>
+                                                    {correctResponse[i]}
+                                                </p>
+                                            ))}
+                                        </div>
+                                    </div>
+
                                     <Button route='undefined' text='Voltar' event={() => {
                                         //DA UM ALERT NA TELA 
                                         if(userS){

@@ -95,7 +95,9 @@ export default function SignUp(){
     //FUNÇÃO UTILIZADA PARA MUDAR O VALOR DA VARIAVEL COM BASE NO INPUT
     function handleInputDateChange(e:ChangeEvent<HTMLInputElement>){
         setInputDateValue(e.target.value)
-
+        
+        console.log(inputDateValue)
+        
         //CHAMA UMA FUNÇÃO PARA VER A VALIDAÇÃO DO INPUT
         validateInputDate()
     }
@@ -192,7 +194,7 @@ export default function SignUp(){
     //FUNÇÃO RESPONSÁVEL POR VER SE O CAMPO ESTÁ NO PADRÃO
     function validateInputDate(){
         //USA REGEX PARA VERIFICAR O PADRÃO DA STRING
-        const padraoDate = /^(0[1-9]|[12][0-9]|3[01])\/(0[1-9]|1[0-2])\/(19|20)\d{1}$/
+        const padraoDate = /^(0[1-9]|[12][0-9]|3[01])\/(0[1-9]|1[0-2])\/(19|20)\d{1}/
 
         //VERIFICA SE O INPUT ESTÁ DENTRO DO PADRÃO DO REGEX
         if(padraoDate.test(inputDateValue) == true){
@@ -293,6 +295,7 @@ export default function SignUp(){
 
                     <div className={`w-full flex items-center flex-col lg:flex-row lg:gap-[30px] lg:w-[60%] lg:mt-[70px]`}>
                         <Input
+                            mask=''
                             placeholder='Digite seu nome'
                             placeholderLarge='Nome'
                             text='Nome'
@@ -305,6 +308,7 @@ export default function SignUp(){
                         />   
 
                         <Input
+                            mask=''
                             placeholder='Digite seu sobrenome'
                             placeholderLarge='Sobrenome' 
                             text='Sobrenome'
@@ -318,6 +322,7 @@ export default function SignUp(){
                     </div>
                     <div className={`w-full flex items-center flex-col lg:flex-row lg:gap-[30px] lg:w-[60%]`}>
                         <Input
+                            mask='99/99/9999'
                             placeholder='Digite sua data de nascimento'
                             placeholderLarge='Data de Nasc'
                             text='Data de Nasc'
@@ -329,6 +334,7 @@ export default function SignUp(){
                             messageError='formato inválido'
                         /> 
                         <Input
+                            mask=''
                             placeholder='Digite um endereço de email'
                             placeholderLarge='Email'
                             text='Email'
@@ -342,10 +348,11 @@ export default function SignUp(){
                     </div>
                     <div className={`w-full flex items-center flex-col lg:flex-row lg:gap-[30px] lg:w-[60%]`}>
                         <Input
+                            mask=''
                             text="Senha"
                             placeholder="Digite uma senha"
                             placeholderLarge='Senha'
-                            hidden={true}
+                            hidden={false}
                             value={inputPasswordValue}
                             event={handleInputPasswordChange} 
                             checked={statePassword}
@@ -354,10 +361,11 @@ export default function SignUp(){
                             messageError='senha precisa ter pelo menos 6 caracteres'
                         />
                         <Input
+                            mask=''
                             text="Confirma a Senha"
                             placeholder="Confirme a senha"
                             placeholderLarge='Confirme a Senha'
-                            hidden={true}
+                            hidden={false}
                             value={inputConfirmPasswordValue}
                             event={handleInputConfirmPasswordChange}
                             checked={stateConfirmPassword}

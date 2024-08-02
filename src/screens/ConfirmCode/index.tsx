@@ -173,6 +173,7 @@ export default function ConfirmCode() {
                     <Text text={`Digite o código que foi enviado por email`} />
 
                     <Input
+                        mask='999-999'
                         value={inputCodeValue}
                         event={handleInputCodeChange}
                         checked={stateCode}
