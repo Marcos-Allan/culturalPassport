@@ -32,6 +32,11 @@ export default function Content() {
     //UTILIZAÇÃO DO HOOK useState
     const [contentMatter, setContentMatter] = useState<string>()
 
+    //FUNÇÃO RESPONSÁVEL POR DEIXAR O TEXTO EM CAPITALIZE
+    function capitalizeText(text:string) {
+        return text.toLowerCase().replace(/\b\w/g, char => char.toUpperCase())
+      }
+
     //FUNÇÃO CHAMADA AO RECARREGAR A PÁGINA
     useEffect(() => {
         //VERIFICA SE O USUÁRIO ESTÁ LOGADO
@@ -57,12 +62,12 @@ export default function Content() {
             <Navbar>
                 <Return />
                 <TitlePage
-                    text={`content`}
+                    text={`conteudo`}
                 />
                 <MenuButton />
             </Navbar>
 
-            <p className={`mt-8 mb-5 text-[18px] ${theme == 'light' ? 'tetx-my-black' : 'text-my-white'}`}>Conteudos de {content?.toLowerCase()}</p>
+            <p className={`mt-8 mb-5 text-[18px] ${theme == 'light' ? 'tetx-my-black' : 'text-my-white'}`}>Conteudos de {capitalizeText(content || 'matéria')}</p>
 
             <div className={`w-[90%] sm:px-12 sm:w-[70%] mb-[100px] sm:mb-[40px] lg:mb-0 flex items-center flex-col overflow-y-scroll scrollbar scrollbar-track-transparent scrollbar-thumb-my-secondary`}>
                 <MarkdownRenderer url={contentMatter} />

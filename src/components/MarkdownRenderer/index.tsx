@@ -13,6 +13,11 @@ import { useMyContext } from '../../provider/geral';
 
 //IMPORTAÇÃO DOS COMPONENETES
 import Text from '../Text';
+import Button from '../Button';
+import TitlePage from '../TitlePage';
+
+//IMPORTAÇÃO DOS ICONES
+import { RiEmotionSadFill } from 'react-icons/ri';
 
 const MarkdownRenderer = ({ url }: { url:any}) => {
 
@@ -24,11 +29,15 @@ const MarkdownRenderer = ({ url }: { url:any}) => {
 
     //UTILIZAÇÃO DO HOOK useState
     const [markdown, setMarkdown] = useState<string>('')
+    const [loadingContent, setLoadingContent] = useState<boolean>(false)
 
     //FUNÇÃO RESPONSÁVEL POR PEGAR O CONTEUDO
     async function getContent(url:string){
         //MUDA O ESTADO DE CARREGAMENTO DA APLICAÇÃO PARA true
         toggleLoading(true);
+        
+        //MUDA O ESTADO DE CARREGAMENTO DOS CONTEUDOS PARA true
+        setLoadingContent(true)
 
         //INTERCEPTOR PARA LOGAR REQUISIÇÕES
         axios.interceptors.request.use(request => {
@@ -45,9 +54,22 @@ const MarkdownRenderer = ({ url }: { url:any}) => {
             if (error.response && error.response.status === 404) {
                 //MUDA O ESTADO DE CARREGAMENTO DA APLICAÇÃO PARA false
                 toggleLoading(false);
+
+                //MUDA O ESTADO DE CARREGAMENTO DOS CONTEUDOS PARA false
+                setLoadingContent(false)
                 
                 //COLOCA UM ALERT NA TELA
                 toggleAlert(`error`, `Conteúdo não encontrado`)
+            
+            }else if (error.response && error.response.status === 503) {
+                //MUDA O ESTADO DE CARREGAMENTO DA APLICAÇÃO PARA false
+                toggleLoading(false);
+
+                //MUDA O ESTADO DE CARREGAMENTO DOS CONTEUDOS PARA false
+                setLoadingContent(false)
+                
+                //COLOCA UM ALERT NA TELA
+                toggleAlert(`error`, `Conteúdo muito pesado`)
             } else {
                 console.log('Erro na resposta:', error);
             }
@@ -61,6 +83,9 @@ const MarkdownRenderer = ({ url }: { url:any}) => {
         .then(function (response) {
             //MUDA O ESTADO DE CARREGAMENTO DA APLICAÇÃO PARA false
             toggleLoading(false);
+
+            //MUDA O ESTADO DE CARREGAMENTO DOS CONTEUDOS PARA false
+            setLoadingContent(false)
                 
             //SETA O VALOR DO CONTEÚDO DA REQUISIÇÃO
             setMarkdown(response.data.content);
@@ -83,13 +108,21 @@ const MarkdownRenderer = ({ url }: { url:any}) => {
 
     return (
         <div className='w-full flex flex-col justify-center items-center'>
-            {markdown == "" && <Text text='Estamos caregando o conteudo, por favor seja paciente' />}
+            {markdown == "" && loadingContent == true && <Text text='Estamos caregando o conteudo, por favor seja paciente' />}
             <div className={`w-full flex flex-col items-start justify-start ${theme == 'light' ? 'tetx-my-black' : 'text-my-white'}`}>
                 <ReactMarkdown
                     children={markdown}
                     remarkPlugins={[remarkGfm, remarkMath]}
                     rehypePlugins={[rehypeRaw, rehypeKatex]}
                 />
+                {loadingContent == false && markdown == "" && (
+                    <div className={`flex flex-col items-center`}>
+                        <TitlePage text='Sentimos muito'/>
+                        <Text text={`Desculpe Infelizmente não encontramos este conteúdo em nosso banco de dados`} />
+                        <RiEmotionSadFill className={`text-[140px] mt-3 mb-4 ${theme == 'light' ? 'text-my-gray' : 'text-my-gray-black'}`} />
+                        <Button route='/materias' text='Retornar' />
+                    </div>
+                )}
             </div>
         </div>
     )

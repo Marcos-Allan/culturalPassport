@@ -23,7 +23,7 @@ export default function AvatarImage(props: Props) {
                 // toggleImg(1)
             }}
             className={`
-                w-[90px] rounded-[50%] border-2 p-1
+                inline-block w-[90px] h-[90px] rounded-full border-2 p-1
                 ${props.active == true ? `${theme == 'light' ? 'border-my-terciary translate-y-[-16px]' : 'border-my-quartenary translate-y-[-16px]'}` : `border-transparent hover:translate-y-[-16px] transition-all duration-[.3s] cursor-pointer`}
             `}
             src={props.img} alt=""

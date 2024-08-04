@@ -100,15 +100,18 @@ export default function MyPerfil() {
     const fetchImages = async () => {
         //FAZ UMA REFERÊNCIA AO LOCAL DE AVATARES SALVOS NA NUVEM
         const storageRef = ref(storage, '/images/avatars');
+
         try {
             //PEGA AS IMAGENS DENTRO DA PASTA ESPECIFICADA
             const result = await listAll(storageRef);
 
             //PEGA A URL DOS AVATARES
             const urlPromises = result.items.map((imageRef) => getDownloadURL(imageRef));
-
+            
             //ESPERA TODOS OS AVATARES SEREM 
             const urls = await Promise.all(urlPromises);
+            
+            console.log(urls)
             
             //SETA AS URLS DAS IMAGENS
             setImgs(urls);
@@ -407,17 +410,17 @@ export default function MyPerfil() {
                 >Avatares
                 </h1>
 
-                <div className={`px-14 mb-8 w-full sm:w-[60%] flex justify-center flex-wrap gap-[10px]`}>
-                    
-                    <AvatarImage active={img == avatar_1 ? true : false} img={imgs[0]} event={() => toggleImg(1)} />
-                    <AvatarImage active={img == avatar_2 ? true : false} img={imgs[1]} event={() => toggleImg(2)} />
-                    <AvatarImage active={img == avatar_3 ? true : false} img={imgs[2]} event={() => toggleImg(3)} />
-                    <AvatarImage active={img == avatar_4 ? true : false} img={imgs[3]} event={() => toggleImg(4)} />
-                    <AvatarImage active={img == avatar_5 ? true : false} img={imgs[4]} event={() => toggleImg(5)} />
-                    <AvatarImage active={img == avatar_6 ? true : false} img={imgs[5]} event={() => toggleImg(6)} />
-                    <AvatarImage active={img == avatar_7 ? true : false} img={imgs[6]} event={() => toggleImg(7)} />
-                    <AvatarImage active={img == avatar_8 ? true : false} img={imgs[7]} event={() => toggleImg(8)} />
-
+                <div className={`px-6 mb-8 w-full sm:w-[60%] h-[160px]`}>
+                    <div className="whitespace-nowrap p-4 flex items-center gap-2 overflow-scroll scrollbar scrollbar-track-transparent scrollbar-thumb-my-secondary">
+                        <AvatarImage active={img == avatar_1 ? true : false} img={imgs[0]} event={() => toggleImg(1)} />
+                        <AvatarImage active={img == avatar_2 ? true : false} img={imgs[1]} event={() => toggleImg(2)} />
+                        <AvatarImage active={img == avatar_3 ? true : false} img={imgs[2]} event={() => toggleImg(3)} />
+                        <AvatarImage active={img == avatar_4 ? true : false} img={imgs[3]} event={() => toggleImg(4)} />
+                        <AvatarImage active={img == avatar_5 ? true : false} img={imgs[4]} event={() => toggleImg(5)} />
+                        <AvatarImage active={img == avatar_6 ? true : false} img={imgs[5]} event={() => toggleImg(6)} />
+                        <AvatarImage active={img == avatar_7 ? true : false} img={imgs[6]} event={() => toggleImg(7)} />
+                        <AvatarImage active={img == avatar_8 ? true : false} img={imgs[7]} event={() => toggleImg(8)} />
+                    </div>
                 </div>
 
                 <Button event={updateUser} text='Atualizar' route='undefined' />
@@ -437,7 +440,6 @@ export default function MyPerfil() {
                             ${theme == 'light' ? 'text-my-secondary' : 'text-my-quartenary'}
                         `}
                     >
-                        {/* {days[new Date().getDay()]} */}
                     </h3>
 
                     <div

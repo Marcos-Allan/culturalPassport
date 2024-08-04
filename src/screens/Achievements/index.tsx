@@ -63,15 +63,24 @@ export default function Achievements() {
 
     //UTILIZA O HOOK DO useState
     const [conquests, setConquests] = useState<any[]>([])
+    const [loadingAchivements, setLoadingAchivements] = useState<boolean>(false)
 
     //FUNÇÃO RESPONSÁVEL POR PEGAR AS CONQUISTAS DO BD
     function getAchievements() {
+
+        //MUDA O ESTADO DE LOADING DAS CONQUISTAS PARA true
+        setLoadingAchivements(true)
+        
         instance.get('/achievement/achievements')
         .then(function (response) {
+            //COLOCA AS CONQUISTAS NO ARRAY DE CONQUISTAS
             setConquests(response.data)
-            console.log(response.data)
+            
+            //MUDA O ESTADO DE LOADING DAS CONQUISTAS PARA false
+            setLoadingAchivements(false)
         })
         .catch(function (error) {
+            //ESCREVE NO CONSOLE O ERRO OCORRIDO
             console.log(error)
         })
     }
@@ -88,8 +97,6 @@ export default function Achievements() {
         //DEFINE O ARRAY COM AS CONQUISTAS
         getAchievements()
 
-        console.log(userS)
-
     },[])
 
     return(
@@ -103,17 +110,23 @@ export default function Achievements() {
             </Navbar>
             
             <div className={`w-full flex flex-col justify-start items-center sm:gap-[20px] mb-[100px] sm:mb-[40px] lg:mb-0 overflow-y-scroll scrollbar scrollbar-track-transparent scrollbar-thumb-my-secondary`}>    
-                {conquests.length >= 1 ? conquests.map((conq, i) => (
+                {loadingAchivements == false && conquests.length >= 1 && conquests.map((conq, i) => (
                     <ConquestCard level={conq.level} message={conq.message} porcentage={conq.porcentage} backImg={conq.imgURL} title={conq.title} key={i} />
-                )):(
+                ))}
+                
+                {loadingAchivements == false && conquests.length < 1 && (
                     <>
-                        <Text text='Nenhuma conquista concluida ainda'/>
+                        <Text text='Nenhuma conquista encontrada'/>
                         <IoMdSad
                             className={`text-[120px]
                                 ${theme == 'light' ? 'text-my-gray' : 'text-my-gray-black'}
                             `}
                         />
                     </>
+                )}
+
+                {loadingAchivements == true && (
+                    <p>carregando as conquistas seja paciente</p>
                 )}
             </div>
 

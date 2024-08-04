@@ -77,8 +77,10 @@ export default function ConquestCard(props: Props) {
 
     return(
         <div
-            className={`w-[90%] sm:w-[60%] my-2 p-3 border-2 flex min-h-[180px] gap-[6px] rounded-[8px] hover:scale-[0.92] cursor-pointer transition-all duration-[.2s]
-            ${theme == 'light' ? 'border-my-secondary' : 'border-my-quartenary'}
+            className={`w-[90%] sm:w-[60%] my-2 p-3 border-2 border-solid flex min-h-[180px] gap-[6px] rounded-[8px] transition-all duration-[.2s]
+            ${checkAchievement(props.title) == true ? 'animate-colorChange' : `
+                ${theme == 'light' ? 'border-my-secondary' : 'border-my-quartenary'}
+            `}
         `}>
             
             {/* ${props.title == "No caminho certo" && userS.simulationsConcludeds == 1 ? '' : 'grayscale(100%)'} */}
@@ -127,9 +129,7 @@ export default function ConquestCard(props: Props) {
                     <p
                         className={`text-[14px]
                         ${theme == 'light' ? 'text-my-gray' : 'text-my-gray-black'}
-                    `}>{`
-                        ${checkAchievement(props.title) == true? 100 : props.porcentage}
-                    `}%</p>
+                    `}>{checkAchievement(props.title) == true ? 100 : props.porcentage}%</p>
 
                 </div>
 

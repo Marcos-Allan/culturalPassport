@@ -34,6 +34,12 @@ export default function Matter() {
     //UTILIZAÇÃO DO HOOK useState
     const [content, setContent] = useState<any[]>([])
 
+    //FUNÇÃO RESPONSÁVEL POR DEIXAR O TEXTO EM CAPITALIZE
+    function capitalizeText(text:string) {
+        if (text.length === 0) return text; // Retorna a string original se estiver vazia
+        return text.charAt(0).toUpperCase() + text.slice(1).toLowerCase();
+    }
+
     //FUNÇÃO RESPONSÁVEL POR GERAR O CONTEÚDO DEPENDENDO DO PARÂMETRO PASSADO
     function getContent(matter:string) {
         switch (matter) {
@@ -169,29 +175,22 @@ export default function Matter() {
             <Navbar>
                 <Return />
                 <TitlePage
-                    text={`${matter}`}
+                    text={`${capitalizeText(matter || 'matéria')}`}
                 />
                 <MenuButton />
             </Navbar>
 
-            <p className={`mt-8 mb-5 text-[18px] ${theme == 'light' ? 'text-my-black' : 'text-my-white'}`}>Conteudos que mais caem nos vestibulares de {matter}</p>
+            <p className={`w-[90%] mt-8 mb-5 text-center text-[18px] ${theme == 'light' ? 'text-my-black' : 'text-my-white'}`}>Conteudos de {capitalizeText(matter || 'matéria')} que mais caem nos vestibulares</p>
 
             <div className={`w-[90%] sm:px-12 sm:w-[70%] mb-[100px] sm:mb-[40px] lg:mb-0 flex items-center flex-col overflow-y-scroll scrollbar scrollbar-track-transparent scrollbar-thumb-my-secondary`}>
                 {content.map((cont, i) => (
                     <ContentCard background={cont.background} title={cont.title} event={() => redirect(cont.title)} key={i} />
                 ))}
-
-                {matter == 'fisíca' && (
-                    <Link to={`/materias/${matter}/test`}
-                    className={`ms-auto w-auto border-[1px] p-3 rounded-[20px] transition-all duration-[.3s] bg-transparent hover:text-my-secondary hover:border-my-secondary ${theme == 'light' ? 'text-my-black border-my-black' : 'text-my-white border-my-white'}
-                    `}>Fazer prova</Link>
-                )}
                 
-                {matter == 'matemática' && (
-                    <Link to={`/materias/${matter}/test`}
-                    className={`ms-auto w-auto border-[1px] p-3 rounded-[20px] transition-all duration-[.3s] bg-transparent hover:text-my-secondary hover:border-my-secondary ${theme == 'light' ? 'text-my-black border-my-black' : 'text-my-white border-my-white'}
-                    `}>Fazer prova</Link>
-                )}
+                <Link to={`/materias/${matter}/test`}
+                className={`ms-auto w-auto border-[1px] p-3 rounded-[20px] transition-all duration-[.3s] bg-transparent hover:text-my-secondary hover:border-my-secondary ${theme == 'light' ? 'text-my-black border-my-black' : 'text-my-white border-my-white'}
+                `}>Fazer prova</Link>
+
             </div>
 
             

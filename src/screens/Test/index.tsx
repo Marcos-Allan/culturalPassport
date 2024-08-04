@@ -13,6 +13,7 @@ import { Pie } from 'react-chartjs-2'
 import TitlePage from '../../components/TitlePage';
 import Navbar from '../../components/Navbar';
 import Button from '../../components/Button';
+import Text from '../../components/Text';
 
 //IMPORTAÇÃO DO PROVEDOR PARA PEGAR AS VARIÁVEIS GLOBAIS
 import { useMyContext } from '../../provider/geral';
@@ -20,9 +21,11 @@ import { useMyContext } from '../../provider/geral';
 //IMPORTAÇÃO DOS ICONES
 import { IoIosArrowBack, IoIosArrowForward } from 'react-icons/io';
 import { RiEmotionSadFill } from 'react-icons/ri';
-import Text from '../../components/Text';
+
+//CONFIGURAÇÃO DA BASE URL DO AXIOS
 import instance from '../../utils/axios';
 
+//CONFIGURAÇÃO DA BIBLIOTECA DE GRÁFICOS
 ChartJS.register(
     ArcElement,
     Tooltip,
@@ -52,6 +55,12 @@ export default function Test() {
     const [yourResponse, setYourResponse] = useState<any[]>(['', '', '', '', ''])
     const [correctResponse, setCorrectResponse] = useState<any[]>([])
     const [myCorrectResponse, setMyCorrectResponse] = useState<number>(0)
+
+    //FUNÇÃO RESPONSÁVEL POR DEIXAR O TEXTO EM CAPITALIZE
+    function capitalizeText(text:string) {
+        if (text.length === 0) return text; // Retorna a string original se estiver vazia
+        return text.charAt(0).toUpperCase() + text.slice(1).toLowerCase();
+    }
 
     //FUNÇÃO RESPONSÁVEL POR VER QUANTAS QUESTÕES O USUÁRIO ACERTOU
     function getResult(){
@@ -115,19 +124,26 @@ export default function Test() {
         
         //SETA A PORCENTAGEM FEITA DA PROVA
         setYourPercent(0)
-        
+
         instance.get(`/simulation/${matter}`)
         .then(function (response) {
             
             // LIMPA O ARRAY DOS SIMULADOS
             setQuestions([])
 
+            //VERIFICA SE O SIMULADO EXISTE N BANCO DE DADOS
+            if(response.data == ""){
+                //MUDA O ESTADO DE CARREGAMENTO DA APLICAÇÃO PARA false
+                toggleLoading(false);
+                return
+            }
+
             //PEGA O RESULTADO DAS QUESTO~ES
             response.data.quests.map((quest:any) => {
 
                 //COLOCA ITEM POR ITEM NO ARRAY DO SIMULADO
                 setQuestions((quests) => [...quests, {
-                    content: matter,
+                    content: capitalizeText(matter || 'matéria'),
                     answer: quest.question,
                     questions: [
                         // `${quest.options[0].option})${quest.options[0].text}`,
@@ -223,8 +239,6 @@ export default function Test() {
         setYourResponse(novasFrutas);
     };
 
-
-
     //FUNÇÃO CHAMADA AO RECARREGAR A PÁGINA
     useEffect(() => {
         //VERIFICA SE O USUÁRIO ESTÁ LOGADO
@@ -243,7 +257,7 @@ export default function Test() {
             {matter == 'fisíca' || matter == 'matemática' ? (
                 <>
                     <Navbar>
-                        <TitlePage text={`${matter}`} />
+                        <TitlePage text={`${capitalizeText(matter || 'matéria')}`} />
                     </Navbar>
                     
                     {questions.length > 0 ? (
@@ -353,7 +367,7 @@ export default function Test() {
                                             console.log(userS)
                                         }
 
-                                        updateUser({ name: "Isack Mentiu", concluded: true })
+                                        updateUser({ name: "Alexsandro", concluded: true })
 
                                         if(userS.simulationsConcludeds >= 1){
                                             updateUser({ name: "No caminho certo", concluded: true })
@@ -373,10 +387,10 @@ export default function Test() {
                     )}
                 </>
             ) : (
-                <div className={`mt-5 flex flex-col items-start`}>
-                    <TitlePage text='Desculpe'/>
-                    <Text text='Sentimos muito Infelizmente não temos provas desta matéria' />
-                    <RiEmotionSadFill className={`text-[140px] ${theme == 'light' ? 'text-my-gray' : 'text-my-gray-black'}`} />
+                <div className={`w-[90%] mt-5 flex flex-col items-center`}>
+                    <TitlePage text='Sentimos muito'/>
+                    <Text text={`Desculpe Infelizmente não temos provas desta matéria ${capitalizeText(matter || 'matéria')} não é o nossa praia`} />
+                    <RiEmotionSadFill className={`text-[140px] mt-3 mb-4 ${theme == 'light' ? 'text-my-gray' : 'text-my-gray-black'}`} />
                     <Button route='/materias' text='Retornar' />
                 </div>
             )}

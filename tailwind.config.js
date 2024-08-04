@@ -19,6 +19,21 @@ export default {
         'my-white-opacity': '#ffffffbb',
         'my-black-opacity': '#000000bb',
       },
+      keyframes: {
+        colorChange: {
+          '0%': { borderColor: 'rgb(255, 0, 0)' },
+          '14%': { borderColor: 'rgb(255, 165, 0)' },
+          '28%': { borderColor: 'rgb(255, 255, 0)' },
+          '42%': { borderColor: 'rgb(0, 128, 0)' },
+          '57%': { borderColor: 'rgb(0, 255, 255)' },
+          '71%': { borderColor: 'rgb(0, 0, 255)' },
+          '85%': { borderColor: 'rgb(128, 0, 128)' },
+          '100%': { borderColor: 'rgb(255, 0, 0)' },
+        },
+      },
+      animation: {
+        colorChange: 'colorChange 4s linear infinite',
+      },
     },
   },
   plugins: [
