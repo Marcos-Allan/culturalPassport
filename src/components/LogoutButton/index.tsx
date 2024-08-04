@@ -69,9 +69,9 @@ export default function LogoutButton() {
         })
         //FECHA O MENU
         toggleMenuOpen(false)
-
-        //TIRA OS DADOS DA CONTA DO USUÁRIO DO FRONTEND
-        toggleUser('', '', '', false)
+        
+        //REGISTRA O NOME E A FOTO E O ID DO DO USUARIO LOGADO PARA MOSTRAR NO FRONT-END
+        toggleUser('', '', '', [], 0, [], false)
     }
 
     return(

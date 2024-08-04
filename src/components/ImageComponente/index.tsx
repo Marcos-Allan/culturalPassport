@@ -28,19 +28,20 @@
  */
 
 //IMPORTAÇÃO DAS BIBLIOTECAS
+import { useState, useEffect } from 'react'
 import Skeleton, { SkeletonTheme } from 'react-loading-skeleton';
 import 'react-loading-skeleton/dist/skeleton.css'
+
+//TIPAGEM DAS PROPS DO COMPONENTE
+interface Props {
+    img: string,
+    width: string[]
+}
 
 //IMPORTAÇÃO DO PROVEDOR PARA PEGAR AS VARIÁVEIS GLOBAIS
 import { useMyContext } from "../../provider/geral"
 
-//TIPAGEM DAS PROPS DO COMPONENTE
-interface Props {
-    text: string,
-    position?: string
-}
-
-export default function Text(props: Props) {
+export default function ImageComponente(props: Props){
 
     //RESGATA AS VARIAVEIS GLOBAIS
     const states:any = useMyContext()
@@ -48,19 +49,48 @@ export default function Text(props: Props) {
     //DESESTRUTURA AS VARIAVEIS ESPECIFICADAS
     const { theme } = states
 
+    //UTILIZAÇÃO DO HOOK useState
+    const [wid, setWid] = useState(0)
+    const [hei, setHei] = useState(0)
+
+    //FUNÇÃO RESPONSÁVEL POR TROCAR TEXTO DO PLACEHOLDER DEPENDENDO DO TAMANHO DA JANELA
+    const updatePlaceholder = () => {
+        //VERIFICA SE O TAMANHO DA JANELA ATUAL É MENOR QUE 1024
+        if(window.innerWidth <= 640){
+            //TROCA O TAMANHO DA IMAGEM
+            setWid(230)
+            setHei(230)
+        }else if(window.innerWidth <= 1280){
+            //TROCA O TAMANHO DA IMAGEM
+            setWid(300)
+            setHei(300)
+        }else{
+            //TROCA O TAMANHO DA IMAGEM
+            setWid(400)
+            setHei(400)
+        }
+    }
+
+    //FUNÇÃO CHAMADA TODA VEZ QUE A PÁGINA É CARREGADA
+    useEffect(() => {
+        //CHAMA A FUNÇÃO QUE TROCA O TEXTO
+        updatePlaceholder()
+
+        //ADICIONA UM EVENTO DE REDIMENSIONAMENTO DE TELA NA JANELA
+        window.addEventListener('resize', updatePlaceholder)
+
+        //REMOVE O EVENTO DE REDIMENSIONAR A TELA DA JANELA AO FECHAR O COMPONENTE
+        return () => window.removeEventListener('resize', updatePlaceholder)
+    },[])
+
     return(
         <SkeletonTheme baseColor={`${theme == 'light' ? '#818181bb' : '#c0c0c0bb'}`} highlightColor={`#ffffffbb`}>
-            <p
-                className={`
-                    w-[90%] sm:w-[60%] my-3 sm:my-1 text-[22px] sm:text-[20px] lg:text-[24px]
-                    ${props.position && props.position == 'left' && 'text-left'}
-                    ${props.position && props.position == 'right' && 'text-right'}
-                    ${!props.position && 'text-center'}
-                    ${theme == 'light' ? 'text-my-gray' : 'text-my-gray-black'}
-                `}
-            >
-                {props.text || <Skeleton count={5} />}
-            </p>
+            {<img
+                src={props.img}
+                // className={`w-full sm:w-[60%] sm:max-w-[400px] lg:w-[100%] lg:max-w-[450px]`}
+                className={`w-[${props.width[0]}%] sm:w-[${props.width[1]}%] sm:max-w-[${props.width[2]}px] lg:w-[${props.width[3]}%] lg:max-w-[${props.width[4]}px]`}
+                alt=""
+            /> || <Skeleton count={1} width={wid} height={hei} />}
         </SkeletonTheme>
     )
 }

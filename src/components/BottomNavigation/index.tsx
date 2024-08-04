@@ -28,8 +28,7 @@
  */
 
 //IMPORTAÇÃO DAS BIBLIOTECAS
-import { useNavigate } from 'react-router-dom'; 
-import { useLocation } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 
 //IMPORTAÇÃO DOS ICONES
 import { GoHome } from "react-icons/go";

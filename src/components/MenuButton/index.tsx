@@ -27,6 +27,10 @@
  * By using the Software, you agree to these terms and conditions.
  */
 
+//IMPORTAÇÃO DAS BIBLIOTECAS
+import Skeleton, { SkeletonTheme } from 'react-loading-skeleton';
+import 'react-loading-skeleton/dist/skeleton.css'
+
 //IMPORTAÇÃO DOS ICONES
 import { IoMenu, IoCloseOutline } from "react-icons/io5";
 
@@ -55,17 +59,19 @@ export default function MenuButton() {
             ):(
                 //MUDA O ICONE DO MENU SE O MENU ESTIVER FECHADO
                 <div className={`relative`}>
-                    <IoMenu
-                        className={`mt-4 text-[40px] sm:text-[34px] ${theme == 'light' ? 'text-my-black' : 'text-my-white'} z-[2] hover:scale-[1.2] transition-all duration-[.2s] cursor-pointer`}
-                        onClick={() => toggleMenuOpen()}
-                    />
+                    <SkeletonTheme baseColor={`${theme == 'light' ? '#818181bb' : '#c0c0c0bb'}`} highlightColor={`#ffffffbb`}>
+                        {<IoMenu
+                            className={`mt-4 text-[40px] sm:text-[34px] ${theme == 'light' ? 'text-my-black' : 'text-my-white'} z-[2] hover:scale-[1.2] transition-all duration-[.2s] cursor-pointer`}
+                            onClick={() => toggleMenuOpen()}
+                        /> || <Skeleton count={1} width={50} height={40} />}
+                    </SkeletonTheme>
                     {/* VERIFICA SE O ESTADO DA VARIAVEL GLOBAL userS.logged É IGUAL A TRUE */}
                     {userS.logged == true && (
                         //COLOCA UMA ANIMAÇÃO NO MENU PARA MOSTRAR QUE TEM MUDANÇAS NO MENU
                         <div className={`w-[14px] h-[14px] rounded-[50%] absolute top-[18%] right-[-10%] animate-bounce
                         ${theme == 'light' ? 'bg-my-terciary' : 'bg-my-quartenary'}`}></div>
                     )}
-                </div>
+                </div> 
             )}
         </>
     )

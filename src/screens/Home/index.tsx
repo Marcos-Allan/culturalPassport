@@ -44,6 +44,7 @@ import Person from '../../assets/imgs/person_1.png'
 
 //IMPORTAÇÃO DO PROVEDOR PARA PEGAR AS VARIÁVEIS GLOBAIS
 import { useMyContext } from '../../provider/geral';
+import ImageComponente from '../../components/ImageComponente/index.tsx';
 
 export default function Home(){
 
@@ -85,11 +86,7 @@ export default function Home(){
                 />
 
                 <div className={`w-full flex flex-col items-center lg:w-[90%]`}>
-                    <img
-                        src={Person}
-                        className={`w-full sm:w-[60%] sm:max-w-[400px] lg:w-[100%] lg:max-w-[450px]`}
-                        alt=""
-                    />  
+                    <ImageComponente img={Person} width={['100', '60', '400', '100', '450']} />
                         
                     <Button text="iniciar" route="/signs" />
                 </div>

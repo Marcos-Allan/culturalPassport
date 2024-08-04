@@ -27,6 +27,10 @@
  * By using the Software, you agree to these terms and conditions.
  */
 
+//IMPORTAÇÃO DAS BIBLIOTECAS
+import Skeleton, { SkeletonTheme } from 'react-loading-skeleton';
+import 'react-loading-skeleton/dist/skeleton.css'
+
 //IMPORTAÇÃO DO PROVEDOR PARA PEGAR AS VARIÁVEIS GLOBAIS
 import { useMyContext } from "../../provider/geral"
 
@@ -45,9 +49,11 @@ export default function TitlePage(props: Props) {
     const { theme } = states
 
     return(
-        <h1 className={`text-center flex-grow-[1] pt-4 text-[26px] sm:text-[28px] font-bold capitalize
-            ${theme == 'light' ? 'text-my-black' : 'text-my-white'}
-            ${props.space && 'lg:pe-[80px]'}
-        `}>{props.text}</h1>
+        <SkeletonTheme baseColor={`${theme == 'light' ? '#818181bb' : '#c0c0c0bb'}`} highlightColor={`#ffffffbb`}>
+            <h1 className={`text-center flex-grow-[1] pt-4 text-[26px] sm:text-[28px] font-bold capitalize
+                ${theme == 'light' ? 'text-my-black' : 'text-my-white'}
+                ${props.space && 'lg:pe-[80px]'}
+            `}>{props.text || <Skeleton count={1}/>}</h1>
+        </SkeletonTheme>
     )
 }

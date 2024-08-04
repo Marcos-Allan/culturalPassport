@@ -28,7 +28,9 @@
  */
 
 //IMPORTAÇÃO DAS BIBLIOTECAS
-import { Link } from "react-router-dom"
+import { useNavigate } from 'react-router-dom';
+import Skeleton, { SkeletonTheme } from 'react-loading-skeleton';
+import 'react-loading-skeleton/dist/skeleton.css'
 
 //IMPORTAÇÃO DO PROVEDOR PARA PEGAR AS VARIÁVEIS GLOBAIS
 import { useMyContext } from "../../provider/geral"
@@ -43,6 +45,9 @@ interface Props {
 
 export default function Button(props: Props) {
 
+    //UTILIZAÇÃO DO HOOK DE NAVEGAÇÃO 
+    const navigate = useNavigate()
+
     //RESGATA AS VARIAVEIS GLOBAIS
     const states:any = useMyContext()
 
@@ -51,44 +56,47 @@ export default function Button(props: Props) {
 
     return(
         //VÊ SE A POR PROPS FOI PASSADA UMA ROTA DE NAVEGAÇÃO, SE NÃO DTERMINA A ROTA PASSADA POR PROPS
-        <>
+        <SkeletonTheme baseColor={`${theme == 'light' ? '#818181bb' : '#c0c0c0bb'}`} highlightColor={`#ffffffbb`}>
             {props.route !== 'undefined' ? (
-                <Link
-                    to={props.route}
-                    className={`
-                        rounded-[8px]
-                        my-2
-                        sm:my-1
-                        text-center
-                        p-[10px]
-                        text-[24px]
-                        sm:text-[18px]
-                        font-medium
-                        capitalize
-                        w-[90%]
-                        sm:w-[60%]
-                        lg:w-[25%]
-                        lg:rounded-[24px]
-                        focus:bg-transparent
-                        focus:outline-none
-                        hover:bg-transparent
-                        hover:outline-none
-                        border-[2px]
-                        transition-all
-                        duration-[0.2s]
-                        cursor-pointer
-                        ${theme == 'light'
-                            ? `bg-my-primary text-my-white border-my-primary focus:text-my-primary hover:text-my-primary`
-                            : `bg-my-secondary text-my-black border-my-secondary focus:text-my-secondary hover:text-my-secondary`
-                        }
-                    `}
-                >
-                    <p
-                        className="capitalize"
+                <div
+                    className='
+                    w-[90%]
+                    sm:w-[60%]
+                    lg:w-[25%]
+                    rounded-[8px]
+                    mb-2
+                '>
+                    {<div
+                        onClick={() => navigate(props.route)}
+                        className={`
+                            rounded-[8px]
+                            my-2
+                            sm:my-1
+                            text-center
+                            p-[10px]
+                            text-[24px]
+                            sm:text-[18px]
+                            font-medium
+                            capitalize
+                            w-full
+                            lg:rounded-[24px]
+                            focus:bg-transparent
+                            focus:outline-none
+                            hover:bg-transparent
+                            hover:outline-none
+                            border-[2px]
+                            transition-all
+                            duration-[0.2s]
+                            cursor-pointer
+                            ${theme == 'light'
+                                ? `bg-my-primary text-my-white border-my-primary focus:text-my-primary hover:text-my-primary`
+                                : `bg-my-secondary text-my-black border-my-secondary focus:text-my-secondary hover:text-my-secondary`
+                            }
+                        `}
                     >
                         {props.text}
-                    </p>
-                </Link>
+                    </div> || <Skeleton height={60} count={1} />}
+                </div>
             ):(
                 //EXECUTA A FUNÇÃO PASSADA POR PROPS
                 <input
@@ -130,6 +138,6 @@ export default function Button(props: Props) {
                     value={props.text}
                 />
             )}
-        </>
+        </SkeletonTheme>
     )
 }

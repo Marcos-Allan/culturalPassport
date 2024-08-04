@@ -29,6 +29,8 @@
 
 //IMPORTAÇÃO DAS BIBLIOTECAS
 import { useNavigate } from 'react-router-dom'
+import Skeleton, { SkeletonTheme } from 'react-loading-skeleton';
+import 'react-loading-skeleton/dist/skeleton.css'
 
 //IMPORTAÇÃO DOS ICONES
 import { IoArrowBackOutline } from "react-icons/io5";
@@ -53,15 +55,17 @@ export default function Return() {
     }
 
     return(
-        <IoArrowBackOutline
-            onClick={previousPage}
-            className={`
-            text-[55px] sm:text-[44px] pt-4 hover:scale-[1.2] transition-all duration-[.2s] cursor-pointer
-                ${theme == 'light'
-                ? 'text-my-black'
-                : 'text-my-white'
-                }
-            `}
-        />
+        <SkeletonTheme baseColor={`${theme == 'light' ? '#818181bb' : '#c0c0c0bb'}`} highlightColor={`#ffffffbb`}>
+            {<IoArrowBackOutline
+                onClick={previousPage}
+                className={`
+                text-[55px] sm:text-[44px] pt-4 hover:scale-[1.2] transition-all duration-[.2s] cursor-pointer
+                    ${theme == 'light'
+                    ? 'text-my-black'
+                    : 'text-my-white'
+                    }
+                `}
+            /> || <Skeleton count={1} width={50} height={40} />}
+        </SkeletonTheme>
     )
 }
