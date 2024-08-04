@@ -56,6 +56,11 @@ export default function Test() {
     const [correctResponse, setCorrectResponse] = useState<any[]>([])
     const [myCorrectResponse, setMyCorrectResponse] = useState<number>(0)
 
+    //FUNÇÃO RESPONSÁVEL POR VER SE A CONQUISTA FOI CONCLUIDA OU NÃO
+    const checkAchievement = (param:string) => {
+        return userS.simulations.some((item:any) => item.name === param)
+    };
+    
     //FUNÇÃO RESPONSÁVEL POR DEIXAR O TEXTO EM CAPITALIZE
     function capitalizeText(text:string) {
         if (text.length === 0) return text; // Retorna a string original se estiver vazia
@@ -367,12 +372,17 @@ export default function Test() {
                                             console.log(userS)
                                         }
 
-                                        updateUser({ name: "Alexsandro", concluded: true })
+                                        //VERIFICA SE O USUÁRIO JA TEM A CONQUISTA
+                                        if(checkAchievement("Alexsandro") !== true){
+                                            //ATUALIZA OS DADOS DO USUÁRIO NO BANCO DE DADOS
+                                            updateUser({ name: "Alexsandro", concluded: true })
 
-                                        if(userS.simulationsConcludeds >= 1){
+                                        }
+                                        
+                                        //VERIFICA SE O USUÁRIO JA TEM A CONQUISTA
+                                        if(checkAchievement("No caminho certo") !== true && userS.simulationsConcludeds >= 1){
                                             updateUser({ name: "No caminho certo", concluded: true })
                                         }
-
                                         //REDIRECIONA ELE PARA A PÁGINA DE MATÉRIAS
                                         navigate('/materias')
                                     }} />
