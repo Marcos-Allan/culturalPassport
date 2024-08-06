@@ -46,7 +46,7 @@ export default function Matter() {
             case 'fis%C3%ADca':
                 //FISICA
                     setContent([
-                        { title: 'eletrodinamica', background: 0 },
+                        { title: 'eletrodinâmica', background: 0 },
                         { title: 'leis de newton', background: 1 },
                         { title: 'ondulatória', background: 2 },
                         { title: 'campo magnético', background: 3 },
@@ -59,43 +59,43 @@ export default function Matter() {
                 case 'hist%C3%B3ria':
                     //HISTÓRIA
                     setContent([
-                        { title: 'brasil colônia', background: 0 },
-                        { title: 'idade moderna', background: 1 },
-                        { title: 'idade média', background: 2 },
-                        { title: 'tempo presente', background: 3 },
-                        { title: 'estado novo e populismo', background: 4 }
+                        { title: 'brasil colônia', background: 0 }, //
+                        { title: 'idade moderna', background: 1 }, //
+                        { title: 'idade média', background: 2 }, //
+                        { title: 'tempo presente', background: 3 }, //
+                        { title: 'estado novo e populismo', background: 4 } //
                     ])
                     break;
                 case 'ingl%C3%AAs':
                     //INGLÊS
                     setContent([
-                        { title: 'tempos verbais em inglês', background: 0 },
-                        { title: 'voz passiva em inglês', background: 1 },
-                        { title: 'pronomes pessoais', background: 2 },
-                        { title: 'linking words', background: 3 }
+                        { title: 'tempos verbais em inglês', background: 0 }, //
+                        { title: 'voz passiva em inglês', background: 1 }, //
+                        { title: 'pronomes pessoais', background: 2 }, //
+                        { title: 'linking words', background: 3 } //
                     ])
                     break;
                 case 'geografia':
                     //GEOGRAFIA
                     setContent([
-                        { title: 'cartografia e leitura de mapas', background: 0 },
-                        { title: 'climas do brasil e climas do mundo', background: 1 },
-                        { title: 'acordo de paris e conferências ambientais', background: 2 },
-                        { title: 'aquecimento global e efeito estufa', background: 3 },
-                        { title: 'estruturas geológicas e tipos de relevo', background: 4 },
-                        { title: 'biomas do brasil e biomas do mundo', background: 5 },
-                        { title: 'matriz de transporte', background: 6 },
-                        { title: 'bacias hidrográficas e escassez', background: 7 },
+                        { title: 'cartografia e leitura de mapas', background: 0 }, //
+                        { title: 'climas do brasil e climas do mundo', background: 1 }, //
+                        { title: 'acordo de paris e conferências ambientais', background: 2 }, //
+                        { title: 'aquecimento global e efeito estufa', background: 3 }, //
+                        { title: 'estruturas geológicas e tipos de relevo', background: 4 }, //
+                        { title: 'biomas do brasil e biomas do mundo', background: 5 }, //
+                        { title: 'matriz de transporte', background: 6 }, //
+                        { title: 'bacias hidrográficas e escassez', background: 7 }, //
                     ])
                     break;
                 case 'artes':
                     //ARTES
                     setContent([
-                        { title: 'arte contemporânea', background: 0 },
-                        { title: 'convenções teatrais', background: 1 },
-                        { title: 'folcloreve folguedos populares', background: 2 },
-                        { title: 'tradições de povos indigenas', background: 3 },
-                        { title: 'arte de origem africana no brasil', background: 4 }
+                        { title: 'arte contemporânea', background: 0 }, //
+                        { title: 'convenções teatrais', background: 1 }, //
+                        { title: 'folclore e folguedos populares', background: 2 }, //
+                        { title: 'tradições de povos indigenas', background: 3 }, //
+                        { title: 'arte de origem africana no brasil', background: 4 } //
                     ])
                     break;
                 case 'portugu%C3%AAs':
@@ -110,34 +110,34 @@ export default function Matter() {
                 case 'qu%C3%ADmica':
                     //QUÍMICA
                     setContent([
-                        { title: 'estudo de moléculas', background: 0 },
-                        { title: 'química orgânica', background: 1 },
-                        { title: 'reações inorgânicas', background: 2 },
+                        { title: 'estudo de moléculas', background: 0 }, //
+                        { title: 'química orgânica', background: 1 }, //
+                        { title: 'reações inorgânicas', background: 2 }, //
                         { title: 'soluções - concentrações', background: 3 },
                         { title: 'cálculos - estequiométricos', background: 4 },
-                        { title: 'eletroquímica', background: 5 },
-                        { title: 'termoquímica', background: 6 },
-                        { title: 'poluição ambiental', background: 7 },
+                        { title: 'eletroquímica', background: 5 }, //
+                        { title: 'termoquímica', background: 6 }, //
+                        { title: 'poluição ambiental', background: 7 }, //
                     ])
                     break;
                 case 'biologia':
                     //BIOLOGIA
                     setContent([
-                        { title: 'ecologia', background: 0 },
-                        { title: 'fisiologia humana', background: 1 },
-                        { title: 'biotecnologia', background: 2 },
-                        { title: 'biologia celular', background: 3 },
-                        { title: 'botânica', background: 4 },
+                        { title: 'ecologia', background: 0 }, //
+                        { title: 'fisiologia humana', background: 1 }, //
+                        { title: 'biotecnologia', background: 2 }, //
+                        { title: 'biologia celular', background: 3 }, //
+                        { title: 'botânica', background: 4 }, //
                     ])
                     break;
                 case 'matem%C3%A1tica':
                     //MAEMÁTICA
                     setContent([
-                        { title: 'porcentagem', background: 0 },
-                        { title: 'equações', background: 1 },
-                        { title: 'funções', background: 2 },
-                        { title: 'PA progressão aritimética', background: 3 },
-                        { title: 'PG progressão geométrica', background: 4 },
+                        { title: 'porcentagem', background: 0 }, //
+                        { title: 'equações', background: 1 }, // 
+                        { title: 'funções', background: 2 }, //
+                        { title: 'progressão aritimética', background: 3 }, //
+                        { title: 'progressão geométrica', background: 4 }, //
                         { title: 'analise combinatória', background: 5 },
                         { title: 'geometria plana e geometria espacial', background: 6 },
                         { title: 'razão e proporção', background: 7 },

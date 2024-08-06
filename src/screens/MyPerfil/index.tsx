@@ -100,6 +100,7 @@ export default function MyPerfil() {
     const fetchImages = async () => {
         //FAZ UMA REFERÊNCIA AO LOCAL DE AVATARES SALVOS NA NUVEM
         const storageRef = ref(storage, '/images/avatars');
+        // const storageRef = ref(storage, '/images/icons-achievements');
 
         try {
             //PEGA AS IMAGENS DENTRO DA PASTA ESPECIFICADA
