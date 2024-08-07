@@ -397,7 +397,6 @@ export default function Test() {
                                         if(checkAchievement("Alexsandro") !== true){
                                             //ATUALIZA OS DADOS DO USUÁRIO NO BANCO DE DADOS
                                             updateUser({ name: "Alexsandro", concluded: true })
-
                                         }
                                         
                                         //VERIFICA SE O USUÁRIO JA TEM A CONQUISTA
@@ -420,7 +419,7 @@ export default function Test() {
             ) : (
                 <div className={`w-[90%] mt-5 flex flex-col items-center`}>
                     <TitlePage text='Sentimos muito'/>
-                    <Text text={`Desculpe Infelizmente não temos provas desta matéria ${capitalizeText(matter || 'matéria')} não é o nossa praia`} />
+                    <Text text={`Desculpe Infelizmente não temos provas desta matéria ${capitalizeText(matter || 'matéria')} não é a nossa praia`} />
                     <RiEmotionSadFill className={`text-[140px] mt-3 mb-4 ${theme == 'light' ? 'text-my-gray' : 'text-my-gray-black'}`} />
                     <Button route='/materias' text='Retornar' />
                 </div>

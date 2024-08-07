@@ -39,7 +39,7 @@ import { ref, uploadBytesResumable, getDownloadURL, listAll } from 'firebase/sto
 import { storage } from '../../utils/firebase';
 
 //IMPORTAÇÃO DOS ICONES
-import { MdImage } from "react-icons/md";
+import { MdImage, MdOutlineEdit } from "react-icons/md"
 
 //IMPORTAÇÃO DO PROVEDOR PARA PEGAR AS VARIÁVEIS GLOBAIS
 import { useMyContext } from "../../provider/geral"
@@ -434,21 +434,23 @@ export default function MyPerfil() {
                             ${theme == 'light' ? 'text-my-black' : 'text-my-white'}
                         `}
                     >Seu Cronograma</h2>
-                    
-                    <h3
-                        className={`
-                            w-full text-center capitalize mb-3 font-bold text-[20px]
-                            ${theme == 'light' ? 'text-my-secondary' : 'text-my-quartenary'}
-                        `}
-                    >
-                    </h3>
 
                     <div
                         className={`
-                            w-full flex flex-col items-center justify-center border-[1px] rounded-[8px] overflow-hidden
+                            w-full flex flex-col items-center justify-center border-[1px] rounded-[8px] relative
                             ${theme == 'light' ? 'text-my-gray border-my-secondary' : 'text-my-gray-black border-my-quartenary'}
                         `}
                     >
+                        <div
+                            className={`absolute top-[-10px] right-[-10px] w-[25px] h-[25px] rounded-[50%] flex items-center justify-center cursor-pointer hover:scale-[1.2] transition-all duration-[.2s] ${theme == 'light' ? 'bg-my-quartenary' : 'bg-my-terciary'}`}
+                            onClick={() => {
+                                toggleUser(userS.name, userS.img, userS._id, userS.simulations, userS.simulationsConcludeds, []) 
+                                navigate('/materias')
+                            }}
+                        >
+                            <MdOutlineEdit className={`pb-[3px] text-[20px] text-my-white`}/>
+                        </div>
+
                         {userS.cronogram.map((mat:string, i:number) => (
                             <div
                             className={`
