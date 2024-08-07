@@ -59,6 +59,7 @@ export const MyProvider = ({ children } : { children: React.ReactNode }) => {
     const [userS, setUserS] = useState<User>({ logged: false, name: '', img: '', id: '', simulations: [], simulationsConcludeds: 0, cronogram: [] })
     const [loading, setLoading] = useState<boolean>(false)
     const [message, setMessage] = useState<Alert>({ type: 'undefined', text: 'Alerta simples' })
+    const [isLogout, setIsLogout] = useState<boolean>(false)
 
     //FUNÇÃO RESPONSAVEL POR TROCAR E SALVAR NO localStorage O TEMA ESCOLHIDO PELO USUÁRIO
     const toggleTheme = () => {
@@ -86,10 +87,15 @@ export const MyProvider = ({ children } : { children: React.ReactNode }) => {
     const toggleAlert = (type: string, text: string ) => {
         setMessage({ type: type, text: text })
     }
+
+    //FUNÇÃO RESPONSÁVEL POR DAR LOGOUT NA CONTA DO USUÁRIO
+    const toggleLogout  = (state:boolean) => {
+        setIsLogout(state)
+    }
     
     //RETORNA TUDO PARA SER USADO EM TODO O SITE
     return (
-        <MyContext.Provider value={{ theme, toggleTheme, menuOpen, toggleMenuOpen, userS, toggleUser, loading, toggleLoading, message, toggleAlert }}>
+        <MyContext.Provider value={{ theme, toggleTheme, menuOpen, toggleMenuOpen, userS, toggleUser, loading, toggleLoading, message, toggleAlert, isLogout, toggleLogout }}>
             {children}
         </MyContext.Provider>
     )

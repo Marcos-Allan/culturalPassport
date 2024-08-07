@@ -259,7 +259,7 @@ export default function Test() {
 
     return(
         <>
-            {matter == 'fisíca' || matter == 'matemática' ? (
+            {matter == 'fisíca' || matter == 'matemática' || matter == 'português' ? (
                 <>
                     <Navbar>
                         <TitlePage text={`${capitalizeText(matter || 'matéria')}`} />
@@ -408,7 +408,6 @@ export default function Test() {
                                     }} />
                                 </div>
                             )}
-
                         </div>
                     ):(
                         <p className={`text-[22px] text-center w-[80%] ${theme == 'light' ? 'text-my-gray' : 'text-my-gray-black'}`}>
