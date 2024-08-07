@@ -7,7 +7,7 @@ import {
     Tooltip,
     Legend
 } from 'chart.js'
-import { Pie } from 'react-chartjs-2'
+import { Doughnut } from 'react-chartjs-2'
 
 //IMPORTAÇÃO DOS COMPONENTES
 import TitlePage from '../../components/TitlePage';
@@ -302,7 +302,7 @@ export default function Test() {
                                                 className={`
                                                     text-[20px] border-[1px] py-2 my-1 px-3 rounded-[40px] cursor-pointer
                                                     ${quest.option == yourResponse[questIndex] ?
-                                                        `${theme == 'light' ?'text-my-secondary border-my-secondary' : 'text-my-quartenary border-my-quartenary'}` :
+                                                        `${theme == 'light' ?'text-my-secondary border-my-secondary' : 'text-my-secondary border-my-secondary'}` :
                                                         `${theme == 'light' ?'text-my-black border-my-black' : 'text-my-white border-my-white'}`
                                                     }
                                                 `}
@@ -328,26 +328,47 @@ export default function Test() {
                                 </>
                             ) : (
                                 <div className='w-full flex flex-col items-center justify-start'>
-                                    <TitlePage text='Prova finalizada'/>
+                                    <TitlePage text='Resultado'/>
+                                    
+                                    <div className={`flex capitalize justify-between text-[20px] mt-3 px-2 py-3 rounded-[8px] w-full border-[1px] ${theme == 'light' ? 'border-my-black text-black' : 'border-my-white text-white'}`}>
+                                        <p>nota final:</p>
+                                        <p>5.00</p>
+                                    </div>
+                                    
+                                    <div className={`flex justify-between text-[20px] mt-3 px-2 py-3 rounded-[8px] w-full border-[1px] ${theme == 'light' ? 'border-my-black text-black' : 'border-my-white text-white'}`}>
+                                        <p>acertos:</p>
+                                        <p>30</p>
+                                    </div>
+                                    
+                                    <div className={`flex justify-between text-[20px] mt-3 px-2 py-3 rounded-[8px] w-full border-[1px] ${theme == 'light' ? 'border-my-black text-black' : 'border-my-white text-white'}`}>
+                                        <p>erros:</p>
+                                        <p>30</p>
+                                    </div>
+                                    
+                                    <div className={`flex justify-between text-[20px] mt-3 px-2 py-3 rounded-[8px] w-full border-[1px] ${theme == 'light' ? 'border-my-black text-black' : 'border-my-white text-white'}`}>
+                                        <p>total de questões:</p>
+                                        <p>60</p>
+                                    </div>
+
                                     <div className={`w-[50%] flex items-center justify-center my-4`}>
-                                        <Pie
+                                        <Doughnut
                                             data = {{
                                                 labels: ['Acertos', 'Erros'],
                                                 datasets: [
                                                     {
                                                         data: [myCorrectResponse, (questions.length - myCorrectResponse)],
                                                         borderColor: 'black',
-                                                        backgroundColor: [`${theme == 'light' ? '#445EF2' : '#05C7F2'}`, `${theme == 'light' ? '#263973' : '#010E26'}`]
+                                                        backgroundColor: [`${theme == 'light' ? '#6E9488' : '#6E9488'}`, `${theme == 'light' ? '#723F28' : '#B47C49'}`]
                                                     }
                                                 ]
                                             }}
                                             options = {{}}
-                                        ></Pie>
+                                        ></Doughnut>
                                     </div>
                                     <h1 className={`mt-2 mb-4 text-[20px] font-bold ${theme == 'light' ? 'text-my-black' : 'text-my-white'}`}>Gabarito da prova</h1>
                                     <div className={`flex flex-row justify-between items-center w-[45%] gap-[3px] mb-5`}>
                                         <div className={`flex flex-col items-center justify-center flex-grow-[1] gap-[3px]`}>
-                                            <p className={`border-[1px] w-full font-bold text-center text-[12px]`}>Gabarito</p>
+                                            <p className={`border-[1px] w-full font-bold text-center text-[12px] ${theme == 'light' ? 'text-my-black' : 'text-my-white'}`}>Gabarito</p>
                                             {yourResponse.map((response:string, i:number) => (
                                                 <p className={`border-[1px] w-full text-center ${response == correctResponse[i] ? 'text-[#00ff00] border-[#00ff00]' : 'text-[#ff0000] border-[#ff0000]'}`}>
                                                     {response}
@@ -356,7 +377,7 @@ export default function Test() {
                                         </div>
                                         
                                         <div className={`flex flex-col items-center justify-center flex-grow-[1] gap-[3px]`}>
-                                            <p className={`border-[1px] w-full font-bold text-center text-[12px]`}>Resposta</p>
+                                            <p className={`border-[1px] w-full font-bold text-center text-[12px] ${theme == 'light' ? 'text-my-black' : 'text-my-white'}`}>Resposta</p>
                                             {yourResponse.map((response:string, i:number) => (
                                                 <p className={`border-[1px] w-full text-center ${response == correctResponse[i] ? 'text-[#00ff00] border-[#00ff00]' : 'text-[#ff0000] border-[#ff0000]'}
                                                 `}>

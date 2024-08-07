@@ -58,7 +58,7 @@ export default function Linkin(props: Props) {
                 focus:underline
                 focus:outline-none
                 focus:border-none
-                ${theme == 'light' ? 'text-my-secondary' : 'text-my-quintenary'}
+                ${theme == 'light' ? 'text-my-terciary' : 'text-my-quintenary'}
             `}
         >
             {props.text}

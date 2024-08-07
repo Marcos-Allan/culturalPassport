@@ -75,7 +75,9 @@ export default function LogoutButton() {
     }
 
     return(
-        <div className={`w-[80%] flex py-3 hover:text-my-secondary transition-all duration-[.2s] cursor-pointer ${theme == 'light' ? 'text-my-white' : 'text-my-black'} `}
+        <div className={`w-[80%] flex py-3 transition-all duration-[.2s] cursor-pointer 
+        ${theme == 'light' ? 'text-my-white hover:text-my-quintenary' : 'text-my-black hover:text-my-secondary'}
+        `}
             onClick={() => handleLogout()}
         >
             <CiLogout className={`text-[30px]`} />

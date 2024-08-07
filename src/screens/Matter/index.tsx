@@ -101,10 +101,10 @@ export default function Matter() {
                 case 'portugu%C3%AAs':
                     //PORTUGUÊS
                     setContent([
-                        { title: 'variação linguistica', background: 0 },
-                        { title: 'genêros textuais', background: 1 },
-                        { title: 'intertextualidade', background: 2 },
-                        { title: 'figuras de linguagem', background: 3 }
+                        { title: 'variação linguística', background: 0 }, //
+                        { title: 'genêros textuais', background: 1 }, //
+                        { title: 'intertextualidade', background: 2 }, //
+                        { title: 'figuras de linguagens', background: 3 } //
                     ])
                     break;
                 case 'qu%C3%ADmica':
@@ -113,8 +113,8 @@ export default function Matter() {
                         { title: 'estudo de moléculas', background: 0 }, //
                         { title: 'química orgânica', background: 1 }, //
                         { title: 'reações inorgânicas', background: 2 }, //
-                        { title: 'soluções - concentrações', background: 3 },
-                        { title: 'cálculos - estequiométricos', background: 4 },
+                        { title: 'soluções - concentrações', background: 3 }, //
+                        { title: 'cálculos - estequiométricos', background: 4 }, //
                         { title: 'eletroquímica', background: 5 }, //
                         { title: 'termoquímica', background: 6 }, //
                         { title: 'poluição ambiental', background: 7 }, //

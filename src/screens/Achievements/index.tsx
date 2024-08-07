@@ -126,7 +126,7 @@ export default function Achievements() {
                 )}
 
                 {loadingAchivements == true && (
-                    <p>carregando as conquistas seja paciente</p>
+                    <p className={`${theme == 'light' ? 'text-my-black' : 'text-my-white'}`}>carregando as conquistas seja paciente</p>
                 )}
             </div>
 
