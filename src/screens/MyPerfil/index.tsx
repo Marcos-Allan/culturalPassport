@@ -342,7 +342,7 @@ export default function MyPerfil() {
                         <img
                             src={img}
                             alt=""
-                            className={`rounded-[50%] mb-2 w-[80px] h-[80px] border-[1px] p-1 ${theme == 'light' ? 'border-my-terciary' : 'border-my-quartenary'}`}
+                            className={`rounded-[50%] mb-2 w-[80px] h-[80px] border-[1px] p-1 ${theme == 'light' ? 'border-my-terciary' : 'border-my-quintenary'}`}
                         />
 
                         <input
@@ -350,7 +350,7 @@ export default function MyPerfil() {
                             className={`text-[22px] w-full font-bold capitalize bg-transparent border-2 p-1 ps-2 rounded-[15px] outline-none
                             ${theme == 'light'
                             ? 'text-my-black border-my-terciary'
-                            : 'text-my-white border-my-quartenary'}
+                            : 'text-my-white border-my-quintenary'}
                             `}
                             value={name}
                         />
@@ -438,11 +438,11 @@ export default function MyPerfil() {
                     <div
                         className={`
                             w-full flex flex-col items-center justify-center border-[1px] rounded-[8px] relative
-                            ${theme == 'light' ? 'text-my-gray border-my-secondary' : 'text-my-gray-black border-my-quartenary'}
+                            ${theme == 'light' ? 'text-my-gray border-my-secondary' : 'text-my-gray-black border-my-quintenary'}
                         `}
                     >
                         <div
-                            className={`absolute top-[-10px] right-[-10px] w-[25px] h-[25px] rounded-[50%] flex items-center justify-center cursor-pointer hover:scale-[1.2] transition-all duration-[.2s] ${theme == 'light' ? 'bg-my-quartenary' : 'bg-my-terciary'}`}
+                            className={`absolute top-[-10px] right-[-10px] w-[25px] h-[25px] rounded-[50%] flex items-center justify-center cursor-pointer hover:scale-[1.2] transition-all duration-[.2s] ${theme == 'light' ? 'bg-my-terciary' : 'bg-my-quintenary'}`}
                             onClick={() => {
                                 toggleUser(userS.name, userS.img, userS._id, userS.simulations, userS.simulationsConcludeds, []) 
                                 navigate('/materias')
@@ -457,7 +457,7 @@ export default function MyPerfil() {
                                 w-full flex items-center justify-between border-[1px] py-2 px-1
                                 ${verifyDay(days[Number(i) <= 6 ? Number(i) : Number(i - 7)]) == true
                                     ? `border-[4px]
-                                ${theme == 'light' ? 'border-my-secondary' : 'border-my-quartenary'}` : `
+                                ${theme == 'light' ? 'border-my-secondary' : 'border-my-quintenary'}` : `
                                 ${theme == 'light' ? 'text-my-gray border-my-gray' : 'text-my-gray-black border-my-gray-black'}`}
                             `}
                         >
@@ -465,7 +465,7 @@ export default function MyPerfil() {
                                 className={`
                                     text-left w-[40%] pl-2
                                     ${verifyDay(days[Number(i) <= 6 ? Number(i) : Number(i - 7)]) == true ? `
-                                        ${theme == 'light' ? 'text-my-secondary font-bold' : 'text-my-quartenary font-bold'}` : `
+                                        ${theme == 'light' ? 'text-my-secondary font-bold' : 'text-my-quintenary font-bold'}` : `
                                         ${theme == 'light' ? 'text-my-gray' : 'text-my-gray-black'}
                                     `}
                                 `}
@@ -475,7 +475,7 @@ export default function MyPerfil() {
                                 className={`
                                     text-left flex-grow-[1] uppercase
                                     ${verifyDay(days[Number(i) <= 6 ? Number(i) : Number(i - 7)]) == true ? `
-                                        ${theme == 'light' ? 'text-my-secondary font-bold' : 'text-my-quartenary font-bold'}` :`
+                                        ${theme == 'light' ? 'text-my-secondary font-bold' : 'text-my-quintenary font-bold'}` :`
                                         ${theme == 'light' ? 'text-my-gray' : 'text-my-gray-black'}
                                     `}
                                 `}
@@ -491,7 +491,7 @@ export default function MyPerfil() {
                                 className={`
                                     text-left w-[30%] capitalize
                                     ${theme == 'light' ? 'text-my-gray' : 'text-my-gray-black'}
-                                    ${verifyDay(days[Number(i) <= 6 ? Number(i) : Number(i - 7)]) == true && `${theme == 'light' ? 'text-my-secondary font-bold' : 'text-my-quartenary font-bold'}`}
+                                    ${verifyDay(days[Number(i) <= 6 ? Number(i) : Number(i - 7)]) == true && `${theme == 'light' ? 'text-my-secondary font-bold' : 'text-my-quintenary font-bold'}`}
                                 `}
                             >
                                 {String(mat).replace(/"/g, '')}
