@@ -80,6 +80,11 @@ export default function Alert() {
                     //MUDA A COR DA BARRA DE BACKGROUND
                     setBackground('#84cd8e')
                     break;
+                
+                case 'conquest':
+                    //MUDA A COR DA BARRA DE BACKGROUND
+                    setBackground('#a049ec')
+                    break;
                     
                     default:
                     //MUDA A COR DA BARRA DE BACKGROUND
@@ -141,6 +146,7 @@ export default function Alert() {
 
                 {/* CRIA UMA DIV COM ANIMAÇÃO */}
                 <animated.div
+                    className={`${message.type == 'conquest' && 'animate-bgChange'}`}
                     ref={msg}
                     style={{
                         height: '6px',

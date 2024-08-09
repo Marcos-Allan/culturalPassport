@@ -52,7 +52,7 @@ export default function Test() {
     const [percentageFinalized, setPercentageFinalized] = useState<number>(0)
     const [yourPercent, setYourPercent] = useState<number>(0)
     const [questions, setQuestions] = useState<any[]>([])
-    const [yourResponse, setYourResponse] = useState<any[]>(['', '', '', '', ''])
+    const [yourResponse, setYourResponse] = useState<any[]>(['', '', '', '', '', '', '', '', '', '', '', '', '', ''])
     const [correctResponse, setCorrectResponse] = useState<any[]>([])
     const [myCorrectResponse, setMyCorrectResponse] = useState<number>(0)
 
@@ -70,14 +70,15 @@ export default function Test() {
     //FUNÇÃO RESPONSÁVEL POR VER QUANTAS QUESTÕES O USUÁRIO ACERTOU
     function getResult(){
         let data = 0
+
         yourResponse.map((myResp:any, i:number) => {
-            console.log(myResp +"=="+correctResponse[i])
             if(myResp == correctResponse[i]){
                 data++
-                console.log('acertamos mais uma')
             }
         })
+
         setMyCorrectResponse(data)
+
         return data
     }
     
@@ -221,7 +222,7 @@ export default function Test() {
                 toggleUser(response.data.name, response.data.img, response.data._id, response.data.simulations, response.data.simulationsConcludeds, cronogram)
     
                 //COLOCA ALERT NA TELA
-                toggleAlert(`success`, `Alteração feita com sucesso`);
+                toggleAlert(`conquest`, `Conquista desbloqueada`);
             })
             .catch(function(error) {
 
@@ -259,7 +260,7 @@ export default function Test() {
 
     return(
         <>
-            {matter == 'fisíca' || matter == 'matemática' || matter == 'português' ? (
+            {matter == 'matemática' || matter == 'fisíca' || matter == 'português' || matter == 'biologia' || matter == 'história' || matter == 'inglês' ? (
                 <>
                     <Navbar>
                         <TitlePage text={`${capitalizeText(matter || 'matéria')}`} />
@@ -332,22 +333,22 @@ export default function Test() {
                                     
                                     <div className={`flex capitalize justify-between text-[20px] mt-3 px-2 py-3 rounded-[8px] w-full border-[1px] ${theme == 'light' ? 'border-my-black text-black' : 'border-my-white text-white'}`}>
                                         <p>nota final:</p>
-                                        <p>5.00</p>
+                                        <p>{(10 / questions.length) *  myCorrectResponse}</p>
                                     </div>
                                     
                                     <div className={`flex justify-between text-[20px] mt-3 px-2 py-3 rounded-[8px] w-full border-[1px] ${theme == 'light' ? 'border-my-black text-black' : 'border-my-white text-white'}`}>
                                         <p>acertos:</p>
-                                        <p>30</p>
+                                        <p>{myCorrectResponse}</p>
                                     </div>
                                     
                                     <div className={`flex justify-between text-[20px] mt-3 px-2 py-3 rounded-[8px] w-full border-[1px] ${theme == 'light' ? 'border-my-black text-black' : 'border-my-white text-white'}`}>
                                         <p>erros:</p>
-                                        <p>30</p>
+                                        <p>{questions.length - myCorrectResponse}</p>
                                     </div>
                                     
                                     <div className={`flex justify-between text-[20px] mt-3 px-2 py-3 rounded-[8px] w-full border-[1px] ${theme == 'light' ? 'border-my-black text-black' : 'border-my-white text-white'}`}>
                                         <p>total de questões:</p>
-                                        <p>60</p>
+                                        <p>{questions.length}</p>
                                     </div>
 
                                     <div className={`w-[50%] flex items-center justify-center my-4`}>
@@ -369,17 +370,17 @@ export default function Test() {
                                     <div className={`flex flex-row justify-between items-center w-[45%] gap-[3px] mb-5`}>
                                         <div className={`flex flex-col items-center justify-center flex-grow-[1] gap-[3px]`}>
                                             <p className={`border-[1px] w-full font-bold text-center text-[12px] ${theme == 'light' ? 'text-my-black' : 'text-my-white'}`}>Gabarito</p>
-                                            {yourResponse.map((response:string, i:number) => (
-                                                <p className={`border-[1px] w-full text-center ${response == correctResponse[i] ? 'text-[#00ff00] border-[#00ff00]' : 'text-[#ff0000] border-[#ff0000]'}`}>
-                                                    {response}
+                                            {questions.map((response:string, i:number) => (
+                                                <p key={response} className={`border-[1px] w-full text-center ${yourResponse[i] == correctResponse[i] ? 'text-[#00ff00] border-[#00ff00]' : 'text-[#ff0000] border-[#ff0000]'}`}>
+                                                    {yourResponse[i]}
                                                 </p>
                                             ))}
                                         </div>
                                         
                                         <div className={`flex flex-col items-center justify-center flex-grow-[1] gap-[3px]`}>
                                             <p className={`border-[1px] w-full font-bold text-center text-[12px] ${theme == 'light' ? 'text-my-black' : 'text-my-white'}`}>Resposta</p>
-                                            {yourResponse.map((response:string, i:number) => (
-                                                <p className={`border-[1px] w-full text-center ${response == correctResponse[i] ? 'text-[#00ff00] border-[#00ff00]' : 'text-[#ff0000] border-[#ff0000]'}
+                                            {questions.map((response:string, i:number) => (
+                                                <p key={response} className={`border-[1px] w-full text-center ${yourResponse[i] == correctResponse[i] ? 'text-[#00ff00] border-[#00ff00]' : 'text-[#ff0000] border-[#ff0000]'}
                                                 `}>
                                                     {correctResponse[i]}
                                                 </p>
@@ -388,15 +389,48 @@ export default function Test() {
                                     </div>
 
                                     <Button route='undefined' text='Voltar' event={() => {
-                                        //DA UM ALERT NA TELA 
-                                        if(userS){
-                                            console.log(userS)
+
+                                        //VERIFICA SE O USUÁRIO JA TEM A CONQUISTA
+                                        // if(matter == 'química' && checkAchievement("Geovana") !== true){
+                                        //     //ATUALIZA OS DADOS DO USUÁRIO NO BANCO DE DADOS
+                                        //     updateUser({ name: "Geovana", concluded: true })
+                                        // }
+
+                                        //VERIFICA SE O USUÁRIO JA TEM A CONQUISTA
+                                        if(matter == 'matemática' && checkAchievement("Alexsandro") !== true){
+                                            updateUser({ name: "Alexsandro", concluded: true })
+                                        }
+                                        
+                                        //VERIFICA SE O USUÁRIO JA TEM A CONQUISTA
+                                        // if(matter == 'geografia' && checkAchievement("Jorgina") !== true){
+                                        //     updateUser({ name: "Jorgina", concluded: true })
+                                        // }
+
+                                        //VERIFICA SE O USUÁRIO JA TEM A CONQUISTA
+                                        // if(matter == 'artes' && checkAchievement("Angreei") !== true){
+                                        //     updateUser({ name: "Angreei", concluded: true })
+                                        // }
+
+                                        //VERIFICA SE O USUÁRIO JA TEM A CONQUISTA
+                                        if(matter == 'fisíca' && checkAchievement("Xandão") !== true){
+                                            updateUser({ name: "Xandão", concluded: true })
                                         }
 
                                         //VERIFICA SE O USUÁRIO JA TEM A CONQUISTA
-                                        if(checkAchievement("Alexsandro") !== true){
-                                            //ATUALIZA OS DADOS DO USUÁRIO NO BANCO DE DADOS
-                                            updateUser({ name: "Alexsandro", concluded: true })
+                                        if(matter == 'biologia' && checkAchievement("Renan") !== true){
+                                            updateUser({ name: "Renan", concluded: true })
+                                        }
+                                        //VERIFICA SE O USUÁRIO JA TEM A CONQUISTA
+                                        if(matter == 'português' && checkAchievement("Cida") !== true){
+                                            updateUser({ name: "Cida", concluded: true })
+                                        }
+                                        //VERIFICA SE O USUÁRIO JA TEM A CONQUISTA
+                                        if(matter == 'história' && checkAchievement("Tozi") !== true){
+                                            updateUser({ name: "Tozi", concluded: true })
+                                        }
+                                        //VERIFICA SE O USUÁRIO JA TEM A CONQUISTA
+                                        if(matter == 'inglês' && checkAchievement("Leandro") !== true){
+                                            updateUser({ name: "Leandro", concluded: true })
                                         }
                                         
                                         //VERIFICA SE O USUÁRIO JA TEM A CONQUISTA

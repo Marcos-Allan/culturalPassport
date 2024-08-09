@@ -43,9 +43,20 @@ export default {
           '85%': { borderColor: 'rgb(128, 0, 128)' },
           '100%': { borderColor: 'rgb(255, 0, 0)' },
         },
+        bgChange: {
+          '0%': { backgroundColor: 'rgb(255, 0, 0)' },
+          '14%': { backgroundColor: 'rgb(255, 165, 0)' },
+          '28%': { backgroundColor: 'rgb(255, 255, 0)' },
+          '42%': { backgroundColor: 'rgb(0, 128, 0)' },
+          '57%': { backgroundColor: 'rgb(0, 255, 255)' },
+          '71%': { backgroundColor: 'rgb(0, 0, 255)' },
+          '85%': { backgroundColor: 'rgb(128, 0, 128)' },
+          '100%': { backgroundColor: 'rgb(255, 0, 0)' },
+        },
       },
       animation: {
         colorChange: 'colorChange 4s linear infinite',
+        bgChange: 'bgChange 4s infinite linear'
       },
     },
   },
