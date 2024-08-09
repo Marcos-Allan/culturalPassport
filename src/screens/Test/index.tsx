@@ -391,20 +391,18 @@ export default function Test() {
                                     <Button route='undefined' text='Voltar' event={() => {
 
                                         //VERIFICA SE O USUÁRIO JA TEM A CONQUISTA
-                                        // if(matter == 'química' && checkAchievement("Geovana") !== true){
-                                        //     //ATUALIZA OS DADOS DO USUÁRIO NO BANCO DE DADOS
-                                        //     updateUser({ name: "Geovana", concluded: true })
-                                        // }
-
+                                        if(matter == 'química' && checkAchievement("Geovana") !== true){
+                                            //ATUALIZA OS DADOS DO USUÁRIO NO BANCO DE DADOS
+                                            updateUser({ name: "Geovana", concluded: true })
+                                        }
                                         //VERIFICA SE O USUÁRIO JA TEM A CONQUISTA
                                         if(matter == 'matemática' && checkAchievement("Alexsandro") !== true){
                                             updateUser({ name: "Alexsandro", concluded: true })
                                         }
-                                        
                                         //VERIFICA SE O USUÁRIO JA TEM A CONQUISTA
-                                        // if(matter == 'geografia' && checkAchievement("Jorgina") !== true){
-                                        //     updateUser({ name: "Jorgina", concluded: true })
-                                        // }
+                                        if(matter == 'geografia' && checkAchievement("Jorgina") !== true){
+                                            updateUser({ name: "Jorgina", concluded: true })
+                                        }
 
                                         //VERIFICA SE O USUÁRIO JA TEM A CONQUISTA
                                         // if(matter == 'artes' && checkAchievement("Angreei") !== true){
@@ -415,7 +413,6 @@ export default function Test() {
                                         if(matter == 'fisíca' && checkAchievement("Xandão") !== true){
                                             updateUser({ name: "Xandão", concluded: true })
                                         }
-
                                         //VERIFICA SE O USUÁRIO JA TEM A CONQUISTA
                                         if(matter == 'biologia' && checkAchievement("Renan") !== true){
                                             updateUser({ name: "Renan", concluded: true })
