@@ -260,7 +260,7 @@ export default function Test() {
 
     return(
         <>
-            {matter == 'matemática' || matter == 'fisíca' || matter == 'português' || matter == 'biologia' || matter == 'história' || matter == 'inglês' ? (
+            {matter == 'fisíca' || matter == 'história' || matter == 'inglês' || matter == 'geografia' || matter == 'português' || matter == 'química' || matter == 'biologia' || matter == 'matemática' ? (
                 <>
                     <Navbar>
                         <TitlePage text={`${capitalizeText(matter || 'matéria')}`} />
