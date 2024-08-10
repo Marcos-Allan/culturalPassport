@@ -110,7 +110,7 @@ export default function CronogramPage() {
                 toggleUser(response.data.name, response.data.img, response.data._id, response.data.simulations, response.data.simulationsConcludeds, cronogram)
     
                 //COLOCA ALERT NA TELA
-                toggleAlert(`success`, `Alteração feita com sucesso`);
+                toggleAlert(`success`, `Cronograma atualizado com sucesso`);
             })
             .catch(function(error) {
 
@@ -121,7 +121,7 @@ export default function CronogramPage() {
                 toggleLoading(false);
     
                 //COLOCA ALERT NA TELA
-                toggleAlert(`error`, `Ocorreu um erro interno no servidor`);
+                toggleAlert(`error`, `Ocorreu um erro interno na merda do  servidor`);
             })
     }
 

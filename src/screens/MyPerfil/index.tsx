@@ -443,7 +443,7 @@ export default function MyPerfil() {
                         <div
                             className={`absolute top-[-10px] right-[-10px] w-[25px] h-[25px] rounded-[50%] flex items-center justify-center cursor-pointer hover:scale-[1.2] transition-all duration-[.2s] ${theme == 'light' ? 'bg-my-terciary' : 'bg-my-quintenary'}`}
                             onClick={() => {
-                                toggleUser(userS.name, userS.img, userS._id, userS.simulations, userS.simulationsConcludeds, []) 
+                                toggleUser(userS.name, userS.img, userS.id, userS.simulations, userS.simulationsConcludeds, [])
                                 navigate('/materias')
                             }}
                         >

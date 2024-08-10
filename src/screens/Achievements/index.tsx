@@ -82,6 +82,9 @@ export default function Achievements() {
         .catch(function (error) {
             //ESCREVE NO CONSOLE O ERRO OCORRIDO
             console.log(error)
+            
+            //MUDA O ESTADO DE LOADING DAS CONQUISTAS PARA false
+            setLoadingAchivements(false)
         })
     }
 
@@ -128,7 +131,7 @@ export default function Achievements() {
                 )}
 
                 {loadingAchivements == true && (
-                    <p className={`${theme == 'light' ? 'text-my-black' : 'text-my-white'}`}>carregando as conquistas seja paciente</p>
+                    <p className={`w-full text-center text-[18px] ${theme == 'light' ? 'text-my-black' : 'text-my-white'}`}>estamos carregando as conquistas seja paciente</p>
                 )}
             </div>
 

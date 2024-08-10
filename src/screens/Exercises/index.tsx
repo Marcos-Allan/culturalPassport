@@ -47,6 +47,9 @@ import { useMyContext } from '../../provider/geral';
 //IMPORTAÇÃO DOS ICONES
 import { IoMdSad } from "react-icons/io";
 
+//CONFIGURAÇÃO DA BASE URL DO AXIOS
+import instance from '../../utils/axios';
+
 export default function Exercises() {
 
     //UTILIZAÇÃO DO HOOK DE NAVEGAÇÃO 
@@ -56,12 +59,11 @@ export default function Exercises() {
     const states:any = useMyContext()
 
     //DESESTRUTURA AS VARIAVEIS ESPECIFICADAS
-    const { userS, theme } = states
+    const { userS, theme, toggleAlert } = states
 
     //UTILIZA O HOOK DO useState
     const [exercises, setExercises] = useState<any[]>([])
-    const [simulations, setSimulations] = useState<any[]>([])
-    const [travels, setTravels] = useState<any[]>([])
+    const [loadingExercises, setLoadingExercises] = useState<boolean>(false)
 
     //FUNÇÃO CHAMADA AO RECARREGAR A PÁGINA
     useEffect(() => {
@@ -72,21 +74,47 @@ export default function Exercises() {
         }
     },[userS.logged])
     
+    //FUNÇÃO RESPONSÁVEL POR PEGAR OS EXERCICIOS
+    function getExercises() {
+        //MUDA O ESTADO DE CARREGAMENTO DOS EXERCICOS PARA true
+        setLoadingExercises(true)
+
+        instance.get(`/exercise/exercises`)
+        .then(function (response) {
+            //VERIFICA SE A CONTA FOI ENCONTRADA PELO TIPO DO DADO RETORNADO
+            if(typeof response.data === "object"){
+                //MUDA O ESTADO DE CARREGAMENTO DOS EXERCICOS PARA false
+                setLoadingExercises(false)
+
+                //DEFINE O ARRAY COM AS CONQUISTAS
+                response.data.map((exerc:any) => {
+                    setExercises((ex) => [...ex, {
+                        concluded: false,
+                        materia: exerc.matter,
+                        title: exerc.title,
+                        type: 'travel'
+                    }])
+                })
+            }else{
+                //MUDA O ESTADO DE CARREGAMENTO DOS EXERCICOS PARA false
+                setLoadingExercises(false)
+
+                //RETORNA MENSAGEM DE ERRO AO USUARIO
+                console.log(response)
+
+                //COLOCA ALERT NA TELA
+                toggleAlert(`error`, `${response.data}`)
+            }
+        })
+        .catch(function (error) {
+            console.log(error)
+        })
+    }
+
     //FUNÇÃO CHAMADA AO RECARREGAR A PÁGINA
     useEffect(() => {
-        //DEFINE O ARRAY COM AS CONQUISTAS
-        setExercises([
-            // { concluded: false, materia: 'português', title: 'museu do ipiranga', type: 'travel' },
-            // { concluded: true, materia: 'geografia', title: 'museu do ipiranga', type: 'travel' },
-            // { concluded: true, materia: 'fuvest', title: 'fazer simulado de matemática', type: 'simulation' },
-            // { concluded: false, materia: 'enem', title: 'fazer simulado de matemática', type: 'simulation' },
-        ])
-
-        const simulations_c = exercises.filter(exerc => exerc.type == 'simulation')
-        const travels_c = exercises.filter(exerc => exerc.type == 'travel')
-
-        setSimulations(simulations_c)
-        setTravels(travels_c)
+        //PEGA OS EXERCICIOS DO BACKEND
+        getExercises()
     },[])
 
     return(
@@ -102,35 +130,26 @@ export default function Exercises() {
             <div className={`w-full flex flex-col justify-start items-center mb-[100px] sm:mb-[40px] lg:mb-0 overflow-y-scroll overflow-visible scrollbar scrollbar-track-transparent scrollbar-thumb-my-secondary`}>    
                 <Text text='Passeios' position='left' />
 
-                {travels.length >= 1 ? travels.map((exerc, i) => (
+                {loadingExercises == false && exercises.length >= 1 && exercises.map((exerc, i) => (
                     <ExerciseCard
                         concluded={exerc.concluded}
                         materia={exerc.materia}
                         title={exerc.title}
                         type={exerc.type} key={i}
                     />
-                )):(
-                    <Text text='Nenhum passeio disponivel no momento'/>
+                ))}
+
+                {loadingExercises == false && exercises.length < 1 && (
+                    <>
+                        <Text text='Nenhum passeio disponivel no momento'/>
+                        <IoMdSad className={`text-[150px] ${theme == 'light' ? 'text-my-gray' : 'text-my-gray-black'}`} />
+                    </>
                 )}
-                
-                <Text text='Simulados' position='left' />
-                
-                {simulations.length >= 1 ? simulations.map((exerc, i) => (
-                    <ExerciseCard
-                        concluded={exerc.concluded}
-                        materia={exerc.materia}
-                        title={exerc.title}
-                        type={exerc.type} key={i}
-                    />
-                )):(
-                    <Text text='Nenhum simulado disponivel no momento'/>
-                )}
-                {travels.length == 0 && simulations.length == 0 && (
-                    <IoMdSad
-                        className={`text-[120px]
-                            ${theme == 'light' ? 'text-my-gray' : 'text-my-gray-black'}
-                        `}
-                    />
+
+                {loadingExercises == true && (
+                    <>
+                        <p className={`w-[90%] text-center text-[18px] ${theme == 'light' ? 'text-my-black' : 'text-my-white'}`}>estamos carregando os passeios seja paciente</p>
+                    </>
                 )}
             </div>
             

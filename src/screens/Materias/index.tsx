@@ -39,10 +39,17 @@ import Return from "../../components/Return";
 import TitlePage from "../../components/TitlePage";
 import MaterialCard from "../../components/MaterialCard";
 import BottomNavigation from "../../components/BottomNavigation";
+import Text from '../../components/Text';
+import CronogramPage from '../../components/CronogramPage';
+
+//IMPORTAÇÃO DOS ICONES
+import { IoMdSad } from "react-icons/io";
 
 //IMPORTAÇÃO DO PROVEDOR PARA PEGAR AS VARIÁVEIS GLOBAIS
 import { useMyContext } from '../../provider/geral';
-import CronogramPage from '../../components/CronogramPage';
+
+//CONFIGURAÇÃO DA BASE URL DO AXIOS
+import instance from '../../utils/axios';
 
 export default function Materias() {
 
@@ -51,13 +58,13 @@ export default function Materias() {
 
     //UTILIZA O HOOK DO useState
     const [matters, setMatters] = useState<any[]>([])
-    // const [mattersCRO, setMattersCRO] = useState<any[]>([])
+    const [loadingMatter, setLoadingMatter] = useState<boolean>(false)
     
     //RESGATA AS VARIAVEIS GLOBAIS
     const states:any = useMyContext()
 
     //DESESTRUTURA AS VARIAVEIS ESPECIFICADAS
-    const { userS } = states
+    const { userS, theme } = states
 
     //FUNÇÃO CHAMADA AO RECARREGAR A PÁGINA
     useEffect(() => {
@@ -68,20 +75,38 @@ export default function Materias() {
         }
     },[userS.logged])
 
+    //FUNÇÃO RESPONÁVEL POR PEGAR AS MATÉRIAS
+    function getMatters() {
+        //MUDA O ESTADO DE CARREGAMENTO DAS MATÉRIAS PARA true
+        setLoadingMatter(true)
+
+        instance.get('/matter/matters')
+        .then(function (response) {
+            //MUDA O ESTADO DE CARREGAMENTO DAS MATÉRIAS PARA false
+            setLoadingMatter(false)
+            
+            //LIMPA O ARRAY DE MATÉRIAS
+            setMatters([])
+
+            //COLOCA AS MATÉRIAS CADASTRADAS NO BD NO ARRAY DE MATÉRIAS
+            response.data.map((mat:any, i:number) => {
+                setMatters((mats:any) => [...mats, {
+                    titleMateria: mat.matter,
+                    background: i
+                }])
+            })
+        })
+        .catch(function (error) {
+            console.log(error)
+            //MUDA O ESTADO DE CARREGAMENTO DAS MATÉRIAS PARA false
+            setLoadingMatter(false)
+        })
+    }
+
     //FUNÇÃO CHAMADA AO RECARREGAR A PÁGINA
     useEffect(() => {
-        //DEFINE O ARRAY COM AS MATÉRIAS
-        setMatters([
-            { titleMateria: 'fisíca',  background: 0 },
-            { titleMateria: 'história',  background: 1 },
-            { titleMateria: 'inglês',  background: 2 },
-            { titleMateria: 'geografia',  background: 3 },
-            { titleMateria: 'artes',  background: 4 },
-            { titleMateria: 'português',  background: 5 },
-            { titleMateria: 'química',  background: 6 },
-            { titleMateria: 'biologia',  background: 7 },
-            { titleMateria: 'matemática',  background: 8 },
-        ])
+        //CHAMA A FUNÇÃO RESPONSÁVEL POR PEGA AS MATÉRIAS CADASTRADAS NO BD
+        getMatters()
     },[])
 
     return(
@@ -95,9 +120,24 @@ export default function Materias() {
             </Navbar>
 
             <div className={`w-full sm:w-[70%] flex flex-col sm:flex-row sm:flex-wrap justify-start sm:justify-center items-center sm:gap-[20px] mb-[100px] sm:mb-[0px] overflow-y-scroll sm:overflow-visible scrollbar scrollbar-track-transparent scrollbar-thumb-my-secondary`}>    
-                {matters.map((mat, i) => (
+                {loadingMatter == false && matters.length >= 1 && matters.map((mat, i) => (
                     <MaterialCard titleMateria={mat.titleMateria} background={mat.background} key={i} />
                 ))}
+
+                {loadingMatter == false && matters.length == 0 && (
+                    <div className={`flex flex-col items-center justify-start`}>
+                        <Text text='Nenhuma matéria encontrada'/>
+                        <IoMdSad
+                            className={`text-[120px]
+                                ${theme == 'light' ? 'text-my-gray' : 'text-my-gray-black'}
+                            `}
+                        />
+                    </div>
+                )}
+
+                {loadingMatter == true && (
+                    <p className={`w-full text-center text-[18px] ${theme == 'light' ? 'text-my-black' : 'text-my-white'}`}>estamos carregando as matérias seja paciente</p>
+                )}
             </div>
 
             <CronogramPage />

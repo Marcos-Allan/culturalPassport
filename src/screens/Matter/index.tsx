@@ -1,6 +1,6 @@
 //IMPORTAÇÃO DAS BIBLIOTECAS
 import { useEffect, useState } from 'react'
-import { useParams, useLocation, useNavigate, Link } from 'react-router-dom';
+import { useParams, useNavigate, Link } from 'react-router-dom';
 
 //IMPORTAÇÃO DOS COMPONENTES
 import MenuButton from "../../components/MenuButton";
@@ -14,6 +14,13 @@ import Menu from '../../components/Menu';
 //IMPORTAÇÃO DO PROVEDOR PARA PEGAR AS VARIÁVEIS GLOBAIS
 import { useMyContext } from '../../provider/geral';
 
+//CONFIGURAÇÃO DA BASE URL DO AXIOS
+import instance from '../../utils/axios';
+
+//IMPORTAÇÃO DOS ICONES
+import { IoMdSad } from "react-icons/io";
+import Text from '../../components/Text';
+
 export default function Matter() {
 
     //USO DO HOOK useParams
@@ -21,9 +28,6 @@ export default function Matter() {
 
     //UTILIZAÇÃO DO HOOK DE NAVEGAÇÃO 
     const navigate = useNavigate()
-
-    //VERIFICA A ROTA ATUAL
-    const location = useLocation();
 
     //RESGATA AS VARIAVEIS GLOBAIS
     const states:any = useMyContext()
@@ -33,121 +37,39 @@ export default function Matter() {
 
     //UTILIZAÇÃO DO HOOK useState
     const [content, setContent] = useState<any[]>([])
+    const [loadingContent, setLoadingContent] = useState<boolean>(false)
 
     //FUNÇÃO RESPONSÁVEL POR DEIXAR O TEXTO EM CAPITALIZE
     function capitalizeText(text:string) {
         if (text.length === 0) return text; // Retorna a string original se estiver vazia
         return text.charAt(0).toUpperCase() + text.slice(1).toLowerCase();
     }
+    
+    //FUNÇÃO RESPONSÁVEL POR LISTAR OS CONTEUDOS DISPONIVEIS
+    function getContent(){
+        instance.get(`/matter/${matter}`)
+        .then(function (response) {
+            console.log(response.data)
 
-    //FUNÇÃO RESPONSÁVEL POR GERAR O CONTEÚDO DEPENDENDO DO PARÂMETRO PASSADO
-    function getContent(matter:string) {
-        switch (matter) {
-            case 'fis%C3%ADca':
-                //FISICA
-                    setContent([
-                        { title: 'eletrodinâmica', background: 0 },
-                        { title: 'leis de newton', background: 1 },
-                        { title: 'ondulatória', background: 2 },
-                        { title: 'campo magnético', background: 3 },
-                        { title: 'cinemática', background: 4 },
-                        { title: 'óptica', background: 5 },
-                        { title: 'mecânica', background: 6 },
-                        { title: 'circuitos elétricos', background: 7 }
-                    ])
-                    break;
-                case 'hist%C3%B3ria':
-                    //HISTÓRIA
-                    setContent([
-                        { title: 'brasil colônia', background: 0 }, //
-                        { title: 'idade moderna', background: 1 }, //
-                        { title: 'idade média', background: 2 }, //
-                        { title: 'tempo presente', background: 3 }, //
-                        { title: 'estado novo e populismo', background: 4 } //
-                    ])
-                    break;
-                case 'ingl%C3%AAs':
-                    //INGLÊS
-                    setContent([
-                        { title: 'tempos verbais em inglês', background: 0 }, //
-                        { title: 'voz passiva em inglês', background: 1 }, //
-                        { title: 'pronomes pessoais', background: 2 }, //
-                        { title: 'linking words', background: 3 } //
-                    ])
-                    break;
-                case 'geografia':
-                    //GEOGRAFIA
-                    setContent([
-                        { title: 'cartografia e leitura de mapas', background: 0 }, //
-                        { title: 'climas do brasil e climas do mundo', background: 1 }, //
-                        { title: 'acordo de paris e conferências ambientais', background: 2 }, //
-                        { title: 'aquecimento global e efeito estufa', background: 3 }, //
-                        { title: 'estruturas geológicas e tipos de relevo', background: 4 }, //
-                        { title: 'biomas do brasil e biomas do mundo', background: 5 }, //
-                        { title: 'matriz de transporte', background: 6 }, //
-                        { title: 'bacias hidrográficas e escassez', background: 7 }, //
-                    ])
-                    break;
-                case 'artes':
-                    //ARTES
-                    setContent([
-                        { title: 'arte contemporânea', background: 0 }, //
-                        { title: 'convenções teatrais', background: 1 }, //
-                        { title: 'folclore e folguedos populares', background: 2 }, //
-                        { title: 'tradições de povos indigenas', background: 3 }, //
-                        { title: 'arte de origem africana no brasil', background: 4 } //
-                    ])
-                    break;
-                case 'portugu%C3%AAs':
-                    //PORTUGUÊS
-                    setContent([
-                        { title: 'variação linguística', background: 0 }, //
-                        { title: 'genêros textuais', background: 1 }, //
-                        { title: 'intertextualidade', background: 2 }, //
-                        { title: 'figuras de linguagens', background: 3 } //
-                    ])
-                    break;
-                case 'qu%C3%ADmica':
-                    //QUÍMICA
-                    setContent([
-                        { title: 'estudo de moléculas', background: 0 }, //
-                        { title: 'química orgânica', background: 1 }, //
-                        { title: 'reações inorgânicas', background: 2 }, //
-                        { title: 'soluções - concentrações', background: 3 }, //
-                        { title: 'cálculos - estequiométricos', background: 4 }, //
-                        { title: 'eletroquímica', background: 5 }, //
-                        { title: 'termoquímica', background: 6 }, //
-                        { title: 'poluição ambiental', background: 7 }, //
-                    ])
-                    break;
-                case 'biologia':
-                    //BIOLOGIA
-                    setContent([
-                        { title: 'ecologia', background: 0 }, //
-                        { title: 'fisiologia humana', background: 1 }, //
-                        { title: 'biotecnologia', background: 2 }, //
-                        { title: 'biologia celular', background: 3 }, //
-                        { title: 'botânica', background: 4 }, //
-                    ])
-                    break;
-                case 'matem%C3%A1tica':
-                    //MAEMÁTICA
-                    setContent([
-                        { title: 'porcentagem', background: 0 }, //
-                        { title: 'equações', background: 1 }, // 
-                        { title: 'funções', background: 2 }, //
-                        { title: 'progressão aritimética', background: 3 }, //
-                        { title: 'progressão geométrica', background: 4 }, //
-                        { title: 'analise combinatória', background: 5 },
-                        { title: 'geometria plana e geometria espacial', background: 6 },
-                        { title: 'razão e proporção', background: 7 },
-                        { title: 'estatística e probabilidade', background: 8 },
-                    ])
-                break;
-        
-            default:
-                break;
-        }
+            //MUDA O ESTADO DE CARREGAMENTO DAS MATÉRIAS PARA false
+            setLoadingContent(false)
+            
+            //LIMPA O ARRAY DE CONTEUDO DAS MATÉRIAS
+            setContent([])
+
+            //COLOCA AS MATÉRIAS CADASTRADAS NO BD NO ARRAY DE MATÉRIAS
+            response.data.contents.map((content:any, i:number) => {
+                setContent((cont:any) => [...cont, {
+                    title: content.text,
+                    background: i
+                }])
+            })
+        })
+        .catch(function (error) {
+            console.log(error)
+            //MUDA O ESTADO DE CARREGAMENTO DAS MATÉRIAS PARA false
+            setLoadingContent(false)
+        })
     }
 
     //FUNÇÃO CHAMADA AO RECARREGAR A PÁGINA
@@ -162,7 +84,7 @@ export default function Matter() {
     //FUNÇÃO CHAMADA AO RECARREGAR A PÁGINA
     useEffect(() => {
         //DEFINE O ARRAY COM OS CONTEUDOS
-        getContent(location.pathname.split('/')[2])
+        getContent()
     },[])
 
     //FUNÇÃO PARA REDIRECIONAR PARA OUTRA PÁGINA
@@ -185,14 +107,28 @@ export default function Matter() {
             <p className={`w-[90%] mt-8 mb-5 text-center text-[18px] ${theme == 'light' ? 'text-my-black' : 'text-my-white'}`}>Conteudos de {capitalizeText(matter || 'matéria')} que mais caem nos vestibulares</p>
 
             <div className={`w-[90%] sm:px-12 sm:w-[70%] mb-[100px] sm:mb-[40px] lg:mb-0 flex items-center flex-col overflow-y-scroll scrollbar scrollbar-track-transparent scrollbar-thumb-my-secondary`}>
-                {content.map((cont, i) => (
+                {loadingContent == false && content.length > 0 && content.map((cont, i) => (
                     <ContentCard background={cont.background} title={cont.title} event={() => redirect(cont.title)} key={i} />
                 ))}
+
+                {loadingContent == false && content.length == 0 &&(
+                    <div className={`flex flex-col items-center justify-start`}>
+                        <Text text='Nenhuma matéria encontrada'/>
+                        <IoMdSad
+                            className={`text-[120px]
+                                ${theme == 'light' ? 'text-my-gray' : 'text-my-gray-black'}
+                            `}
+                        />
+                    </div>
+                )}
                 
+                {loadingContent == true && (
+                    <p className={`w-full text-center text-[18px] ${theme == 'light' ? 'text-my-black' : 'text-my-white'}`}>estamos carregando as matérias seja paciente</p>
+                )}
+
                 <Link to={`/materias/${matter}/test`}
                 className={`ms-auto w-auto border-[1px] p-3 rounded-[20px] transition-all duration-[.3s] bg-transparent hover:text-my-secondary hover:border-my-secondary ${theme == 'light' ? 'text-my-black border-my-black' : 'text-my-white border-my-white'}
                 `}>Fazer prova</Link>
-
             </div>
 
             
