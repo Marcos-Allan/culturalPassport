@@ -67,11 +67,13 @@ export default function Exercises() {
     useEffect(() => {
         //VERIFICA SE O USUÁRIO ESTÁ LOGADO
         if(userS.logged == false){
-
             //REDIRECIONA ELE PARA A PÁGINA DE MATÉRIAS
             navigate('/')
         }
-
+    },[userS.logged])
+    
+    //FUNÇÃO CHAMADA AO RECARREGAR A PÁGINA
+    useEffect(() => {
         //DEFINE O ARRAY COM AS CONQUISTAS
         setExercises([
             // { concluded: false, materia: 'português', title: 'museu do ipiranga', type: 'travel' },

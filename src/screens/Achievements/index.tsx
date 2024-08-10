@@ -93,10 +93,12 @@ export default function Achievements() {
             //REDIRECIONA ELE PARA A PÁGINA DE MATÉRIAS
             navigate('/')
         }
+    },[userS.logged])
 
+    //FUNÇÃO CHAMADA AO RECARREGAR A PÁGINA
+    useEffect(() => {
         //DEFINE O ARRAY COM AS CONQUISTAS
         getAchievements()
-
     },[])
 
     return(

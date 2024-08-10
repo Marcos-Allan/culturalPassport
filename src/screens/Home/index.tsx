@@ -61,11 +61,10 @@ export default function Home(){
     useEffect(() => {
         //VERIFICA SE O USUÁRIO ESTÁ LOGADO
         if(userS.logged == true){
-
             //REDIRECIONA ELE PARA A PÁGINA DE MATÉRIAS
             navigate('/materias')
         }
-    },[])
+    },[userS.logged])
     
     //FUNÇÃO CHAMADA AO RECARREGAR A PÁGINA
     useEffect(() => {

@@ -140,7 +140,7 @@ export default function CronogramPage() {
                         >
                             {matters.map((mat) => (
                                 <div className={``}>
-                                    <p className={`capitalize cursor-pointer hover:underline transition-all duration-[.3s]
+                                    <p className={`capitalize cursor-pointer hover:underline transition-all duration-[.3s] text-[14px]
                                         ${isInCronogram(mat.matter) == true
                                             ? `font-bold ${theme == 'light' ? 'text-my-secondary' : 'font-black text-my-quartenary'}`
                                             : `${theme == 'light' ? 'text-my-gray' : 'text-my-gray-black'}`}
@@ -153,13 +153,14 @@ export default function CronogramPage() {
                             ))}
 
                         </div>
-                        <div className={`${theme == 'light' ? 'bg-my-secondary' : 'bg-my-quartenary'} h-full w-4/12 p-2`}>
+                        <div className={`${theme == 'light' ? 'bg-my-secondary' : 'bg-my-quartenary'} h-full w-5/12 p-2`}>
                             {cronogramS.length > 0 ? cronogramS.map((mat, i) => (
-                                <p className={`font-bold ${theme == 'light' ? 'text-my-white' : 'text-my-black'}`} onClick={() => setCro(mat)}>{i+1} - <span className='capitalize cursor-pointer hover:underline transition-all duration-[.3s]'>{mat}</span></p>
+                                <p className={`font-bold ${theme == 'light' ? 'text-my-white' : 'text-my-black'}`} onClick={() => setCro(mat)}>{i+1} - <span className='capitalize cursor-pointer hover:underline transition-all duration-[.3s] text-[14px]'>{mat}</span></p>
                             )):(
                                 <p className={`text-center font-bold ${theme == 'light' ? 'text-my-white' : 'text-my-black'}`} >Defina o seu cronograma</p>
                             )}
                         </div>
+
                         {cronogramS.length > 8 ? (
                          <IoArrowForward
                              onClick={() => {

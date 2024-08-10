@@ -60,11 +60,10 @@ export default function Chat() {
     useEffect(() => {
         //VERIFICA SE O USUÁRIO ESTÁ LOGADO
         if(userS.logged == false){
-
             //REDIRECIONA ELE PARA A PÁGINA DE MATÉRIAS
             navigate('/')
         }
-    },[])
+    },[userS.logged])
 
     return(
         <>

@@ -191,11 +191,10 @@ export default function SignIn(){
     useEffect(() => {
         //VERIFICA SE O USUÁRIO ESTÁ LOGADO
         if(userS.logged == true){
-
             //REDIRECIONA ELE PARA A PÁGINA DE MATÉRIAS
             navigate('/materias')
         }
-    },[])
+    },[userS.logged])
 
     return(
         <>

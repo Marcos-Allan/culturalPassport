@@ -63,11 +63,13 @@ export default function Materias() {
     useEffect(() => {
         //VERIFICA SE O USUÁRIO ESTÁ LOGADO
         if(userS.logged == false){
-
             //REDIRECIONA ELE PARA A PÁGINA DE MATÉRIAS
             navigate('/')
         }
+    },[userS.logged])
 
+    //FUNÇÃO CHAMADA AO RECARREGAR A PÁGINA
+    useEffect(() => {
         //DEFINE O ARRAY COM AS MATÉRIAS
         setMatters([
             { titleMateria: 'fisíca',  background: 0 },
@@ -80,8 +82,6 @@ export default function Materias() {
             { titleMateria: 'biologia',  background: 7 },
             { titleMateria: 'matemática',  background: 8 },
         ])
-
-        // setMattersCRO(userS.cronogram.split('[')[1].split(']')[0].split(','))
     },[])
 
     return(

@@ -63,7 +63,6 @@ import Menu from "../../components/Menu";
 import Button from '../../components/Button';
 import BottomNavigation from '../../components/BottomNavigation';
 import AvatarImage from '../../components/AvatarImage';
-import InfoStudentCard from '../../components/InfoStudentCard';
 
 export default function MyPerfil() {
     //FAZ REFERENCIA A UM ELEMENTO
@@ -80,15 +79,6 @@ export default function MyPerfil() {
     const [imgURL, setImgURL] = useState<string>('imagens')
     const [progress, setProgress] = useState<any>(0)
     const [days, setDays] = useState<string[]>(['domingo', 'segunda-feira', 'terça-feira', 'quarta-feira', 'quinta-feira', 'sexta-feira', 'sábado'])
-
-    //FUNÇÃO CHAMADA QUANDO A PAGINA É CARREGADA
-    useEffect(() => {
-        //VERIFICA SE O USUÁRIO NÃO ESTÁ LOGADO
-        if(userS.logged == false) {
-            //MANDA O USUÁRIO PARA A PÁGINA HOME
-            navigate('/')
-        }
-    }, [])
 
     //UTILIZAÇÃO DO HOOK DE NAVEGAÇÃO 
     const states:any = useMyContext()
@@ -328,6 +318,15 @@ export default function MyPerfil() {
         }
     }
 
+    //FUNÇÃO CHAMADA QUANDO A PAGINA É CARREGADA
+    useEffect(() => {
+        //VERIFICA SE O USUÁRIO NÃO ESTÁ LOGADO
+        if(userS.logged == false) {
+            //MANDA O USUÁRIO PARA A PÁGINA HOME
+            navigate('/')
+        }
+    }, [userS.logged])
+    
     return(
         <>
             <Navbar>   
@@ -499,11 +498,6 @@ export default function MyPerfil() {
                         </div>
                         ))}
                     </div>
-
-                    <InfoStudentCard prop='Escola' value='ETEC paulistano' />
-                    <InfoStudentCard prop='RM' value='22043' />
-                    <InfoStudentCard prop='Data de Nascimento' value='11/06/2006' />
-                    <InfoStudentCard prop='CPF' value='393.223.189-43' />
                 </div>
             </div>
 

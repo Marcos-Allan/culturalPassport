@@ -62,10 +62,10 @@ export default function LogoutPage() {
         toggleLogout(!isLogout)
         
         //FUNÇÃO CHAMADA DEPOIS DE 0.4 S
-        setTimeout(() => {
-            //REDIRECIONA PARA A HOME DA PÁGINA
-            window.location.href = "/"
-        }, 400);
+        // setTimeout(() => {
+        //     //REDIRECIONA PARA A HOME DA PÁGINA
+        //     window.location.href = "/"
+        // }, 400);
     }
 
     return(

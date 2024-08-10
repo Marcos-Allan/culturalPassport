@@ -63,11 +63,10 @@ export default function ForgoutPassword() {
     useEffect(() => {
         //VERIFICA SE O USUÁRIO ESTÁ LOGADO
         if(userS.logged == true){
-
             //REDIRECIONA ELE PARA A PÁGINA DE MATÉRIAS
             navigate('/materias')
         }
-    },[])
+    },[userS.logged])
 
     //CRIA OS ESTADOS DO COMPONENTE
     const [inputEmailValue, setInputEmailValue] = useState<string>('')

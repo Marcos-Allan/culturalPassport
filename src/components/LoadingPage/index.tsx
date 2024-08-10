@@ -39,18 +39,15 @@ export default function LoadingPage() {
     const { theme, loading } = states
 
     return(
-        <>
-            {loading == true && (
-                <div className={`
-                    absolute top-0 left-0 w-screen h-screen flex justify-center items-center
-                    ${theme == 'light' ? 'bg-my-black-opacity' : 'bg-my-white-opacity'}
-                `}>
-                    <div className={`
-                        w-[80px] h-[80px] bg-my-transparent rounded-[50%] border-[6px] border-t-transparent animate-spin
-                        ${theme == 'light' ? 'border-my-quartenary' : 'border-my-terciary'}
-                    `}></div>
-                </div>
-            )}
-        </>
+        <div className={`
+            absolute top-0 left-0 w-screen h-screen flex justify-center items-center transition-all duration-[.3s]
+            ${loading == true ? 'opacity-1 z-[2]' : 'opacity-0 z-[-1]'}
+            ${theme == 'light' ? 'bg-my-black-opacity' : 'bg-my-white-opacity'}
+        `}>
+            <div className={`
+                w-[80px] h-[80px] bg-my-transparent rounded-[50%] border-[6px] border-t-transparent animate-spin
+                ${theme == 'light' ? 'border-my-quartenary' : 'border-my-terciary'}
+            `}></div>
+        </div>
     )
 }

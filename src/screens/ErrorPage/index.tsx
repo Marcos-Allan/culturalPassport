@@ -67,7 +67,7 @@ export default function ErrorPage() {
             //SETA A ROTA PADRÃO PARA "/materias"
             setRoute('/materias')
         }
-    },[])
+    },[userS.logged])
 
     return(
         <>
