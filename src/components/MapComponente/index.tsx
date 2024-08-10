@@ -27,37 +27,34 @@
  * By using the Software, you agree to these terms and conditions.
  */
 
-//TIPAGEM DAS PROPS DO COMPONENTE
-interface Props {
-    background: number,
-    title: string,
-    key: number,
-    event?: () => void,
-}
 
-//IMPORTAÇÃO DO PROVEDOR PARA PEGAR AS VARIÁVEIS GLOBAIS
-import { useMyContext } from '../../provider/geral';
+import React from 'react';
+import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
+import L from 'leaflet';
 
-export default function ContentCard(props: Props) {
+// Defina as coordenadas do Museu da História do Brasil
+const position: [number, number] = [-15.7937, -47.8823];
 
-    //RESGATA AS VARIAVEIS GLOBAIS
-    const states:any = useMyContext()
+// Crie um ícone personalizado, se necessário (opcional)
+const customIcon = new L.Icon({
+  iconUrl: 'https://docs.mapbox.com/help/demos/custom-markers-gl-js/mapbox-icon.png',
+  iconSize: [30, 30],
+});
 
-    //DESESTRUTURA AS VARIAVEIS ESPECIFICADAS
-    const { theme } = states
+const MapComponent: React.FC = () => {
+  return (
+    <div className='h-auto w-[90%]'>
+    <MapContainer center={position} zoom={13} style={{ height: '500px', width: '100%' }}>
+      <TileLayer
+        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+        attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+      />
+      <Marker position={position} icon={customIcon}>
+        <Popup>Museu da História do Brasil</Popup>
+      </Marker>
+    </MapContainer>
+    </div>
+  );
+};
 
-    return(
-        <div
-            onClick={() => {
-                props.event && props.event()
-            }}
-            className={`w-full mb-4 flex justify-center rounded-[24px] py-4 border-2 hover:scale-[0.9] lg:hover:scale-[0.9] transition-all duration-[.3s] cursor-pointer
-            ${theme == 'light' ? 'border-my-black' : 'border-my-white'}
-            ${props.background == 0 || props.background == 3 || props.background == 6 ? 'bg-my-primary' : ''}
-            ${props.background == 1 || props.background == 4 || props.background == 7 ? 'bg-my-secondary' : ''}
-            ${props.background == 2 || props.background == 5 || props.background == 8 ? 'bg-my-terciary' : ''}
-        `}>
-            <p className={`capitalize font-semibold text-[18px] text-my-white text-center`}>{props.title}</p>
-        </div>
-    )
-}
+export default MapComponent;

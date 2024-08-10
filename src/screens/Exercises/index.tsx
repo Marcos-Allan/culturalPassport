@@ -31,6 +31,8 @@
 import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 
+import 'leaflet/dist/leaflet.css';
+
 //IMPORTAÇÃO DOS COMPONENTES
 import BottomNavigation from "../../components/BottomNavigation";
 import Menu from "../../components/Menu";
@@ -49,6 +51,7 @@ import { IoMdSad } from "react-icons/io";
 
 //CONFIGURAÇÃO DA BASE URL DO AXIOS
 import instance from '../../utils/axios';
+import MapComponente from '../../components/MapComponente';
 
 export default function Exercises() {
 
@@ -131,14 +134,18 @@ export default function Exercises() {
                 <Text text='Passeios' position='left' />
 
                 {loadingExercises == false && exercises.length >= 1 && exercises.map((exerc, i) => (
-                    <ExerciseCard
-                        concluded={exerc.concluded}
-                        materia={exerc.materia}
-                        title={exerc.title}
-                        type={exerc.type} key={i}
-                    />
+                    <>
+                        <ExerciseCard
+                            concluded={exerc.concluded}
+                            materia={exerc.materia}
+                            title={exerc.title}
+                            type={exerc.type} key={i}
+                        />
+                    </>
                 ))}
 
+                <MapComponente />
+                
                 {loadingExercises == false && exercises.length < 1 && (
                     <>
                         <Text text='Nenhum passeio disponivel no momento'/>

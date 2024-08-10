@@ -17,12 +17,14 @@
     "chart.js": "^4.4.3",
     "firebase": "^10.11.0",
     "katex": "^0.16.11",
+    "leaflet": "^1.9.4",
     "openmobile": "^1.0.6",
     "react": "^18.2.0",
     "react-chartjs-2": "^5.2.0",
     "react-dom": "^18.2.0",
     "react-icons": "^5.0.1",
     "react-input-mask": "^3.0.0-alpha.2",
+    "react-leaflet": "^4.2.1",
     "react-loading-skeleton": "^3.4.0",
     "react-markdown": "^9.0.1",
     "react-router-dom": "^6.22.3",
@@ -32,6 +34,7 @@
     "remark-math": "^6.0.0"
   },
   "devDependencies": {
+    "@types/leaflet": "^1.9.12",
     "@types/react": "^18.2.66",
     "@types/react-dom": "^18.2.22",
     "@typescript-eslint/eslint-plugin": "^7.2.0",

@@ -62,7 +62,7 @@ export default function MaterialCard(props: Props) {
     
     return(
         <div
-            className={`relative mt-[30px] w-[90%] sm:w-3/12 h-[100px] rounded-[8px] p-3 hover:scale-[0.9] lg:hover:scale-[1.1] cursor-pointer transition-all duration-[.2s]`}
+            className={`relative mt-[30px] w-[90%] sm:w-3/12 h-[100px] rounded-[8px] p-3 hover:scale-[0.9] lg:hover:scale-[0.9] cursor-pointer transition-all duration-[.2s]`}
             style={{ backgroundColor: `${colors[Number(props.background)]}` }}
             onClick={() => navigate(`/materias/${props.titleMateria.toLowerCase()}`)}
         >
