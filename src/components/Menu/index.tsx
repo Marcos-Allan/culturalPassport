@@ -40,6 +40,7 @@ import { MdOutlineEdit } from "react-icons/md"
 //IMPORTAÇÃO DOS COMPONENTES
 import ToggleTheme from "../ToggleTheme";
 import LogoutButton from "../LogoutButton";
+import DeleteAccountButton from '../DeleteAccountButton';
 
 export default function Menu() {
 
@@ -99,7 +100,10 @@ export default function Menu() {
 
             {/* VERIFICA SE O ESTADO DA VARIAVEL GLOBAL userS.logged É IGUAL A TRUE */}
             {userS.logged == true && (
-                <LogoutButton />
+                <>
+                    <LogoutButton />
+                    <DeleteAccountButton />
+                </>
             )}
         </div>
     )

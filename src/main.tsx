@@ -65,6 +65,7 @@ import { Provider } from './provider/index.tsx';
 import ScreenPage from './components/ScreenPage/index.tsx';
 import Alert from './components/Alert/index.tsx';
 import LogoutPage from './components/LogoutPage/index.tsx';
+import DeleteAccountPage from './components/DeleteAccountPage/index.tsx';
 
 //ARQUIVO DE CONFIGURAÇÃO DAS ROTAS
 const router = createBrowserRouter([
@@ -159,6 +160,7 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
         <LoadingPage />
         <Alert />
         <LogoutPage />
+        <DeleteAccountPage />
       </ScreenPage>
     </Provider>
   </React.StrictMode>,

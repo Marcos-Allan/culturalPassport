@@ -130,7 +130,7 @@ export default function Matter() {
                 )}
 
                 <Link to={`/materias/${matter}/test`}
-                className={`ms-auto w-auto border-[1px] p-3 rounded-[20px] transition-all duration-[.3s] bg-transparent hover:text-my-secondary hover:border-my-secondary ${theme == 'light' ? 'text-my-black border-my-black' : 'text-my-white border-my-white'}
+                className={`ms-auto mb-3 w-auto border-[1px] p-3 rounded-[20px] transition-all duration-[.3s] bg-transparent hover:text-my-secondary hover:border-my-secondary ${theme == 'light' ? 'text-my-black border-my-black' : 'text-my-white border-my-white'}
                 `}>Fazer prova</Link>
             </div>
 

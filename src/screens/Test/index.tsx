@@ -313,7 +313,7 @@ export default function Test() {
                                         ))}
                                     </ol>
 
-                                    <div className={`w-full flex mt-4 ${questIndex >= 1 ? 'justify-between' : 'justify-end'}`}>
+                                    <div className={`w-full flex mt-4 mb-[30px] ${questIndex >= 1 ? 'justify-between' : 'justify-end'}`}>
                                         {questIndex >= 1 && (
                                             <div className={`flex bg-my-secondary items-center justify-between gap-[10px] px-3 py-2 rounded-[30px] text-my-white  border-[1px] border-my-secondary cursor-pointer
                                             hover:bg-transparent hover:text-my-secondary hover:border-my-secondary transition-all duration-[.3s]`} onClick={prevQuestion}>
@@ -330,7 +330,7 @@ export default function Test() {
                                     </div>
                                 </>
                             ) : (
-                                <div className='w-full flex flex-col items-center justify-start'>
+                                <div className='w-full flex flex-col items-center justify-start mb-[30px]'>
                                     <TitlePage text='Resultado'/>
                                     
                                     <div className={`flex capitalize justify-between text-[20px] mt-3 px-2 py-3 rounded-[8px] w-full border-[1px] ${theme == 'light' ? 'border-my-black text-black' : 'border-my-white text-white'}`}>
@@ -433,7 +433,7 @@ export default function Test() {
                                         }
                                         
                                         //VERIFICA SE O USUÁRIO JA TEM A CONQUISTA
-                                        if(checkAchievement("No caminho certo") !== true && userS.simulationsConcludeds >= 1){
+                                        if(checkAchievement("No caminho certo") !== true && userS.simulationsConcludeds >= 0){
                                             updateUser({ name: "No caminho certo", concluded: true })
                                         }
                                         //REDIRECIONA ELE PARA A PÁGINA DE MATÉRIAS

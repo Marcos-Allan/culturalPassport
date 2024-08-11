@@ -60,6 +60,7 @@ export const MyProvider = ({ children } : { children: React.ReactNode }) => {
     const [loading, setLoading] = useState<boolean>(false)
     const [message, setMessage] = useState<Alert>({ type: 'undefined', text: 'Alerta simples' })
     const [isLogout, setIsLogout] = useState<boolean>(false)
+    const [isDelAccount, setIsDelAccount] = useState<boolean>(false)
 
     //FUNÇÃO RESPONSAVEL POR TROCAR E SALVAR NO localStorage O TEMA ESCOLHIDO PELO USUÁRIO
     const toggleTheme = () => {
@@ -93,9 +94,14 @@ export const MyProvider = ({ children } : { children: React.ReactNode }) => {
         setIsLogout(state)
     }
     
+    //FUNÇÃO RESPONSÁVEL POR DELETAR NA CONTA DO USUÁRIO
+    const toggleDeleteAccount  = (state:boolean) => {
+        setIsDelAccount(state)
+    }
+    
     //RETORNA TUDO PARA SER USADO EM TODO O SITE
     return (
-        <MyContext.Provider value={{ theme, toggleTheme, menuOpen, toggleMenuOpen, userS, toggleUser, loading, toggleLoading, message, toggleAlert, isLogout, toggleLogout }}>
+        <MyContext.Provider value={{ theme, toggleTheme, menuOpen, toggleMenuOpen, userS, toggleUser, loading, toggleLoading, message, toggleAlert, isLogout, toggleLogout, isDelAccount, toggleDeleteAccount }}>
             {children}
         </MyContext.Provider>
     )
