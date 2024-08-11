@@ -21,8 +21,6 @@ import { useMyContext } from '../../provider/geral';
 
 //IMPORTAÇÃO DOS ICONES
 import { IoMdSad } from "react-icons/io";
-import DividersButton from '../../components/DividersButton';
-import Button from '../../components/Button';
 
 export default function Travel() {
 
