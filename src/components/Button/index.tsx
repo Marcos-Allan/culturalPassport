@@ -70,11 +70,11 @@ export default function Button(props: Props) {
                         onClick={() => navigate(props.route)}
                         className={`
                             rounded-[8px]
-                            my-2
+                            my-1
                             sm:my-1
                             text-center
-                            p-[10px]
-                            text-[24px]
+                            p-[8px]
+                            text-[22px]
                             sm:text-[18px]
                             font-medium
                             capitalize
@@ -109,16 +109,16 @@ export default function Button(props: Props) {
                         w-[90%]
                         sm:w-[60%]
                         lg:w-[25%]
-                        my-2
+                        my-1
                         sm:my-1
                         rounded-[8px]
                         lg:px-14
                         lg:rounded-[24px]
                         lg:my-4
                         text-center
-                        p-[10px]
+                        p-[8px]
+                        text-[22px]
                         sm:p-[6px]
-                        text-[24px]
                         sm:text-[16px]
                         font-medium
                         capitalize

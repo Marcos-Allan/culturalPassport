@@ -425,7 +425,7 @@ export default function MyPerfil() {
 
                 <Button event={updateUser} text='Atualizar' route='undefined' />
                 
-                <div className='w-[90%] sm:w-[60%] mb-[90px] sm:mb-[30px] lg:mb-0'>
+                <div className='w-[90%] sm:w-[60%] mb-[100px] sm:mb-[30px] lg:mb-0'>
                     <h2
                         className={`
                             w-full text-center

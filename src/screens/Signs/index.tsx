@@ -83,7 +83,7 @@ export default function Signs(){
                     text="Faça login ou cadastre-se para não perder seus dados"
                 />
                 <div className={`w-full flex flex-col items-center lg:w-[90%]`}>
-                    <ImageComponente img={Person} width={['93', '30', '400', '100', '450']} />
+                    <ImageComponente img={Person} width={['83', '30', '400', '100', '450']} />
                     <DividersButton>
                         <Button text="fazer login" route="/sign-in" />
                         <Button text="criar conta" route="/sign-up" />

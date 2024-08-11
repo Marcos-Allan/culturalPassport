@@ -40,7 +40,7 @@ export default function LoadingPage() {
 
     return(
         <div className={`
-            absolute top-0 left-0 w-screen h-screen flex justify-center items-center transition-all duration-[.3s]
+            fixed top-0 left-0 w-screen h-screen flex justify-center items-center transition-all duration-[.3s]
             ${loading == true ? 'opacity-1 z-[2]' : 'opacity-0 z-[-1]'}
             ${theme == 'light' ? 'bg-my-black-opacity' : 'bg-my-white-opacity'}
         `}>

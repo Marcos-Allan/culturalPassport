@@ -131,6 +131,9 @@ export default function Feedback() {
 
     //FUNÇÃO CHAMADA AO RECARREGAR A PÁGINA
     useEffect(() => {
+        //LIMPA O ARRAY DE FEEDBACKS
+        setMessages([])
+
         //INICIA A  CONEXÃO COM WebSocket
         const ws = new WebSocket('wss://backendculturalpassport-1.onrender.com');
       
@@ -184,6 +187,9 @@ export default function Feedback() {
 
     //SALVA OS FEEDBACKS NO BD
     const handleSubmit = () => {
+        //LIMPA O ARRAY DE FEEDBACKS
+        setMessages([])
+
         //VERIFICA SE O USUÁRIO ESTÁ CONECTADO AO SERVIDOR WebSocket E SE A MENSAGEM NÃO ESTÁ VAZIA
         if (webSocket && newMessage.trim() !== '') {
             //INICIA UM NOVO OBJETO DE FEEDBACK
@@ -228,7 +234,7 @@ export default function Feedback() {
                 <MenuButton />
             </Navbar>
 
-            <div className={`${theme == 'light' ? 'bg-my-white' : 'bg-my-black'} overflow-y-scroll scrollbar scrollbar-track-transparent scrollbar-thumb-my-secondary w-[90%] sm:w-[60%] pt-[30px] h-[calc(100%-230px)] lg:h-[calc(100%-90px)] flex flex-col gap-[20px]`}>
+            <div className={`${theme == 'light' ? 'bg-my-white' : 'bg-my-black'} overflow-y-scroll scrollbar scrollbar-track-transparent scrollbar-thumb-my-secondary w-[90%] sm:w-[60%] pt-[30px] h-full flex flex-col gap-[20px]`}>
                 
                 <div className={`mx-auto rounded-[6px] py-2 px-4 w-full ${theme == 'light' ? 'bg-my-secondary' : 'bg-my-quartenary'} opacity-[0.8]`}>
                     <p className={`${theme == 'light' ? 'text-my-black' : 'text-my-white'} text-left sm:text-center text-[14px]`}>
@@ -327,12 +333,12 @@ export default function Feedback() {
             </div>
 
             {isFeedback == false && (
-                <div className={`w-[95%] sm:w-[60%] flex flex-row flex-wrap gap-2 mt-2`}>
+                <div className={`w-[95%] sm:w-[60%] flex flex-row flex-wrap gap-1 mt-2 mb-[100px] lg:mb-0`}>
                     <div
                         onClick={() => {
                             setNewMessage('1')
                         }}
-                        className={`relative flex items-center justify-center w-[48.92%] text-center py-2 font-bold rounded-[6px] border-[1px] text-[20px] gap-2 ${theme == 'light' ? 'border-my-black text-my-black' : 'border-my-white text-my-white' }`}>
+                        className={`relative flex items-center justify-center basis-[48.92%] sm:basis-[18.9%] text-center py-2 font-bold rounded-[6px] border-[1px] text-[20px] sm:text-[12px] gap-2 sm:gap-1 ${theme == 'light' ? 'border-my-black text-my-black' : 'border-my-white text-my-white' }`}>
                         <FaStar className='text-[#d9e64f]' />
                     </div>
                     
@@ -340,7 +346,7 @@ export default function Feedback() {
                         onClick={() => {
                             setNewMessage('2')
                         }}
-                        className={`relative flex items-center justify-center w-[48.92%] text-center py-2 font-bold rounded-[6px] border-[1px] text-[20px] gap-2 ${theme == 'light' ? 'border-my-black text-my-black' : 'border-my-white text-my-white' }`}>
+                        className={`relative flex items-center justify-center basis-[48.92%] sm:basis-[18.9%] text-center py-2 font-bold rounded-[6px] border-[1px] text-[20px] sm:text-[12px] gap-2 sm:gap-1 ${theme == 'light' ? 'border-my-black text-my-black' : 'border-my-white text-my-white' }`}>
                         <FaStar className='text-[#d9e64f]' />
                         <FaStar className='text-[#d9e64f]' />
                     </div>
@@ -349,7 +355,7 @@ export default function Feedback() {
                         onClick={() => {
                             setNewMessage('3')
                         }}
-                        className={`relative flex items-center justify-center w-[48.92%] text-center py-2 font-bold rounded-[6px] border-[1px] text-[20px] gap-2 ${theme == 'light' ? 'border-my-black text-my-black' : 'border-my-white text-my-white' }`}>
+                        className={`relative flex items-center justify-center basis-[48.92%] sm:basis-[18.9%] text-center py-2 font-bold rounded-[6px] border-[1px] text-[20px] sm:text-[12px] gap-2 sm:gap-1 ${theme == 'light' ? 'border-my-black text-my-black' : 'border-my-white text-my-white' }`}>
                         <FaStar className='text-[#d9e64f]' />
                         <FaStar className='text-[#d9e64f]' />
                         <FaStar className='text-[#d9e64f]' />
@@ -359,7 +365,7 @@ export default function Feedback() {
                         onClick={() => {
                             setNewMessage('4')
                         }}
-                        className={`relative flex items-center justify-center w-[48.92%] text-center py-2 font-bold rounded-[6px] border-[1px] text-[20px] gap-2 ${theme == 'light' ? 'border-my-black text-my-black' : 'border-my-white text-my-white' }`}>
+                        className={`relative flex items-center justify-center basis-[48.92%] sm:basis-[18.9%] text-center py-2 font-bold rounded-[6px] border-[1px] text-[20px] sm:text-[12px] gap-2 sm:gap-1 ${theme == 'light' ? 'border-my-black text-my-black' : 'border-my-white text-my-white' }`}>
                         <FaStar className='text-[#d9e64f]' />
                         <FaStar className='text-[#d9e64f]' />
                         <FaStar className='text-[#d9e64f]' />
@@ -370,7 +376,7 @@ export default function Feedback() {
                         onClick={() => {
                             setNewMessage('5')
                         }}
-                        className={`relative flex items-center justify-center w-full text-center py-2 font-bold rounded-[6px] border-[1px] text-[20px] gap-2 ${theme == 'light' ? 'border-my-black text-my-black' : 'border-my-white text-my-white' }`}>
+                        className={`relative flex items-center justify-center basis-[100%] sm:basis-[20%] text-center py-2 font-bold rounded-[6px] border-[1px] text-[20px] sm:text-[12px] gap-2 sm:gap-1 ${theme == 'light' ? 'border-my-black text-my-black' : 'border-my-white text-my-white' }`}>
                         <FaStar className='text-[#d9e64f]' />
                         <FaStar className='text-[#d9e64f]' />
                         <FaStar className='text-[#d9e64f]' />
