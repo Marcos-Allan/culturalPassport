@@ -27,15 +27,15 @@
  * By using the Software, you agree to these terms and conditions.
  */
 
-
+//IMPORTAÇÃO DAS BIBLIOTECAS
 import React from 'react';
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 import L from 'leaflet';
 
-// Defina as coordenadas do Museu da História do Brasil
+//COORDENADAS PARA LOCALIZAÇÃO INICIAL DO MAPA
 const position: [number, number] = [-15.7937, -47.8823];
 
-// Crie um ícone personalizado, se necessário (opcional)
+//CRIA UM ICONE DE PERSONALIZADO
 const customIcon = new L.Icon({
   iconUrl: 'https://docs.mapbox.com/help/demos/custom-markers-gl-js/mapbox-icon.png',
   iconSize: [30, 30],

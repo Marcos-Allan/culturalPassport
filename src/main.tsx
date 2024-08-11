@@ -65,8 +65,6 @@ import ScreenPage from './components/ScreenPage/index.tsx';
 import Alert from './components/Alert/index.tsx';
 import LogoutPage from './components/LogoutPage/index.tsx';
 
-
-
 //ARQUIVO DE CONFIGURAÇÃO DAS ROTAS
 const router = createBrowserRouter([
   {

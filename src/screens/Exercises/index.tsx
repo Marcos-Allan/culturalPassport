@@ -31,6 +31,7 @@
 import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 
+//IMPORTAÇÃO DOS ESTILOS PARA GERAR O MAPA
 import 'leaflet/dist/leaflet.css';
 
 //IMPORTAÇÃO DOS COMPONENTES
@@ -42,6 +43,7 @@ import Return from "../../components/Return";
 import TitlePage from "../../components/TitlePage";
 import Text from '../../components/Text';
 import ExerciseCard from '../../components/ExerciseCard';
+import MapComponente from '../../components/MapComponente';
 
 //IMPORTAÇÃO DO PROVEDOR PARA PEGAR AS VARIÁVEIS GLOBAIS
 import { useMyContext } from '../../provider/geral';
@@ -51,7 +53,6 @@ import { IoMdSad } from "react-icons/io";
 
 //CONFIGURAÇÃO DA BASE URL DO AXIOS
 import instance from '../../utils/axios';
-import MapComponente from '../../components/MapComponente';
 
 export default function Exercises() {
 
