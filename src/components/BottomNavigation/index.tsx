@@ -88,17 +88,6 @@ export default function BottomNavigation() {
 
             <div
                 className={`flex flex-col items-center justify-center gap-[5px]`}
-                onClick={() => navigate('/chat')}
-            >
-                <div className={`flex items-center justify-center rounded-[50%] transition-all duration-[.2s] cursor-pointer
-                ${location.pathname == '/chat'  ? 'bg-my-white text-my-terciary' : 'text-my-white hover:bg-my-white hover:text-my-terciary'}`}>
-                    <IoChatbubbleOutline className={`text-[36px] p-[6px]`} />
-                </div>
-                <p className={`text-[10px] text-my-white`}>Chat</p>
-            </div>
-
-            <div
-                className={`flex flex-col items-center justify-center gap-[5px]`}
                 onClick={() => navigate('/my-perfil')}
             >
                 <div className={`flex items-center justify-center rounded-[50%] transition-all duration-[.2s] cursor-pointer
@@ -106,6 +95,17 @@ export default function BottomNavigation() {
                     <IoPersonOutline className={`text-[36px] p-[6px]`} />
                 </div>
                 <p className={`text-[10px] text-my-white`}>Perfil</p>
+            </div>
+
+            <div
+                className={`flex flex-col items-center justify-center gap-[5px]`}
+                onClick={() => navigate('/feedback')}
+            >
+                <div className={`flex items-center justify-center rounded-[50%] transition-all duration-[.2s] cursor-pointer
+                ${location.pathname == '/feedback'  ? 'bg-my-white text-my-terciary' : 'text-my-white hover:bg-my-white hover:text-my-terciary'}`}>
+                    <IoChatbubbleOutline className={`text-[36px] p-[6px]`} />
+                </div>
+                <p className={`text-[10px] text-my-white`}>Feedback</p>
             </div>
         </div>
     )

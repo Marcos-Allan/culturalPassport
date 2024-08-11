@@ -50,13 +50,13 @@ import ErrorPage from './screens/ErrorPage/index.tsx';
 import LoadingPage from './components/LoadingPage';
 import MyPerfil from './screens/MyPerfil/index.tsx';
 import Materias from './screens/Materias/index.tsx';
-import Chat from './screens/Chat/index.tsx';
 import Achievements from './screens/Achievements/index.tsx';
 import Exercises from './screens/Exercises/index.tsx';
 import Matter from './screens/Matter/index.tsx';
 import Test from './screens/Test/index.tsx';
 import Content from './screens/Content/index.tsx';
 import Travel from './screens/Travel/index.tsx';
+import Feedback from './screens/Feedback/index.tsx';
 
 //IMPORTAÇÃO DO PROVEDOR QUE GUARDA AS VÁRIAVEIS DE ESTADO GLOBAL
 import { Provider } from './provider/index.tsx';
@@ -114,8 +114,8 @@ const router = createBrowserRouter([
     errorElement: <ErrorPage />
   },
   {
-    path: "chat",
-    element: <Chat />,
+    path: "feedback",
+    element: <Feedback />,
     errorElement: <ErrorPage />
   },
   {
