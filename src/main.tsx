@@ -56,6 +56,7 @@ import Exercises from './screens/Exercises/index.tsx';
 import Matter from './screens/Matter/index.tsx';
 import Test from './screens/Test/index.tsx';
 import Content from './screens/Content/index.tsx';
+import Travel from './screens/Travel/index.tsx';
 
 //IMPORTAÇÃO DO PROVEDOR QUE GUARDA AS VÁRIAVEIS DE ESTADO GLOBAL
 import { Provider } from './provider/index.tsx';
@@ -125,6 +126,11 @@ const router = createBrowserRouter([
   {
     path: "exercises",
     element: <Exercises />,
+    errorElement: <ErrorPage />
+  },
+  {
+    path: "exercises/:travel",
+    element: <Travel />,
     errorElement: <ErrorPage />
   },
   {

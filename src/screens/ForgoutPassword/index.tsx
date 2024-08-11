@@ -107,17 +107,17 @@ export default function ForgoutPassword() {
             //ESCREVE NO CONSOLE DO SITE 
             console.log(response.data)
 
-            //VERIFICA SE A CONTA EXISTE NO BANCO DE DADOS
-            if(response.data == "Usuário não encontrado"){
-                //COLOCA ALERT NA TELA
-                toggleAlert(`error`, `Usuário não cadastrado`)
-            }else if(response.data.message == "Código enviado para o email informado"){
+            //VERIFICA SE O USUÁRIO FOI ENCONTRADO E MANDA MENSAGEM DE SUCEESO PARA ELE
+            if(response.data.message == "Código enviado para o email informado"){
                 //COLOCA ALERT NA TELA
                 toggleAlert(`success`, `Email enviado`)
                 //RESGATA O ID DO USUÁRIO
                 toggleUser('', '', response.data.user._id, [], 0, [], false)
                 //REDIRECIONA O USUÁRIO PARA A PRÓXIMA PÁGINA
                 navigate('/confirm-code')
+            }else{
+                //COLOCA ALERT NA TELA
+                toggleAlert(`error`, response.data)
             }
 
         })

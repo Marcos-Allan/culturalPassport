@@ -31,9 +31,6 @@
 import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 
-//IMPORTAÇÃO DOS ESTILOS PARA GERAR O MAPA
-import 'leaflet/dist/leaflet.css';
-
 //IMPORTAÇÃO DOS COMPONENTES
 import BottomNavigation from "../../components/BottomNavigation";
 import Menu from "../../components/Menu";
@@ -43,7 +40,6 @@ import Return from "../../components/Return";
 import TitlePage from "../../components/TitlePage";
 import Text from '../../components/Text';
 import ExerciseCard from '../../components/ExerciseCard';
-import MapComponente from '../../components/MapComponente';
 
 //IMPORTAÇÃO DO PROVEDOR PARA PEGAR AS VARIÁVEIS GLOBAIS
 import { useMyContext } from '../../provider/geral';
@@ -144,10 +140,8 @@ export default function Exercises() {
                         />
                     </>
                 ))}
-
-                <MapComponente />
                 
-                {loadingExercises == false && exercises.length < 1 && (
+                {loadingExercises == false && exercises.length == 0 && (
                     <>
                         <Text text='Nenhum passeio disponivel no momento'/>
                         <IoMdSad className={`text-[150px] ${theme == 'light' ? 'text-my-gray' : 'text-my-gray-black'}`} />

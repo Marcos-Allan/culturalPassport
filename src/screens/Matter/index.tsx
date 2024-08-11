@@ -47,6 +47,9 @@ export default function Matter() {
     
     //FUNÇÃO RESPONSÁVEL POR LISTAR OS CONTEUDOS DISPONIVEIS
     function getContent(){
+        //MUDA O ESTADO DE CARREGAMENTO DOS CONTEUDOS PARA true
+        setLoadingContent(true)
+
         instance.get(`/matter/${matter}`)
         .then(function (response) {
             console.log(response.data)

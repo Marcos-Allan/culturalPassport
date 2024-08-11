@@ -45,8 +45,8 @@ export default function BottomNavigation() {
     const location = useLocation();
 
     //FUNÇÃO RESPONSÁVEL POR VER SE A PALAVRA CONTÉM A STRING DESEJADA
-    function containsWord(text:string) {
-        return text.toLowerCase().includes('materias')
+    function containsWord(text:string, icon:string) {
+        return text.toLowerCase().includes(icon)
     }
 
     return(
@@ -57,7 +57,7 @@ export default function BottomNavigation() {
                 onClick={() => navigate('/materias')}
             >
                 <div className={`flex items-center justify-center rounded-[50%] transition-all duration-[.2s] cursor-pointer
-                    ${containsWord(location.pathname) ? 'bg-my-white text-my-terciary' : 'text-my-white hover:bg-my-white hover:text-my-terciary'}
+                    ${containsWord(location.pathname, 'materias') ? 'bg-my-white text-my-terciary' : 'text-my-white hover:bg-my-white hover:text-my-terciary'}
                 `}>
                     <GoHome className={`text-[36px] p-[6px]`} />
                 </div>
@@ -80,7 +80,7 @@ export default function BottomNavigation() {
                 onClick={() => navigate('/exercises')}
             >
                 <div className={`flex items-center justify-center rounded-[50%] transition-all duration-[.2s] cursor-pointer
-                    ${location.pathname == '/exercises'  ? 'bg-my-white text-my-terciary' : 'text-my-white hover:bg-my-white hover:text-my-terciary'}`}>
+                    ${containsWord(location.pathname, 'exercises') ? 'bg-my-white text-my-terciary' : 'text-my-white hover:bg-my-white hover:text-my-terciary'}`}>
                     <FaRegAddressBook className={`text-[36px] p-[6px] `} />
                 </div>
                 <p className={`text-[10px] text-my-white`}>Exercicios</p>
