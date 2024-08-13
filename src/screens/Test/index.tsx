@@ -77,7 +77,14 @@ export default function Test() {
             }
         })
 
+        //CHECA AS RESPOSTAS ACERTADAS PELO USUÁRIO
         setMyCorrectResponse(data)
+
+        //CHECA PARA VER QUANTOS SIMULADOS O USUÁRIO TERMINOU
+        if(userS.simulationsConcludeds === 0){
+            //CHAMA A FUNÇÃO DE ADQUIRIR CONQUISTA
+            grantAchievement('No caminho certo');
+        }
 
         return data
     }
@@ -195,7 +202,7 @@ export default function Test() {
     }
 
     //FUNÇÃO RESPONSÁVEL POR ATUALIZAR OS DADOS DO USUÁRIO
-    async function updateUser(conquest:any) {
+    async function updateUser(conquest:any, conquestName:string) {
         //MUDA O ESTADO DE CARREGAMENTO DA APLICAÇÃO PARA true
         toggleLoading(true);
 
@@ -222,7 +229,7 @@ export default function Test() {
                 toggleUser(response.data.name, response.data.img, response.data._id, response.data.simulations, response.data.simulationsConcludeds, cronogram)
     
                 //COLOCA ALERT NA TELA
-                toggleAlert(`conquest`, `Conquista desbloqueada`);
+                toggleAlert(`conquest`, `Conquista desbloqueada "${conquestName}"`);
             })
             .catch(function(error) {
 
@@ -245,6 +252,41 @@ export default function Test() {
         setYourResponse(novasFrutas);
     };
 
+    // Função auxiliar para conceder uma conquista
+    const grantAchievement = (name: string) => {
+        // Ativa o estado de loading
+        toggleLoading(true);
+        
+        if (checkAchievement(name) !== true) {
+            updateUser({ name, concluded: true }, name)
+        }
+    };
+
+    //FUNÇÃO RESPONSÁVEL POR PEGAR AS CONQUISTAS
+    function getAchievement() {
+
+        // Mapeia as conquistas com base na matéria
+        const achievementsToCheck: Record<string, string> = {
+            'química': 'Geovana',
+            'matemática': 'Alexsandro',
+            'geografia': 'Jorgina',
+            'artes': 'Angreei',
+            'fisíca': 'Xandão',
+            'biologia': 'Renan',
+            'português': 'Cida',
+            'história': 'Tozi',
+            'inglês': 'Leandro'
+        };
+
+        // Concede a conquista específica da matéria se o usuário ainda não a tem
+        const currentAchievement = achievementsToCheck[matter as string];
+        if (currentAchievement) {
+            grantAchievement(currentAchievement);
+        }
+
+        navigate('/materias');
+    };
+
     //FUNÇÃO CHAMADA AO RECARREGAR A PÁGINA
     useEffect(() => {
         //VERIFICA SE O USUÁRIO ESTÁ LOGADO
@@ -262,7 +304,7 @@ export default function Test() {
 
     return(
         <>
-            {matter == 'fisíca' || matter == 'história' || matter == 'inglês' || matter == 'geografia' || matter == 'português' || matter == 'química' || matter == 'biologia' || matter == 'matemática' ? (
+            {matter == 'fisíca' || matter == 'história' || matter == 'inglês' || matter == 'geografia' || matter == 'português' || matter == 'química' || matter == 'biologia' || matter == 'matemática' || matter == 'artes' ? (
                 <>
                     <Navbar>
                         <TitlePage text={`${capitalizeText(matter || 'matéria')}`} />
@@ -335,7 +377,7 @@ export default function Test() {
                                     
                                     <div className={`flex capitalize justify-between text-[20px] mt-3 px-2 py-3 rounded-[8px] w-full border-[1px] ${theme == 'light' ? 'border-my-black text-black' : 'border-my-white text-white'}`}>
                                         <p>nota final:</p>
-                                        <p>{(10 / questions.length) *  myCorrectResponse}</p>
+                                        <p>{Number((10 / questions.length) *  myCorrectResponse).toFixed(2)}</p>
                                     </div>
                                     
                                     <div className={`flex justify-between text-[20px] mt-3 px-2 py-3 rounded-[8px] w-full border-[1px] ${theme == 'light' ? 'border-my-black text-black' : 'border-my-white text-white'}`}>
@@ -390,55 +432,7 @@ export default function Test() {
                                         </div>
                                     </div>
 
-                                    <Button route='undefined' text='Voltar' event={() => {
-
-                                        //VERIFICA SE O USUÁRIO JA TEM A CONQUISTA
-                                        if(matter == 'química' && checkAchievement("Geovana") !== true){
-                                            //ATUALIZA OS DADOS DO USUÁRIO NO BANCO DE DADOS
-                                            updateUser({ name: "Geovana", concluded: true })
-                                        }
-                                        //VERIFICA SE O USUÁRIO JA TEM A CONQUISTA
-                                        if(matter == 'matemática' && checkAchievement("Alexsandro") !== true){
-                                            updateUser({ name: "Alexsandro", concluded: true })
-                                        }
-                                        //VERIFICA SE O USUÁRIO JA TEM A CONQUISTA
-                                        if(matter == 'geografia' && checkAchievement("Jorgina") !== true){
-                                            updateUser({ name: "Jorgina", concluded: true })
-                                        }
-
-                                        //VERIFICA SE O USUÁRIO JA TEM A CONQUISTA
-                                        // if(matter == 'artes' && checkAchievement("Angreei") !== true){
-                                        //     updateUser({ name: "Angreei", concluded: true })
-                                        // }
-
-                                        //VERIFICA SE O USUÁRIO JA TEM A CONQUISTA
-                                        if(matter == 'fisíca' && checkAchievement("Xandão") !== true){
-                                            updateUser({ name: "Xandão", concluded: true })
-                                        }
-                                        //VERIFICA SE O USUÁRIO JA TEM A CONQUISTA
-                                        if(matter == 'biologia' && checkAchievement("Renan") !== true){
-                                            updateUser({ name: "Renan", concluded: true })
-                                        }
-                                        //VERIFICA SE O USUÁRIO JA TEM A CONQUISTA
-                                        if(matter == 'português' && checkAchievement("Cida") !== true){
-                                            updateUser({ name: "Cida", concluded: true })
-                                        }
-                                        //VERIFICA SE O USUÁRIO JA TEM A CONQUISTA
-                                        if(matter == 'história' && checkAchievement("Tozi") !== true){
-                                            updateUser({ name: "Tozi", concluded: true })
-                                        }
-                                        //VERIFICA SE O USUÁRIO JA TEM A CONQUISTA
-                                        if(matter == 'inglês' && checkAchievement("Leandro") !== true){
-                                            updateUser({ name: "Leandro", concluded: true })
-                                        }
-                                        
-                                        //VERIFICA SE O USUÁRIO JA TEM A CONQUISTA
-                                        if(checkAchievement("No caminho certo") !== true && userS.simulationsConcludeds >= 0){
-                                            updateUser({ name: "No caminho certo", concluded: true })
-                                        }
-                                        //REDIRECIONA ELE PARA A PÁGINA DE MATÉRIAS
-                                        navigate('/materias')
-                                    }} />
+                                    <Button route='undefined' text='Voltar' event={getAchievement} />
                                 </div>
                             )}
                         </div>

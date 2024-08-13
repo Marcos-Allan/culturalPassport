@@ -44,17 +44,19 @@ export default function MaterialCard(props: Props) {
         '#52bd9b', //0
         '#c47e3d', //1
         '#e41c1c', //2
-        '#eeee1b', //3
+        '#f7c957', //3
         '#e843f1', //4
         '#987dd0', //5
         '#c66193', //6
         '#38da56', //7
+        '#527fef', //8
+        '#281b6e', //9
     ])
 
     //FUNÇÃO CHAMADA AO RECARREGAR A PÁGINA
     useEffect(() => {
         //COLOCA UMA NOVA COR NO ARRAY DE CORES
-        setColors((colors) => [...colors, '#527fef'])
+        setColors((colors) => [...colors, '#40a6b0'])
     },[])
 
     //UTILIZAÇÃO DO HOOK DE NAVEGAÇÃO 

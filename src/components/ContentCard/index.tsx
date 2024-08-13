@@ -53,9 +53,9 @@ export default function ContentCard(props: Props) {
             }}
             className={`w-full mb-4 flex justify-center rounded-[24px] py-4 border-2 hover:scale-[0.9] lg:hover:scale-[0.9] transition-all duration-[.3s] cursor-pointer
             ${theme == 'light' ? 'border-my-black' : 'border-my-white'}
-            ${props.background == 0 || props.background == 3 || props.background == 6 ? 'bg-my-primary' : ''}
-            ${props.background == 1 || props.background == 4 || props.background == 7 ? 'bg-my-secondary' : ''}
-            ${props.background == 2 || props.background == 5 || props.background == 8 ? 'bg-my-terciary' : ''}
+            ${props.background == 0 || props.background == 3 || props.background == 6 || props.background == 9 ? 'bg-my-primary' : ''}
+            ${props.background == 1 || props.background == 4 || props.background == 7 || props.background == 10 ? 'bg-my-secondary' : ''}
+            ${props.background == 2 || props.background == 5 || props.background == 8 || props.background == 11 ? 'bg-my-terciary' : ''}
         `}>
             <p className={`capitalize font-semibold text-[18px] text-my-white text-center`}>{props.title}</p>
         </div>
