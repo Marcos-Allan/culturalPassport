@@ -51,12 +51,13 @@ export default function MaterialCard(props: Props) {
         '#38da56', //7
         '#527fef', //8
         '#281b6e', //9
+        '#40a6b0', //10
     ])
 
     //FUNÇÃO CHAMADA AO RECARREGAR A PÁGINA
     useEffect(() => {
         //COLOCA UMA NOVA COR NO ARRAY DE CORES
-        setColors((colors) => [...colors, '#40a6b0'])
+        setColors((colors) => [...colors, '#72f232'])
     },[])
 
     //UTILIZAÇÃO DO HOOK DE NAVEGAÇÃO 

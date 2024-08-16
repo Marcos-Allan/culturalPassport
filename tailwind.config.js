@@ -6,6 +6,7 @@ export default {
   ],
   theme: {
     extend: {
+      
       // colors: {
       //   'my-primary': '#010E26',
       //   'my-secondary': '#445EF2',
@@ -19,6 +20,7 @@ export default {
       //   'my-white-opacity': '#ffffffbb',
       //   'my-black-opacity': '#000000bb',
       // },
+
       colors: {
         'my-primary': '#191D1F',
         'my-secondary': '#B47C49',

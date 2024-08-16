@@ -56,7 +56,18 @@ export const MyProvider = ({ children } : { children: React.ReactNode }) => {
     //CRIA ESTADO GLOBAL DE CADA VARIAVEL
     const [theme, setTheme] = useState<string | null>(localStorage.getItem('themePC'))
     const [menuOpen, setMenuOpen] = useState<boolean>(false)
-    const [userS, setUserS] = useState<User>({ logged: false, name: '', img: '', id: '', simulations: [], simulationsConcludeds: 0, cronogram: [] })
+    // const [userS, setUserS] = useState<User>({ logged: false, name: '', img: '', id: '', simulations: [], simulationsConcludeds: 0, cronogram: [] })
+    const [userS, setUserS] = useState<User | null>(localStorage.getItem('userPC') !== null ?
+        {
+            logged: JSON.parse(localStorage.getItem('userPC') as any).logged,
+            name: JSON.parse(localStorage.getItem('userPC') as any).name,
+            img: JSON.parse(localStorage.getItem('userPC') as any).img,
+            id: JSON.parse(localStorage.getItem('userPC') as any).id,
+            simulations: JSON.parse(localStorage.getItem('userPC') as any).simulation,
+            simulationsConcludeds: JSON.parse(localStorage.getItem('userPC') as any).simulationsConcludeds,
+            cronogram: JSON.parse(localStorage.getItem('userPC') as any).cronogram
+        } : { logged: false, name: '', img: '', id: '', simulations: [], simulationsConcludeds: 0, cronogram: [] }
+    )
     const [loading, setLoading] = useState<boolean>(false)
     const [message, setMessage] = useState<Alert>({ type: 'undefined', text: 'Alerta simples' })
     const [isLogout, setIsLogout] = useState<boolean>(false)
@@ -76,6 +87,7 @@ export const MyProvider = ({ children } : { children: React.ReactNode }) => {
     
     //FUNÇÃO RESPONSAVEL POR ABRIR E FECHAR O MENU
     const toggleUser = (name:string, img:string, id:string, simulations:any, simulationsConcludeds:number = 0, cronogram:any, logged:boolean = true) => {
+        localStorage.setItem('userPC', JSON.stringify({ logged: logged, name: name, img: img, id: id, simulations: simulations, simulationsConcludeds: simulationsConcludeds, cronogram: cronogram }))
         setUserS({ logged: logged, name: name, img: img, id: id, simulations: simulations, simulationsConcludeds: simulationsConcludeds, cronogram: cronogram })
     }
     
