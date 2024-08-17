@@ -252,12 +252,14 @@ export default function Test() {
         setYourResponse(novasFrutas);
     };
 
-    // Função auxiliar para conceder uma conquista
+    //FUNÇÃO RESPONSÁVEL POR CONCEDER A CONQUISTA AO USUÁRIO
     const grantAchievement = (name: string) => {
-        // Ativa o estado de loading
+        //MUDA O ESTADO DE CARREGAMENTO DA PÁGINA PARA true
         toggleLoading(true);
         
+        //VERIFICA SE O USUÁRIO JÁ TEM A CONQUISTA
         if (checkAchievement(name) !== true) {
+            //FAZ A REQUISIÇÃO QUE COLOCA A CONQUISTA DESBLOQUEADA NA CONTA DO USUÁRIO
             updateUser({ name, concluded: true }, name)
         }
     };
@@ -265,7 +267,7 @@ export default function Test() {
     //FUNÇÃO RESPONSÁVEL POR PEGAR AS CONQUISTAS
     function getAchievement() {
 
-        // Mapeia as conquistas com base na matéria
+        //MAPEIA AS CONQUISTAS COM BASE NA MATÉRIA
         const achievementsToCheck: Record<string, string> = {
             'química': 'Geovana',
             'matemática': 'Alexsandro',
@@ -275,15 +277,23 @@ export default function Test() {
             'biologia': 'Renan',
             'português': 'Cida',
             'história': 'Tozi',
-            'inglês': 'Leandro'
+            'inglês': 'Leandro',
+            'sociologia': 'Carol S',
+            'filosofia': 'Carol F',
+            'espanhol': 'Shakira Traida'
         };
 
-        // Concede a conquista específica da matéria se o usuário ainda não a tem
+        //CONCEDE A CONQUISTA ESPECIFICA DA MATÉRIA SE O USUÁRIO AINDA NÃO A TEM
         const currentAchievement = achievementsToCheck[matter as string];
+        //VERIFICA SE O USUÁRIO JÁ TEM A CONQUISTA DA MATÉRIA
         if (currentAchievement) {
             grantAchievement(currentAchievement);
         }
 
+        //MUDA O ESTADO DE CARREGAMENTO DA PÁGINA PARA false
+        toggleLoading(false);
+
+        //NAVEGA PARA A PÁGINA DE MATÉRIAS
         navigate('/materias');
     };
 
@@ -304,7 +314,7 @@ export default function Test() {
 
     return(
         <>
-            {matter == 'fisíca' || matter == 'história' || matter == 'inglês' || matter == 'geografia' || matter == 'português' || matter == 'química' || matter == 'biologia' || matter == 'matemática' || matter == 'artes' ? (
+            {matter == 'fisíca' || matter == 'história' || matter == 'inglês' || matter == 'geografia' || matter == 'português' || matter == 'química' || matter == 'biologia' || matter == 'matemática' || matter == 'artes' || matter == 'filosofia' || matter == 'sociologia' || matter == 'espanhol' ? (
                 <>
                     <Navbar>
                         <TitlePage text={`${capitalizeText(matter || 'matéria')}`} />

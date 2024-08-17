@@ -33,8 +33,8 @@ export default function Content() {
     const [contentMatter, setContentMatter] = useState<string>()
 
     //FUNÇÃO RESPONSÁVEL POR DEIXAR O TEXTO EM CAPITALIZE
-    function capitalizeText(text:string) {
-        return text.toLowerCase().replace(/\b\w/g, char => char.toUpperCase())
+    function capitalizeText(text: string) {
+        return text.toLowerCase().replace(/(?:^|\s)\p{L}/gu, char => char.toUpperCase());
       }
 
     //FUNÇÃO CHAMADA AO RECARREGAR A PÁGINA
