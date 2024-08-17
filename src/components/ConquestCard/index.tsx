@@ -27,113 +27,132 @@
  * By using the Software, you agree to these terms and conditions.
  */
 
+//IMPORTAÇÃO DAS BIBLIOTECAS
+import { useState, useEffect } from 'react';
+
 //IMPORTAÇÃO DO PROVEDOR PARA PEGAR AS VARIÁVEIS GLOBAIS
 import { useMyContext } from '../../provider/geral';
 
-//TIPAGEM DAS PROPRIEDADES DO COMPONENTE
+// TIPAGEM DAS PROPRIEDADES DO COMPONENTE
 interface Props {
-    level: number,
-    porcentage: number,
-    title: string,
-    message: string,
-    backImg: string,
+    level: number;
+    porcentage: number;
+    title: string;
+    message: string;
+    backImg: string;
 }
 
 export default function ConquestCard(props: Props) {
 
-    //RESGATA AS VARIAVEIS GLOBAIS
-    const states:any = useMyContext()
+    // RESGATA AS VARIÁVEIS GLOBAIS
+    const states: any = useMyContext();
 
-    //DESESTRUTURA AS VARIAVEIS ESPECIFICADAS
-    const { theme, userS } = states
+    // DESESTRUTURA AS VARIÁVEIS ESPECIFICADAS
+    const { theme, userS } = states;
 
-    //FUNÇÃO RESPONSÁVEL POR RENDERIZAR AS BARRAS DE LEVEL
+    // ESTADO PARA ARMAZENAR SE A CONQUISTA FOI ALCANÇADA
+    const [achievement, setAchievement] = useState<boolean>(false);
+
+    // FUNÇÃO PARA VERIFICAR SE A CONQUISTA EXISTE
+    const checkAchievement = (param: string) => {
+        
+        console.log(userS)
+
+        // Verifica se userS e userS.simulations estão definidos
+        if (!userS || !userS.simulations) {
+            console.error("Dados de usuário ou simulações não estão disponíveis");
+            return false;
+        }
+
+        // Verifica se a conquista existe
+        const hasAchievement = userS.simulations.some((item: any) => item.name === param);
+        console.log(`Verificando conquista: ${param} - Resultado: ${hasAchievement}`);
+        return hasAchievement;
+    };
+
+    // useEffect para monitorar mudanças em userS e props.title
+    useEffect(() => {
+        setAchievement(checkAchievement(props.title));
+    }, [userS, props.title]);
+
+    return (
+        <div
+            className={`w-[90%] sm:w-[60%] my-2 p-3 border-2 border-solid flex min-h-[180px] gap-[6px] rounded-[8px] transition-all duration-[.2s] ${
+                achievement ? 'animate-colorChange' : theme === 'light' ? 'border-my-secondary' : 'border-my-quartenary'
+            }`}
+        >
+            {/* ${props.title == "No caminho certo" && userS.simulationsConcludeds == 1 ? '' : 'grayscale(100%)'} */}
+            <div
+                style={{
+                    backgroundImage: `url('${props.backImg}')`,
+                    filter: `${achievement ? '' : 'grayscale(100%)'}`,
+                }}
+                className="bg-cover bg-center h-full min-w-[40%] flex flex-row p-2 items-end gap-1 rounded-[5px]"
+            >
+                {/* CHAMA A FUNÇÃO QUE RENDERIZA OS LEVELS DEPENDENDO DA QUANTIDADE ESPECIFICADA */}
+                {renderLevel(props.level)}
+            </div>
+
+            <div className="flex-grow-[1] flex flex-col h-full justify-between bg-transparent p-2 rounded-[5px]">
+                <div>
+                    <h1
+                        className={`font-bold text-[17px] ${
+                            theme === 'light' ? 'text-my-black' : 'text-my-white'
+                        }`}
+                    >
+                        {props.title}
+                    </h1>
+
+                    <p
+                        className={`text-[15px] ${
+                            theme === 'light' ? 'text-my-gray' : 'text-my-gray-black'
+                        }`}
+                    >
+                        {props.message}
+                    </p>
+                </div>
+
+                <div className="w-full flex flex-row justify-between items-center">
+                    <div
+                        className={`align-bottom w-[80%] h-[10px] ${
+                            theme === 'light' ? 'bg-my-gray' : 'bg-my-gray-black'
+                        }`}
+                    >
+                        {/* ${props.title == "No caminho certo" && userS.simulationsConcludeds == 1 ? 100 : Number(props.porcentage)}% */}
+                        <div
+                            style={{
+                                width: `${achievement ? 100 : Number(props.porcentage)}%`,
+                            }}
+                            className={`h-full ${
+                                theme === 'light' ? 'bg-my-secondary' : 'bg-my-quartenary'
+                            }`}
+                        ></div>
+                    </div>
+
+                    {/* ${props.title == "No caminho certo" && userS.simulationsConcludeds == 1 ? 100 : props.porcentage} */}
+                    <p
+                        className={`text-[14px] ${
+                            theme === 'light' ? 'text-my-gray' : 'text-my-gray-black'
+                        }`}
+                    >
+                        {achievement ? 100 : props.porcentage}%
+                    </p>
+                </div>
+            </div>
+        </div>
+    );
+
+    // FUNÇÃO RESPONSÁVEL POR RENDERIZAR AS BARRAS DE LEVEL
     function renderLevel(quantity: number) {
-        //INICIA ARRAY VAZIO
-        const level = []
-
-        //FAZ LOOP PELA QUANTIDADE FORNECIDA PELA FUNÇÃO
-        for(let i = 0; i < quantity; i++) {
-
-            //ADICIONA UM COMPONENTE NO ARRAY
+        const level = [];
+        for (let i = 0; i < quantity; i++) {
             level.push(
                 <div
                     key={i}
-                    className={`h-[10px] flex-grow-[1] rounded-[2px]
-                    bg-my-white-opacity   
-                `}/>
-            )
-
+                    className="h-[10px] flex-grow-[1] rounded-[2px] bg-my-white-opacity"
+                />
+            );
         }
-
-        //RETORNA O COMPONENTE A QUANTIDADE DE VEZES FORNECIDA PELA FUNÇÃO
-        return level
+        return level;
     }
-
-    //FUNÇÃO RESPONSÁVEL POR VER SE A CONQUISTA FOI CONCLUIDA OU NÃO
-    const checkAchievement = (param:string) => {
-        return userS.simulations.some((item:any) => item.name === param)
-    };
-
-    return(
-        <div
-            className={`w-[90%] sm:w-[60%] my-2 p-3 border-2 border-solid flex min-h-[180px] gap-[6px] rounded-[8px] transition-all duration-[.2s]
-            ${checkAchievement(props.title) == true ? 'animate-colorChange' : `
-                ${theme == 'light' ? 'border-my-secondary' : 'border-my-quartenary'}
-            `}
-        `}>
-            
-            {/* ${props.title == "No caminho certo" && userS.simulationsConcludeds == 1 ? '' : 'grayscale(100%)'} */}
-            <div
-                style={{ backgroundImage: `url('${props.backImg}')`, filter: `
-                    ${checkAchievement(props.title) == true ? '' : 'grayscale(100%)'}
-                ` }}
-                className={`bg-cover bg-center  h-full min-w-[40%] flex flex-row p-2 items-end gap-1 rounded-[5px]
-                
-            `}>
-                {/* CHAMA A FUNÇÃO QUE RENDERIZA OS LEVELS DEPENDENDO DA QUANTIDADE ESPECIFICADA */}
-                {renderLevel(props.level)} 
-            </div>
-
-            <div className={`flex-grow-[1] flex flex-col h-full justify-between bg-transparent p-2 rounded-[5px]`}>
-                
-                <div>
-                    <h1
-                        className={`font-bold text-[17px]
-                        ${theme == 'light' ? 'text-my-black' : 'text-my-white'}
-                    `}>{props.title}</h1>
-
-                    <p
-                        className={`text-[15px]
-                        ${theme == 'light' ? 'text-my-gray' : 'text-my-gray-black'}
-                    `}>{props.message}</p>
-                </div>
-                
-                <div className='w-full flex flex-row justify-between items-center'>
-
-                    <div
-                        className={`align-bottom w-[80%] h-[10px]
-                        ${theme == 'light' ? 'bg-my-gray' : 'bg-my-gray-black'}
-                    `}>
-                        {/* `${props.title == "No caminho certo" && userS.simulationsConcludeds == 1 ? 100 : Number(props.porcentage)}%` */}
-                        <div
-                            style={{ width: 
-                                `${checkAchievement(props.title) == true ? 100 : Number(props.porcentage)}`
-                             }}
-                            className={`h-full
-                            ${theme == 'light' ? 'bg-my-secondary' : 'bg-my-quartenary'}
-                        `}></div>
-                    </div>
-                    
-                    {/* ${props.title == "No caminho certo" && userS.simulationsConcludeds == 1 ? 100 : props.porcentage} */}
-                    <p
-                        className={`text-[14px]
-                        ${theme == 'light' ? 'text-my-gray' : 'text-my-gray-black'}
-                    `}>{checkAchievement(props.title) == true ? 100 : props.porcentage}%</p>
-
-                </div>
-
-            </div>
-        </div>
-    )
 }

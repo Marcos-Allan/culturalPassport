@@ -95,14 +95,17 @@ export default function Achievements() {
 
             //REDIRECIONA ELE PARA A PÁGINA DE MATÉRIAS
             navigate('/')
+        }else{   
+            //DEFINE O ARRAY COM AS CONQUISTAS
+            getAchievements()
         }
     },[userS.logged])
 
-    //FUNÇÃO CHAMADA AO RECARREGAR A PÁGINA
-    useEffect(() => {
-        //DEFINE O ARRAY COM AS CONQUISTAS
-        getAchievements()
-    },[])
+    // //FUNÇÃO CHAMADA AO RECARREGAR A PÁGINA
+    // useEffect(() => {
+    //     //DEFINE O ARRAY COM AS CONQUISTAS
+    //     getAchievements()
+    // },[])
 
     return(
         <>
@@ -119,7 +122,7 @@ export default function Achievements() {
                     <ConquestCard level={conq.level} message={conq.message} porcentage={conq.porcentage} backImg={conq.imgURL} title={conq.title} key={i} />
                 ))}
                 
-                {loadingAchivements == false && conquests.length < 1 && (
+                {loadingAchivements == false && conquests.length <= 0 && (
                     <>
                         <Text text='Nenhuma conquista encontrada'/>
                         <IoMdSad

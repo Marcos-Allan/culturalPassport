@@ -63,7 +63,7 @@ export const MyProvider = ({ children } : { children: React.ReactNode }) => {
             name: JSON.parse(localStorage.getItem('userPC') as any).name,
             img: JSON.parse(localStorage.getItem('userPC') as any).img,
             id: JSON.parse(localStorage.getItem('userPC') as any).id,
-            simulations: JSON.parse(localStorage.getItem('userPC') as any).simulation,
+            simulations: JSON.parse(localStorage.getItem('userPC') as any).simulations,
             simulationsConcludeds: JSON.parse(localStorage.getItem('userPC') as any).simulationsConcludeds,
             cronogram: JSON.parse(localStorage.getItem('userPC') as any).cronogram
         } : { logged: false, name: '', img: '', id: '', simulations: [], simulationsConcludeds: 0, cronogram: [] }
