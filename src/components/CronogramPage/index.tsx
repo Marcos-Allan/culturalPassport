@@ -64,6 +64,9 @@ export default function CronogramPage() {
             { matter: 'química', id: 'inputQui' },
             { matter: 'biologia', id: 'inputBio' },
             { matter: 'matemática', id: 'inputMat' },
+            { matter: 'filosofia', id: 'inputFil' },
+            { matter: 'sociologia', id: 'inputSoc' },
+            { matter: 'espanhol', id: 'inputEsp' },
         ])
     },[])
 
@@ -121,7 +124,7 @@ export default function CronogramPage() {
                 toggleLoading(false);
     
                 //COLOCA ALERT NA TELA
-                toggleAlert(`error`, `Ocorreu um erro interno na merda do  servidor`);
+                toggleAlert(`error`, `Ocorreu um erro interno no servidor`);
             })
     }
 
@@ -134,7 +137,7 @@ export default function CronogramPage() {
                 `}>
                     <h1 className={`w-[90%] text-center text-[20px] font-medium mb-[14px] ${theme == 'light' ? 'text-my-white' : 'text-my-black'}`}>Olá <span className={`font-bold ${theme == 'light' ? 'text-my-quartenary' : 'text-my-secondary'}`}>{userS.name}</span>, defina seu cronograma de estudos</h1>
 
-                    <div className={`relative flex flex-row w-[90%] sm:w-[70%] lg:w-[50%] h-[240px] rounded-[8px] ${theme == 'light' ? 'bg-my-secondary' : 'bg-my-quartenary'} border-4 ${theme == 'light' ? 'border-my-secondary' : 'border-my-quartenary'}`}>
+                    <div className={`relative flex flex-row w-[90%] sm:w-[70%] lg:w-[50%] h-[310px] rounded-[8px] ${theme == 'light' ? 'bg-my-secondary' : 'bg-my-quartenary'} border-4 ${theme == 'light' ? 'border-my-secondary' : 'border-my-quartenary'}`}>
                         <div
                             className={`flex-grow-[1] p-2 rounded-[8px] ${theme == 'light' ? 'bg-my-white' : 'bg-my-black'}`}
                         >
@@ -161,7 +164,7 @@ export default function CronogramPage() {
                             )}
                         </div>
 
-                        {cronogramS.length > 8 ? (
+                        {cronogramS.length > 11 ? (
                          <IoArrowForward
                              onClick={() => {
                                 updateUser()
