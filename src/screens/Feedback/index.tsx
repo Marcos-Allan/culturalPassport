@@ -81,7 +81,7 @@ export default function Feedback() {
     },[userS.logged])
 
     //CHECA SE O USUÁRIO JA MANDOU O FEEDBACK
-    function checkIsFeedback() {
+    async function checkIsFeedback() {
         instance.get('/feedback/feedbacks')
         .then(function (response){
             response.data.map((feedback:any) => {
@@ -124,27 +124,33 @@ export default function Feedback() {
     const handleSubmit = (mesn:string) => {
         //CHAMA A FUNÇÃO QUE VERIFICA SE O USUÁRIO JÁ MANDOU ALGUM FEEDBACK
         checkIsFeedback()
+        .then(function (response){
+            console.log(response)
+            if(isFeedback == true){
+                alert('tu já mandou feedback')
+            }else{
+                //LIMPA O ARRAY DE FEEDBACKS
+                setMessages([])
 
-        if(isFeedback == false){
-            //LIMPA O ARRAY DE FEEDBACKS
-            setMessages([])
+                instance.post('/feedback/upload', {
+                    userID: userS.id,
+                    message: mesn,
+                    name: userS.name
+                })
+                .then(function (response){
+                    console.log(response.data)
+                    getFeedbacks()
+                })
+                .catch(function (error){
+                    console.log(error)
+                })
 
-            instance.post('/feedback/upload', {
-                userID: userS.id,
-                message: mesn,
-                name: userS.name
-            })
-            .then(function (response){
-                console.log(response.data)
-                getFeedbacks()
-            })
-            .catch(function (error){
-                console.log(error)
-            })
-
-            //LIMPA O CAMPO DE MENSAGEM
-            setNewMessage('');
-        }
+                //LIMPA O CAMPO DE MENSAGEM
+                setNewMessage('');
+            }
+        }).catch(function (error){
+            console.log(error)
+        })
     }
 
     // FUNÇÃO RESPONSÁVEL POR RENDERIZAR AS BARRAS DE LEVEL
@@ -204,7 +210,7 @@ export default function Feedback() {
                                 key={Math.random() * 999999999999}   
                                 className={`self-start border-2 ${theme == 'light' ? 'border-my-gray' : 'border-my-gray-black' } p-1 max-w-[200px] rounded-[10px] rounded-es-[0px]`}
                             >
-                                <span className={`text-[#f7884c] font-black text-[14px]`}>{msg.user}</span>
+                                <span className={`text-[#0066ff] font-black text-[14px]`}>{msg.user}</span>
                                 <p className={`flex flex-row text-[16px] font-light ${theme == 'light' ? 'text-my-black' : 'text-my-white'} pt-1`}>
 
                                     {/* CHAMA A FUNÇÃO QUE RENDERIZA OS LEVELS DEPENDENDO DA QUANTIDADE ESPECIFICADA */}
