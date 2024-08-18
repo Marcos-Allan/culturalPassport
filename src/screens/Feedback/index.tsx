@@ -41,6 +41,7 @@ import MenuButton from "../../components/MenuButton";
 import Navbar from "../../components/Navbar";
 import Return from "../../components/Return";
 import TitlePage from "../../components/TitlePage";
+import StarRating from '../../components/StarRating';
 
 //CONFIGURAÇÃO DA BASE URL DO AXIOS
 import instance from '../../utils/axios';
@@ -65,11 +66,18 @@ export default function Feedback() {
     const states:any = useMyContext()
 
     //DESESTRUTURA AS VARIAVEIS ESPECIFICADAS
-    const { userS, theme } = states
+    const { userS, theme, toggleAlert } = states
 
     //UTILIZAÇÃO DO HOOK useState
     const [messages, setMessages] = useState<Msg[]>([]);
     const [isFeedback, setIsFeedback] = useState<boolean>(false)
+    const [selectedRating, setSelectedRating] = useState<number | null>(null);
+    const [inputMessage, setInputMessage] = useState<string>('')
+
+    //FUNÇÃO RESPONSÁVEL POR PEGAR O VALOR DAS ESTRELAS ESCOLHIDAS
+    const handleRatingSelect = (rating: number) => {
+        setSelectedRating(rating);
+    };
 
     //FUNÇÃO CHAMADA AO RECARREGAR A PÁGINA
     useEffect(() => {
@@ -122,42 +130,45 @@ export default function Feedback() {
     //SALVA OS FEEDBACKS NO BD
     const handleSubmit = (mesg:string) => {
 
-        instance.post('/feedback/upload', {
-            userID: userS.id,
-            message: mesg,
-            name: userS.name,
-            userImg: userS.img
-        })
-        .then(function (response){
-            console.log(response.data)
-            //LIMPA O ARRAY DE FEEDBACKS
-            setMessages([])
-            
-            //CHAMA A FUNÇÃO QUE VERIFICA SE O USUÁRIO JA MANDOU O FEEDBACK
-            checkIsFeedback()
+        if(((selectedRating !== null && selectedRating == 0) || selectedRating == null) && (inputMessage == "")){ //VERIFICA SE O USUÁRIO NÃO COLOCOU AS ESTRELAS E NEM O FEEDBACK
+            //COLOCA ALERT NA TELA
+            toggleAlert(`error`, `Seja mais específico`)
 
-            //CHAMA A FUNÇÃO QUE PEGA OS FEEDBACKS
-            getFeedbacks()
-        })
-        .catch(function (error){
-            console.log(error)
-        })
-    }
+        }else if((selectedRating !== null && selectedRating == 0) || selectedRating == null){ //VERIFICA SE O USUÁRIO NÃO COLOCOU AS ESTRELAS
+            //COLOCA ALERT NA TELA
+            toggleAlert(`error`, `Nos de ao menos uma estrela`)
 
-    // FUNÇÃO RESPONSÁVEL POR RENDERIZAR AS BARRAS DE LEVEL
-    function renderLevel(quantity: number) {
-        //INICIA UM ARRAY VAZIO
-        const level = [];
+        }else if(inputMessage == ""){ //VERIFICA SE O USUÁRIO NÃO COLOCOU O COMENTÁRIO
+            //COLOCA ALERT NA TELA
+            toggleAlert(`error`, `Digite seu feedback`)
+        
+        }else{ //VERIFICA SE O FEEDBACK JÁ TEM ESTRELAS E COMENTÁRIO
+            instance.post('/feedback/upload', {
+                userID: userS.id,
+                message: mesg,
+                name: userS.name,
+                userImg: userS.img
+            })
+            .then(function (response){
+                console.log(response.data)
+                //LIMPA O ARRAY DE FEEDBACKS
+                setMessages([])
+                
+                //COLOCA O ALERT NA TELA
+                toggleAlert(`success`, `muito obrigada por nos avaliar`)
 
-        //FAZ UM LOOP PARA CLONAR O CONTEÚDO USANDO O NÚMERO PASSADO POR PARÂMETRO
-        for (let i = 0; i < quantity; i++) {
-            level.push(
-                <FaStar className='text-[#d9e64f] text-[20px]' />
-            );
+                //CHAMA A FUNÇÃO QUE VERIFICA SE O USUÁRIO JA MANDOU O FEEDBACK
+                checkIsFeedback()
+
+                //CHAMA A FUNÇÃO QUE PEGA OS FEEDBACKS
+                getFeedbacks()
+            })
+            .catch(function (error){
+                console.log(error)
+            })
         }
-        return level;
     }
-    
+
     //FUNÇÃO CHAMADA AO RECARREGAR A PÁGINA
     useEffect(() => {
         //CHAMA A FUNÇÃO DE VERIFICAÇÃO DE FEEDBACK ENVIADO
@@ -180,7 +191,7 @@ export default function Feedback() {
                 <MenuButton />
             </Navbar>
 
-            <div className={`${theme == 'light' ? 'bg-my-white' : 'bg-my-black'} overflow-y-scroll scrollbar scrollbar-track-transparent scrollbar-thumb-my-secondary w-[90%] sm:w-[60%] pt-[30px] h-full flex flex-col gap-[20px]`}>
+            <div className={`${theme == 'light' ? 'bg-my-white' : 'bg-my-black'} overflow-y-scroll scrollbar scrollbar-track-transparent scrollbar-thumb-my-secondary w-[90%] sm:w-[60%] pt-[30px] h-full pb-[10px] flex flex-col gap-[20px]`}>
                 
                 <div className={`mx-auto rounded-[6px] py-2 px-4 w-full ${theme == 'light' ? 'bg-my-secondary' : 'bg-my-quartenary'} opacity-[0.8]`}>
                     <p className={`${theme == 'light' ? 'text-my-black' : 'text-my-white'} text-left sm:text-center text-[14px]`}>
@@ -196,79 +207,66 @@ export default function Feedback() {
                         {msg.id !== userS.id ? (
                             <div
                                 key={Math.random() * 999999999999}   
-                                className={`self-start border-2 ${theme == 'light' ? 'border-my-gray' : 'border-my-gray-black' } p-1 max-w-[400px] rounded-[10px] rounded-es-[0px]`}
+                                className={`border-2 ${theme == 'light' ? 'border-my-gray' : 'border-my-gray-black' } p-1 w-full rounded-[10px]`}
                             >
-                                <div className={`flex flex-row justify-between items-center gap-2`}>
+                                <div className={`flex flex-row justify-between items-center gap-2 p-1`}>
                                     <div className={`flex flex-row items-center gap-1`}>
-                                        <img src={msg.img} className='w-7 h-7 rounded-[50%]' />
+                                        <img src={msg.img} className='w-6 h-6 rounded-[50%]' />
                                         <p className={`text-[#ff0062] font-black text-[16px]`}>
                                             {msg.user}
                                         </p>
                                     </div>
-                                    <p className={`flex flex-row ${theme == 'light' ? 'text-my-black' : 'text-my-white'}`}>
-                                        {msg.text} {renderLevel(1)}
+
+                                    <p className={`flex flex-row items-start gap-1 text-[14px] ${theme == 'light' ? 'text-my-black' : 'text-my-white'}`}>
+                                        {JSON.parse(msg.text).rating}
+                                        <FaStar className='text-[#e2ff3b] text-[12px]' />
                                     </p>
                                 </div>
+                                
+                                <p className={`${theme == 'light' ? 'text-my-black' : 'text-my-white'} my-1 mx-3`}>{JSON.parse(msg.text).message}</p>
                             </div> 
                         ):(
-                            <div className={`self-end border-2 border-my-gray p-1 max-w-[200px] rounded-[10px] rounded-ee-[0px]`}>
-                                <p className={`text-[16px] font-light flex flex-row  ${theme == 'light' ? 'text-my-black' : 'text-my-white'}`}>
+                            <div className={`border-2 ${theme == 'light' ? 'border-my-gray' : 'border-my-gray-black' } p-1 w-full rounded-[10px]`}>
+                                <div className={`flex flex-row justify-between items-center gap-2 p-1`}>
+                                    <div className={`flex flex-row items-center gap-1`}>
+                                        <img src={userS.img} className='w-6 h-6 rounded-[50%]' />
+                                        <p className={`text-[#347ede] font-black text-[16px]`}>
+                                            {userS.name}
+                                        </p>
+                                    </div>
+
+                                    <p className={`flex flex-row items-start gap-1 text-[14px] ${theme == 'light' ? 'text-my-black' : 'text-my-white'}`}>
+                                        {JSON.parse(msg.text).rating}
+                                        <FaStar className='text-[#e2ff3b] text-[12px]' />
+                                    </p>
+                                </div>
                                 
-                                    {/* CHAMA A FUNÇÃO QUE RENDERIZA OS LEVELS DEPENDENDO DA QUANTIDADE ESPECIFICADA */}
-                                    {renderLevel(Number(msg.text))}
-                                
-                                </p>
+                                <p className={`${theme == 'light' ? 'text-my-black' : 'text-my-white'} my-1 mx-3`}>{JSON.parse(msg.text).message}</p>
                             </div>
                         )}
                     </>
                 ))}
             </div>
 
+
             {isFeedback == false && (
-                <div className={`w-[95%] sm:w-[60%] flex flex-row flex-wrap gap-1 mt-2 mb-[100px] lg:mb-0`}>
-                    <div
-                        onClick={() => {
-                            handleSubmit('1')
-                        }}
-                        className={`relative flex items-center justify-center basis-[48.92%] sm:basis-[18.9%] text-center py-2 font-bold rounded-[6px] border-[1px] text-[20px] sm:text-[12px] gap-2 sm:gap-1 ${theme == 'light' ? 'border-my-black text-my-black' : 'border-my-white text-my-white' }`}>
-                        {/* CHAMA A FUNÇÃO QUE RENDERIZA OS LEVELS DEPENDENDO DA QUANTIDADE ESPECIFICADA */}
-                        {renderLevel(1)}
-                    </div>
+                <form
+                    className={`w-[95%] sm:w-[60%] py-2 px-1 flex flex-row flex-wrap gap-1 mt-2 mb-[100px] lg:mb-0`}
+                    onSubmit={(e) => {
+                        e.preventDefault()
+                        handleSubmit(JSON.stringify({ rating: selectedRating, message: inputMessage }))
+                    }}
+                >
+                    <StarRating onRatingSelect={handleRatingSelect} maxStars={5} />
                     
-                    <div
-                        onClick={() => {
-                            handleSubmit('2')
-                        }}
-                        className={`relative flex items-center justify-center basis-[48.92%] sm:basis-[18.9%] text-center py-2 font-bold rounded-[6px] border-[1px] text-[20px] sm:text-[12px] gap-2 sm:gap-1 ${theme == 'light' ? 'border-my-black text-my-black' : 'border-my-white text-my-white' }`}>
-                        {renderLevel(2)}
-                    </div>
+                    <input type="text" name="" id="" value={inputMessage} onChange={(e) => setInputMessage(e.target.value)} placeholder='Descreva aqui ' className={`bg-transparent flex-grow-[1] rounded-tl-[5px] rounded-bl-[5px] py-1 text-[14px] ps-2 outline-none border-[2px] 
+                        ${theme == 'light' ? 'border-my-secondary text-my-black' : 'border-my-quintenary text-my-white'}`}
+                    />
                     
-                    <div
-                        onClick={() => {
-                            handleSubmit('3')
-                        }}
-                        className={`relative flex items-center justify-center basis-[48.92%] sm:basis-[18.9%] text-center py-2 font-bold rounded-[6px] border-[1px] text-[20px] sm:text-[12px] gap-2 sm:gap-1 ${theme == 'light' ? 'border-my-black text-my-black' : 'border-my-white text-my-white' }`}>
-                        {renderLevel(3)}
-                    </div>
-                    
-                    <div
-                        onClick={() => {
-                            handleSubmit('4')
-                        }}
-                        className={`relative flex items-center justify-center basis-[48.92%] sm:basis-[18.9%] text-center py-2 font-bold rounded-[6px] border-[1px] text-[20px] sm:text-[12px] gap-2 sm:gap-1 ${theme == 'light' ? 'border-my-black text-my-black' : 'border-my-white text-my-white' }`}>
-                        {renderLevel(4)}
-                    </div>
-                    
-                    <div
-                        onClick={() => {
-                            handleSubmit('5')
-                        }}
-                        className={`relative flex items-center justify-center basis-[100%] sm:basis-[20%] text-center py-2 font-bold rounded-[6px] border-[1px] text-[20px] sm:text-[12px] gap-2 sm:gap-1 ${theme == 'light' ? 'border-my-black text-my-black' : 'border-my-white text-my-white' }`}>
-                        {/* CHAMA A FUNÇÃO QUE RENDERIZA OS LEVELS DEPENDENDO DA QUANTIDADE ESPECIFICADA */}
-                        {renderLevel(5)}
-                    </div>
-                    
-                </div>
+                    <input type="submit" value="enviar" className={`px-5 text-my-white rounded-tr-[5px] rounded-br-[5px] uppercase outline-none hover:bg-transparent border-[1px] border-transparent
+                        ${theme == 'light' ? 'bg-my-secondary hover:border-my-secondary hover:text-my-secondary' : 'bg-my-quintenary hover:border-my-quintenary hover:text-my-quintenary'}`}
+                    />
+                </form>
             )}
 
             <BottomNavigation />
