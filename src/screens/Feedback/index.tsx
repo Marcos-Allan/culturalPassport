@@ -82,9 +82,6 @@ export default function Feedback() {
 
     //CHECA SE O USUÁRIO JA MANDOU O FEEDBACK
     function checkIsFeedback() {
-        //LIMPA O ARRAY DE FEEDBACKS
-        setMessages([])
-
         instance.get('/feedback/feedbacks')
         .then(function (response){
             response.data.map((feedback:any) => {
@@ -102,7 +99,6 @@ export default function Feedback() {
 
     //FUNÇÃO RESPONSÁVEL POR PEGAR OS FEEDBACKS ENVIADOS PELOS USUÁRIOS
     function getFeedbacks(){
-        
         //LIMPA O ARRAY DE FEEDBACKS
         setMessages([])
 
@@ -126,24 +122,29 @@ export default function Feedback() {
 
     //SALVA OS FEEDBACKS NO BD
     const handleSubmit = (mesn:string) => {
-        //LIMPA O ARRAY DE FEEDBACKS
-        setMessages([])
+        //CHAMA A FUNÇÃO QUE VERIFICA SE O USUÁRIO JÁ MANDOU ALGUM FEEDBACK
+        checkIsFeedback()
 
-        instance.post('/feedback/upload', {
-            userID: userS.id,
-            message: mesn,
-            name: userS.name
-        })
-        .then(function (response){
-            console.log(response.data)
-            getFeedbacks()
-        })
-        .catch(function (error){
-            console.log(error)
-        })
+        if(isFeedback == false){
+            //LIMPA O ARRAY DE FEEDBACKS
+            setMessages([])
 
-        //LIMPA O CAMPO DE MENSAGEM
-        setNewMessage('');
+            instance.post('/feedback/upload', {
+                userID: userS.id,
+                message: mesn,
+                name: userS.name
+            })
+            .then(function (response){
+                console.log(response.data)
+                getFeedbacks()
+            })
+            .catch(function (error){
+                console.log(error)
+            })
+
+            //LIMPA O CAMPO DE MENSAGEM
+            setNewMessage('');
+        }
     }
 
     // FUNÇÃO RESPONSÁVEL POR RENDERIZAR AS BARRAS DE LEVEL
@@ -203,7 +204,7 @@ export default function Feedback() {
                                 key={Math.random() * 999999999999}   
                                 className={`self-start border-2 ${theme == 'light' ? 'border-my-gray' : 'border-my-gray-black' } p-1 max-w-[200px] rounded-[10px] rounded-es-[0px]`}
                             >
-                                <span className={`text-[#8939d8] font-black text-[14px]`}>{msg.user}</span>
+                                <span className={`text-[#f7884c] font-black text-[14px]`}>{msg.user}</span>
                                 <p className={`flex flex-row text-[16px] font-light ${theme == 'light' ? 'text-my-black' : 'text-my-white'} pt-1`}>
 
                                     {/* CHAMA A FUNÇÃO QUE RENDERIZA OS LEVELS DEPENDENDO DA QUANTIDADE ESPECIFICADA */}
