@@ -160,10 +160,10 @@ export default function Feedback() {
     }
 
     //FUNÇÃO CHAMADA AO RECARREGAR A PÁGINA
-    useEffect(() => {
-        //CHAMA A FUNÇÃO DE SALVAR OS FEEDBACKS NO BD
-        handleSubmit()
-    },[newMessage])
+    // useEffect(() => {
+    //     //CHAMA A FUNÇÃO DE SALVAR OS FEEDBACKS NO BD
+    //     handleSubmit()
+    // },[newMessage])
 
     //FUNÇÃO CHAMADA AO RECARREGAR A PÁGINA
     useEffect(() => {
@@ -229,6 +229,7 @@ export default function Feedback() {
                     <div
                         onClick={() => {
                             setNewMessage('1')
+                            handleSubmit()
                         }}
                         className={`relative flex items-center justify-center basis-[48.92%] sm:basis-[18.9%] text-center py-2 font-bold rounded-[6px] border-[1px] text-[20px] sm:text-[12px] gap-2 sm:gap-1 ${theme == 'light' ? 'border-my-black text-my-black' : 'border-my-white text-my-white' }`}>
                         {/* CHAMA A FUNÇÃO QUE RENDERIZA OS LEVELS DEPENDENDO DA QUANTIDADE ESPECIFICADA */}
@@ -238,6 +239,7 @@ export default function Feedback() {
                     <div
                         onClick={() => {
                             setNewMessage('2')
+                            handleSubmit()
                         }}
                         className={`relative flex items-center justify-center basis-[48.92%] sm:basis-[18.9%] text-center py-2 font-bold rounded-[6px] border-[1px] text-[20px] sm:text-[12px] gap-2 sm:gap-1 ${theme == 'light' ? 'border-my-black text-my-black' : 'border-my-white text-my-white' }`}>
                         {renderLevel(2)}
@@ -246,6 +248,7 @@ export default function Feedback() {
                     <div
                         onClick={() => {
                             setNewMessage('3')
+                            handleSubmit()
                         }}
                         className={`relative flex items-center justify-center basis-[48.92%] sm:basis-[18.9%] text-center py-2 font-bold rounded-[6px] border-[1px] text-[20px] sm:text-[12px] gap-2 sm:gap-1 ${theme == 'light' ? 'border-my-black text-my-black' : 'border-my-white text-my-white' }`}>
                         {renderLevel(3)}
@@ -254,6 +257,7 @@ export default function Feedback() {
                     <div
                         onClick={() => {
                             setNewMessage('4')
+                            handleSubmit()
                         }}
                         className={`relative flex items-center justify-center basis-[48.92%] sm:basis-[18.9%] text-center py-2 font-bold rounded-[6px] border-[1px] text-[20px] sm:text-[12px] gap-2 sm:gap-1 ${theme == 'light' ? 'border-my-black text-my-black' : 'border-my-white text-my-white' }`}>
                         {renderLevel(4)}
@@ -262,6 +266,7 @@ export default function Feedback() {
                     <div
                         onClick={() => {
                             setNewMessage('5')
+                            handleSubmit()
                         }}
                         className={`relative flex items-center justify-center basis-[100%] sm:basis-[20%] text-center py-2 font-bold rounded-[6px] border-[1px] text-[20px] sm:text-[12px] gap-2 sm:gap-1 ${theme == 'light' ? 'border-my-black text-my-black' : 'border-my-white text-my-white' }`}>
                         {/* CHAMA A FUNÇÃO QUE RENDERIZA OS LEVELS DEPENDENDO DA QUANTIDADE ESPECIFICADA */}
