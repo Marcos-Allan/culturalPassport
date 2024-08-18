@@ -84,6 +84,9 @@ export default function Feedback() {
 
     //CHECA SE O USUÁRIO JA MANDOU O FEEDBACK
     function checkIsFeedback() {
+        //LIMPA O ARRAY DE FEEDBACKS
+        setMessages([])
+
         instance.get('/feedback/feedbacks')
         .then(function (response){
             response.data.map((feedback:any) => {
@@ -209,6 +212,20 @@ export default function Feedback() {
         }
     }
 
+    // FUNÇÃO RESPONSÁVEL POR RENDERIZAR AS BARRAS DE LEVEL
+    function renderLevel(quantity: number) {
+        //INICIA UM ARRAY VAZIO
+        const level = [];
+
+        //FAZ UM LOOP PARA CLONAR O CONTEÚDO USANDO O NÚMERO PASSADO POR PARÂMETRO
+        for (let i = 0; i < quantity; i++) {
+            level.push(
+                <FaStar className='text-[#d9e64f] text-[20px]' />
+            );
+        }
+        return level;
+    }
+
     //FUNÇÃO CHAMADA AO RECARREGAR A PÁGINA
     useEffect(() => {
         //CHAMA A FUNÇÃO DE SALVAR OS FEEDBACKS NO BD
@@ -245,86 +262,28 @@ export default function Feedback() {
                     </p>
                 </div>
 
-                {messages && messages.map((msg) => (
+                {messages.length > 0 && messages.map((msg) => (
                     <>
                         {msg.id !== userS.id ? (
                             <div
                                 key={Math.random() * 999999999999}   
                                 className={`self-start border-2 ${theme == 'light' ? 'border-my-gray' : 'border-my-gray-black' } p-1 max-w-[200px] rounded-[10px] rounded-es-[0px]`}
                             >
-                                <span className={`text-[#3d4efe] font-black text-[14px]`}>{msg.user}</span>
+                                <span className={`text-[#75d76a] font-black text-[14px]`}>{msg.user}</span>
                                 <p className={`flex flex-row text-[16px] font-light ${theme == 'light' ? 'text-my-black' : 'text-my-white'} pt-1`}>
-                                    {Number(msg.text) == 1 && (
-                                        <FaStar className='text-[#d9e64f] text-[20px]' />
-                                    )}
-                                    {Number(msg.text) == 2 && (
-                                        <>
-                                            <FaStar className='text-[#d9e64f] text-[20px]' />
-                                            <FaStar className='text-[#d9e64f] text-[20px]' />
-                                        </>
-                                    )}
-                                    {Number(msg.text) == 3 && (
-                                        <>
-                                            <FaStar className='text-[#d9e64f] text-[20px]' />
-                                            <FaStar className='text-[#d9e64f] text-[20px]' />
-                                            <FaStar className='text-[#d9e64f] text-[20px]' />
-                                        </>
-                                    )}
-                                    {Number(msg.text) == 4 && (
-                                        <>
-                                            <FaStar className='text-[#d9e64f] text-[20px]' />
-                                            <FaStar className='text-[#d9e64f] text-[20px]' />
-                                            <FaStar className='text-[#d9e64f] text-[20px]' />
-                                            <FaStar className='text-[#d9e64f] text-[20px]' />
-                                        </>
-                                    )}
-                                    {Number(msg.text) == 5 && (
-                                        <>
-                                            <FaStar className='text-[#d9e64f] text-[20px]' />
-                                            <FaStar className='text-[#d9e64f] text-[20px]' />
-                                            <FaStar className='text-[#d9e64f] text-[20px]' />
-                                            <FaStar className='text-[#d9e64f] text-[20px]' />
-                                            <FaStar className='text-[#d9e64f] text-[20px]' />
-                                        </>
-                                    )}
+
+                                    {/* CHAMA A FUNÇÃO QUE RENDERIZA OS LEVELS DEPENDENDO DA QUANTIDADE ESPECIFICADA */}
+                                    {renderLevel(Number(msg.text))}
+
                                 </p>
                             </div> 
                         ):(
                             <div className={`self-end border-2 border-my-gray p-1 max-w-[200px] rounded-[10px] rounded-ee-[0px]`}>
                                 <p className={`text-[16px] font-light flex flex-row  ${theme == 'light' ? 'text-my-black' : 'text-my-white'}`}>
-                                {Number(msg.text) == 1 && (
-                                        <FaStar className='text-[#d9e64f] text-[20px]' />
-                                    )}
-                                    {Number(msg.text) == 2 && (
-                                        <>
-                                            <FaStar className='text-[#d9e64f] text-[20px]' />
-                                            <FaStar className='text-[#d9e64f] text-[20px]' />
-                                        </>
-                                    )}
-                                    {Number(msg.text) == 3 && (
-                                        <>
-                                            <FaStar className='text-[#d9e64f] text-[20px]' />
-                                            <FaStar className='text-[#d9e64f] text-[20px]' />
-                                            <FaStar className='text-[#d9e64f] text-[20px]' />
-                                        </>
-                                    )}
-                                    {Number(msg.text) == 4 && (
-                                        <>
-                                            <FaStar className='text-[#d9e64f] text-[20px]' />
-                                            <FaStar className='text-[#d9e64f] text-[20px]' />
-                                            <FaStar className='text-[#d9e64f] text-[20px]' />
-                                            <FaStar className='text-[#d9e64f] text-[20px]' />
-                                        </>
-                                    )}
-                                    {Number(msg.text) == 5 && (
-                                        <>
-                                            <FaStar className='text-[#d9e64f] text-[20px]' />
-                                            <FaStar className='text-[#d9e64f] text-[20px]' />
-                                            <FaStar className='text-[#d9e64f] text-[20px]' />
-                                            <FaStar className='text-[#d9e64f] text-[20px]' />
-                                            <FaStar className='text-[#d9e64f] text-[20px]' />
-                                        </>
-                                    )}
+                                
+                                    {/* CHAMA A FUNÇÃO QUE RENDERIZA OS LEVELS DEPENDENDO DA QUANTIDADE ESPECIFICADA */}
+                                    {renderLevel(Number(msg.text))}
+                                
                                 </p>
                             </div>
                         )}
@@ -339,7 +298,8 @@ export default function Feedback() {
                             setNewMessage('1')
                         }}
                         className={`relative flex items-center justify-center basis-[48.92%] sm:basis-[18.9%] text-center py-2 font-bold rounded-[6px] border-[1px] text-[20px] sm:text-[12px] gap-2 sm:gap-1 ${theme == 'light' ? 'border-my-black text-my-black' : 'border-my-white text-my-white' }`}>
-                        <FaStar className='text-[#d9e64f]' />
+                        {/* CHAMA A FUNÇÃO QUE RENDERIZA OS LEVELS DEPENDENDO DA QUANTIDADE ESPECIFICADA */}
+                        {renderLevel(1)}
                     </div>
                     
                     <div
@@ -347,8 +307,7 @@ export default function Feedback() {
                             setNewMessage('2')
                         }}
                         className={`relative flex items-center justify-center basis-[48.92%] sm:basis-[18.9%] text-center py-2 font-bold rounded-[6px] border-[1px] text-[20px] sm:text-[12px] gap-2 sm:gap-1 ${theme == 'light' ? 'border-my-black text-my-black' : 'border-my-white text-my-white' }`}>
-                        <FaStar className='text-[#d9e64f]' />
-                        <FaStar className='text-[#d9e64f]' />
+                        {renderLevel(2)}
                     </div>
                     
                     <div
@@ -356,9 +315,7 @@ export default function Feedback() {
                             setNewMessage('3')
                         }}
                         className={`relative flex items-center justify-center basis-[48.92%] sm:basis-[18.9%] text-center py-2 font-bold rounded-[6px] border-[1px] text-[20px] sm:text-[12px] gap-2 sm:gap-1 ${theme == 'light' ? 'border-my-black text-my-black' : 'border-my-white text-my-white' }`}>
-                        <FaStar className='text-[#d9e64f]' />
-                        <FaStar className='text-[#d9e64f]' />
-                        <FaStar className='text-[#d9e64f]' />
+                        {renderLevel(3)}
                     </div>
                     
                     <div
@@ -366,10 +323,7 @@ export default function Feedback() {
                             setNewMessage('4')
                         }}
                         className={`relative flex items-center justify-center basis-[48.92%] sm:basis-[18.9%] text-center py-2 font-bold rounded-[6px] border-[1px] text-[20px] sm:text-[12px] gap-2 sm:gap-1 ${theme == 'light' ? 'border-my-black text-my-black' : 'border-my-white text-my-white' }`}>
-                        <FaStar className='text-[#d9e64f]' />
-                        <FaStar className='text-[#d9e64f]' />
-                        <FaStar className='text-[#d9e64f]' />
-                        <FaStar className='text-[#d9e64f]' />
+                        {renderLevel(4)}
                     </div>
                     
                     <div
@@ -377,11 +331,8 @@ export default function Feedback() {
                             setNewMessage('5')
                         }}
                         className={`relative flex items-center justify-center basis-[100%] sm:basis-[20%] text-center py-2 font-bold rounded-[6px] border-[1px] text-[20px] sm:text-[12px] gap-2 sm:gap-1 ${theme == 'light' ? 'border-my-black text-my-black' : 'border-my-white text-my-white' }`}>
-                        <FaStar className='text-[#d9e64f]' />
-                        <FaStar className='text-[#d9e64f]' />
-                        <FaStar className='text-[#d9e64f]' />
-                        <FaStar className='text-[#d9e64f]' />
-                        <FaStar className='text-[#d9e64f]' />
+                        {/* CHAMA A FUNÇÃO QUE RENDERIZA OS LEVELS DEPENDENDO DA QUANTIDADE ESPECIFICADA */}
+                        {renderLevel(5)}
                     </div>
                     
                 </div>

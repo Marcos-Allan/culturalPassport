@@ -58,17 +58,36 @@ export default function ConquestCard(props: Props) {
         
         console.log(userS)
 
-        // Verifica se userS e userS.simulations estão definidos
+        //VERIFICA SE O USUÁRIO E AS CONQUISTAS DELE JÁ FORAM CARREGADOS
         if (!userS || !userS.simulations) {
             console.error("Dados de usuário ou simulações não estão disponíveis");
             return false;
         }
 
-        // Verifica se a conquista existe
+        //VERIFICA SE A CONQUISTA EXISTE NO BD
         const hasAchievement = userS.simulations.some((item: any) => item.name === param);
         console.log(`Verificando conquista: ${param} - Resultado: ${hasAchievement}`);
+        
+        //RETORNA A CONQUISTA PARA PODER COLOCAR NO BD DO USUÁRIO
         return hasAchievement;
     };
+
+    // FUNÇÃO RESPONSÁVEL POR RENDERIZAR AS BARRAS DE LEVEL
+    function renderLevel(quantity: number) {
+        //INICIA UM ARRAY VAZIO
+        const level = [];
+
+        //FAZ UM LOOP PARA CLONAR O CONTEÚDO USANDO O NÚMERO PASSADO POR PARÂMETRO
+        for (let i = 0; i < quantity; i++) {
+            level.push(
+                <div
+                    key={i}
+                    className="h-[10px] flex-grow-[1] rounded-[2px] bg-my-white-opacity"
+                />
+            );
+        }
+        return level;
+    }
 
     // useEffect para monitorar mudanças em userS e props.title
     useEffect(() => {
@@ -141,18 +160,4 @@ export default function ConquestCard(props: Props) {
             </div>
         </div>
     );
-
-    // FUNÇÃO RESPONSÁVEL POR RENDERIZAR AS BARRAS DE LEVEL
-    function renderLevel(quantity: number) {
-        const level = [];
-        for (let i = 0; i < quantity; i++) {
-            level.push(
-                <div
-                    key={i}
-                    className="h-[10px] flex-grow-[1] rounded-[2px] bg-my-white-opacity"
-                />
-            );
-        }
-        return level;
-    }
 }
