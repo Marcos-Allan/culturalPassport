@@ -125,17 +125,18 @@ export default function Feedback() {
     }
 
     //SALVA OS FEEDBACKS NO BD
-    const handleSubmit = () => {
+    const handleSubmit = (mesn:string) => {
         //LIMPA O ARRAY DE FEEDBACKS
         setMessages([])
 
         instance.post('/feedback/upload', {
             userID: userS.id,
-            message: newMessage,
+            message: mesn,
             name: userS.name
         })
         .then(function (response){
             console.log(response.data)
+            getFeedbacks()
         })
         .catch(function (error){
             console.log(error)
@@ -228,8 +229,7 @@ export default function Feedback() {
                 <div className={`w-[95%] sm:w-[60%] flex flex-row flex-wrap gap-1 mt-2 mb-[100px] lg:mb-0`}>
                     <div
                         onClick={() => {
-                            setNewMessage('1')
-                            handleSubmit()
+                            handleSubmit('1')
                         }}
                         className={`relative flex items-center justify-center basis-[48.92%] sm:basis-[18.9%] text-center py-2 font-bold rounded-[6px] border-[1px] text-[20px] sm:text-[12px] gap-2 sm:gap-1 ${theme == 'light' ? 'border-my-black text-my-black' : 'border-my-white text-my-white' }`}>
                         {/* CHAMA A FUNÇÃO QUE RENDERIZA OS LEVELS DEPENDENDO DA QUANTIDADE ESPECIFICADA */}
@@ -238,8 +238,7 @@ export default function Feedback() {
                     
                     <div
                         onClick={() => {
-                            setNewMessage('2')
-                            handleSubmit()
+                            handleSubmit('2')
                         }}
                         className={`relative flex items-center justify-center basis-[48.92%] sm:basis-[18.9%] text-center py-2 font-bold rounded-[6px] border-[1px] text-[20px] sm:text-[12px] gap-2 sm:gap-1 ${theme == 'light' ? 'border-my-black text-my-black' : 'border-my-white text-my-white' }`}>
                         {renderLevel(2)}
@@ -247,8 +246,7 @@ export default function Feedback() {
                     
                     <div
                         onClick={() => {
-                            setNewMessage('3')
-                            handleSubmit()
+                            handleSubmit('3')
                         }}
                         className={`relative flex items-center justify-center basis-[48.92%] sm:basis-[18.9%] text-center py-2 font-bold rounded-[6px] border-[1px] text-[20px] sm:text-[12px] gap-2 sm:gap-1 ${theme == 'light' ? 'border-my-black text-my-black' : 'border-my-white text-my-white' }`}>
                         {renderLevel(3)}
@@ -256,8 +254,7 @@ export default function Feedback() {
                     
                     <div
                         onClick={() => {
-                            setNewMessage('4')
-                            handleSubmit()
+                            handleSubmit('4')
                         }}
                         className={`relative flex items-center justify-center basis-[48.92%] sm:basis-[18.9%] text-center py-2 font-bold rounded-[6px] border-[1px] text-[20px] sm:text-[12px] gap-2 sm:gap-1 ${theme == 'light' ? 'border-my-black text-my-black' : 'border-my-white text-my-white' }`}>
                         {renderLevel(4)}
@@ -265,8 +262,7 @@ export default function Feedback() {
                     
                     <div
                         onClick={() => {
-                            setNewMessage('5')
-                            handleSubmit()
+                            handleSubmit('5')
                         }}
                         className={`relative flex items-center justify-center basis-[100%] sm:basis-[20%] text-center py-2 font-bold rounded-[6px] border-[1px] text-[20px] sm:text-[12px] gap-2 sm:gap-1 ${theme == 'light' ? 'border-my-black text-my-black' : 'border-my-white text-my-white' }`}>
                         {/* CHAMA A FUNÇÃO QUE RENDERIZA OS LEVELS DEPENDENDO DA QUANTIDADE ESPECIFICADA */}
