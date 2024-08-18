@@ -53,6 +53,7 @@ interface Msg{
     text: string,
     user: string,
     id: number,
+    img: string,
 }
 
 export default function Feedback() {
@@ -108,7 +109,8 @@ export default function Feedback() {
                 setMessages((prevMessages:any) => [...prevMessages, {
                     user: feedback.name,
                     text: feedback.message,
-                    id: feedback.userID
+                    id: feedback.userID,
+                    img: feedback.userImg
                 }])
             })
         })
@@ -123,7 +125,8 @@ export default function Feedback() {
         instance.post('/feedback/upload', {
             userID: userS.id,
             message: mesg,
-            name: userS.name
+            name: userS.name,
+            userImg: userS.img
         })
         .then(function (response){
             console.log(response.data)
@@ -193,15 +196,19 @@ export default function Feedback() {
                         {msg.id !== userS.id ? (
                             <div
                                 key={Math.random() * 999999999999}   
-                                className={`self-start border-2 ${theme == 'light' ? 'border-my-gray' : 'border-my-gray-black' } p-1 max-w-[200px] rounded-[10px] rounded-es-[0px]`}
+                                className={`self-start border-2 ${theme == 'light' ? 'border-my-gray' : 'border-my-gray-black' } p-1 max-w-[400px] rounded-[10px] rounded-es-[0px]`}
                             >
-                                <span className={`text-[#ff0062] font-black text-[14px]`}>{msg.user}</span>
-                                <p className={`flex flex-row text-[16px] font-light ${theme == 'light' ? 'text-my-black' : 'text-my-white'} pt-1`}>
-
-                                    {/* CHAMA A FUNÇÃO QUE RENDERIZA OS LEVELS DEPENDENDO DA QUANTIDADE ESPECIFICADA */}
-                                    {renderLevel(Number(msg.text))}
-
-                                </p>
+                                <div className={`flex flex-row justify-between items-center gap-2`}>
+                                    <div className={`flex flex-row items-center gap-1`}>
+                                        <img src={msg.img} className='w-7 h-7 rounded-[50%]' />
+                                        <p className={`text-[#ff0062] font-black text-[16px]`}>
+                                            {msg.user}
+                                        </p>
+                                    </div>
+                                    <p className={`flex flex-row ${theme == 'light' ? 'text-my-black' : 'text-my-white'}`}>
+                                        {msg.text} {renderLevel(1)}
+                                    </p>
+                                </div>
                             </div> 
                         ):(
                             <div className={`self-end border-2 border-my-gray p-1 max-w-[200px] rounded-[10px] rounded-ee-[0px]`}>
