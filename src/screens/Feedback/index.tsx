@@ -203,7 +203,7 @@ export default function Feedback() {
                                 key={Math.random() * 999999999999}   
                                 className={`self-start border-2 ${theme == 'light' ? 'border-my-gray' : 'border-my-gray-black' } p-1 max-w-[200px] rounded-[10px] rounded-es-[0px]`}
                             >
-                                <span className={`text-[#75d76a] font-black text-[14px]`}>{msg.user}</span>
+                                <span className={`text-[#8939d8] font-black text-[14px]`}>{msg.user}</span>
                                 <p className={`flex flex-row text-[16px] font-light ${theme == 'light' ? 'text-my-black' : 'text-my-white'} pt-1`}>
 
                                     {/* CHAMA A FUNÇÃO QUE RENDERIZA OS LEVELS DEPENDENDO DA QUANTIDADE ESPECIFICADA */}
