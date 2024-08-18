@@ -141,9 +141,6 @@ export default function Feedback() {
             .catch(function (error){
                 console.log(error)
             })
-
-            //LIMPA O CAMPO DE MENSAGEM
-            setNewMessage('');
         }
     }
 
