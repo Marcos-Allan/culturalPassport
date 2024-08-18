@@ -166,6 +166,9 @@ export default function Feedback() {
 
     //FUNÇÃO CHAMADA AO RECARREGAR A PÁGINA
     useEffect(() => {
+        //LIMPA O ARRAY DE FEEDBACKS
+        setMessages([])
+
         //CHAMA A FUNÇÃO DE VERIFICAÇÃO DE FEEDBACK ENVIADO
         checkIsFeedback()
         
@@ -183,7 +186,7 @@ export default function Feedback() {
                 <MenuButton />
             </Navbar>
 
-            <div className={`${theme == 'light' ? 'bg-my-white' : 'bg-my-black'} overflow-y-scroll scrollbar scrollbar-track-transparent scrollbar-thumb-my-secondary w-[90%] sm:w-[60%] pt-[30px] h-full flex flex-col gap-[20px]`}>
+            <div className={`${theme == 'light' ? 'bg-my-white' : 'bg-my-black'} overflow-y-scroll scrollbar scrollbar-track-transparent scrollbar-thumb-my-secondary w-[90%] sm:w-[60%] pt-[30px] h-full mb-[100px]  bg-red-500 flex flex-col gap-[20px]`}>
                 
                 <div className={`mx-auto rounded-[6px] py-2 px-4 w-full ${theme == 'light' ? 'bg-my-secondary' : 'bg-my-quartenary'} opacity-[0.8]`}>
                     <p className={`${theme == 'light' ? 'text-my-black' : 'text-my-white'} text-left sm:text-center text-[14px]`}>
