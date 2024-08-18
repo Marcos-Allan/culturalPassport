@@ -68,7 +68,6 @@ export default function Feedback() {
 
     //UTILIZAÇÃO DO HOOK useState
     const [messages, setMessages] = useState<Msg[]>([]);
-    const [newMessage, setNewMessage] = useState<string>('');
     const [isFeedback, setIsFeedback] = useState<boolean>(false)
 
     //FUNÇÃO CHAMADA AO RECARREGAR A PÁGINA
@@ -99,8 +98,6 @@ export default function Feedback() {
 
     //FUNÇÃO RESPONSÁVEL POR PEGAR OS FEEDBACKS ENVIADOS PELOS USUÁRIOS
     function getFeedbacks(){
-        //LIMPA O ARRAY DE FEEDBACKS
-        setMessages([])
 
         instance.get('/feedback/feedbacks')
         .then(function (response){
@@ -121,27 +118,27 @@ export default function Feedback() {
     }
 
     //SALVA OS FEEDBACKS NO BD
-    const handleSubmit = () => {
-        //CHAMA A FUNÇÃO QUE VERIFICA SE O USUÁRIO JÁ MANDOU ALGUM FEEDBACK
-        checkIsFeedback()
+    const handleSubmit = (mesg:string) => {
 
-        if(isFeedback == false){
+        instance.post('/feedback/upload', {
+            userID: userS.id,
+            message: mesg,
+            name: userS.name
+        })
+        .then(function (response){
+            console.log(response.data)
             //LIMPA O ARRAY DE FEEDBACKS
             setMessages([])
+            
+            //CHAMA A FUNÇÃO QUE VERIFICA SE O USUÁRIO JA MANDOU O FEEDBACK
+            checkIsFeedback()
 
-            instance.post('/feedback/upload', {
-                userID: userS.id,
-                message: newMessage,
-                name: userS.name
-            })
-            .then(function (response){
-                console.log(response.data)
-                getFeedbacks()
-            })
-            .catch(function (error){
-                console.log(error)
-            })
-        }
+            //CHAMA A FUNÇÃO QUE PEGA OS FEEDBACKS
+            getFeedbacks()
+        })
+        .catch(function (error){
+            console.log(error)
+        })
     }
 
     // FUNÇÃO RESPONSÁVEL POR RENDERIZAR AS BARRAS DE LEVEL
@@ -157,24 +154,18 @@ export default function Feedback() {
         }
         return level;
     }
-
+    
     //FUNÇÃO CHAMADA AO RECARREGAR A PÁGINA
     useEffect(() => {
-        //CHAMA A FUNÇÃO DE SALVAR OS FEEDBACKS NO BD
-        handleSubmit()
-    },[newMessage])
-
-    //FUNÇÃO CHAMADA AO RECARREGAR A PÁGINA
-    useEffect(() => {
-        //LIMPA O ARRAY DE FEEDBACKS
-        setMessages([])
-
         //CHAMA A FUNÇÃO DE VERIFICAÇÃO DE FEEDBACK ENVIADO
         checkIsFeedback()
+
+        //LIMPA O ARRAY DE FEEDBACKS
+        setMessages([])
         
         //CHAMA A FUNÇÃO DE LISTAR OS FEEDBACKS ENVIADOS
         getFeedbacks()
-    },[newMessage])
+    },[])
 
     return(
         <>
@@ -186,7 +177,7 @@ export default function Feedback() {
                 <MenuButton />
             </Navbar>
 
-            <div className={`${theme == 'light' ? 'bg-my-white' : 'bg-my-black'} overflow-y-scroll scrollbar scrollbar-track-transparent scrollbar-thumb-my-secondary w-[90%] sm:w-[60%] pt-[30px] h-full mb-[100px]  bg-red-500 flex flex-col gap-[20px]`}>
+            <div className={`${theme == 'light' ? 'bg-my-white' : 'bg-my-black'} overflow-y-scroll scrollbar scrollbar-track-transparent scrollbar-thumb-my-secondary w-[90%] sm:w-[60%] pt-[30px] h-full flex flex-col gap-[20px]`}>
                 
                 <div className={`mx-auto rounded-[6px] py-2 px-4 w-full ${theme == 'light' ? 'bg-my-secondary' : 'bg-my-quartenary'} opacity-[0.8]`}>
                     <p className={`${theme == 'light' ? 'text-my-black' : 'text-my-white'} text-left sm:text-center text-[14px]`}>
@@ -204,7 +195,7 @@ export default function Feedback() {
                                 key={Math.random() * 999999999999}   
                                 className={`self-start border-2 ${theme == 'light' ? 'border-my-gray' : 'border-my-gray-black' } p-1 max-w-[200px] rounded-[10px] rounded-es-[0px]`}
                             >
-                                <span className={`text-[#0066ff] font-black text-[14px]`}>{msg.user}</span>
+                                <span className={`text-[#ff0062] font-black text-[14px]`}>{msg.user}</span>
                                 <p className={`flex flex-row text-[16px] font-light ${theme == 'light' ? 'text-my-black' : 'text-my-white'} pt-1`}>
 
                                     {/* CHAMA A FUNÇÃO QUE RENDERIZA OS LEVELS DEPENDENDO DA QUANTIDADE ESPECIFICADA */}
@@ -230,7 +221,7 @@ export default function Feedback() {
                 <div className={`w-[95%] sm:w-[60%] flex flex-row flex-wrap gap-1 mt-2 mb-[100px] lg:mb-0`}>
                     <div
                         onClick={() => {
-                            setNewMessage('1')
+                            handleSubmit('1')
                         }}
                         className={`relative flex items-center justify-center basis-[48.92%] sm:basis-[18.9%] text-center py-2 font-bold rounded-[6px] border-[1px] text-[20px] sm:text-[12px] gap-2 sm:gap-1 ${theme == 'light' ? 'border-my-black text-my-black' : 'border-my-white text-my-white' }`}>
                         {/* CHAMA A FUNÇÃO QUE RENDERIZA OS LEVELS DEPENDENDO DA QUANTIDADE ESPECIFICADA */}
@@ -239,7 +230,7 @@ export default function Feedback() {
                     
                     <div
                         onClick={() => {
-                            setNewMessage('2')
+                            handleSubmit('2')
                         }}
                         className={`relative flex items-center justify-center basis-[48.92%] sm:basis-[18.9%] text-center py-2 font-bold rounded-[6px] border-[1px] text-[20px] sm:text-[12px] gap-2 sm:gap-1 ${theme == 'light' ? 'border-my-black text-my-black' : 'border-my-white text-my-white' }`}>
                         {renderLevel(2)}
@@ -247,7 +238,7 @@ export default function Feedback() {
                     
                     <div
                         onClick={() => {
-                            setNewMessage('3')
+                            handleSubmit('3')
                         }}
                         className={`relative flex items-center justify-center basis-[48.92%] sm:basis-[18.9%] text-center py-2 font-bold rounded-[6px] border-[1px] text-[20px] sm:text-[12px] gap-2 sm:gap-1 ${theme == 'light' ? 'border-my-black text-my-black' : 'border-my-white text-my-white' }`}>
                         {renderLevel(3)}
@@ -255,7 +246,7 @@ export default function Feedback() {
                     
                     <div
                         onClick={() => {
-                            setNewMessage('4')
+                            handleSubmit('4')
                         }}
                         className={`relative flex items-center justify-center basis-[48.92%] sm:basis-[18.9%] text-center py-2 font-bold rounded-[6px] border-[1px] text-[20px] sm:text-[12px] gap-2 sm:gap-1 ${theme == 'light' ? 'border-my-black text-my-black' : 'border-my-white text-my-white' }`}>
                         {renderLevel(4)}
@@ -263,7 +254,7 @@ export default function Feedback() {
                     
                     <div
                         onClick={() => {
-                            setNewMessage('5')
+                            handleSubmit('5')
                         }}
                         className={`relative flex items-center justify-center basis-[100%] sm:basis-[20%] text-center py-2 font-bold rounded-[6px] border-[1px] text-[20px] sm:text-[12px] gap-2 sm:gap-1 ${theme == 'light' ? 'border-my-black text-my-black' : 'border-my-white text-my-white' }`}>
                         {/* CHAMA A FUNÇÃO QUE RENDERIZA OS LEVELS DEPENDENDO DA QUANTIDADE ESPECIFICADA */}
