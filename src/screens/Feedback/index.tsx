@@ -67,9 +67,7 @@ export default function Feedback() {
     const { userS, theme } = states
 
     //UTILIZAÇÃO DO HOOK useState
-    const [yourId, setYourId] = useState<number>()
     const [messages, setMessages] = useState<Msg[]>([]);
-    const [webSocket, setWebSocket] = useState<any>(null);
     const [newMessage, setNewMessage] = useState<string>('');
     const [isFeedback, setIsFeedback] = useState<boolean>(false)
 
@@ -102,12 +100,6 @@ export default function Feedback() {
         })
     }
 
-    //FUNÇÃO CHAMADA AO RECARREGAR A PÁGINA
-    useEffect(() => {
-        //SETA U ID UNICO PARA O USUÁRIO PODER TROCAR MENSAGEM
-        setYourId(Math.floor(Math.random() * 9999))
-    },[])
-
     //FUNÇÃO RESPONSÁVEL POR PEGAR OS FEEDBACKS ENVIADOS PELOS USUÁRIOS
     function getFeedbacks(){
         
@@ -132,84 +124,25 @@ export default function Feedback() {
         })
     }
 
-    //FUNÇÃO CHAMADA AO RECARREGAR A PÁGINA
-    useEffect(() => {
-        //LIMPA O ARRAY DE FEEDBACKS
-        setMessages([])
-
-        //INICIA A  CONEXÃO COM WebSocket
-        const ws = new WebSocket('wss://backendculturalpassport-1.onrender.com');
-      
-        //ESCUTA O EVENTO DE ENTRADA DO USUÁRIO NO SERVIDOR WebSocket
-        ws.addEventListener('open', (event) => {
-            console.log(event)
-            console.log('Conectado ao servidor WebSocket');
-            setWebSocket(ws)
-        });
-      
-        //ESCUTA O EVENTO DE RECEBER MENSAGEM DO USUÁRIO NO SERVIDOR WebSocket
-        ws.addEventListener('message', (event) => {
-          const data = event.data;
-
-          if (data instanceof Blob) {
-            //INICIA UMA VARIÁVEL COMO UMA NOVA INSTÂNCIA DE LEITOR DE ARQUIVO
-            const reader = new FileReader();
-        
-            //LÊ O ARQUIVO RECEBIDO DO BACKEND AO CAARREGAR O LEITOR
-            reader.onload = function () {
-                
-                //FINALIZA A LEITURA E RETORNA OS DADOS NA VARIAVEL
-                const textData = reader.result;
-
-                //ESCREVE NO CONSOLE OS DADOS
-                console.log('Dados lidos do Blob:',textData);
-
-                //ESCREEV NO CONSOLE O USUÁRIO E A MENSAGEM ENVIADA POR ELE
-                console.log(`${JSON.parse(textData as any).user}: ${JSON.parse(textData as any).text}`);
-              
-                //CHAMA A FUNÇÕA PARA LISTAR OS FEEDBACKS
-                getFeedbacks()
-            };
-        
-            reader.readAsText(data);
-          } else {
-            try {
-              const parsedData = JSON.parse(data);
-              console.log('Mensagem JSON recebida do servidor:', parsedData);
-            } catch (error) {
-              console.error('Erro ao fazer parse da mensagem JSON:', error);
-            }
-          }
-        });
-        
-        return () => {
-            //FECHA A CONEXÃO COM O SERVIDOR WebSocket
-            ws.close();
-        };
-      }, []);
-
     //SALVA OS FEEDBACKS NO BD
     const handleSubmit = () => {
         //LIMPA O ARRAY DE FEEDBACKS
         setMessages([])
 
-        //VERIFICA SE O USUÁRIO ESTÁ CONECTADO AO SERVIDOR WebSocket E SE A MENSAGEM NÃO ESTÁ VAZIA
-        if (webSocket && newMessage.trim() !== '') {
-            //INICIA UM NOVO OBJETO DE FEEDBACK
-            const messageToSend = {
-                text: newMessage,
-                user: userS.logged == true ? userS.name : `user${yourId}`,
-                id: userS.id
-            };
-        
-            //ENVIA PARA O SERVIDOR SALVAR NO BD
-            webSocket.send(JSON.stringify(messageToSend));
+        instance.post('/feedback/upload', {
+            userID: userS.id,
+            message: newMessage,
+            name: userS.name
+        })
+        .then(function (response){
+            console.log(response.data)
+        })
+        .catch(function (error){
+            console.log(error)
+        })
 
-            //LIMPA O CAMPO DE MENSAGEM
-            setNewMessage('');
-        } else {
-            return
-        }
+        //LIMPA O CAMPO DE MENSAGEM
+        setNewMessage('');
     }
 
     // FUNÇÃO RESPONSÁVEL POR RENDERIZAR AS BARRAS DE LEVEL
