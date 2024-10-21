@@ -47,18 +47,20 @@ export default function ScreenPage(props: Props) {
     const { theme, menuOpen, toggleMenuOpen } = states
 
     return(
-        <div
-            className={`
-                w-screen h-screen flex justify-start items-center flex-col overflow-x-hidden sm:overflow-y-hidden pb-12 relative
-                ${theme == 'light' ? 'bg-my-white' : 'bg-my-black'}
-            `}
-            onClick={() => {
-                if(menuOpen == true){
-                    toggleMenuOpen()
-                }
-            }}
-        >
-            {props.children}
-        </div>
+        <>
+            <div
+                className={`
+                    w-screen h-screen flex justify-start items-center flex-col overflow-x-hidden sm:overflow-y-hidden pb-12 relative
+                    ${theme == 'light' ? 'bg-my-white' : 'bg-my-black'}
+                `}
+                onClick={() => {
+                    if(menuOpen == true){
+                        toggleMenuOpen()
+                    }
+                }}
+            >
+                {props.children}
+            </div>
+        </>
     )
 }

@@ -38,13 +38,14 @@ import MenuButton from "../../components/MenuButton/index.tsx";
 import Button from "../../components/Button/index.tsx"
 import Text from "../../components/Text/index.tsx";
 import Menu from "../../components/Menu/index.tsx";
+import ImageComponente from '../../components/ImageComponente/index.tsx';
+import BubbleAnimation from '../../components/Bubles/index.tsx';
 
 //IMPORTAÇÃO DA IMAGEM USADA NA TELA
 import Person from '../../assets/imgs/person_1.png'
 
 //IMPORTAÇÃO DO PROVEDOR PARA PEGAR AS VARIÁVEIS GLOBAIS
 import { useMyContext } from '../../provider/geral';
-import ImageComponente from '../../components/ImageComponente/index.tsx';
 
 export default function Home(){
 
@@ -74,6 +75,7 @@ export default function Home(){
 
     return(
         <>
+            <BubbleAnimation />
             <Navbar>
                 <TitlePage text="Bem Vindo Estudante" space={true} />
                 <MenuButton />

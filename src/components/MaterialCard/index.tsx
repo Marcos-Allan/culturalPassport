@@ -41,23 +41,23 @@ export default function MaterialCard(props: Props) {
     
     //USO DO HOOK useState
     const [colors, setColors] = useState<String[]>([
-        '#52bd9b', //0
-        '#c47e3d', //1
-        '#e41c1c', //2
-        '#f7c957', //3
-        '#e843f1', //4
-        '#987dd0', //5
-        '#c66193', //6
-        '#38da56', //7
-        '#527fef', //8
-        '#281b6e', //9
-        '#40a6b0', //10
+        '#FF75ED', //0 FF75ED
+        '#8D46DC', //1 8D46DC
+        '#4882FE', //2 4882FE
+        '#20DB48', //3 20DB48
+        '#FF75ED', //4 FF75ED
+        '#8D46DC', //5 8D46DC
+        '#4882FE', //6 4882FE
+        '#20DB48', //7 20DB48
+        '#FF75ED', //8 FF75ED
+        '#8D46DC', //9 8D46DC
+        '#4882FE', //10 4882FE
     ])
 
     //FUNÇÃO CHAMADA AO RECARREGAR A PÁGINA
     useEffect(() => {
         //COLOCA UMA NOVA COR NO ARRAY DE CORES
-        setColors((colors) => [...colors, '#72f232'])
+        setColors((colors) => [...colors, '#20DB48'])
     },[])
 
     //UTILIZAÇÃO DO HOOK DE NAVEGAÇÃO 
@@ -65,18 +65,14 @@ export default function MaterialCard(props: Props) {
     
     return(
         <div
-            className={`relative mt-[30px] w-[90%] sm:w-3/12 h-[100px] rounded-[8px] p-3 hover:scale-[0.9] lg:hover:scale-[0.9] cursor-pointer transition-all duration-[.2s]`}
-            style={{ backgroundColor: `${colors[Number(props.background)]}` }}
+            className={`relative mt-[30px] w-[90%] sm:w-3/12 h-[100px] flex items-center justify-center rounded-[8px] p-3 border-[3px] hover:scale-[0.9] lg:hover:scale-[0.9] cursor-pointer transition-all duration-[.2s]`}
+            style={{ borderColor: `${colors[Number(props.background)]}` }}
             onClick={() => navigate(`/materias/${props.titleMateria.toLowerCase()}`)}
         >
-            <p className={`text-[22px] text-my-white font-semibold capitalize`}>{props.titleMateria}</p>
-
-            <div
-                className={`rounded-[50%] w-[50px] h-[50px] absolute bottom-[-12%] right-[5%] border-[3px] bg-my-white
-                `}
-                style={{ borderColor: `${colors[Number(props.background)]}` }}
-            >
-            </div>
+            <p
+                className={`text-[22px] text-my-white font-semibold capitalize text-center`}
+                style={{ color: `${colors[Number(props.background)]}` }}
+            >{props.titleMateria}</p>
             
         </div>
     )

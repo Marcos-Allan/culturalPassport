@@ -40,13 +40,14 @@ import Text from "../../components/Text/index.tsx";
 import Button from "../../components/Button/index.tsx"
 import Menu from "../../components/Menu/index.tsx";
 import DividersButton from "../../components/DividersButton/index.tsx";
+import ImageComponente from '../../components/ImageComponente/index.tsx';
+import BubbleAnimation from '../../components/Bubles/index.tsx';
 
 //IMPORTAÇÃO DA IMAGEM USADA NA PÁGINA
 import Person from '../../assets/imgs/person_2.png'
 
 //IMPORTAÇÃO DO PROVEDOR PARA PEGAR AS VARIÁVEIS GLOBAIS
 import { useMyContext } from '../../provider/geral';
-import ImageComponente from '../../components/ImageComponente/index.tsx';
 
 export default function Signs(){
 
@@ -70,6 +71,7 @@ export default function Signs(){
 
     return(
         <>
+            <BubbleAnimation />
             <Navbar>
                 <Return />
                 <TitlePage
