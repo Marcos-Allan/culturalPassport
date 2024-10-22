@@ -75,7 +75,6 @@ export default function Home(){
 
     return(
         <>
-            <BubbleAnimation />
             <Navbar>
                 <TitlePage text="Bem Vindo Estudante" space={true} />
                 <MenuButton />
@@ -93,6 +92,7 @@ export default function Home(){
                 </div>
             </div>
             <Menu />
+            <BubbleAnimation />
         </>
     )
 }

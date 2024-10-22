@@ -181,6 +181,14 @@ export default function Feedback() {
         getFeedbacks()
     },[])
 
+    const RenderStars = (count: number) => {
+        return (
+            <div className={`flex flex-row gap-1 mr-2`}>
+                {Array(count).fill(<FaStar className='text-[#2533ff] text-[14px]' />)}
+            </div>
+        );
+    };
+
     return(
         <>
             <Navbar>
@@ -207,37 +215,38 @@ export default function Feedback() {
                         {msg.id !== userS.id ? (
                             <div
                                 key={Math.random() * 999999999999}   
-                                className={`border-2 ${theme == 'light' ? 'border-my-gray' : 'border-my-gray-black' } p-1 w-full rounded-[10px]`}
+                                className={`p-1 w-full rounded-[10px]`}
                             >
-                                <div className={`flex flex-row justify-between items-center gap-2 p-1`}>
-                                    <div className={`flex flex-row items-center gap-1`}>
+                                <div className={`flex flex-col justify-between items-start gap-2 p-1`}>
+                                    <div className={`flex flex-row items-center gap-2`}>
                                         <img src={msg.img} className='w-6 h-6 rounded-[50%]' />
-                                        <p className={`text-[#ff0062] font-black text-[16px]`}>
+                                        <p className={`text-[#ff0062] font-black text-[16px] my-2`}>
                                             {msg.user}
                                         </p>
                                     </div>
+                                    <p className={`flex ps-1 flex-row items-center gap-1  text-[16px] ${theme == 'light' ? 'text-my-black' : 'text-my-white'}`}>
+                                        {RenderStars(Number(JSON.parse(msg.text).rating))}
 
-                                    <p className={`flex flex-row items-start gap-1 text-[14px] ${theme == 'light' ? 'text-my-black' : 'text-my-white'}`}>
-                                        {JSON.parse(msg.text).rating}
-                                        <FaStar className='text-[#e2ff3b] text-[12px]' />
+                                        {`${new Date().getDate()}/${new Date().getMonth() + 1}/${new Date().getFullYear()}`}
                                     </p>
                                 </div>
                                 
                                 <p className={`${theme == 'light' ? 'text-my-black' : 'text-my-white'} my-1 mx-3`}>{JSON.parse(msg.text).message}</p>
                             </div> 
                         ):(
-                            <div className={`border-2 ${theme == 'light' ? 'border-my-gray' : 'border-my-gray-black' } p-1 w-full rounded-[10px]`}>
-                                <div className={`flex flex-row justify-between items-center gap-2 p-1`}>
-                                    <div className={`flex flex-row items-center gap-1`}>
+                            <div className={`p-1 w-full rounded-[10px]`}>
+                                <div className={`flex flex-col justify-between items-start gap-2 p-1`}>
+                                    <div className={`flex flex-row items-center gap-2`}>
                                         <img src={userS.img} className='w-6 h-6 rounded-[50%]' />
-                                        <p className={`text-[#347ede] font-black text-[16px]`}>
+                                        <p className={`text-[#ff0062] font-black text-[16px] my-2`}>
                                             {userS.name}
                                         </p>
                                     </div>
 
-                                    <p className={`flex flex-row items-start gap-1 text-[14px] ${theme == 'light' ? 'text-my-black' : 'text-my-white'}`}>
-                                        {JSON.parse(msg.text).rating}
-                                        <FaStar className='text-[#e2ff3b] text-[12px]' />
+                                    <p className={`flex ps-1 flex-row items-center gap-1  text-[16px] ${theme == 'light' ? 'text-my-black' : 'text-my-white'}`}>
+                                        {RenderStars(Number(JSON.parse(msg.text).rating))}
+
+                                        {`${new Date().getDate()}/${new Date().getMonth() + 1}/${new Date().getFullYear()}`}
                                     </p>
                                 </div>
                                 

@@ -71,7 +71,6 @@ export default function Signs(){
 
     return(
         <>
-            <BubbleAnimation />
             <Navbar>
                 <Return />
                 <TitlePage
@@ -93,6 +92,7 @@ export default function Signs(){
                 </div>
             </div>
             <Menu />
+            <BubbleAnimation />
         </>
     )
 }

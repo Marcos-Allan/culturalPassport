@@ -54,9 +54,10 @@ interface Alert {
 export const MyProvider = ({ children } : { children: React.ReactNode }) => {
     
     //CRIA ESTADO GLOBAL DE CADA VARIAVEL
+    const sucessColor = '#18ac42'
+    const errorColor = '#ff3434'
     const [theme, setTheme] = useState<string | null>(localStorage.getItem('themePC'))
     const [menuOpen, setMenuOpen] = useState<boolean>(false)
-    // const [userS, setUserS] = useState<User>({ logged: false, name: '', img: '', id: '', simulations: [], simulationsConcludeds: 0, cronogram: [] })
     const [userS, setUserS] = useState<User | null>(localStorage.getItem('userPC') !== null ?
         {
             logged: JSON.parse(localStorage.getItem('userPC') as any).logged,
@@ -113,7 +114,7 @@ export const MyProvider = ({ children } : { children: React.ReactNode }) => {
     
     //RETORNA TUDO PARA SER USADO EM TODO O SITE
     return (
-        <MyContext.Provider value={{ theme, toggleTheme, menuOpen, toggleMenuOpen, userS, toggleUser, loading, toggleLoading, message, toggleAlert, isLogout, toggleLogout, isDelAccount, toggleDeleteAccount }}>
+        <MyContext.Provider value={{ sucessColor, errorColor, theme, toggleTheme, menuOpen, toggleMenuOpen, userS, toggleUser, loading, toggleLoading, message, toggleAlert, isLogout, toggleLogout, isDelAccount, toggleDeleteAccount }}>
             {children}
         </MyContext.Provider>
     )

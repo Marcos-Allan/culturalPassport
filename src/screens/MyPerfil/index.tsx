@@ -68,7 +68,6 @@ export default function MyPerfil() {
     //FAZ REFERENCIA A UM ELEMENTO
     const inputFileRef = useRef<HTMLInputElement | null>(null)
 
-
     //UTILIZAÇÃO DO HOOK DE NAVEGAÇÃO 
     const navigate = useNavigate()
 
@@ -84,7 +83,7 @@ export default function MyPerfil() {
     const states:any = useMyContext()
 
     //RESGATA AS VARIAVEIS GLOBAIS
-    const { theme, userS, toggleLoading, toggleAlert, toggleUser } = states
+    const { theme, userS, toggleLoading, toggleAlert, toggleUser, sucessColor } = states
 
     //FUNÇÃO RESPONSÁVEL POR LISTAR OS AVATARES
     const fetchImages = async () => {
@@ -369,9 +368,9 @@ export default function MyPerfil() {
                                     rounded-[50%]
                                     border-[2px]
                                     p-2
-                                    ${imgURL ? 'text-[#00ff00] border-[#00ff00]' : `${theme == 'light' ? 'text-my-gray border-my-gray' : 'text-my-gray-black border-my-gray-black'}`}
-                                    ${theme == 'light' ? '' : ''}
+                                    ${imgURL ? `` : `${theme == 'light' ? 'text-my-gray border-my-gray' : 'text-my-gray-black border-my-gray-black'}`}
                                 `}
+                                style={{ color: `${imgURL && sucessColor}`, borderColor: `${imgURL && sucessColor}` }}
                             />
                             <p
                                 className={`
@@ -383,8 +382,9 @@ export default function MyPerfil() {
                                     transition-all
                                     duration-[.3s]
                                     cursor-pointer
-                                    ${imgURL ? 'text-[#00ff00]' : `${theme == 'light' ? 'text-my-gray' : 'text-my-gray-black'}`}
-                                `}  
+                                    ${imgURL ? `` : `${theme == 'light' ? 'text-my-gray' : 'text-my-gray-black'}`}
+                                `}
+                                style={{ color: `${imgURL && sucessColor}` }}
                             >{imgURL ? 'imagem selecionada' : 'Nenhuma imagem selecionada'}</p>
                             <p
                                 className={`
@@ -394,8 +394,9 @@ export default function MyPerfil() {
                                 transition-all
                                 duration-[.3s]
                                 cursor-pointer
-                                    ${progress == 100 ? 'text-[#00ff00]' : `${theme == 'light' ? 'text-my-gray' : 'text-my-gray-black'}`}
+                                    ${progress == 100 ? `` : `${theme == 'light' ? 'text-my-gray' : 'text-my-gray-black'}`}
                                 `}
+                                style={{ color: `${imgURL && sucessColor}` }}
                                 >{progress}%</p>
                         </div>
                     </label>

@@ -106,7 +106,7 @@ export default function Input(props: Props) {
     const states:any = useMyContext()
 
     //DESESTRUTURA AS VARIAVEIS ESPECIFICADAS
-    const { theme } = states
+    const { theme, sucessColor, errorColor } = states
 
     //UTILIZA O HOOK useState
     const [isVisible, setIsVisible] = useState<boolean>(false)
@@ -123,15 +123,15 @@ export default function Input(props: Props) {
                 if(passwordInputVisible.current && label.current && message.current && span.current && spanOne.current){
                     //MUDA O ESTILO COMO CORES DE LETRAS, ICONES E BORDAS DOS RESPECTIVOS ELEMENTOS 
                     if(placeholderText == props.placeholderLarge){
-                        passwordInputVisible.current.style.borderBottom = `1px solid #00ff00`
+                        passwordInputVisible.current.style.borderBottom = `1px solid ${sucessColor}`
                     }else{
-                        passwordInputVisible.current.style.border = `1px solid #00ff00`
+                        passwordInputVisible.current.style.border = `1px solid ${sucessColor}`
                     }
-                    label.current.style.color = `#00ff00`
-                    passwordInputVisible.current.style.color = `#00ff00`
-                    message.current.style.color = `#00ff00`
-                    span.current.style.color = `#00ff00`
-                    spanOne.current.style.color = `#00ff00`
+                    label.current.style.color = `${sucessColor}`
+                    passwordInputVisible.current.style.color = `${sucessColor}`
+                    message.current.style.color = `${sucessColor}`
+                    span.current.style.color = `${sucessColor}`
+                    spanOne.current.style.color = `${sucessColor}`
                     
                     //MUDA A OPACIDADE DA MENSAGEM PARA
                     message.current.style.opacity = `100%`
@@ -148,15 +148,15 @@ export default function Input(props: Props) {
                 if(passwordInputVisible.current && label.current && message.current && span.current && spanOne.current){
                     //MUDA O ESTILO COMO CORES DE LETRAS, ICONES E BORDAS DOS RESPECTIVOS ELEMENTOS 
                     if(placeholderText == props.placeholderLarge){
-                        passwordInputVisible.current.style.borderBottom = `1px solid #ff0000`
+                        passwordInputVisible.current.style.borderBottom = `1px solid ${errorColor}`
                     }else{
-                        passwordInputVisible.current.style.border = `1px solid #ff0000`
+                        passwordInputVisible.current.style.border = `1px solid ${errorColor}`
                     }
-                    label.current.style.color = `#ff0000`
-                    passwordInputVisible.current.style.color = `#ff0000`
-                    message.current.style.color = `#ff0000`
-                    span.current.style.color = `#ff0000`
-                    spanOne.current.style.color = `#ff0000`
+                    label.current.style.color = `${errorColor}`
+                    passwordInputVisible.current.style.color = `${errorColor}`
+                    message.current.style.color = `${errorColor}`
+                    span.current.style.color = `${errorColor}`
+                    spanOne.current.style.color = `${errorColor}`
                     
                     //MUDA A OPACIDADE DA MENSAGEM PARA
                     message.current.style.opacity = `100%`
