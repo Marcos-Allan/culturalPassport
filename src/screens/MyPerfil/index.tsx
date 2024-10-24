@@ -77,7 +77,7 @@ export default function MyPerfil() {
     const [name, setName] = useState<string>()
     const [imgURL, setImgURL] = useState<string>('imagens')
     const [progress, setProgress] = useState<any>(0)
-    const [days, setDays] = useState<string[]>(['domingo', 'segunda-feira', 'terça-feira', 'quarta-feira', 'quinta-feira', 'sexta-feira', 'sábado'])
+    const [days, setDays] = useState<string[]>(['segunda-feira', 'terça-feira', 'quarta-feira', 'quinta-feira', 'sexta-feira', 'sábado'])
 
     //UTILIZAÇÃO DO HOOK DE NAVEGAÇÃO 
     const states:any = useMyContext()
@@ -121,8 +121,10 @@ export default function MyPerfil() {
         //COLOCA A FOTO DE PERFIL DO USUÁRIO
         setImg(userS.img)
 
+        console.log(userS.cronogram)
+
         //COLOCA OS DIAS DA SEMANA NO ARRAY
-        setDays(['domingo', 'segunda-feira', 'terça-feira', 'quarta-feira', 'quinta-feira', 'sexta-feira', 'sábado'])
+        setDays(['segunda-feira', 'terça-feira', 'quarta-feira', 'quinta-feira', 'sexta-feira', 'sábado'])
     }, []);
 
     //FUNÇÃO RESPONSÁVEL POR PEGAR A IMAGEM DOS ARQUIVOS DO USUÁRIO
@@ -451,7 +453,7 @@ export default function MyPerfil() {
                             <MdOutlineEdit className={`pb-[3px] text-[20px] text-my-white`}/>
                         </div>
 
-                        {userS.cronogram.map((mat:string, i:number) => (
+                        {days.map((mat:any, i:number) => (
                             <div
                             className={`
                                 w-full flex items-center justify-between border-[1px] py-2 px-1
@@ -486,6 +488,8 @@ export default function MyPerfil() {
                                     <p>{String(days[i - 7]).slice(0, 3)}</p>
                                 )}
                             </p>
+                            
+                            <p className={`hidden`}>{mat}</p>
 
                             <p
                                 className={`
@@ -494,7 +498,7 @@ export default function MyPerfil() {
                                     ${verifyDay(days[Number(i) <= 6 ? Number(i) : Number(i - 7)]) == true && `${theme == 'light' ? 'text-my-secondary font-bold' : 'text-my-quintenary font-bold'}`}
                                 `}
                             >
-                                {String(mat).replace(/"/g, '')}
+                                {String(userS.cronogram[i == 0 ? i : i == 1 ? 2 : i == 2 ? 4 : i == 3 ? 6 : i == 4 ? 8 : 10]).replace(/"/g, '')}, {String(userS.cronogram[i == 0 ? i+1 : i == 1 ? 2+1 : i == 2 ? 4+1 : i == 3 ? 6+1 : i == 4 ? 8+1 : 10+1]).replace(/"/g, '')}
                             </p>
                         </div>
                         ))}

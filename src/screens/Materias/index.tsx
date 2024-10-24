@@ -112,6 +112,7 @@ export default function Materias() {
 
     return(
         <>
+            <BubbleAnimation />
             <Navbar>
                 <Return />
                 <TitlePage
@@ -148,7 +149,6 @@ export default function Materias() {
             
             <Menu />
 
-            <BubbleAnimation />
         </>
     )
 }

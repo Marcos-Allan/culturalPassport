@@ -41,15 +41,15 @@ export default function MaterialCard(props: Props) {
     
     //USO DO HOOK useState
     const [colors, setColors] = useState<String[]>([
-        '#FF75ED', //0 FF75ED
+        '#5A94F2', //0 5A94F2
         '#8D46DC', //1 8D46DC
         '#4882FE', //2 4882FE
         '#20DB48', //3 20DB48
-        '#FF75ED', //4 FF75ED
+        '#5A94F2', //4 5A94F2
         '#8D46DC', //5 8D46DC
         '#4882FE', //6 4882FE
         '#20DB48', //7 20DB48
-        '#FF75ED', //8 FF75ED
+        '#5A94F2', //8 5A94F2
         '#8D46DC', //9 8D46DC
         '#4882FE', //10 4882FE
     ])

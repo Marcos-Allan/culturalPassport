@@ -29,13 +29,13 @@
 
 //IMPORTAÇÃO DAS BIBLIOTECAS
 import { useState, useEffect } from 'react'
+import { DragDropContext, Droppable, Draggable } from '@hello-pangea/dnd';
 
 //IMPORTAÇÃO DO PROVEDOR PARA PEGAR AS VARIÁVEIS GLOBAIS
 import { useMyContext } from "../../provider/geral"
 
 //IMPORTAÇÃO DOS ICONES
 import {  IoArrowForward } from "react-icons/io5";
-import { IoMdTrash } from "react-icons/io";
 import instance from '../../utils/axios';
 
 export default function CronogramPage() {
@@ -50,41 +50,42 @@ export default function CronogramPage() {
     const [matters, setMatters] = useState<any[]>([])
     const [cronogramS, setCronogramS] = useState<any[]>([])
 
+    const ord = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
     //FUNÇÃO CHAMADA TODA VEZ QUE A PÁGINA É RECARREGADA
     useEffect(() => {
 
         //DEFINE O ARRAY COM AS MATÉRIAS
         setMatters([
-            { matter: 'fisíca', id: 'inputFis' },
-            { matter: 'história', id: 'inputHis' },
-            { matter: 'inglês', id: 'inputIng' },
-            { matter: 'geografia', id: 'inputGeo' },
-            { matter: 'artes', id: 'inputArt' },
-            { matter: 'português', id: 'inputPor' },
-            { matter: 'química', id: 'inputQui' },
-            { matter: 'biologia', id: 'inputBio' },
-            { matter: 'matemática', id: 'inputMat' },
-            { matter: 'filosofia', id: 'inputFil' },
-            { matter: 'sociologia', id: 'inputSoc' },
-            { matter: 'espanhol', id: 'inputEsp' },
+            'fisíca',
+            'história',
+            'inglês',
+            'geografia',
+            'artes',
+            'português',
+            'química',
+            'biologia',
+            'matemática',
+            'filosofia',
+            'sociologia',
+            'espanhol',
+        ])
+        
+        //DEFINE O ARRAY COM AS MATÉRIAS
+        setCronogramS([
+            'fisíca',
+            'história',
+            'inglês',
+            'geografia',
+            'artes',
+            'português',
+            'química',
+            'biologia',
+            'matemática',
+            'filosofia',
+            'sociologia',
+            'espanhol',
         ])
     },[])
-
-    //FUNÇÃO QUE REMOVE OU TIRA A MATÉRIA DO CRONOGRAMA
-    function setCro(matter:string) {
-        setCronogramS((items) => {
-            if(items.includes(matter)) {
-                return items.filter((item) => item !== matter)
-            }else {
-                return [...items, matter]
-            }
-        })
-    }
-
-    //FUNÇÃO PARA VER SE O ITEM JÁ ESTÁ NO CRONOGRAMA
-    function isInCronogram(matter:string){
-        return cronogramS.includes(matter)
-    }
 
     //FUNÇÃO RESPONSÁVEL POR ATUALIZAR OS DADOS DO USUÁRIO
     async function updateUser() {
@@ -128,6 +129,29 @@ export default function CronogramPage() {
             })
     }
 
+    //FUNÇÃO RESPONSÁVL POR REORDENAR OS ITEMS DO ARRAY
+    function reorder(list: any[], startIndex: number, endIndex: number) {
+        const result = Array.from(list)
+        const [removed] = result.splice(startIndex, 1)
+        result.splice(endIndex, 0, removed)
+
+        return result
+    }
+
+    //FUNÇÃO RESPONSÁVL POR FINALIZAR O DRAG 
+    function onDragEnd(result:any) {
+        if(!result){
+            return
+        }
+
+        const items = reorder(matters, result.source.index, result.destination.index)
+
+        console.log(items)
+
+        setMatters(items)
+        setCronogramS(items)
+    }
+
     return(
         <>
             {userS.logged === true && userS.cronogram.length < 1 && (
@@ -135,36 +159,64 @@ export default function CronogramPage() {
                     absolute top-0 left-0 w-screen h-screen flex flex-col justify-center items-center
                     ${theme == 'light' ? 'bg-my-black-opacity' : 'bg-my-white-opacity'}
                 `}>
-                    <h1 className={`w-[90%] text-center text-[20px] font-medium mb-[14px] ${theme == 'light' ? 'text-my-white' : 'text-my-black'}`}>Olá <span className={`font-bold ${theme == 'light' ? 'text-my-quartenary' : 'text-my-secondary'}`}>{userS.name}</span>, defina seu cronograma de estudos</h1>
+                    <h1 className={`w-[80%] text-center text-[20px] font-medium mb-[14px] ${theme == 'light' ? 'text-my-white' : 'text-my-black'}`}>Olá <span className={`font-bold ${theme == 'light' ? 'text-my-quartenary' : 'text-my-secondary'}`}>{userS.name}</span>, defina seu cronograma de estudos</h1>
 
-                    <div className={`relative flex flex-row w-[90%] sm:w-[70%] lg:w-[50%] h-[310px] rounded-[8px] ${theme == 'light' ? 'bg-my-secondary' : 'bg-my-quartenary'} border-4 ${theme == 'light' ? 'border-my-secondary' : 'border-my-quartenary'}`}>
+                    <div className={`ml-[40px] relative flex flex-row w-[80%] sm:w-[70%] lg:w-[50%] min-h-[280px] rounded-[8px] ${theme == 'light' ? 'bg-my-secondary' : 'bg-my-quartenary'} border-4 ${theme == 'light' ? 'border-my-secondary' : 'border-my-quartenary'}`}>
                         <div
-                            className={`flex-grow-[1] p-2 rounded-[8px] ${theme == 'light' ? 'bg-my-white' : 'bg-my-black'}`}
+                            className={`flex-grow-[1] py-8 px-4 rounded-[8px] ${theme == 'light' ? 'bg-my-white' : 'bg-my-black'}`}
                         >
-                            {matters.map((mat) => (
-                                <div className={``}>
-                                    <p className={`capitalize cursor-pointer hover:underline transition-all duration-[.3s] text-[14px]
-                                        ${isInCronogram(mat.matter) == true
-                                            ? `font-bold ${theme == 'light' ? 'text-my-secondary' : 'font-black text-my-quartenary'}`
-                                            : `${theme == 'light' ? 'text-my-gray' : 'text-my-gray-black'}`}
-                                        `}
-                                        onClick={() => setCro(mat.matter)}
-                                    >
-                                        {mat.matter}
-                                    </p>
-                                </div>
-                            ))}
+                            <div className={`absolute top-0 left-[-39px] text-my-white mt-[28px] border-[4px] text-center ${theme == 'light' ? 'border-l-my-secondary border-t-my-secondary border-b-my-secondary border-r-my-white bg-my-white' : 'border-t-my-quartenary border-l-my-quartenary border-b-my-quartenary border-r-my-black bg-my-black'} flex flex-col gap-[5px] rounded-tl-[8px] rounded-bl-[8px]`}>
+                                <p className='capitalize py-[3px] bg-my-primary'>seg</p>
+                                <p className='capitalize py-[3px] bg-my-secondary'>ter</p>
+                                <p className='capitalize py-[3px] bg-my-terciary'>qua</p>
+                                <p className='capitalize py-[3px] bg-my-quartenary'>qui</p>
+                                <p className='capitalize py-[3px] bg-my-quintenary'>sex</p>
+                                <p className='capitalize py-[3px] bg-my-primary'>sab</p>
+                            </div>
+
+                            <DragDropContext onDragEnd={onDragEnd}>
+                                <Droppable droppableId="matters" type="list" direction="vertical">
+                                    {(provided) => (
+                                        <div
+                                            style={{
+                                                display: 'grid',
+                                                gridTemplateColumns: 'repeat(2, 1fr)',
+                                                gap: '5px'
+                                            }}
+                                            ref={provided.innerRef}
+                                            {...provided.droppableProps}
+                                        >
+                                            {matters.map((mat, ind) => (
+                                            <Draggable draggableId={`${ind}`} index={ind} key={ind}>
+                                                {(provided2) => (
+                                                <div
+                                                    style={{ order: `${ord[ind]}` }}
+                                                    className={`order-[${ord[ind]}]`}
+                                                    ref={provided2.innerRef}
+                                                    {...provided2.draggableProps}
+                                                    {...provided2.dragHandleProps}
+                                                >
+                                                    <p
+                                                    className={`capitalize h-[30px] flex items-center justify-center cursor-pointer hover:underline transition-all duration-[.3s] text-[14px] text-center py-1 text-my-white ${
+                                                        theme === 'light'
+                                                            ? 'bg-my-secondary'
+                                                            : 'bg-my-quartenary'
+                                                        } `}
+                                                    >
+                                                    {mat}
+                                                    </p>
+                                                </div>
+                                                )}
+                                            </Draggable>
+                                            ))}
+                                            {provided.placeholder}
+                                        </div>
+                                    )}
+                                </Droppable>
+                            </DragDropContext>
 
                         </div>
-                        <div className={`${theme == 'light' ? 'bg-my-secondary' : 'bg-my-quartenary'} h-full w-5/12 p-2`}>
-                            {cronogramS.length > 0 ? cronogramS.map((mat, i) => (
-                                <p className={`font-bold ${theme == 'light' ? 'text-my-white' : 'text-my-black'}`} onClick={() => setCro(mat)}>{i+1} - <span className='capitalize cursor-pointer hover:underline transition-all duration-[.3s] text-[14px]'>{mat}</span></p>
-                            )):(
-                                <p className={`text-center font-bold ${theme == 'light' ? 'text-my-white' : 'text-my-black'}`} >Defina o seu cronograma</p>
-                            )}
-                        </div>
 
-                        {cronogramS.length > 11 ? (
                          <IoArrowForward
                              onClick={() => {
                                 updateUser()
@@ -172,24 +224,11 @@ export default function CronogramPage() {
                              className={`
                              absolute right-[0%] top-[0%] text-[20px] m-1 hover:scale-[1.2] transition-all duration-[.2s] cursor-pointer
                                  ${theme == 'light'
-                                 ? 'text-my-white'
-                                 : 'text-my-black'
+                                 ? 'text-my-secondary'
+                                 : 'text-my-quartenary'
                                  }
                              `}
                          />
-                         ):(
-                            <IoMdTrash
-                                onClick={() => setCronogramS([])}
-                                className={`
-                                absolute right-[0%] top-[0%] text-[20px] m-1 hover:scale-[1.2] transition-all duration-[.2s] cursor-pointer
-                                    ${theme == 'light'
-                                    ? 'text-my-white'
-                                    : 'text-my-black'
-                                    }
-                                `}
-                            />
-
-                        )}
                     </div>
                 </div>
             )}
