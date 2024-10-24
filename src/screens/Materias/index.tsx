@@ -41,6 +41,7 @@ import MaterialCard from "../../components/MaterialCard";
 import BottomNavigation from "../../components/BottomNavigation";
 import Text from '../../components/Text';
 import CronogramPage from '../../components/CronogramPage';
+import BubbleAnimation from '../../components/Bubles';
 
 //IMPORTAÇÃO DOS ICONES
 import { IoMdSad } from "react-icons/io";
@@ -146,6 +147,8 @@ export default function Materias() {
             <BottomNavigation />
             
             <Menu />
+
+            <BubbleAnimation />
         </>
     )
 }

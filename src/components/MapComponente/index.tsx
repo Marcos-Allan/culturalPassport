@@ -26,7 +26,7 @@ const MapComponent: React.FC<Props> = ({ position }) => {
   const { theme } = states
 
   return (
-    <div className={`h-auto flex items-start justify-center w-full sm:w-[80%] sm:rounded-[10px] overflow-hidden rounded z-[1] border-[1px] ${theme == 'light' ? 'border-my-black' : 'border-my-white'}`}>
+    <div className={`min-h-[280px] h-auto flex items-start justify-center w-full sm:w-[80%] sm:rounded-[10px] overflow-hidden rounded z-[1] border-[1px] ${theme == 'light' ? 'border-my-black' : 'border-my-white'}`}>
       <MapContainer center={position} zoom={13} style={{ height: '250px', width: '100%' }}>
         <TileLayer
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"

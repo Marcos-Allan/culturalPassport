@@ -16,6 +16,9 @@ import MapComponent from '../../components/MapComponente';
 //IMPORTAÇÃO DOS ESTILOS PARA GERAR O MAPA
 import 'leaflet/dist/leaflet.css';
 
+//CONFIGURAÇÃO DA BASE URL DO AXIOS
+import instance from '../../utils/axios';
+
 //IMPORTAÇÃO DO PROVEDOR PARA PEGAR AS VARIÁVEIS GLOBAIS
 import { useMyContext } from '../../provider/geral';
 
@@ -39,6 +42,7 @@ export default function Travel() {
     //UTILIZAÇÃO DO HOOK useState
     const [location, setLocation] = useState<any[]>([])
     const [loadingTravel, setLoadingTravel] = useState<boolean>(false)
+    const [travelDescription, setTravelDescription] = useState<boolean>(false)
 
     //FUNÇÃO RESPONSÁVEL POR DEIXAR O TEXTO EM CAPITALIZE
     function capitalizeText(text:string) {
@@ -72,6 +76,25 @@ export default function Travel() {
         })
     }
 
+    //FUNÇÃO RESPONSÁVEL POR PEGAR A VIAGEM ESPECIFICADA
+    function getTravelDescription() {
+        instance.get(`/exercise/exercises`)
+        .then(function (response) {
+            //PERCORRE TODO O ARRAY DE PASSEIOS
+            response.data.map((travelItem:any) => {
+                //VERIFICA SE O PASSEIO DO ARRAY É IGUAL AO PASSEIO DA PÁGINA
+                if(travelItem.title === travel){
+                    //PEGA A DESCRIÇÃO DO PASSEIO DA PÁGINA
+                    setTravelDescription(travelItem.description)
+                }
+            })
+            
+        })
+        .catch(function (error) {
+            console.log(error)
+        })
+    }
+
     //FUNÇÃO CHAMADA AO RECARREGAR A PÁGINA
     useEffect(() => {
         //VERIFICA SE O USUÁRIO ESTÁ LOGADO
@@ -83,8 +106,11 @@ export default function Travel() {
     
     //FUNÇÃO CHAMADA AO RECARREGAR A PÁGINA
     useEffect(() => {
-        //DEFINE O LOCAL DA VIAGEM
+        //CHAMA A FUNÇÃO QUE DEFINE O LOCAL DO PASSEIO
         getTravel()
+
+        //CHAMA A FUNÇÃO QUE PEGA A DESCRIÇÃO DO PASSEIO
+        getTravelDescription()
     },[])
 
     return(
@@ -97,7 +123,7 @@ export default function Travel() {
                 <MenuButton />
             </Navbar>
 
-            <div className={`w-full flex flex-col justify-start items-center mb-[100px] sm:mb-[40px] lg:mb-0 overflow-y-scroll overflow-visible scrollbar scrollbar-track-transparent scrollbar-thumb-my-secondary`}>
+            <div className={`min-h-[300px] w-full flex flex-col justify-start items-center mb-3 overflow-y-scroll overflow-visible scrollbar scrollbar-track-transparent scrollbar-thumb-my-secondary`}>
 
 
                 {loadingTravel == false && location.length >= 2 && (
@@ -115,9 +141,12 @@ export default function Travel() {
                 )}
 
                 {loadingTravel == true && (
-                        <p className={`w-full text-center text-[18px] ${theme == 'light' ? 'text-my-black' : 'text-my-white'}`}>estamos carregando as matérias seja paciente</p>
+                    <p className={`w-full text-center text-[18px] ${theme == 'light' ? 'text-my-black' : 'text-my-white'}`}>estamos carregando as matérias seja paciente</p>
                 )}
+
             </div>
+            <h1 className={`text-[24px] font-bold text-center mb-3 ${theme == 'light' ? 'text-my-black' : 'text-my-white'}`}>Descrição</h1>
+            <p className={`w-[90%] overflow-scroll mb-[100px] sm:mb-[40px] lg:mb-0 ${theme == 'light' ? 'text-my-black' : 'text-my-white'}`}>{travelDescription}</p>
             
             <BottomNavigation />
             

@@ -107,7 +107,7 @@ const MarkdownRenderer = ({ url }: { url:any}) => {
 
         axios.get(url, {
             //DETERMINA O TEMPO MÁXIMO DA REQUISIÇÃO
-            timeout: 15000,
+            timeout: 30000,
         })
         .then(function (response) {
             //MUDA O ESTADO DE CARREGAMENTO DA APLICAÇÃO PARA false
