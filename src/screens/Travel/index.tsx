@@ -146,7 +146,7 @@ export default function Travel() {
 
             </div>
             <h1 className={`text-[24px] font-bold text-center mb-3 ${theme == 'light' ? 'text-my-black' : 'text-my-white'}`}>Descrição</h1>
-            <p className={`w-[90%] overflow-scroll mb-[100px] sm:mb-[40px] lg:mb-0 ${theme == 'light' ? 'text-my-black' : 'text-my-white'}`}>{travelDescription}</p>
+            <p className={`w-[90%] lg:w-[80%] overflow-y-scroll mb-[100px] sm:mb-[40px] lg:mb-0 ${theme == 'light' ? 'text-my-black' : 'text-my-white'} scrollbar scrollbar-track-transparent scrollbar-thumb-my-secondary`}>{travelDescription}</p>
             
             <BottomNavigation />
             
