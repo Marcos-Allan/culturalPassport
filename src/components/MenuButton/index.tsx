@@ -43,7 +43,7 @@ export default function MenuButton() {
     const states:any = useMyContext()
 
     //RESGATA AS VARIAVEIS GLOBAIS
-    const { theme, menuOpen, toggleMenuOpen, userS } = states
+    const { theme, menuOpen, toggleMenuOpen } = states
 
     return(
         <>
@@ -65,12 +65,6 @@ export default function MenuButton() {
                             onClick={() => toggleMenuOpen()}
                         /> || <Skeleton count={1} width={50} height={40} />}
                     </SkeletonTheme>
-                    {/* VERIFICA SE O ESTADO DA VARIAVEL GLOBAL userS.logged É IGUAL A TRUE */}
-                    {userS.logged == true && (
-                        //COLOCA UMA ANIMAÇÃO NO MENU PARA MOSTRAR QUE TEM MUDANÇAS NO MENU
-                        <div className={`w-[14px] h-[14px] rounded-[50%] absolute top-[18%] right-[-10%] animate-bounce
-                        ${theme == 'light' ? 'bg-my-terciary' : 'bg-my-quartenary'}`}></div>
-                    )}
                 </div> 
             )}
         </>

@@ -116,7 +116,7 @@ export default function Materias() {
             <Navbar>
                 <Return />
                 <TitlePage
-                    text={`Materias`}
+                    text={`Matérias`}
                 />
                 <MenuButton />
             </Navbar>

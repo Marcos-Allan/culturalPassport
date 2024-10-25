@@ -45,7 +45,7 @@ interface Props {
 //IMPORTAÇÃO DO PROVEDOR PARA PEGAR AS VARIÁVEIS GLOBAIS
 import { useMyContext } from '../../provider/geral';
 
-export default function ExerciseCard(props: Props) {
+export default function TravelCard(props: Props) {
 
     //UTILIZAÇÃO DO HOOK DE NAVEGAÇÃO 
     const navigate = useNavigate()
@@ -58,7 +58,7 @@ export default function ExerciseCard(props: Props) {
 
     return(
         <div
-            onClick={() => navigate(`/exercises/${props.title}`)}
+            onClick={() => navigate(`/travels/${props.title}`)}
             className={`w-[90%] sm:w-[60%] border-2 my-2 ${theme == 'light' ? 'border-my-gray' : 'border-my-gray-black'} p-3 rounded-[16px] flex items-center justify-center hover:scale-[0.92] cursor-pointer transition-all duration-[.2s]`}
         >
                 

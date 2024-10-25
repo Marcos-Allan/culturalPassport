@@ -39,7 +39,7 @@ import Navbar from "../../components/Navbar";
 import Return from "../../components/Return";
 import TitlePage from "../../components/TitlePage";
 import Text from '../../components/Text';
-import ExerciseCard from '../../components/ExerciseCard';
+import TravelCard from '../../components/ExerciseCard';
 
 //IMPORTAÇÃO DO PROVEDOR PARA PEGAR AS VARIÁVEIS GLOBAIS
 import { useMyContext } from '../../provider/geral';
@@ -50,7 +50,7 @@ import { IoMdSad } from "react-icons/io";
 //CONFIGURAÇÃO DA BASE URL DO AXIOS
 import instance from '../../utils/axios';
 
-export default function Exercises() {
+export default function Travels() {
 
     //UTILIZAÇÃO DO HOOK DE NAVEGAÇÃO 
     const navigate = useNavigate()
@@ -122,7 +122,7 @@ export default function Exercises() {
             <Navbar>
                 <Return />
                 <TitlePage
-                    text={`Exercicios`}
+                    text={`Passeios`}
                 />
                 <MenuButton />
             </Navbar>
@@ -132,7 +132,7 @@ export default function Exercises() {
 
                 {loadingExercises == false && exercises.length >= 1 && exercises.map((exerc, i) => (
                     <>
-                        <ExerciseCard
+                        <TravelCard
                             concluded={exerc.concluded}
                             materia={exerc.materia}
                             title={exerc.title}

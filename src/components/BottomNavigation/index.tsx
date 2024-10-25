@@ -77,13 +77,13 @@ export default function BottomNavigation() {
             
             <div
                 className={`flex flex-col items-center justify-center gap-[5px]`}
-                onClick={() => navigate('/exercises')}
+                onClick={() => navigate('/travels')}
             >
                 <div className={`flex items-center justify-center rounded-[50%] transition-all duration-[.2s] cursor-pointer
-                    ${containsWord(location.pathname, 'exercises') ? 'bg-my-white text-my-terciary' : 'text-my-white hover:bg-my-white hover:text-my-terciary'}`}>
+                    ${containsWord(location.pathname, 'travels') ? 'bg-my-white text-my-terciary' : 'text-my-white hover:bg-my-white hover:text-my-terciary'}`}>
                     <FaRegAddressBook className={`text-[36px] p-[6px] `} />
                 </div>
-                <p className={`text-[10px] text-my-white`}>Exercicios</p>
+                <p className={`text-[10px] text-my-white`}>Passeios</p>
             </div>
 
             <div
