@@ -57,7 +57,7 @@ export const MyProvider = ({ children } : { children: React.ReactNode }) => {
     const sucessColor = '#18ac42'
     const errorColor = '#ff3434'
     const [theme, setTheme] = useState<string | null>(localStorage.getItem('themePC'))
-    const [timeCronogram, setTimeCronogram] = useState<any[]>(['14', '03'])
+    const [timeCronogram, setTimeCronogram] = useState<number[]>([14, 3])
     const [menuOpen, setMenuOpen] = useState<boolean>(false)
     const [userS, setUserS] = useState<User | null>(localStorage.getItem('userPC') !== null ?
         {

@@ -83,7 +83,7 @@ export default function MyPerfil() {
     const states:any = useMyContext()
 
     //RESGATA AS VARIAVEIS GLOBAIS
-    const { theme, userS, toggleLoading, toggleAlert, toggleUser, sucessColor } = states
+    const { theme, userS, toggleLoading, toggleAlert, toggleUser, sucessColor, timeCronogram } = states
 
     //FUNÇÃO RESPONSÁVEL POR LISTAR OS AVATARES
     const fetchImages = async () => {
@@ -428,6 +428,8 @@ export default function MyPerfil() {
 
                 <Button event={updateUser} text='Atualizar' route='undefined' />
                 
+                <p className={`mt-4 text-[30px] ${theme == 'light' ? 'text-my-terciary' : 'text-my-quintenary'}`}>Horário programado: {timeCronogram[0] >= 0 && timeCronogram[0] <= 9 ? `0${timeCronogram[0]}` : `${timeCronogram[0]}`}:{timeCronogram[1] >= 0 && timeCronogram[1] <= 9 ? `0${timeCronogram[1]}` : `${timeCronogram[1]}`}</p>
+
                 <div className='w-[90%] sm:w-[60%] mb-[100px] sm:mb-[30px] lg:mb-0'>
                     <h2
                         className={`

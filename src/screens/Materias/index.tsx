@@ -65,7 +65,7 @@ export default function Materias() {
     const states:any = useMyContext()
 
     //DESESTRUTURA AS VARIAVEIS ESPECIFICADAS
-    const { userS, theme } = states
+    const { userS, theme, timeCronogram } = states
 
     //FUNÇÃO CHAMADA AO RECARREGAR A PÁGINA
     useEffect(() => {
@@ -108,6 +108,8 @@ export default function Materias() {
     useEffect(() => {
         //CHAMA A FUNÇÃO RESPONSÁVEL POR PEGA AS MATÉRIAS CADASTRADAS NO BD
         getMatters()
+
+        console.log(timeCronogram)
     },[])
 
     return(

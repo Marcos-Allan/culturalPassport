@@ -269,7 +269,7 @@ export default function CronogramPage() {
                          <IoArrowForward
                              onClick={() => {
                                 updateUser()
-                                toggleCronogram(hours, minutes)
+                                toggleCronogram(Number(hours), Number(minutes))
                             }}
                              className={`
                              absolute right-[0%] top-[0%] text-[20px] m-1 hover:scale-[1.2] transition-all duration-[.2s] cursor-pointer

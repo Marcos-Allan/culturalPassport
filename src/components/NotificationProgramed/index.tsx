@@ -55,16 +55,16 @@ export default function NotificationProgramed() {
             //VERIFICA SE O TEMPO ATUAL É IGUAL AO TEMPO AGENDADO
             if (horas === Number(timeCronogram[0]) && minutos === Number(timeCronogram[1])) {
                 //COLOCA ALERT NA TELA
-                toggleAlert("warning", `São ${timeCronogram[0]}:${timeCronogram[1]}Hora da notificação!`);
+                toggleAlert("warning", `São ${timeCronogram[0] >= 0 && timeCronogram[0] <= 9 ? `0${timeCronogram[0]}` : timeCronogram[0]} : ${timeCronogram[1] >= 0 && timeCronogram[1] <= 9 ? `0${timeCronogram[1]}` : timeCronogram[1]} Hora da notificação!`);
             }
         };
     
         //CONFIGURA O INTERVALO DE TEMPO QUE CHAMA A FUNÇÃO DE 30 EM 30 SEGUNDOS
-        const intervalo = setInterval(verificarHorario, 30000);
+        const intervalo = setInterval(verificarHorario, 31000);
     
         // Limpa o intervalo quando o componente é desmontado
         return () => clearInterval(intervalo);
-      }, []);
+      }, [timeCronogram]);
 
     return(
         <>
