@@ -47,6 +47,7 @@ export default function Alert() {
 
     //REGISTRA ESTADOS NA APLICAÇÃO
     const [background, setBackground] = useState<string>('')
+    const [isModal, setIsModal] = useState<boolean>(false)
     
     //FUNÇÃO RESPONSÁVEL POR MUDAR A VISIBILIDADE DO MODAL
     function hideAlert() {
@@ -77,45 +78,37 @@ export default function Alert() {
                 setBackground('#64a7f3')
             break;
         }
+        //MUDA O ESTADO DA A VARIAVEL RESPONÁVEL POR COLOCAR O ALERT NA TELA PARA true
+        setIsModal(true)
     }
+
+    useEffect(() => {
+        if(isModal == true){
+            //CHAMA O MODAL
+            if(message.text !== 'Alerta simples'){
+                notify(message.text, background)
+            }
+            //MUDA O ESTADO DA A VARIAVEL RESPONÁVEL POR COLOCAR O ALERT NA TELA PARA  false
+            setIsModal(false)
+        }
+    },[isModal])
     
     //FUNÇÃO CHAMADA QUANDO A PÁGINA É RECARREGADA, E QUANDO TEM ALTERAÇÃO NO ESTADO DA MENSAGEM DO ALERT
     useEffect(() => {
         //CHAMA A FUNÇÃO QUE DEFINE A COR DO MODAL
         hideAlert()
     }, [message])
-        
-    useEffect(() => {
-        //CHAMA O MODAL
-        if(message.text == 'Alert simples'){
-            return
-        }else{
-            notify(message.text)
-        }
-    }, [message])
 
-    const notify = (text:string) => toast(text, {
+    const notify = (text:string, bg:any) => toast(text, {
         theme: theme,
+        progressStyle: message.type !== 'conquest' ?
+            { backgroundColor: bg } :
+            { background: 'linear-gradient(90deg, #FF5733, #FFC300, #DAF7A6, #33FF57)', backgroundSize: '100% 100%' }
     })
 
     return(
         <>
-            {message.type !== 'conquest' ? (
-                <ToastContainer
-                    limit={1}
-                    autoClose={5000}
-                    progressStyle={{ backgroundColor: background }}
-                />
-            ):(
-                <ToastContainer
-                    limit={1}
-                    autoClose={5000} // Define o tempo de fechamento automático do toast (5 segundos)
-                    progressStyle={{
-                        background: 'linear-gradient(90deg, #FF5733, #FFC300, #DAF7A6, #33FF57)',
-                        backgroundSize: '100% 100%', // Tamanho do gradiente para preencher a barra
-                    }}
-                />
-            )}
+            <ToastContainer limit={1} />
         </>
     )
 }   
