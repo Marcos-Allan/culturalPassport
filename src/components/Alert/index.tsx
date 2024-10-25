@@ -28,15 +28,16 @@
  */
 
 //IMPORTAÇÃO DAS BIBLIOTECAS
-import { useState, useEffect, useRef } from 'react'
-import { useSpring, animated } from '@react-spring/web'
+import { useState, useEffect } from 'react'
+import { ToastContainer, toast } from 'react-toastify';
 
 //IMPORTAÇÃO DO PROVEDOR PARA PEGAR AS VARIÁVEIS GLOBAIS
 import { useMyContext } from "../../provider/geral"
 
+//IMPORTAÇÃO DO ESTILO DA BIBLIOTECA react-toastify
+import 'react-toastify/dist/ReactToastify.css';
+
 export default function Alert() {
-    //REFERENCIA A CAIXA DO ALERTA
-    const msg = useRef<HTMLDivElement>(null)
     
     //RESGATA AS VARIAVEIS GLOBAIS
     const states:any = useMyContext()
@@ -45,122 +46,76 @@ export default function Alert() {
     const { theme, message } = states
 
     //REGISTRA ESTADOS NA APLICAÇÃO
-    const [opacity, setOpacity] = useState<number>(1)
-    const [background, setBackground] = useState<string>('#cdcdcd')
-    
-    //CONFIGURA A ANIMAÇÃO INICIAL 
-    const [springs, api] = useSpring(() => ({
-        from: { 
-            width: '100%'
-        },
-        config:{
-            duration: 5500,
-        }
-    }))
+    const [background, setBackground] = useState<string>('')
     
     //FUNÇÃO RESPONSÁVEL POR MUDAR A VISIBILIDADE DO MODAL
     function hideAlert() {
-
-        //VERIFICA SE O TIPO DO MODAL FOI DEFINIDO
-        if(message.type == 'undefined'){
-            if(msg.current){
-                //MUDA O ESTADO DE VISIBILIDADE DELE
-                msg.current.style.display = 'none'
-            }
-            return 
-        }else{
-            //SWITCH CASE DOS TIPOS DA BARRA
-            switch (message.type) {
-                case 'error':
-                    //MUDA A COR DA BARRA DE BACKGROUND
-                    setBackground('#e64f4f')
-                    break;
-                    
-                case 'success':
-                    //MUDA A COR DA BARRA DE BACKGROUND
-                    setBackground('#84cd8e')
-                    break;
+        //SWITCH CASE DOS TIPOS DA BARRA
+        switch (message.type) {
+            case 'error':
+                //MUDA A COR DA BARRA DE BACKGROUND
+                setBackground('#e64f4f')
+            break;
                 
-                case 'conquest':
-                    //MUDA A COR DA BARRA DE BACKGROUND
-                    setBackground('#a049ec')
-                    break;
-                    
-                    default:
-                    //MUDA A COR DA BARRA DE BACKGROUND
-                    setBackground('#64a7f3')
-                    break;
-            }
-            //RESETA A BARRA PARA POSIÇÃO INICIAL E DA INICIO A ANIMAÇÃO
-            api.start({
-                from: { 
-                    width: `100%`,
-                },
-                to: {
-                    width: `0%`,
-                },
-            })
-
-            //PEGA A CAIXA DO ALERT NO ESTADO ATUAL
-            if(msg.current){
-                //MUDA O ESTADO DE VISIBILIDADE DELE E A INTANGIBILIDADE
-                msg.current.style.display = 'block'
-            }
-
-            //DEIXA A CAIXA DE ALERTA VISIVEL
-            setOpacity(1)
+            case 'success':
+                //MUDA A COR DA BARRA DE BACKGROUND
+                setBackground('#84cd8e')
+            break;
             
-            //FUNÇÃO EXECUTADA DEPOIS DE 5.5 SEGUNDOS
-            setTimeout(() => {
-                //DEIXA A CAIXA DE ALERTA INVISIVEL
-                setOpacity(0)
-                
-                //FUNÇÃO EXECUTADA DEPOIS DE 0.4 SEGUNDOS
-                setTimeout(() => {
-                    //PEGA A CAIXA DO ALERT NO ESTADO ATUAL
-                    if(msg.current){
-                        //MUDA O ESTADO DE VISIBILIDADE DELE E A INTANGIBILIDADE
-                        msg.current.style.display = 'none'
-                    }
-                }, 400);
-
-            }, 5500);
+            case 'conquest':
+                //MUDA A COR DA BARRA DE BACKGROUND
+                setBackground('#a049ec')
+            break;
+        
+            case 'warning':
+                //MUDA A COR DA BARRA DE BACKGROUND
+                setBackground('#dffa10')
+            break;
+            
+            default:
+                //MUDA A COR DA BARRA DE BACKGROUND
+                setBackground('#64a7f3')
+            break;
         }
     }
     
     //FUNÇÃO CHAMADA QUANDO A PÁGINA É RECARREGADA, E QUANDO TEM ALTERAÇÃO NO ESTADO DA MENSAGEM DO ALERT
     useEffect(() => {
-        //MUDA A VISIBILIDADE DO MODAL
+        //CHAMA A FUNÇÃO QUE DEFINE A COR DO MODAL
         hideAlert()
     }, [message])
+        
+    useEffect(() => {
+        //CHAMA O MODAL
+        if(message.text == 'Alert simples'){
+            return
+        }else{
+            notify(message.text)
+        }
+    }, [message])
+
+    const notify = (text:string) => toast(text, {
+        theme: theme,
+    })
 
     return(
-        <div className={`w-full flex flex-col items-center p-2 pt-4 absolute top-0`}>
-            <div
-                ref={msg}
-                className={`
-                ${theme == 'light' ? 'bg-my-white border-my-terciary' : 'bg-my-black border-my-quartenary'}
-                w-[95%] sm:w-[60%] border-2 rounded-[8px] px-3 py-2 pb-3 relative overflow-hidden ${opacity == 0 ? 'opacity-0' : 'opacity-100'} transition-opacity duration-[400ms]
-            `}>
-                <p className={`text-center capitalize ${theme == 'light' ? 'text-my-black' : 'text-my-white'}`}>{message.text}</p>
-
-                {/* CRIA UMA DIV COM ANIMAÇÃO */}
-                <animated.div
-                    className={`${message.type == 'conquest' && 'animate-bgChange'}`}
-                    ref={msg}
-                    style={{
-                        height: '6px',
-                        backgroundColor: background,
-                        position: 'absolute',
-                        bottom: '0px',
-                        left: '0px',
-                        transition: 'left',
-                        transitionDuration: '2500ms',
-                        ...springs,
+        <>
+            {message.type !== 'conquest' ? (
+                <ToastContainer
+                    limit={1}
+                    autoClose={5000}
+                    progressStyle={{ backgroundColor: background }}
+                />
+            ):(
+                <ToastContainer
+                    limit={1}
+                    autoClose={5000} // Define o tempo de fechamento automático do toast (5 segundos)
+                    progressStyle={{
+                        background: 'linear-gradient(90deg, #FF5733, #FFC300, #DAF7A6, #33FF57)',
+                        backgroundSize: '100% 100%', // Tamanho do gradiente para preencher a barra
                     }}
                 />
-
-            </div>
-        </div>
+            )}
+        </>
     )
 }   

@@ -16,3 +16,12 @@ body, html {
     height: 100vh;
     overflow: hidden;
 }
+
+@keyframes progressAnimation {
+    0% { background-position: 0% 50%; }
+    100% { background-position: 100% 50%; }
+}
+
+.Toastify__progress-bar {
+    background-size: 200% 200%;
+}
