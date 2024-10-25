@@ -57,6 +57,7 @@ export const MyProvider = ({ children } : { children: React.ReactNode }) => {
     const sucessColor = '#18ac42'
     const errorColor = '#ff3434'
     const [theme, setTheme] = useState<string | null>(localStorage.getItem('themePC'))
+    const [timeCronogram, setTimeCronogram] = useState<any[]>(['14', '03'])
     const [menuOpen, setMenuOpen] = useState<boolean>(false)
     const [userS, setUserS] = useState<User | null>(localStorage.getItem('userPC') !== null ?
         {
@@ -111,10 +112,15 @@ export const MyProvider = ({ children } : { children: React.ReactNode }) => {
     const toggleDeleteAccount  = (state:boolean) => {
         setIsDelAccount(state)
     }
+
+    //FUNÇÃO RESPONSÁVEL POR ATUALIZAR O CRONOGRAMA
+    const toggleCronogram = (hour:number, minute:number) => {
+        setTimeCronogram([hour, minute])
+    }
     
     //RETORNA TUDO PARA SER USADO EM TODO O SITE
     return (
-        <MyContext.Provider value={{ sucessColor, errorColor, theme, toggleTheme, menuOpen, toggleMenuOpen, userS, toggleUser, loading, toggleLoading, message, toggleAlert, isLogout, toggleLogout, isDelAccount, toggleDeleteAccount }}>
+        <MyContext.Provider value={{ sucessColor, errorColor, theme, toggleTheme, menuOpen, toggleMenuOpen, userS, toggleUser, loading, toggleLoading, message, toggleAlert, isLogout, toggleLogout, isDelAccount, toggleDeleteAccount, timeCronogram, toggleCronogram }}>
             {children}
         </MyContext.Provider>
     )

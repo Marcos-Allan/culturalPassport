@@ -39,7 +39,7 @@ export default function NotificationProgramed() {
     const states:any = useMyContext()
 
     //DESESTRUTURA AS VARIAVEIS ESPECIFICADAS
-    const { toggleAlert } = states
+    const { toggleAlert, timeCronogram } = states
 
     useEffect(() => {
         const verificarHorario = () => {
@@ -53,9 +53,9 @@ export default function NotificationProgramed() {
             const minutos = agora.getMinutes();
     
             //VERIFICA SE O TEMPO ATUAL É IGUAL AO TEMPO AGENDADO
-            if (horas === 10 && minutos === 34) {
+            if (horas === Number(timeCronogram[0]) && minutos === Number(timeCronogram[1])) {
                 //COLOCA ALERT NA TELA
-                toggleAlert("warning", "É meio-dia! Hora da notificação!");
+                toggleAlert("warning", `São ${timeCronogram[0]}:${timeCronogram[1]}Hora da notificação!`);
             }
         };
     
