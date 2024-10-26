@@ -117,7 +117,9 @@ export default function Feedback() {
         .then(function (response){
             // console.log(userS.id)
             response.data.map((feedback:any) => {
-                console.log(feedback)
+                console.log(userS.id)
+                console.log(feedback.userID)
+
                 //SETA NO ARRAY DE FEEDBACKS OS FEEDBACKSS
                 setMessages((prevMessages:any) => [...prevMessages, {
                     name: feedback.name,
@@ -194,10 +196,22 @@ export default function Feedback() {
     const RenderStars = (count: number) => {
         return (
             <div className={`flex flex-row gap-1 mr-2`}>
-                {Array(count).fill(<FaStar className='text-[#2533ff] text-[14px]' />)}
+                {Array(count).fill(<FaStar className='text-[#4882fe] text-[14px]' />)}
             </div>
         );
     };
+
+    //FUNÇÃO RESPONSÁVEL POR 
+    function selectRandomColor(cores:[]) {
+        //GERA UM NÚMERO ALEATÓRIO ENTRE O NÚMERO MÁXIMO DE ITEMS DO ARRAY E O MÍNIMO
+        const indiceAleatorio = Math.floor(Math.random() * cores.length)
+
+        //RETORNA A COR ESCOLIDA PELO  ÍNDICE
+        return cores[indiceAleatorio]
+    }
+    
+    //ARRAY DE CORES ESCOLHIDAS
+    const colors = ['#8D46DC', '#75028E', '#20db48', '#4882fe']
 
     return(
         <>
@@ -222,7 +236,7 @@ export default function Feedback() {
 
                 {messages.length > 0 && messages.map((msg) => (
                     <>
-                        {msg.userID !== userS.id ? (
+                        {msg.userID != userS.id ? (
                             <div
                                 key={Math.random() * 999999999999}   
                                 className={`p-1 w-full rounded-[10px]`}
@@ -230,7 +244,10 @@ export default function Feedback() {
                                 <div className={`flex flex-col justify-between items-start gap-2 p-1`}>
                                     <div className={`flex flex-row items-center gap-2`}>
                                         <img src={msg.userImg} className='w-6 h-6 rounded-[50%]' />
-                                        <p className={`text-[#ff0062] font-black text-[16px] my-2`}>
+                                        <p
+                                            style={{ color: selectRandomColor(colors as any) }}
+                                            className={`font-black text-[16px] my-2`}
+                                        >
                                             {msg.name}
                                         </p>
                                     </div>
@@ -248,7 +265,9 @@ export default function Feedback() {
                                 <div className={`flex flex-col justify-between items-start gap-2 p-1`}>
                                     <div className={`flex flex-row items-center gap-2`}>
                                         <img src={userS.img} className='w-6 h-6 rounded-[50%]' />
-                                        <p className={`text-[#ff0062] font-black text-[16px] my-2`}>
+                                        <p
+                                            className={`text-[#ff346e] font-black text-[16px] my-2`}
+                                        >
                                             {userS.name}
                                         </p>
                                     </div>
@@ -256,7 +275,7 @@ export default function Feedback() {
                                     <p className={`flex ps-1 flex-row items-center gap-1  text-[16px] ${theme == 'light' ? 'text-my-black' : 'text-my-white'}`}>
                                         {RenderStars(msg.raiting)}
 
-                                        {`${new Date().getDate()}/${new Date().getMonth() + 1}/${new Date().getFullYear()}`}
+                                        {msg.data}
                                     </p>
                                 </div>
                                 
@@ -275,7 +294,6 @@ export default function Feedback() {
                         e.preventDefault()
                         // handleSubmit(JSON.stringify({ rating: selectedRating, message: inputMessage }))
                         handleSubmit(inputMessage, Number(selectedRating), `${new Date().getDate()}/${new Date().getMonth() + 1}/${new Date().getFullYear()}`)
-                        
                     }}
                 >
                     <StarRating onRatingSelect={handleRatingSelect} maxStars={5} />
