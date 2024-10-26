@@ -194,7 +194,7 @@ export default function CronogramPage() {
                         <input
                             type="number"
                             value={Number(hours) >= 0 && Number(hours) <= 9 ? '0'+hours : hours}
-                            className={`w-[34px] flex items-center justify-center text-center bg-transparent outline-none border-none
+                            className={`w-[45px] text-[20px] flex items-center justify-center text-center bg-transparent outline-none border-none
                                 ${theme == 'light' ? 'text-my-black' : 'text-my-white'}
                             `}
                             onChange={handleHours}
@@ -203,7 +203,7 @@ export default function CronogramPage() {
                         <input
                             type="number"
                             value={Number(minutes) >= 0 && Number(minutes) <= 9 ? '0'+minutes : minutes}
-                            className={`w-[34px] flex items-center justify-center text-center bg-transparent outline-none border-none
+                            className={`w-[45px] text-[20px] flex items-center justify-center text-center bg-transparent outline-none border-none
                                 ${theme == 'light' ? 'text-my-black' : 'text-my-white'}
                             `}
                             onChange={handleMinutes}

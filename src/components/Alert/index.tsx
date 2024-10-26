@@ -103,7 +103,7 @@ export default function Alert() {
         theme: theme,
         progressStyle: message.type !== 'conquest' ?
             { backgroundColor: bg } :
-            { background: 'linear-gradient(90deg, #FF5733, #FFC300, #DAF7A6, #33FF57)', backgroundSize: '100% 100%' }
+            { background: 'linear-gradient(90deg, #191D1F, #8D46DC, #75028E, #20db48, #4882fe)', backgroundSize: '100% 100%' }
     })
 
     return(

@@ -143,7 +143,7 @@ export default function ConquestCard(props: Props) {
                                 width: `${achievement ? 100 : Number(props.porcentage)}%`,
                             }}
                             className={`h-full ${
-                                theme === 'light' ? 'bg-my-secondary' : 'bg-my-quartenary'
+                                theme === 'light' ? 'bg-my-quintenary' : 'bg-my-secondary'
                             }`}
                         ></div>
                     </div>

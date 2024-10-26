@@ -51,10 +51,13 @@ import { useMyContext } from '../../provider/geral';
 
 //INTERFACE DAS MENSAGENS
 interface Msg{
-    text: string,
-    user: string,
-    id: number,
-    img: string,
+    _id: any,
+    userID: any,
+    message: string,
+    raiting: number,
+    data: string,
+    name: string,
+    userImg: string,
 }
 
 export default function Feedback() {
@@ -86,6 +89,8 @@ export default function Feedback() {
             //REDIRECIONA ELE PARA A PÁGINA DE MATÉRIAS
             navigate('/')
         }
+
+        console.log(messages)
     },[userS.logged])
 
     //CHECA SE O USUÁRIO JA MANDOU O FEEDBACK
@@ -112,13 +117,16 @@ export default function Feedback() {
         .then(function (response){
             // console.log(userS.id)
             response.data.map((feedback:any) => {
-                
+                console.log(feedback)
                 //SETA NO ARRAY DE FEEDBACKS OS FEEDBACKSS
                 setMessages((prevMessages:any) => [...prevMessages, {
-                    user: feedback.name,
-                    text: feedback.message,
-                    id: feedback.userID,
-                    img: feedback.userImg
+                    name: feedback.name,
+                    message: feedback.message,
+                    userID: feedback.userID,
+                    userImg: feedback.userImg,
+                    raiting: feedback.raiting,
+                    data: feedback.data,
+
                 }])
             })
         })
@@ -128,7 +136,7 @@ export default function Feedback() {
     }
 
     //SALVA OS FEEDBACKS NO BD
-    const handleSubmit = (mesg:string) => {
+    const handleSubmit = (msg:string, raiting:number, data:string) => {
 
         if(((selectedRating !== null && selectedRating == 0) || selectedRating == null) && (inputMessage == "")){ //VERIFICA SE O USUÁRIO NÃO COLOCOU AS ESTRELAS E NEM O FEEDBACK
             //COLOCA ALERT NA TELA
@@ -145,7 +153,9 @@ export default function Feedback() {
         }else{ //VERIFICA SE O FEEDBACK JÁ TEM ESTRELAS E COMENTÁRIO
             instance.post('/feedback/upload', {
                 userID: userS.id,
-                message: mesg,
+                message: msg,
+                raiting: raiting,
+                data: data,
                 name: userS.name,
                 userImg: userS.img
             })
@@ -212,26 +222,26 @@ export default function Feedback() {
 
                 {messages.length > 0 && messages.map((msg) => (
                     <>
-                        {msg.id !== userS.id ? (
+                        {msg.userID !== userS.id ? (
                             <div
                                 key={Math.random() * 999999999999}   
                                 className={`p-1 w-full rounded-[10px]`}
                             >
                                 <div className={`flex flex-col justify-between items-start gap-2 p-1`}>
                                     <div className={`flex flex-row items-center gap-2`}>
-                                        <img src={msg.img} className='w-6 h-6 rounded-[50%]' />
+                                        <img src={msg.userImg} className='w-6 h-6 rounded-[50%]' />
                                         <p className={`text-[#ff0062] font-black text-[16px] my-2`}>
-                                            {msg.user}
+                                            {msg.name}
                                         </p>
                                     </div>
                                     <p className={`flex ps-1 flex-row items-center gap-1  text-[16px] ${theme == 'light' ? 'text-my-black' : 'text-my-white'}`}>
-                                        {RenderStars(Number(JSON.parse(msg.text).rating))}
+                                        {RenderStars(msg.raiting)}
 
-                                        {`${new Date().getDate()}/${new Date().getMonth() + 1}/${new Date().getFullYear()}`}
+                                        {msg.data}
                                     </p>
                                 </div>
                                 
-                                <p className={`${theme == 'light' ? 'text-my-black' : 'text-my-white'} my-1 mx-3`}>{JSON.parse(msg.text).message}</p>
+                                <p className={`${theme == 'light' ? 'text-my-black' : 'text-my-white'} my-1 mx-3`}>{msg.message}</p>
                             </div> 
                         ):(
                             <div className={`p-1 w-full rounded-[10px]`}>
@@ -244,13 +254,13 @@ export default function Feedback() {
                                     </div>
 
                                     <p className={`flex ps-1 flex-row items-center gap-1  text-[16px] ${theme == 'light' ? 'text-my-black' : 'text-my-white'}`}>
-                                        {RenderStars(Number(JSON.parse(msg.text).rating))}
+                                        {RenderStars(msg.raiting)}
 
                                         {`${new Date().getDate()}/${new Date().getMonth() + 1}/${new Date().getFullYear()}`}
                                     </p>
                                 </div>
                                 
-                                <p className={`${theme == 'light' ? 'text-my-black' : 'text-my-white'} my-1 mx-3`}>{JSON.parse(msg.text).message}</p>
+                                <p className={`${theme == 'light' ? 'text-my-black' : 'text-my-white'} my-1 mx-3`}>{msg.message}</p>
                             </div>
                         )}
                     </>
@@ -263,7 +273,9 @@ export default function Feedback() {
                     className={`w-[95%] sm:w-[60%] py-2 px-1 flex flex-row flex-wrap gap-1 mt-2 mb-[100px] lg:mb-0`}
                     onSubmit={(e) => {
                         e.preventDefault()
-                        handleSubmit(JSON.stringify({ rating: selectedRating, message: inputMessage }))
+                        // handleSubmit(JSON.stringify({ rating: selectedRating, message: inputMessage }))
+                        handleSubmit(inputMessage, Number(selectedRating), `${new Date().getDate()}/${new Date().getMonth() + 1}/${new Date().getFullYear()}`)
+                        
                     }}
                 >
                     <StarRating onRatingSelect={handleRatingSelect} maxStars={5} />

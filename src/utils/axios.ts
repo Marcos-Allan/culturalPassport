@@ -30,8 +30,8 @@
 import axios from 'axios'
 
 const instance = axios.create({
-    baseURL: 'https://backend-cultural-passport.vercel.app'
-    // baseURL: 'https://backendculturalpassport-1.onrender.com'
+    // baseURL: 'https://backend-cultural-passport.vercel.app'
+    baseURL: 'https://backendculturalpassport-1.onrender.com'
     // baseURL: 'http://localhost:3000'
   });
 
