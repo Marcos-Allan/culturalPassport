@@ -28,7 +28,7 @@
  */
 
 //IMPORTAÇÃO DAS BIBLIOTECAS
-import { useState, useEffect } from 'react'
+import { useEffect } from 'react'
 import { ToastContainer, toast } from 'react-toastify';
 
 //IMPORTAÇÃO DO PROVEDOR PARA PEGAR AS VARIÁVEIS GLOBAIS
@@ -45,65 +45,55 @@ export default function Alert() {
     //DESESTRUTURA AS VARIAVEIS ESPECIFICADAS
     const { theme, message } = states
 
-    //REGISTRA ESTADOS NA APLICAÇÃO
-    const [background, setBackground] = useState<string>('')
-    const [isModal, setIsModal] = useState<boolean>(false)
-    
     //FUNÇÃO RESPONSÁVEL POR MUDAR A VISIBILIDADE DO MODAL
     function hideAlert() {
         //SWITCH CASE DOS TIPOS DA BARRA
         switch (message.type) {
             case 'error':
-                //MUDA A COR DA BARRA DE BACKGROUND
-                setBackground('#e64f4f')
+                //CHAMA O MODAL DE ACORDO COM A COR PASSADA POR PARÂMETRO
+                notify(message.text, '#e64f4f')
             break;
                 
             case 'success':
-                //MUDA A COR DA BARRA DE BACKGROUND
-                setBackground('#84cd8e')
+                //CHAMA O MODAL DE ACORDO COM A COR PASSADA POR PARÂMETRO
+                notify(message.text, '#84cd8e')
             break;
             
             case 'conquest':
-                //MUDA A COR DA BARRA DE BACKGROUND
-                setBackground('#a049ec')
+                //CHAMA O MODAL DE ACORDO COM A COR PASSADA POR PARÂMETRO
+                notifyConquest(message.text)
             break;
         
             case 'warning':
-                //MUDA A COR DA BARRA DE BACKGROUND
-                setBackground('#dffa10')
+                //CHAMA O MODAL DE ACORDO COM A COR PASSADA POR PARÂMETRO
+                notify(message.text, '#dffa10')
             break;
             
             default:
-                //MUDA A COR DA BARRA DE BACKGROUND
-                setBackground('#64a7f3')
+                //CHAMA O MODAL DE ACORDO COM A COR PASSADA POR PARÂMETRO
+                notify(message.text, '#64a7f3')
             break;
         }
-        //MUDA O ESTADO DA A VARIAVEL RESPONÁVEL POR COLOCAR O ALERT NA TELA PARA true
-        setIsModal(true)
     }
-
-    useEffect(() => {
-        if(isModal == true){
-            //CHAMA O MODAL
-            if(message.text !== 'Alerta simples'){
-                notify(message.text, background)
-            }
-            //MUDA O ESTADO DA A VARIAVEL RESPONÁVEL POR COLOCAR O ALERT NA TELA PARA  false
-            setIsModal(false)
-        }
-    },[isModal])
     
     //FUNÇÃO CHAMADA QUANDO A PÁGINA É RECARREGADA, E QUANDO TEM ALTERAÇÃO NO ESTADO DA MENSAGEM DO ALERT
     useEffect(() => {
-        //CHAMA A FUNÇÃO QUE DEFINE A COR DO MODAL
-        hideAlert()
+        //CHAMA A FUNÇÃO QUE COLOXA O MODAL
+        if(message.text == 'Alerta simples'){
+            return
+        }else{
+            hideAlert()
+        }
     }, [message])
 
-    const notify = (text:string, bg:any) => toast(text, {
+    const notify = (text:string, bg:string) => toast(text, {
         theme: theme,
-        progressStyle: message.type !== 'conquest' ?
-            { backgroundColor: bg } :
-            { background: 'linear-gradient(90deg, #191D1F, #8D46DC, #75028E, #20db48, #4882fe)', backgroundSize: '100% 100%' }
+        progressStyle: { backgroundColor: bg }
+    })
+    
+    const notifyConquest = (text:string) => toast(text, {
+        theme: theme,
+        progressStyle: { background: 'linear-gradient(90deg, #191D1F, #8D46DC, #75028E, #20db48, #4882fe)', backgroundSize: '100% 100%' }
     })
 
     return(
