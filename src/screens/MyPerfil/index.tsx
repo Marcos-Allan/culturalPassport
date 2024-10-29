@@ -114,7 +114,7 @@ export default function MyPerfil() {
     useEffect(() => {
         //LISTA OS AVATARES DO SISTEMA
         fetchImages();
-        
+
         //COLOCA O NOME DO USUÁRIO DA CONTA
         setName(userS.name)
         
