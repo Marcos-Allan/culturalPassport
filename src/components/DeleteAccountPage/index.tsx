@@ -53,7 +53,7 @@ export default function DeleteAccountPage() {
             toggleAlert('success', 'conta deletada com sucesso')
             
             //REGISTRA O NOME E A FOTO E O ID DO DO USUARIO LOGADO PARA MOSTRAR NO FRONT-END
-            toggleUser('', '', '', [], 0, [], false)
+            toggleUser('', '', '', [], 0, [], '', [], false)
             
             //REMOVE A TELA DE POP-UP DE REMOVER
             toggleDeleteAccount(!isDelAccount)

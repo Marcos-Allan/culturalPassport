@@ -42,6 +42,8 @@ interface User {
     simulations: any,
     simulationsConcludeds: number,
     cronogram: any,
+    soundAlert: string,
+    timeCronograma: any,
 }
 
 //TIPAGEM DO ALERT
@@ -65,10 +67,12 @@ export const MyProvider = ({ children } : { children: React.ReactNode }) => {
             name: JSON.parse(localStorage.getItem('userPC') as any).name,
             img: JSON.parse(localStorage.getItem('userPC') as any).img,
             id: JSON.parse(localStorage.getItem('userPC') as any).id,
+            soundAlert: JSON.parse(localStorage.getItem('userPC') as any).soundAlert,
             simulations: JSON.parse(localStorage.getItem('userPC') as any).simulations,
             simulationsConcludeds: JSON.parse(localStorage.getItem('userPC') as any).simulationsConcludeds,
-            cronogram: JSON.parse(localStorage.getItem('userPC') as any).cronogram
-        } : { logged: false, name: '', img: '', id: '', simulations: [], simulationsConcludeds: 0, cronogram: [] }
+            cronogram: JSON.parse(localStorage.getItem('userPC') as any).cronogram,
+            timeCronograma: JSON.parse(localStorage.getItem('userPC') as any).timeCronograma,
+        } : { logged: false, name: '', img: '', id: '', simulations: [], simulationsConcludeds: 0, cronogram: [], soundAlert: 'https://firebasestorage.googleapis.com/v0/b/cultural-passport-78148.appspot.com/o/images%2Fsounds%2F14.mp3?alt=media&token=05af905e-a0c0-4552-b428-bfa036e28a13', timeCronograma: [10, 0]}
     )
     const [loading, setLoading] = useState<boolean>(false)
     const [message, setMessage] = useState<Alert>({ type: 'undefined', text: 'Alerta simples' })
@@ -89,9 +93,9 @@ export const MyProvider = ({ children } : { children: React.ReactNode }) => {
     }
     
     //FUNÇÃO RESPONSAVEL POR ABRIR E FECHAR O MENU
-    const toggleUser = (name:string, img:string, id:string, simulations:any, simulationsConcludeds:number = 0, cronogram:any, logged:boolean = true) => {
+    const toggleUser = (name:string, img:string, id:string, simulations:any, simulationsConcludeds:number = 0, cronogram:any, soundAlert:string, timeCronograma:any, logged:boolean = true) => {
         localStorage.setItem('userPC', JSON.stringify({ logged: logged, name: name, img: img, id: id, simulations: simulations, simulationsConcludeds: simulationsConcludeds, cronogram: cronogram }))
-        setUserS({ logged: logged, name: name, img: img, id: id, simulations: simulations, simulationsConcludeds: simulationsConcludeds, cronogram: cronogram })
+        setUserS({ logged: logged, name: name, img: img, id: id, simulations: simulations, simulationsConcludeds: simulationsConcludeds, cronogram: cronogram, soundAlert: soundAlert, timeCronograma: timeCronograma })
     }
     
     //FUNÇÃO RESPONSAVEL POR TROCAR O ESTADO DE LOADING DA APLICAÇÃO

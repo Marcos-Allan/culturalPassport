@@ -259,7 +259,7 @@ export default function MyPerfil() {
             console.log(cronogram)
 
             //REGISTRA O NOME E A FOTO E O ID DO USUARIO LOGADO PARA MOSTRAR NO FRONT-END
-            toggleUser(response.data.name, response.data.img, response.data._id, response.data.simulations, response.data.simulationsConcludeds, cronogram)
+            toggleUser(response.data.name, response.data.img, response.data._id, response.data.simulations, response.data.simulationsConcludeds, cronogram, soundNotification, timeCronogram)
 
             //COLOCA ALERT NA TELA
             toggleAlert(`success`, `Alteração feita com sucesso`);
@@ -439,7 +439,7 @@ export default function MyPerfil() {
                     ))}
                 </div>
                 
-                <p className={`mt-4 text-[30px] ${theme == 'light' ? 'text-my-terciary' : 'text-my-quintenary'}`}>Horário programado: {timeCronogram[0] >= 0 && timeCronogram[0] <= 9 ? `0${timeCronogram[0]}` : `${timeCronogram[0]}`}:{timeCronogram[1] >= 0 && timeCronogram[1] <= 9 ? `0${timeCronogram[1]}` : `${timeCronogram[1]}`}</p>
+                <p className={`mt-4 text-[30px] ${theme == 'light' ? 'text-my-terciary' : 'text-my-quintenary'}`}>Horário programado: {userS.timeCronograma[0] >= 0 && userS.timeCronograma[0] <= 9 ? `0${userS.timeCronograma[0]}` : `${userS.timeCronograma[0]}`}:{userS.timeCronograma[1] >= 0 && userS.timeCronograma[1] <= 9 ? `0${userS.timeCronograma[1]}` : `${userS.timeCronograma[1]}`}</p>
 
                 <div className='w-[90%] sm:w-[60%] mb-[100px] sm:mb-[30px] lg:mb-0'>
                     <h2
@@ -459,7 +459,7 @@ export default function MyPerfil() {
                         <div
                             className={`absolute top-[-10px] right-[-10px] w-[25px] h-[25px] rounded-[50%] flex items-center justify-center cursor-pointer hover:scale-[1.2] transition-all duration-[.2s] ${theme == 'light' ? 'bg-my-terciary' : 'bg-my-quintenary'}`}
                             onClick={() => {
-                                toggleUser(userS.name, userS.img, userS.id, userS.simulations, userS.simulationsConcludeds, [])
+                                toggleUser(userS.name, userS.img, userS.id, userS.simulations, userS.simulationsConcludeds, [], userS.soundAlert, userS.timeCronograma)
                                 navigate('/materias')
                             }}
                         >

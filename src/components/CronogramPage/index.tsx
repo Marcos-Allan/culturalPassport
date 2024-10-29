@@ -44,14 +44,14 @@ export default function CronogramPage() {
     const states:any = useMyContext()
 
     //DESESTRUTURA AS VARIAVEIS ESPECIFICADAS
-    const { theme, userS, toggleLoading, toggleUser, toggleAlert, toggleCronogram } = states
+    const { theme, userS, toggleLoading, toggleUser, toggleAlert, toggleCronogram, soundNotification } = states
 
     //UTILIZAÇÃO DO HOOK useState
     const [matters, setMatters] = useState<any[]>([])
     const [cronogramS, setCronogramS] = useState<any[]>([])
     
-    const [hours, setHours] = useState<number | string>(0)
-    const [minutes, setMinutes] = useState<number | string>(59)
+    const [hours, setHours] = useState<number | string>(userS.timeCronograma[0])
+    const [minutes, setMinutes] = useState<number | string>(userS.timeCronograma[1])
 
     const ord = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
     
@@ -98,7 +98,9 @@ export default function CronogramPage() {
 
             //FAZ UMA REQUISIÇÃO DO TIPO put PARA ATUALIZAR OS DADOS DO USUÁRIO
              instance.put(`/users/update/${userS.id}`, {
-                cronogram: JSON.stringify(cronogramS)
+                cronogram: JSON.stringify(cronogramS),
+                timeCronograma: [hours, minutes],
+                soundAlert: soundNotification
             })
             .then(function(response) {
 
@@ -115,7 +117,8 @@ export default function CronogramPage() {
                 console.log(cronogram)
     
                 //REGISTRA O NOME E A FOTO E O ID DO USUARIO LOGADO PARA MOSTRAR NO FRONT-END
-                toggleUser(response.data.name, response.data.img, response.data._id, response.data.simulations, response.data.simulationsConcludeds, cronogram)
+                toggleUser(response.data.name, response.data.img, response.data._id, response.data.simulations, response.data.simulationsConcludeds, cronogram, response.data.soundAlert, response.data.timeCronograma)
+                
     
                 //COLOCA ALERT NA TELA
                 toggleAlert(`success`, `Cronograma atualizado com sucesso`);

@@ -39,9 +39,9 @@ export default function NotificationProgramed() {
     const states:any = useMyContext()
 
     //DESESTRUTURA AS VARIAVEIS ESPECIFICADAS
-    const { toggleAlert, timeCronogram, soundNotification } = states
+    const { toggleAlert, timeCronogram, userS } = states
 
-    const alarm = new Audio(soundNotification)
+    const alarm = new Audio(userS.soundAlert)
 
     //FUNÇÃO CHAMADA TODA VEZ QUE A PÁGINA É RECARREGADA
     useEffect(() => {
@@ -56,9 +56,9 @@ export default function NotificationProgramed() {
             const minutos = agora.getMinutes();
     
             //VERIFICA SE O TEMPO ATUAL É IGUAL AO TEMPO AGENDADO
-            if (horas === Number(timeCronogram[0]) && minutos === Number(timeCronogram[1])) {
+            if (horas === Number(userS.timeCronograma[0]) && minutos === Number(userS.timeCronograma[1])) {
                 //COLOCA ALERT NA TELA
-                toggleAlert("warning", `São ${timeCronogram[0] >= 0 && timeCronogram[0] <= 9 ? `0${timeCronogram[0]}` : timeCronogram[0]} : ${timeCronogram[1] >= 0 && timeCronogram[1] <= 9 ? `0${timeCronogram[1]}` : timeCronogram[1]} Hora da notificação!`)
+                toggleAlert("warning", `São ${userS.timeCronograma[0] >= 0 && userS.timeCronograma[0] <= 9 ? `0${userS.timeCronograma[0]}` : userS.timeCronograma[0]} : ${userS.timeCronograma[1] >= 0 && userS.timeCronograma[1] <= 9 ? `0${userS.timeCronograma[1]}` : userS.timeCronograma[1]} Hora da notificação!`)
 
                 //DA PLAY NO SOM DO ALERT
                 alarm.play()

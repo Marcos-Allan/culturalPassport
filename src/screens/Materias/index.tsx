@@ -109,7 +109,7 @@ export default function Materias() {
         //CHAMA A FUNÇÃO RESPONSÁVEL POR PEGA AS MATÉRIAS CADASTRADAS NO BD
         getMatters()
 
-        console.log(timeCronogram)
+        console.log(userS)
     },[])
 
     return(

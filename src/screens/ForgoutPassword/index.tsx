@@ -112,7 +112,7 @@ export default function ForgoutPassword() {
                 //COLOCA ALERT NA TELA
                 toggleAlert(`success`, `Email enviado`)
                 //RESGATA O ID DO USUÁRIO
-                toggleUser('', '', response.data.user._id, [], 0, [], false)
+                toggleUser('', '', response.data.user._id, [], 0, [], 'https://firebasestorage.googleapis.com/v0/b/cultural-passport-78148.appspot.com/o/images%2Fsounds%2F14.mp3?alt=media&token=05af905e-a0c0-4552-b428-bfa036e28a13', [10, 0], false)
                 //REDIRECIONA O USUÁRIO PARA A PRÓXIMA PÁGINA
                 navigate('/confirm-code')
             }else{
