@@ -33,53 +33,21 @@ import { useEffect } from 'react'
 //IMPORTAÇÃO DO PROVEDOR PARA PEGAR AS VARIÁVEIS GLOBAIS
 import { useMyContext } from '../../provider/geral';
 
-//IMPORTAÇÃO DAS BIBLIOTECAS DO FIREBASE
-import { ref, getDownloadURL, listAll } from 'firebase/storage';
-import { storage } from '../../utils/firebase';
-
 export default function NotificationProgramed() {
 
     //RESGATA AS VARIAVEIS GLOBAIS
     const states:any = useMyContext()
 
     //DESESTRUTURA AS VARIAVEIS ESPECIFICADAS
-    const { toggleAlert, timeCronogram } = states
+    const { toggleAlert, timeCronogram, soundNotification } = states
 
-    //FUNÇÃO RESPONSÁVEL POR LISTAR OS AVATARES
-    const fetchSounds = async () => {
-        //FAZ UMA REFERÊNCIA AO LOCAL DE AVATARES SALVOS NA NUVEM
-        const storageRef = ref(storage, '/images/sounds');
-        // const storageRef = ref(storage, '/images/icons-achievements');
-
-        try {
-            //PEGA AS IMAGENS DENTRO DA PASTA ESPECIFICADA
-            const result = await listAll(storageRef);
-
-            //PEGA A URL DOS AVATARES
-            const urlPromises = result.items.map((sounds) => getDownloadURL(sounds));
-            
-            //ESPERA TODOS OS AVATARES SEREM 
-            const urls = await Promise.all(urlPromises);
-            
-            console.log(urls)
-            
-            //SETA AS URLS DOS SONS
-            console.log(urls);
-        } catch (error) {
-            console.error('Erro ao listar os sons:', error);
-        }
-    };
-
-    const alarm = new Audio('https://firebasestorage.googleapis.com/v0/b/cultural-passport-78148.appspot.com/o/images%2Fsounds%2F14.mp3?alt=media&token=05af905e-a0c0-4552-b428-bfa036e28a13')
+    const alarm = new Audio(soundNotification)
 
     //FUNÇÃO CHAMADA TODA VEZ QUE A PÁGINA É RECARREGADA
     useEffect(() => {
         const verificarHorario = () => {
             //PEGA O TEMPO ATUAL
             const agora = new Date();
-
-            //LISTA OS SONS DO BANCO DE DADOS
-            fetchSounds()
             
             //PEGA A HORA ATUAL
             const horas = agora.getHours();

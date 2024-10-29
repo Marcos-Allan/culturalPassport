@@ -39,7 +39,7 @@ import { ref, uploadBytesResumable, getDownloadURL, listAll } from 'firebase/sto
 import { storage } from '../../utils/firebase';
 
 //IMPORTAÇÃO DOS ICONES
-import { MdImage, MdOutlineEdit } from "react-icons/md"
+import { MdImage, MdOutlineEdit, MdAudiotrack } from "react-icons/md"
 
 //IMPORTAÇÃO DO PROVEDOR PARA PEGAR AS VARIÁVEIS GLOBAIS
 import { useMyContext } from "../../provider/geral"
@@ -74,8 +74,8 @@ export default function MyPerfil() {
     //UTILIZA O HOOK useState
     const [img, setImg] = useState<string>('')
     const [imgs, setImgs] = useState<string[]>([])
+    const [sounds, setSounds] = useState<string[]>([])
     const [name, setName] = useState<string>()
-    const [imgURL, setImgURL] = useState<string>('imagens')
     const [progress, setProgress] = useState<any>(0)
     const [days, setDays] = useState<string[]>(['segunda-feira', 'terça-feira', 'quarta-feira', 'quinta-feira', 'sexta-feira', 'sábado'])
 
@@ -83,7 +83,7 @@ export default function MyPerfil() {
     const states:any = useMyContext()
 
     //RESGATA AS VARIAVEIS GLOBAIS
-    const { theme, userS, toggleLoading, toggleAlert, toggleUser, sucessColor, timeCronogram } = states
+    const { theme, userS, toggleLoading, toggleAlert, toggleUser, timeCronogram, toggleSoundNotification, soundNotification } = states
 
     //FUNÇÃO RESPONSÁVEL POR LISTAR OS AVATARES
     const fetchImages = async () => {
@@ -110,10 +110,39 @@ export default function MyPerfil() {
         }
     };
 
+    //FUNÇÃO RESPONSÁVEL POR LISTAR OS AVATARES
+    const fetchSounds = async () => {
+        //FAZ UMA REFERÊNCIA AO LOCAL DE AVATARES SALVOS NA NUVEM
+        const storageRef = ref(storage, '/images/sounds');
+        // const storageRef = ref(storage, '/images/icons-achievements');
+
+        try {
+            //PEGA AS IMAGENS DENTRO DA PASTA ESPECIFICADA
+            const result = await listAll(storageRef);
+
+            //PEGA A URL DOS AVATARES
+            const urlPromises = result.items.map((sounds) => getDownloadURL(sounds));
+            
+            //ESPERA TODOS OS AVATARES SEREM 
+            const urls = await Promise.all(urlPromises);
+            
+            console.log(urls)
+            console.log(progress)
+            
+            //SETA AS URLS DOS SONS
+            setSounds(urls);
+        } catch (error) {
+            console.error('Erro ao listar os sons:', error);
+        }
+    };
+
     //FUNÇÃO CHAMADA TODA VEZ QUE RECARREGA A PÁGINA
     useEffect(() => {
         //LISTA OS AVATARES DO SISTEMA
         fetchImages();
+        
+        //LISTA OS SONS DO BANCO DE DADOS
+        fetchSounds()
 
         //COLOCA O NOME DO USUÁRIO DA CONTA
         setName(userS.name)
@@ -142,9 +171,6 @@ export default function MyPerfil() {
             reader.onloadend = () => {
                 //SETA AS IMAGENS COMO URL
                 setImg(reader.result as string)
-                
-                //SETA AS IMAGENS COMO URL
-                setImgURL(reader.result as string)
             }
             //LÊ A URL DO ARQUIVO
             reader.readAsDataURL(file)
@@ -187,7 +213,6 @@ export default function MyPerfil() {
                         getDownloadURL(uploadTask.snapshot.ref)
                             .then(url => {
                                 //SETA A URL DA IMAGEM
-                                setImgURL(url);
                                 setImg(url);
 
                                 //RESOLVE A PROMESSA PASSANDO A IMAGEM COMO PARÂMETRO
@@ -243,9 +268,6 @@ export default function MyPerfil() {
             if (inputFileRef.current) {
                 inputFileRef.current.value = "";
             }
-
-            //RESETA A URL DA IMAGEM
-            setImgURL('')
             
             //RESETA A PORCENTAGEM DO PROGRESSO
             setProgress(0)
@@ -338,13 +360,31 @@ export default function MyPerfil() {
             <div className={`w-full flex flex-col items-center overflow-y-scroll scrollbar scrollbar-track-transparent scrollbar-thumb-my-secondary`}>
                 
                 {userS.logged == true && (
-                    <div className={`w-[90%] sm:w-[60%] flex items-center gap-[10px] mb-0 mt-4`}>
-                        <img
-                            src={img}
-                            alt=""
-                            className={`rounded-[50%] mb-2 w-[80px] h-[80px] border-[1px] p-1 ${theme == 'light' ? 'border-my-terciary' : 'border-my-quintenary'}`}
-                        />
-
+                    <div className={`w-[90%] sm:w-[60%] flex items-center gap-[10px] mb-0 mt-4 relative`}>
+                        <div className={`relative w-[80px] h-[80px]`}>
+                            <img
+                                src={img}
+                                alt=""
+                                className={`rounded-[50%] min-w-[80px] min-h-[80px] border-[1px] p-1 ${theme == 'light' ? 'border-my-terciary' : 'border-my-quintenary'}`}
+                            />
+                            <label className='absolute top-[-6px] right-[-6px]' htmlFor='fileArchive'>
+                                <div className={`w-full flex flex-row items-center justify-between`}>
+                                    <MdImage
+                                        className={`
+                                            hover:scale-[1.1]
+                                            transition-all
+                                            duration-[.3s]
+                                            cursor-pointer
+                                            text-[32px]
+                                            rounded-[50%]
+                                            p-2
+                                            ${theme == 'light' ? 'text-my-white bg-my-secondary' : 'text-my-black bg-my-quintenary'}
+                                        `}
+                                    />
+                                </div>
+                            </label>
+                        </div>
+                        
                         <input
                             onChange={(e) => setName(e.target.value)}
                             className={`text-[22px] w-full font-bold capitalize bg-transparent border-2 p-1 ps-2 rounded-[15px] outline-none
@@ -358,50 +398,6 @@ export default function MyPerfil() {
                 )}
 
                 <div className={`w-[90%] sm:w-[60%] flex flex-row items-center justify-center relative`}>
-                    <label className='w-[90%]' htmlFor='fileArchive'>
-                        <div className={`w-full my-[20px] flex flex-row items-center justify-between`}>
-                            <MdImage
-                                className={`
-                                    hover:scale-[1.1]
-                                    transition-all
-                                    duration-[.3s]
-                                    cursor-pointer
-                                    text-[64px]
-                                    rounded-[50%]
-                                    border-[2px]
-                                    p-2
-                                    ${imgURL ? `` : `${theme == 'light' ? 'text-my-gray border-my-gray' : 'text-my-gray-black border-my-gray-black'}`}
-                                `}
-                                style={{ color: `${imgURL && sucessColor}`, borderColor: `${imgURL && sucessColor}` }}
-                            />
-                            <p
-                                className={`
-                                    pl-[20px]
-                                    sm:pl-0
-                                    text-[20px]
-                                    font-extralight
-                                    hover:scale-[1.1]
-                                    transition-all
-                                    duration-[.3s]
-                                    cursor-pointer
-                                    ${imgURL ? `` : `${theme == 'light' ? 'text-my-gray' : 'text-my-gray-black'}`}
-                                `}
-                                style={{ color: `${imgURL && sucessColor}` }}
-                            >{imgURL ? 'imagem selecionada' : 'Nenhuma imagem selecionada'}</p>
-                            <p
-                                className={`
-                                text-[22px]
-                                font-semibold
-                                hover:scale-[1.1]
-                                transition-all
-                                duration-[.3s]
-                                cursor-pointer
-                                    ${progress == 100 ? `` : `${theme == 'light' ? 'text-my-gray' : 'text-my-gray-black'}`}
-                                `}
-                                style={{ color: `${imgURL && sucessColor}` }}
-                                >{progress}%</p>
-                        </div>
-                    </label>
                     <input ref={inputFileRef} className='hidden' type="file" name="fileArchive" id="fileArchive" onChange={handleFileIMG} />
                     {/* {imgURL && <img src={imgURL} alt='imagem que fez upload' width={'200px'} height={'200px'} />} */}
                 </div>
@@ -427,6 +423,21 @@ export default function MyPerfil() {
                 </div>
 
                 <Button event={updateUser} text='Atualizar' route='undefined' />
+                
+                <div className={`w-[90%] sm:w-[60%] flex flex-row flex-wrap justify-center items-center`}>
+                    {sounds && sounds.map((sing:string) => (
+                        <button
+                            onClick={() => {
+                                const audio = new Audio(sing)
+                                toggleSoundNotification(sing)
+                                audio.play()
+                            }}
+                            className={`p-1 m-1 rounded-[50%] ${soundNotification == sing ? `${theme == 'light' ? 'bg-my-quintenary' : 'bg-my-secondary'}` : `${theme == 'light' ? 'bg-my-secondary' : 'bg-my-quintenary'}`}`}
+                        >
+                            <MdAudiotrack className={`${theme == 'light' ? 'text-my-white' : 'text-my-black'}`} />
+                        </button>
+                    ))}
+                </div>
                 
                 <p className={`mt-4 text-[30px] ${theme == 'light' ? 'text-my-terciary' : 'text-my-quintenary'}`}>Horário programado: {timeCronogram[0] >= 0 && timeCronogram[0] <= 9 ? `0${timeCronogram[0]}` : `${timeCronogram[0]}`}:{timeCronogram[1] >= 0 && timeCronogram[1] <= 9 ? `0${timeCronogram[1]}` : `${timeCronogram[1]}`}</p>
 

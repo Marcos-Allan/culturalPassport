@@ -74,6 +74,7 @@ export const MyProvider = ({ children } : { children: React.ReactNode }) => {
     const [message, setMessage] = useState<Alert>({ type: 'undefined', text: 'Alerta simples' })
     const [isLogout, setIsLogout] = useState<boolean>(false)
     const [isDelAccount, setIsDelAccount] = useState<boolean>(false)
+    const [soundNotification, setSundNotification] = useState<string>('https://firebasestorage.googleapis.com/v0/b/cultural-passport-78148.appspot.com/o/images%2Fsounds%2F14.mp3?alt=media&token=05af905e-a0c0-4552-b428-bfa036e28a13')
 
     //FUNÇÃO RESPONSAVEL POR TROCAR E SALVAR NO localStorage O TEMA ESCOLHIDO PELO USUÁRIO
     const toggleTheme = () => {
@@ -118,9 +119,13 @@ export const MyProvider = ({ children } : { children: React.ReactNode }) => {
         setTimeCronogram([hour, minute])
     }
     
+    //FUNÇÃO RESPONSÁVEL POR MUDAR O SOM DA NOTIFICAÇÃO
+    const toggleSoundNotification = (soundURL:string) => {
+        setSundNotification(soundURL)
+    }
     //RETORNA TUDO PARA SER USADO EM TODO O SITE
     return (
-        <MyContext.Provider value={{ sucessColor, errorColor, theme, toggleTheme, menuOpen, toggleMenuOpen, userS, toggleUser, loading, toggleLoading, message, toggleAlert, isLogout, toggleLogout, isDelAccount, toggleDeleteAccount, timeCronogram, toggleCronogram }}>
+        <MyContext.Provider value={{ sucessColor, errorColor, theme, toggleTheme, menuOpen, toggleMenuOpen, userS, toggleUser, loading, toggleLoading, message, toggleAlert, isLogout, toggleLogout, isDelAccount, toggleDeleteAccount, timeCronogram, toggleCronogram, soundNotification, toggleSoundNotification }}>
             {children}
         </MyContext.Provider>
     )
