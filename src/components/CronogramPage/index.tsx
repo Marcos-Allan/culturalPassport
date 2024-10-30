@@ -30,13 +30,19 @@
 //IMPORTAÇÃO DAS BIBLIOTECAS
 import { useState, useEffect } from 'react'
 import { DragDropContext, Droppable, Draggable } from '@hello-pangea/dnd';
+import TimePicker from 'react-time-picker';
 
 //IMPORTAÇÃO DO PROVEDOR PARA PEGAR AS VARIÁVEIS GLOBAIS
 import { useMyContext } from "../../provider/geral"
 
 //IMPORTAÇÃO DOS ICONES
 import {  IoArrowForward } from "react-icons/io5";
+
+//CONFIGURAÇÃO DA BASE URL DO AXIOS
 import instance from '../../utils/axios';
+
+//IMPORTAÇÃO DOS ESTILOS DO INPUT
+import './TimePickerStyles.css';
 
 export default function CronogramPage() {
 
@@ -49,9 +55,15 @@ export default function CronogramPage() {
     //UTILIZAÇÃO DO HOOK useState
     const [matters, setMatters] = useState<any[]>([])
     const [cronogramS, setCronogramS] = useState<any[]>([])
-    
-    const [hours, setHours] = useState<number | string>(userS.timeCronograma[0])
-    const [minutes, setMinutes] = useState<number | string>(userS.timeCronograma[1])
+
+    const [time, setTime] = useState(`${userS.timeCronograma[0]}:${userS.timeCronograma[1]}`);
+
+    const handleTimeChange = (event:any) => {
+        // setTime(event.target.value);
+        setTime(event);
+        console.log(event.split(':')[0])
+        console.log(event.split(':')[1])
+    };
 
     const ord = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
     
@@ -99,7 +111,7 @@ export default function CronogramPage() {
             //FAZ UMA REQUISIÇÃO DO TIPO put PARA ATUALIZAR OS DADOS DO USUÁRIO
              instance.put(`/users/update/${userS.id}`, {
                 cronogram: JSON.stringify(cronogramS),
-                timeCronograma: [hours, minutes],
+                timeCronograma: [time.split(':')[0], time.split(':')[1]],
                 soundAlert: soundNotification
             })
             .then(function(response) {
@@ -144,26 +156,6 @@ export default function CronogramPage() {
         return result
     }
 
-    function handleHours(value:any) {
-        if(Number(value.target.value) > 23){
-            setHours(0)
-        }else if(Number(value.target.value < 0)) {
-            setHours(23)
-        }else{
-            setHours(value.target.value)
-        }
-    }
-    
-    function handleMinutes(value:any) {
-        if(Number(value.target.value) > 59) {
-            setMinutes(0)
-        }else if(Number(value.target.value < 0)) {
-            setMinutes(59)
-        }else{
-            setMinutes(value.target.value)
-        }
-    }
-
     //FUNÇÃO RESPONSÁVL POR FINALIZAR O DRAG 
     function onDragEnd(result:any) {
         //VERIFICA SE TEM RESULTADO 
@@ -193,24 +185,18 @@ export default function CronogramPage() {
                     
                     <div className={`ml-[40px] flex flex-row flex-wrap mb-3 text-[24px] py-2 px-4 ${theme == 'light' ? 'bg-my-secondary' : 'bg-my-quartenary'}`}>
                         <h1 className={`capitalize mr-3 ${theme == 'light' ? 'text-my-black' : 'text-my-white'}`}>horário: </h1>
-                        <input
-                            type="number"
-                            value={Number(hours) >= 0 && Number(hours) <= 9 ? '0'+hours : hours}
-                            className={`w-[45px] text-[20px] flex items-center justify-center text-center bg-transparent outline-none border-none
-                                ${theme == 'light' ? 'text-my-black' : 'text-my-white'}
+                        <TimePicker
+                            onChange={handleTimeChange}
+                            value={time}
+                            className={`
+                            custom-time-picker
+                            ${theme === 'light' ? 'text-my-black' : 'text-my-white'}
                             `}
-                            onChange={handleHours}
-                        />
-                        <p className={`mx-1 ${theme == 'light' ? 'text-my-black' : 'text-my-white'}`}>:</p>
-                        <input
-                            type="number"
-                            value={Number(minutes) >= 0 && Number(minutes) <= 9 ? '0'+minutes : minutes}
-                            className={`w-[45px] text-[20px] flex items-center justify-center text-center bg-transparent outline-none border-none
-                                ${theme == 'light' ? 'text-my-black' : 'text-my-white'}
-                            `}
-                            onChange={handleMinutes}
+                            disableClock
+                            clearIcon={null}
                         />
                     </div>
+
 
                     <div className={`ml-[40px] relative flex flex-row w-[80%] sm:w-[70%] lg:w-[50%] min-h-[280px] rounded-[8px] ${theme == 'light' ? 'bg-my-secondary' : 'bg-my-quartenary'} border-4 ${theme == 'light' ? 'border-my-secondary' : 'border-my-quartenary'}`}>
                         <div
@@ -271,7 +257,7 @@ export default function CronogramPage() {
                          <IoArrowForward
                              onClick={() => {
                                 updateUser()
-                                toggleCronogram(Number(hours), Number(minutes))
+                                toggleCronogram(Number(time.split(':')[0]), Number(time.split(':')[1]))
                             }}
                              className={`
                              absolute right-[0%] top-[0%] text-[20px] m-1 hover:scale-[1.2] transition-all duration-[.2s] cursor-pointer
