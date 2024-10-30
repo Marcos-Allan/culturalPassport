@@ -118,7 +118,6 @@ export default function CronogramPage() {
     
                 //REGISTRA O NOME E A FOTO E O ID DO USUARIO LOGADO PARA MOSTRAR NO FRONT-END
                 toggleUser(response.data.name, response.data.img, response.data._id, response.data.simulations, response.data.simulationsConcludeds, cronogram, response.data.soundAlert, response.data.timeCronograma)
-                
     
                 //COLOCA ALERT NA TELA
                 toggleAlert(`success`, `Cronograma atualizado com sucesso`);

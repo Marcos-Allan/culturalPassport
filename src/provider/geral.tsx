@@ -59,7 +59,6 @@ export const MyProvider = ({ children } : { children: React.ReactNode }) => {
     const sucessColor = '#18ac42'
     const errorColor = '#ff3434'
     const [theme, setTheme] = useState<string | null>(localStorage.getItem('themePC'))
-    const [timeCronogram, setTimeCronogram] = useState<number[]>([14, 3])
     const [menuOpen, setMenuOpen] = useState<boolean>(false)
     const [userS, setUserS] = useState<User | null>(localStorage.getItem('userPC') !== null ?
         {
@@ -78,7 +77,8 @@ export const MyProvider = ({ children } : { children: React.ReactNode }) => {
     const [message, setMessage] = useState<Alert>({ type: 'undefined', text: 'Alerta simples' })
     const [isLogout, setIsLogout] = useState<boolean>(false)
     const [isDelAccount, setIsDelAccount] = useState<boolean>(false)
-    const [soundNotification, setSundNotification] = useState<string>('https://firebasestorage.googleapis.com/v0/b/cultural-passport-78148.appspot.com/o/images%2Fsounds%2F14.mp3?alt=media&token=05af905e-a0c0-4552-b428-bfa036e28a13')
+    const [timeCronogram, setTimeCronogram] = useState<number[]>([userS ? userS.timeCronograma[0] : 10, userS ? userS.timeCronograma[1] : 0])
+    const [soundNotification, setSundNotification] = useState<string>(userS ? userS.soundAlert : 'https://firebasestorage.googleapis.com/v0/b/cultural-passport-78148.appspot.com/o/images%2Fsounds%2F14.mp3?alt=media&token=05af905e-a0c0-4552-b428-bfa036e28a13')
 
     //FUNÇÃO RESPONSAVEL POR TROCAR E SALVAR NO localStorage O TEMA ESCOLHIDO PELO USUÁRIO
     const toggleTheme = () => {
@@ -94,8 +94,29 @@ export const MyProvider = ({ children } : { children: React.ReactNode }) => {
     
     //FUNÇÃO RESPONSAVEL POR ABRIR E FECHAR O MENU
     const toggleUser = (name:string, img:string, id:string, simulations:any, simulationsConcludeds:number = 0, cronogram:any, soundAlert:string, timeCronograma:any, logged:boolean = true) => {
-        localStorage.setItem('userPC', JSON.stringify({ logged: logged, name: name, img: img, id: id, simulations: simulations, simulationsConcludeds: simulationsConcludeds, cronogram: cronogram }))
-        setUserS({ logged: logged, name: name, img: img, id: id, simulations: simulations, simulationsConcludeds: simulationsConcludeds, cronogram: cronogram, soundAlert: soundAlert, timeCronograma: timeCronograma })
+        localStorage.setItem('userPC', JSON.stringify({
+            logged: logged, 
+            name: name,
+            img: img,
+            id: id,
+            simulations: simulations,
+            simulationsConcludeds: simulationsConcludeds,
+            cronogram: cronogram,
+            soundAlert: soundAlert,
+            timeCronograma: timeCronograma
+        }))
+        
+        setUserS({
+            logged: logged,
+            name: name,
+            img: img,
+            id: id,
+            simulations: simulations,
+            simulationsConcludeds: simulationsConcludeds,
+            cronogram: cronogram,
+            soundAlert: soundAlert,
+            timeCronograma: timeCronograma
+        })
     }
     
     //FUNÇÃO RESPONSAVEL POR TROCAR O ESTADO DE LOADING DA APLICAÇÃO

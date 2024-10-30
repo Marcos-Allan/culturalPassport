@@ -70,7 +70,7 @@ export default function NotificationProgramed() {
     
         // Limpa o intervalo quando o componente é desmontado
         return () => clearInterval(intervalo);
-      }, [timeCronogram]);
+      }, [timeCronogram, userS]);
 
     return(
         <>
