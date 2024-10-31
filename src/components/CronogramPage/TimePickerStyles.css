@@ -1,15 +1,22 @@
-.custom-time-picker {
-  width: 5rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+/* Aumenta o tamanho da área do TimePicker */
+.custom-time-picker .react-time-picker__wrapper {
+  width: 100%;
+  max-width: 20rem; /* ajuste conforme desejado */
+  height: 60px; /* altura desejada */
 }
 
+/* Aumenta o tamanho dos inputs dentro do TimePicker */
 .custom-time-picker .react-time-picker__inputGroup__input {
-  width: 100px;
-  background-color: transparent;
-  outline: none;
-  border: none;
-  margin: 0px 4px;
-  padding-left: 0px;
+  width: 40px !important; /* ajuste conforme necessário */
+  text-align: center !important;
+  background-color: transparent !important;
+  border: none !important;
+  outline: none !important;
+  font-size: 1.60rem !important;
+}
+
+@media (min-width: 640px) {
+  .custom-time-picker .react-time-picker__inputGroup__input {
+    margin-left: 20px !important;
+  }
 }

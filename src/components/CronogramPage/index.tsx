@@ -189,8 +189,8 @@ export default function CronogramPage() {
                             onChange={handleTimeChange}
                             value={time}
                             className={`
-                            custom-time-picker
-                            ${theme === 'light' ? 'text-my-black' : 'text-my-white'}
+                                custom-time-picker
+                                ${theme === 'light' ? 'text-my-black' : 'text-my-white'}
                             `}
                             disableClock
                             clearIcon={null}

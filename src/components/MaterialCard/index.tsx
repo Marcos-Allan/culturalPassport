@@ -133,7 +133,7 @@ export default function MaterialCard(props: Props) {
     
     return(
         <div
-            className={`relative mt-[60px] w-[90%] pb-3 h-[250px] sm:w-3/12 sm:mt-[20px] sm:pb-0 sm:h-[200px] lg:h-[160px] flex flex-col items-center justify-start rounded-[8px] border-[3px] hover:scale-[0.9] lg:hover:scale-[0.9] cursor-pointer transition-all duration-[.2s]`}
+            className={`relative mt-[20px] mx-2 w-5/12 pb-3 h-[250px] sm:w-3/12 sm:mt-[20px] sm:pb-0 sm:h-[200px] lg:h-[160px] flex flex-col items-center justify-start rounded-[8px] border-[3px] hover:scale-[0.9] lg:hover:scale-[0.9] cursor-pointer transition-all duration-[.2s]`}
             style={{ borderColor: `${colors[Number(props.background)]}` }}
             onClick={() => navigate(`/materias/${props.titleMateria.toLowerCase()}`)}
         >
