@@ -87,18 +87,23 @@ export default function Alert() {
     }, [message])
 
     const notify = (text:string, bg:string) => toast(text, {
-        theme: theme,
+        theme: 'dark',
         progressStyle: { backgroundColor: bg }
     })
     
     const notifyConquest = (text:string) => toast(text, {
-        theme: theme,
+        theme: 'dark',
         progressStyle: { background: 'linear-gradient(90deg, #191D1F, #8D46DC, #75028E, #20db48, #4882fe)', backgroundSize: '100% 100%' }
     })
 
     return(
         <>
-            <ToastContainer limit={1} />
+            <ToastContainer limit={1}
+                toastStyle={{
+                    backgroundColor: `${theme == 'light' ? '#ffffff' : '#000000'}`,
+                    color: `${theme == 'light' ? '#000000' : '#ffffff'}`, 
+                }}
+            />
         </>
     )
 }   
