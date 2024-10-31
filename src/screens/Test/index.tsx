@@ -217,7 +217,7 @@ export default function Test() {
                 toggleLoading(false);
     
                 //MOSTRA OS DADOS DA REQUISIÇÃO
-                console.log(response.data);
+                console.log('servidor: '+response.data);
 
                 //FORMATA E SEPARA A STRING PARA VER MATÉRIA POR MATÉRIA DO CRONOGRAMA
                 const cronogram = response.data.cronogram.split('[')[1].split(']')[0].split(',')
