@@ -39,7 +39,7 @@ import { ref, uploadBytesResumable, getDownloadURL, listAll } from 'firebase/sto
 import { storage } from '../../utils/firebase';
 
 //IMPORTAÇÃO DOS ICONES
-import { MdImage, MdOutlineEdit, MdAudiotrack } from "react-icons/md"
+import { MdImage, MdOutlineEdit } from "react-icons/md"
 
 //IMPORTAÇÃO DO PROVEDOR PARA PEGAR AS VARIÁVEIS GLOBAIS
 import { useMyContext } from "../../provider/geral"
@@ -63,6 +63,9 @@ import Menu from "../../components/Menu";
 import Button from '../../components/Button';
 import BottomNavigation from '../../components/BottomNavigation';
 import AvatarImage from '../../components/AvatarImage';
+import AudioPlayer from '../../components/AudioPlayer';
+import ScheduledTime from '../../components/ScheduledTime';
+import CronogramTable from '../../components/CronogramTable';
 
 export default function MyPerfil() {
     //FAZ REFERENCIA A UM ELEMENTO
@@ -328,19 +331,6 @@ export default function MyPerfil() {
 
     }
 
-    //FUNÇÃO RESPONSÁVEL POR VER SE O DIA DA SEMANA
-    function verifyDay(word:string) {
-        //PEGA O OBJETO DATA DO SISTEMA
-        const date = new Date()
-
-        //VERIFICA O DIA DA ATUAL E RETORNA true OU false
-        if(word == days[date.getDay()]){
-            return true
-        }else{
-            return false
-        }
-    }
-
     //FUNÇÃO CHAMADA QUANDO A PAGINA É CARREGADA
     useEffect(() => {
         //VERIFICA SE O USUÁRIO NÃO ESTÁ LOGADO
@@ -349,6 +339,18 @@ export default function MyPerfil() {
             navigate('/')
         }
     }, [userS.logged])
+
+    //FUNÇÃO RESPONSÁVEL POR PEGAR E REPRODUZIR O AUDIO
+    function playAudio(sing:string) {
+        //CRIA UMA NOVA INSTÂNCIA DE ÁUDIO
+        const audio = new Audio(sing)
+
+        //MUDA A VARIÁVEL PARA O NOME DO ÁUDIO PARA DEIXA-LÁ DESTACADA
+        toggleSoundNotification(sing)
+
+        //REPRODUZ O ÁUDIO
+        audio.play()
+    }
     
     return(
         <>
@@ -399,7 +401,6 @@ export default function MyPerfil() {
 
                 <div className={`w-[90%] sm:w-[60%] flex flex-row items-center justify-center relative`}>
                     <input ref={inputFileRef} className='hidden' type="file" name="fileArchive" id="fileArchive" onChange={handleFileIMG} />
-                    {/* {imgURL && <img src={imgURL} alt='imagem que fez upload' width={'200px'} height={'200px'} />} */}
                 </div>
 
                 <h1
@@ -426,20 +427,11 @@ export default function MyPerfil() {
                 
                 <div className={`w-[90%] sm:w-[60%] flex flex-row flex-wrap justify-center items-center`}>
                     {sounds && sounds.map((sing:string) => (
-                        <button
-                            onClick={() => {
-                                const audio = new Audio(sing)
-                                toggleSoundNotification(sing)
-                                audio.play()
-                            }}
-                            className={`p-1 m-1 rounded-[50%] ${soundNotification == sing ? `${theme == 'light' ? 'bg-my-quintenary' : 'bg-my-secondary'}` : `${theme == 'light' ? 'bg-my-secondary' : 'bg-my-quintenary'}`}`}
-                        >
-                            <MdAudiotrack className={`${theme == 'light' ? 'text-my-white' : 'text-my-black'}`} />
-                        </button>
+                        <AudioPlayer active={soundNotification == sing ? true : false} onClick={() => playAudio(sing)} />
                     ))}
                 </div>
                 
-                <p className={`mt-4 text-[30px] ${theme == 'light' ? 'text-my-terciary' : 'text-my-quintenary'}`}>Horário programado: {userS.timeCronograma[0] >= 0 && userS.timeCronograma[0] <= 9 ? `0${userS.timeCronograma[0]}` : `${userS.timeCronograma[0]}`}:{userS.timeCronograma[1] >= 0 && userS.timeCronograma[1] <= 9 ? `0${userS.timeCronograma[1]}` : `${userS.timeCronograma[1]}`}</p>
+                <ScheduledTime />
 
                 <div className='w-[90%] sm:w-[60%] mb-[100px] sm:mb-[30px] lg:mb-0'>
                     <h2
@@ -467,53 +459,7 @@ export default function MyPerfil() {
                         </div>
 
                         {days.map((mat:any, i:number) => (
-                            <div
-                            className={`
-                                w-full flex items-center justify-between border-[1px] py-2 px-1
-                                ${verifyDay(days[Number(i) <= 6 ? Number(i) : Number(i - 7)]) == true
-                                    ? `border-[4px]
-                                ${theme == 'light' ? 'border-my-secondary' : 'border-my-quintenary'}` : `
-                                ${theme == 'light' ? 'text-my-gray border-my-gray' : 'text-my-gray-black border-my-gray-black'}`}
-                            `}
-                        >
-                            <p
-                                className={`
-                                    text-left w-[40%] pl-2
-                                    ${verifyDay(days[Number(i) <= 6 ? Number(i) : Number(i - 7)]) == true ? `
-                                        ${theme == 'light' ? 'text-my-secondary font-bold' : 'text-my-quintenary font-bold'}` : `
-                                        ${theme == 'light' ? 'text-my-gray' : 'text-my-gray-black'}
-                                    `}
-                                `}
-                            >{i+1} - </p>
-                            
-                            <p
-                                className={`
-                                    text-left flex-grow-[1] uppercase
-                                    ${verifyDay(days[Number(i) <= 6 ? Number(i) : Number(i - 7)]) == true ? `
-                                        ${theme == 'light' ? 'text-my-secondary font-bold' : 'text-my-quintenary font-bold'}` :`
-                                        ${theme == 'light' ? 'text-my-gray' : 'text-my-gray-black'}
-                                    `}
-                                `}
-                            >
-                                {i <= 6 ? (
-                                    <p>{String(days[i]).slice(0, 3)}</p>
-                                ) : (
-                                    <p>{String(days[i - 7]).slice(0, 3)}</p>
-                                )}
-                            </p>
-                            
-                            <p className={`hidden`}>{mat}</p>
-
-                            <p
-                                className={`
-                                    text-left w-[30%] capitalize
-                                    ${theme == 'light' ? 'text-my-gray' : 'text-my-gray-black'}
-                                    ${verifyDay(days[Number(i) <= 6 ? Number(i) : Number(i - 7)]) == true && `${theme == 'light' ? 'text-my-secondary font-bold' : 'text-my-quintenary font-bold'}`}
-                                `}
-                            >
-                                {String(userS.cronogram[i == 0 ? i : i == 1 ? 2 : i == 2 ? 4 : i == 3 ? 6 : i == 4 ? 8 : 10]).replace(/"/g, '')}, {String(userS.cronogram[i == 0 ? i+1 : i == 1 ? 2+1 : i == 2 ? 4+1 : i == 3 ? 6+1 : i == 4 ? 8+1 : 10+1]).replace(/"/g, '')}
-                            </p>
-                        </div>
+                            <CronogramTable i={i} mat={mat}  />
                         ))}
                     </div>
                 </div>
@@ -522,6 +468,5 @@ export default function MyPerfil() {
             <BottomNavigation />
             <Menu />
         </>
-
     )
 }
