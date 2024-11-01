@@ -425,6 +425,8 @@ export default function MyPerfil() {
 
                 <Button event={updateUser} text='Atualizar' route='undefined' />
                 
+                <h1 className={`text-center font-bold text-[24px] mt-4 mb-2 ${theme == 'light' ? 'text-my-secondary' : 'text-my-quintenary'}`}>Sons</h1>
+
                 <div className={`w-[90%] sm:w-[60%] flex flex-row flex-wrap justify-center items-center`}>
                     {sounds && sounds.map((sing:string) => (
                         <AudioPlayer active={soundNotification == sing ? true : false} onClick={() => playAudio(sing)} />

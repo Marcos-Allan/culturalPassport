@@ -89,7 +89,7 @@ export default function Content() {
             <Navbar>
                 <Return />
                 <TitlePage
-                    text={`conteudo`}
+                    text={`conteúdo`}
                 />
                 <MenuButton />
             </Navbar>

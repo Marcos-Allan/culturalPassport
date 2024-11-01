@@ -286,7 +286,7 @@ export default function SignUp(){
                         <Navbar>
                             <Return />
                             <TitlePage
-                                text={`cadastrar-se`}
+                                text={`Cadastrar-se`}
                             />
                             <MenuButton />
                         </Navbar>

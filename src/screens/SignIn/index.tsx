@@ -202,7 +202,7 @@ export default function SignIn(){
                 <Navbar>   
                     <Return />
                     <TitlePage
-                        text={`login`}
+                        text={`Login`}
                         />
                     <MenuButton />
                 </Navbar>

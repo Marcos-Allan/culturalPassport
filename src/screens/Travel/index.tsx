@@ -147,7 +147,7 @@ export default function Travel() {
             <Navbar>
                 <Return />
                 <TitlePage
-                    text={`${capitalizeText(travel || 'viagem')}`}
+                    text={`${capitalizeText(travel || 'Passeio')}`}
                 />
                 <MenuButton />
             </Navbar>

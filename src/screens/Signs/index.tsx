@@ -74,7 +74,7 @@ export default function Signs(){
             <Navbar>
                 <Return />
                 <TitlePage
-                    text={`salve seu progresso`}
+                    text={`Salve seu progresso`}
                 />
                 <MenuButton />
             </Navbar>

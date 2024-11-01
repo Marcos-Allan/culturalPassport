@@ -149,7 +149,7 @@ export default function ForgoutPassword() {
                 <Navbar>
                     <Return />
                     <TitlePage
-                        text={`esqueceu a senha`}
+                        text={`Esqueceu a senha`}
                     />
                     <MenuButton />
                 </Navbar>
