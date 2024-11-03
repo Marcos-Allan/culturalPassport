@@ -31,12 +31,16 @@
 import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom';
 
+//IMPORTAÇÃO DO PROVEDOR PARA PEGAR AS VARIÁVEIS GLOBAIS
+import { useMyContext } from '../../provider/geral';
+
 //TIPAGEM DAS PROPRIEDADES DO COMPONENTE
 interface Props {
     background: Number,
     titleMateria: String,
 }
 
+//IMPORTAÇÃO DAS IMAGENS
 import img1 from '../../assets/imgs/icons/physics.png'
 import img2 from '../../assets/imgs/icons/history.png'
 import img3 from '../../assets/imgs/icons/english.png'
@@ -50,8 +54,13 @@ import img10 from '../../assets/imgs/icons/sociology.png'
 import img11 from '../../assets/imgs/icons/philosophy.png'
 import img12 from '../../assets/imgs/icons/spanish.png'
 
-
 export default function MaterialCard(props: Props) {
+    
+    //RESGATA AS VARIAVEIS GLOBAIS
+    const states:any = useMyContext()
+
+    //DESESTRUTURA AS VARIAVEIS ESPECIFICADAS
+    const { theme } = states
     
     //USO DO HOOK useState
     const [image, setImage] = useState<any>()
@@ -133,15 +142,15 @@ export default function MaterialCard(props: Props) {
     
     return(
         <div
-            className={`relative mt-[20px] mx-2 w-5/12 pb-3 h-[250px] sm:w-3/12 sm:mt-[20px] sm:pb-0 sm:h-[200px] lg:h-[160px] flex flex-col items-center justify-start rounded-[8px] border-[3px] hover:scale-[0.9] lg:hover:scale-[0.9] cursor-pointer transition-all duration-[.2s]`}
+            className={`relative mt-[20px] mx-2 w-5/12 sm:w-3/12 sm:mt-[20px] sm:mx-1 flex flex-col items-center justify-start rounded-[8px] border-[3px] hover:scale-[0.9] lg:hover:scale-[0.9] cursor-pointer transition-all duration-[.2s]`}
             style={{ borderColor: `${colors[Number(props.background)]}` }}
             onClick={() => navigate(`/materias/${props.titleMateria.toLowerCase()}`)}
         >
-            <div className={`w-full flex items-center justify-center p-4 h-[190px]`} style={{ backgroundColor: `${colors[Number(props.background)]}` }}>
-                <img src={image} alt="" className={`w-[70px]`} />
+            <div className={`w-full flex items-center justify-center p-8`} style={{ backgroundColor: `${colors[Number(props.background)]}` }}>
+                <img src={image} alt="" className={`w-[90px]`} />
             </div>
             <p
-                className={`text-[22px] sm:text-[18px] text-my-white font-semibold capitalize text-center mt-2 sm:my-2`}
+                className={`flex items-center justify-center w-full h-full text-[22px] sm:text-[18px] font-semibold capitalize text-center rounded-b-[6px] py-2 ${theme == 'light' ? 'bg-my-white' : 'bg-my-black' }`}
                 style={{ color: `${colors[Number(props.background)]}` }}
             >{props.titleMateria}</p>
             

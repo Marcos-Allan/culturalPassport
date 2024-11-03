@@ -35,6 +35,7 @@ import { GoHome } from "react-icons/go";
 import { GrTrophy } from "react-icons/gr";
 import { IoChatbubbleOutline, IoPersonOutline } from "react-icons/io5";
 import { LuPlaneTakeoff } from "react-icons/lu";
+import { LuMedal } from "react-icons/lu";
 
 export default function BottomNavigation() {
 
@@ -106,6 +107,17 @@ export default function BottomNavigation() {
                     <IoChatbubbleOutline className={`text-[36px] p-[6px]`} />
                 </div>
                 <p className={`text-[10px] text-my-white`}>Feedback</p>
+            </div>
+            
+            <div
+                className={`flex flex-col items-center justify-center gap-[5px]`}
+                onClick={() => navigate('/ranking')}
+            >
+                <div className={`flex items-center justify-center rounded-[50%] transition-all duration-[.2s] cursor-pointer
+                ${location.pathname == '/ranking'  ? 'bg-my-white text-my-terciary' : 'text-my-white hover:bg-my-white hover:text-my-terciary'}`}>
+                    <LuMedal className={`text-[36px] p-[6px]`} />
+                </div>
+                <p className={`text-[10px] text-my-white`}>Ranking</p>
             </div>
         </div>
     )

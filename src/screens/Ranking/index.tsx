@@ -29,7 +29,7 @@
 
 //IMPORTAÇÃO DAS BIBLIOTECAS
 import { useEffect, useState } from 'react'
-import { useParams, useNavigate, Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 //IMPORTAÇÃO DOS COMPONENTES
 import MenuButton from "../../components/MenuButton";
@@ -37,7 +37,6 @@ import Navbar from "../../components/Navbar";
 import Return from "../../components/Return";
 import TitlePage from "../../components/TitlePage";
 import BottomNavigation from "../../components/BottomNavigation";
-import ContentCard from '../../components/ContentCard';
 import Menu from '../../components/Menu';
 import Text from '../../components/Text';
 
@@ -50,10 +49,7 @@ import instance from '../../utils/axios';
 //IMPORTAÇÃO DOS ICONES
 import { IoMdSad } from "react-icons/io";
 
-export default function Matter() {
-
-    //USO DO HOOK useParams
-    const { matter } = useParams()
+export default function Ranking() {
 
     //UTILIZAÇÃO DO HOOK DE NAVEGAÇÃO 
     const navigate = useNavigate()
@@ -65,42 +61,27 @@ export default function Matter() {
     const { userS, theme } = states
 
     //UTILIZAÇÃO DO HOOK useState
-    const [content, setContent] = useState<any[]>([])
+    const [users, setUsers] = useState<any[]>([])
     const [loadingContent, setLoadingContent] = useState<boolean>(false)
 
-    //FUNÇÃO RESPONSÁVEL POR DEIXAR O TEXTO EM CAPITALIZE
-    function capitalizeText(text:string) {
-        if (text.length === 0) return text; // Retorna a string original se estiver vazia
-        return text.charAt(0).toUpperCase() + text.slice(1).toLowerCase();
-    }
-    
-    //FUNÇÃO RESPONSÁVEL POR LISTAR OS CONTEUDOS DISPONIVEIS
-    function getContent(){
-        //MUDA O ESTADO DE CARREGAMENTO DOS CONTEUDOS PARA true
-        setLoadingContent(true)
-
-        instance.get(`/matter/${matter}`)
+    //FUNÇÃO RESPONSÁVEL POR PEGAR OS USUÁRIOS
+    function getUsers() {
+        //MUDA O ESTADO DE CARREGAMENTO DA PÁGINA PARA false
+        setLoadingContent(false)
+        
+        instance.get('/users')
         .then(function (response) {
-            console.log(response.data)
-
-            //MUDA O ESTADO DE CARREGAMENTO DAS MATÉRIAS PARA false
+            //MUDA O ESTADO DE CARREGAMENTO DA PÁGINA PARA false
             setLoadingContent(false)
+
+            //REORGANIZA O ARRAY COM BASE NO NÚMERO DE SIMULADOS CONCLUIDOS
+            const usersOrdenados = [...response.data].sort((a, b) => b.simulationsConcludeds - a.simulationsConcludeds);
             
-            //LIMPA O ARRAY DE CONTEUDO DAS MATÉRIAS
-            setContent([])
-
-            //COLOCA AS MATÉRIAS CADASTRADAS NO BD NO ARRAY DE MATÉRIAS
-            response.data.contents.map((content:any, i:number) => {
-                setContent((cont:any) => [...cont, {
-                    title: content.text,
-                    background: i
-                }])
-            })
+            //COLOCA OS USUÁRIOS JA REORDENADOS NO ARRAY DE USUÁRIOS
+            setUsers(usersOrdenados)
         })
-        .catch(function (error) {
+        .catch(function (error) {   
             console.log(error)
-            //MUDA O ESTADO DE CARREGAMENTO DAS MATÉRIAS PARA false
-            setLoadingContent(false)
         })
     }
 
@@ -115,37 +96,35 @@ export default function Matter() {
     
     //FUNÇÃO CHAMADA AO RECARREGAR A PÁGINA
     useEffect(() => {
-        //DEFINE O ARRAY COM OS CONTEUDOS
-        getContent()
+        //FUNÇÃO RESPONSÁVEL POR PEGAR OS USUÁRIOS
+        getUsers()
     },[])
-
-    //FUNÇÃO PARA REDIRECIONAR PARA OUTRA PÁGINA
-    function redirect(cont:string){
-
-        //NAVEGA PARA A PRÓXIMA PÁGINA
-        navigate(`/materias/${matter}/content/${cont}`)
-    }
 
     return(
         <>
             <Navbar>
                 <Return />
                 <TitlePage
-                    text={`${capitalizeText(matter || 'matéria')}`}
+                    text={'Ranking'}
                 />
                 <MenuButton />
             </Navbar>
 
-            <p className={`w-[90%] mt-8 mb-5 text-center text-[18px] ${theme == 'light' ? 'text-my-black' : 'text-my-white'}`}>Conteudos de {capitalizeText(matter || 'matéria')} que mais caem nos vestibulares</p>
-
             <div className={`w-[90%] sm:px-12 sm:w-[70%] mb-[100px] sm:mb-[40px] lg:mb-0 flex items-center flex-col overflow-y-scroll scrollbar scrollbar-track-transparent scrollbar-thumb-my-secondary`}>
-                {loadingContent == false && content.length > 0 && content.map((cont, i) => (
-                    <ContentCard background={cont.background} title={cont.title} event={() => redirect(cont.title)} key={i} />
+                {loadingContent == false && users.length > 0 && users.map((user, i) => (
+                    <div className={`w-[95%] flex justify-between items-center mb-6 ${theme == 'light' ? 'text-my-black' : 'text-my-white'}`}>
+                        <div className={`flex items-center justify-start gap-1`}>
+                            <p className={`mr-3`}>{i+1}°</p>
+                            <img src={user.img} className={`w-[80px] h-[80px] rounded-[50%] border-[6px] ${i == 0 ? 'animate-colorChange' : 'border-transparent'}`} />
+                            <p>{user.name}</p>
+                        </div>
+                        <p>{user.simulationsConcludeds}</p>
+                    </div>
                 ))}
 
-                {loadingContent == false && content.length == 0 &&(
+                {loadingContent == false && users.length == 0 &&(
                     <div className={`flex flex-col items-center justify-start`}>
-                        <Text text='Nenhuma matéria encontrada'/>
+                        <Text text='Nenhuma usuário encontrado'/>
                         <IoMdSad
                             className={`text-[120px]
                                 ${theme == 'light' ? 'text-my-gray' : 'text-my-gray-black'}
@@ -155,12 +134,8 @@ export default function Matter() {
                 )}
                 
                 {loadingContent == true && (
-                    <p className={`w-full text-center text-[18px] ${theme == 'light' ? 'text-my-black' : 'text-my-white'}`}>estamos carregando as matérias seja paciente</p>
+                    <p className={`w-full text-center text-[18px] ${theme == 'light' ? 'text-my-black' : 'text-my-white'}`}>estamos carregando os usuários seja paciente</p>
                 )}
-
-                <Link to={`/materias/${matter}/test`}
-                className={`ms-auto mb-3 w-auto border-[1px] p-3 rounded-[20px] transition-all duration-[.3s] bg-transparent hover:text-my-secondary hover:border-my-secondary ${theme == 'light' ? 'text-my-black border-my-black' : 'text-my-white border-my-white'}
-                `}>Fazer prova</Link>
             </div>
 
             

@@ -68,6 +68,7 @@ import Alert from './components/Alert/index.tsx';
 import LogoutPage from './components/LogoutPage/index.tsx';
 import DeleteAccountPage from './components/DeleteAccountPage/index.tsx';
 import NotificationProgramed from './components/NotificationProgramed/index.tsx';
+import Ranking from './screens/Ranking/index.tsx';
 
 //ARQUIVO DE CONFIGURAÇÃO DAS ROTAS
 const router = createBrowserRouter([
@@ -149,6 +150,11 @@ const router = createBrowserRouter([
   {
     path: "materias/:matter/content/:content",
     element: <Content />,
+    errorElement: <ErrorPage />
+  },
+  {
+    path: "ranking",
+    element: <Ranking />,
     errorElement: <ErrorPage />
   }
 ])

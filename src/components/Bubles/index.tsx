@@ -32,7 +32,7 @@ import { motion, Variants } from 'framer-motion';
 
 const Bubble = () => {
     //ARRAY DE CORES
-    const colors = ["#5A94F285", "#BF00FF85", "#4882FE85, #20DB4885", "#4B155685", "#7A44A085"];
+    const colors = ["#5A94F285", "#BF00FF85", "#4882FE85", "#20DB4885", "#4B155685", "#7A44A085"];
   
     //ESCOLHE UMA COR ALEATÓRIA
     const randomColor = colors[Math.floor(Math.random() * colors.length)];
@@ -45,7 +45,7 @@ const Bubble = () => {
     const randomDuration = 4 + Math.random() * 4;
     const randomSize = 20 + Math.random() * 40;
 
-    const bubbleVariants:Variants = {
+    const bubbleVariants: Variants = {
         start: {
             y: `${randomYStart}vh`,
             opacity: 0,
@@ -65,22 +65,22 @@ const Bubble = () => {
         },
     };
 
-  return (
-    <motion.div
-      className="bubble"
-      variants={bubbleVariants}
-      initial="start"
-      animate="end"
-      style={{
-        position: "absolute",
-        left: `${randomX}%`,
-        width: `${randomSize}px`,
-        height: `${randomSize}px`,
-        backgroundColor: randomColor,
-        borderRadius: "50%",
-      }}
-    />
-  );
+    return (
+        <motion.div
+            className="bubble"
+            variants={bubbleVariants}
+            initial="start"
+            animate="end"
+            style={{
+                position: "absolute",
+                left: `${randomX}%`,
+                width: `${randomSize}px`,
+                height: `${randomSize}px`,
+                backgroundColor: randomColor,
+                borderRadius: "50%",
+            }}
+        />
+    );
 };
 
 const BubbleAnimation = () => {
@@ -94,7 +94,7 @@ const BubbleAnimation = () => {
             width: "100%", 
             height: "100vh", 
             overflow: "hidden",
-            zIndex: 1,
+            zIndex: -1, // z-index baixo para bolhas ficarem no fundo
             pointerEvents: "none",
             background: "transparent",
         }}>
