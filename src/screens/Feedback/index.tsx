@@ -39,13 +39,13 @@ import Navbar from "../../components/Navbar";
 import Return from "../../components/Return";
 import TitlePage from "../../components/TitlePage";
 import StarRating from '../../components/StarRating';
+import FeedbackCard from '../../components/FeedbackCard';
 
 //CONFIGURAÇÃO DA BASE URL DO AXIOS
 import instance from '../../utils/axios';
 
 //IMPORTAÇÃO DO PROVEDOR PARA PEGAR AS VARIÁVEIS GLOBAIS
 import { useMyContext } from '../../provider/geral';
-import FeedbackCard from '../../components/FeedbackCard';
 
 //INTERFACE DAS MENSAGENS
 interface Msg{
@@ -201,7 +201,7 @@ export default function Feedback() {
                 <MenuButton />
             </Navbar>
 
-            <div className={`${theme == 'light' ? 'bg-my-white' : 'bg-my-black'} overflow-y-scroll scrollbar scrollbar-track-transparent scrollbar-thumb-my-secondary w-[90%] sm:w-[60%] pt-[30px] h-full pb-[10px] flex flex-col gap-[20px] mb-[100px] sm:mb-[40px] lg:mb-0`}>
+            <div className={`${theme == 'light' ? 'bg-my-white' : 'bg-my-black'} overflow-y-scroll scrollbar scrollbar-track-transparent scrollbar-thumb-my-secondary w-[90%] sm:w-[60%] pt-[30px] h-full pb-[10px] flex flex-col gap-[20px] mb-[10px] sm:mb-[40px] lg:mb-0`}>
                 
                 <div className={`mx-auto rounded-[6px] py-2 px-4 w-full ${theme == 'light' ? 'bg-my-secondary' : 'bg-my-quartenary'} opacity-[0.8]`}>
                     <p className={`${theme == 'light' ? 'text-my-black' : 'text-my-white'} text-left sm:text-center text-[14px]`}>
