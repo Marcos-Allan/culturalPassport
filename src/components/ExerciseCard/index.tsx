@@ -31,8 +31,8 @@
 import { useNavigate } from 'react-router-dom';
 
 //IMPORTAÇÃO DOS ICONES
-import { BsAirplane } from 'react-icons/bs';
 import { FiBook } from 'react-icons/fi';
+import { MdOutlineTrain } from "react-icons/md";
 
 //TIPAGEM DAS PROPS DO COMPONENTE
 interface Props {
@@ -63,14 +63,14 @@ export default function TravelCard(props: Props) {
         >
                 
             <div className={`flex-grow-[1] flex flex-col`}>
-                <h1 className={`capitalize font-bold text-[20px] ${theme == 'light' ? 'text-my-black' : 'text-my-white'}`}>{props.title}</h1>
+                <h1 className={`capitalize font-bold text-[20px] ${theme == 'light' ? 'text-my-quintenary' : 'text-my-quintenary'}`}>{props.title}</h1>
                 <p className={`capitalize text-[16px] ${theme == 'light' ? 'text-my-gray' : 'text-my-gray-black'}`}>{props.materia}</p>
             </div>
 
             {props.type == 'travel' ? (
-                <BsAirplane className={`${props.concluded == true ? 'text-[#00ff00]' : `${theme == 'light' ? 'text-my-gray' : 'text-my-gray-black'}`} text-[28px]`} />
+                <MdOutlineTrain className={`${props.concluded == true ? 'text-[#00ff00]' : `${theme == 'light' ? 'text-my-quintenary' : 'text-my-quintenary'}`} text-[28px]`} />
             ) : (
-                <FiBook className={`${props.concluded == true ? 'text-[#00ff00]' : `${theme == 'light' ? 'text-my-gray' : 'text-my-gray-black'}`} text-[28px]`} />
+                <FiBook className={`${props.concluded == true ? 'text-[#00ff00]' : `${theme == 'light' ? 'text-my-quintenary' : 'text-my-quintenary'}`} text-[28px]`} />
             )}
         </div>
     )

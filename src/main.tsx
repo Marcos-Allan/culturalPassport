@@ -40,7 +40,6 @@ import './index.css'
 
 //IMPORTAÇÃO DAS PÁGINAS
 import Home from './screens/Home/index.tsx';
-import Signs from './screens/Signs/index.tsx';
 import SignIn from './screens/SignIn/index.tsx';
 import SignUp from './screens/SignUp/indx.tsx';
 import ForgoutPassword from './screens/ForgoutPassword/index.tsx';
@@ -51,7 +50,6 @@ import LoadingPage from './components/LoadingPage';
 import MyPerfil from './screens/MyPerfil/index.tsx';
 import Materias from './screens/Materias/index.tsx';
 import Achievements from './screens/Achievements/index.tsx';
-
 import Matter from './screens/Matter/index.tsx';
 import Test from './screens/Test/index.tsx';
 import Content from './screens/Content/index.tsx';
@@ -75,11 +73,6 @@ const router = createBrowserRouter([
   {
     path: "/",
     element: <Home />,
-    errorElement: <ErrorPage />
-  },
-  {
-    path: "signs",
-    element: <Signs />,
     errorElement: <ErrorPage />
   },
   {

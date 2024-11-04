@@ -201,9 +201,9 @@ export default function Feedback() {
                 <MenuButton />
             </Navbar>
 
-            <div className={`${theme == 'light' ? 'bg-my-white' : 'bg-my-black'} overflow-y-scroll scrollbar scrollbar-track-transparent scrollbar-thumb-my-secondary w-[90%] sm:w-[60%] pt-[30px] h-full pb-[10px] flex flex-col gap-[20px] mb-[10px] sm:mb-[40px] lg:mb-0`}>
+            <div className={`${theme == 'light' ? 'bg-my-white' : 'bg-my-black'} overflow-y-scroll scrollbar-none w-[90%] sm:w-[60%] pt-[30px] h-full pb-[10px] flex flex-col gap-[20px] mb-[10px] sm:mb-[40px] lg:mb-0`}>
                 
-                <div className={`mx-auto rounded-[6px] py-2 px-4 w-full ${theme == 'light' ? 'bg-my-secondary' : 'bg-my-quartenary'} opacity-[0.8]`}>
+                <div className={`mx-auto rounded-[6px] py-2 px-4 w-full ${theme == 'light' ? 'bg-my-quintenary' : 'bg-my-quintenary'} opacity-[0.8]`}>
                     <p className={`${theme == 'light' ? 'text-my-black' : 'text-my-white'} text-left sm:text-center text-[14px]`}>
                         {isFeedback == false
                             ? 'De uma nota de feedback sobre o nosso sistema, avalie nos por favor'

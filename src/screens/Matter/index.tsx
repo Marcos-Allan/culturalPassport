@@ -49,6 +49,7 @@ import instance from '../../utils/axios';
 
 //IMPORTAÇÃO DOS ICONES
 import { IoMdSad } from "react-icons/io";
+import TravelCard from '../../components/ExerciseCard';
 
 export default function Matter() {
 
@@ -66,7 +67,10 @@ export default function Matter() {
 
     //UTILIZAÇÃO DO HOOK useState
     const [content, setContent] = useState<any[]>([])
+    const [travels, setTravels] = useState<any[]>([])
     const [loadingContent, setLoadingContent] = useState<boolean>(false)
+    const [loadingTravels, setLoadingTravels] = useState<boolean>(false)
+
 
     //FUNÇÃO RESPONSÁVEL POR DEIXAR O TEXTO EM CAPITALIZE
     function capitalizeText(text:string) {
@@ -104,6 +108,42 @@ export default function Matter() {
         })
     }
 
+    //FUNÇÃO RESPONSÁVEL POR PEGAR OS EXERCICIOS
+    function getTravels() {
+        //MUDA O ESTADO DE CARREGAMENTO DOS EXERCICOS PARA true
+        setLoadingTravels(true)
+
+        instance.get(`/exercise/exercises`)
+        .then(function (response) {
+            //VERIFICA SE A CONTA FOI ENCONTRADA PELO TIPO DO DADO RETORNADO
+            if(typeof response.data === "object"){
+                //MUDA O ESTADO DE CARREGAMENTO DOS EXERCICOS PARA false
+                setLoadingTravels(false)
+
+                //DEFINE O ARRAY COM AS CONQUISTAS
+                response.data.map((exerc:any) => {
+                    if(exerc.matter.toLowerCase() == matter?.toLowerCase()){
+                        setTravels((ex) => [...ex, {
+                            concluded: false,
+                            materia: exerc.matter,
+                            title: exerc.title,
+                            type: 'travel'
+                        }])
+                    }
+                })
+            }else{
+                //MUDA O ESTADO DE CARREGAMENTO DOS EXERCICOS PARA false
+                setLoadingTravels(false)
+
+                //RETORNA MENSAGEM DE ERRO AO USUARIO
+                console.log(response)
+            }
+        })
+        .catch(function (error) {
+            console.log(error)
+        })
+    }
+
     //FUNÇÃO CHAMADA AO RECARREGAR A PÁGINA
     useEffect(() => {
         //VERIFICA SE O USUÁRIO ESTÁ LOGADO
@@ -117,6 +157,9 @@ export default function Matter() {
     useEffect(() => {
         //DEFINE O ARRAY COM OS CONTEUDOS
         getContent()
+
+        //DEFINE O ARRAY COM OS PASSEIOS
+        getTravels()
     },[])
 
     //FUNÇÃO PARA REDIRECIONAR PARA OUTRA PÁGINA
@@ -136,9 +179,10 @@ export default function Matter() {
                 <MenuButton />
             </Navbar>
 
-            <p className={`w-[90%] mt-8 mb-5 text-center text-[18px] ${theme == 'light' ? 'text-my-black' : 'text-my-white'}`}>Conteudos de {capitalizeText(matter || 'matéria')} que mais caem nos vestibulares</p>
 
-            <div className={`w-[90%] sm:px-12 sm:w-[70%] mb-[100px] sm:mb-[40px] lg:mb-0 flex items-center flex-col overflow-y-scroll scrollbar scrollbar-track-transparent scrollbar-thumb-my-secondary`}>
+            <div className={`w-[90%] sm:px-12 sm:w-[70%] mb-[100px] sm:mb-[40px] lg:mb-0 flex items-center flex-col overflow-y-scroll scrollbar-none overflow-x-hidden`}>
+                <p className={`w-[90%] mt-8 mb-5 text-center text-[18px] ${theme == 'light' ? 'text-my-black' : 'text-my-white'}`}>Conteudos de {capitalizeText(matter || 'matéria')} que mais caem nos vestibulares</p>
+
                 {loadingContent == false && content.length > 0 && content.map((cont, i) => (
                     <ContentCard background={cont.background} title={cont.title} event={() => redirect(cont.title)} key={i} />
                 ))}
@@ -156,6 +200,36 @@ export default function Matter() {
                 
                 {loadingContent == true && (
                     <p className={`w-full text-center text-[18px] ${theme == 'light' ? 'text-my-black' : 'text-my-white'}`}>estamos carregando as matérias seja paciente</p>
+                )}
+
+                <p className={`w-[90%] mt-8 mb-5 text-center text-[18px] ${theme == 'light' ? 'text-my-black' : 'text-my-white'}`}>Passeios relacionados com a matéria</p>
+
+                <div className={`w-screen flex flex-col items-center`}>
+                    {loadingTravels == false && travels.length > 0 && travels.map((travel, i) => (
+                        <>
+                            <TravelCard
+                                concluded={travel.concluded}
+                                materia={travel.materia}
+                                title={travel.title}
+                                type={travel.type} key={i}
+                            />
+                        </>
+                    ))}
+                </div>
+
+                {loadingTravels == false && travels.length == 0 &&(
+                    <div className={`flex flex-col items-center justify-start`}>
+                        <Text text='Nenhuma passeio encontrado'/>
+                        <IoMdSad
+                            className={`text-[120px]
+                                ${theme == 'light' ? 'text-my-gray' : 'text-my-gray-black'}
+                            `}
+                        />
+                    </div>
+                )}
+                
+                {loadingContent == true && (
+                    <p className={`w-full text-center text-[18px] ${theme == 'light' ? 'text-my-black' : 'text-my-white'}`}>estamos carregando os passeios seja paciente</p>
                 )}
 
                 <Link to={`/materias/${matter}/test`}

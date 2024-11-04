@@ -411,7 +411,7 @@ export default function MyPerfil() {
                 </h1>
 
                 <div className={`px-6 mb-8 w-full sm:w-[60%] h-[160px]`}>
-                    <div className="whitespace-nowrap p-4 flex items-center gap-2 overflow-scroll scrollbar scrollbar-track-transparent scrollbar-thumb-my-secondary">
+                    <div className="whitespace-nowrap p-4 flex items-center gap-2 overflow-scroll scrollbar-none">
                         <AvatarImage active={img == avatar_1 ? true : false} img={imgs[0]} event={() => toggleImg(1)} />
                         <AvatarImage active={img == avatar_2 ? true : false} img={imgs[1]} event={() => toggleImg(2)} />
                         <AvatarImage active={img == avatar_3 ? true : false} img={imgs[2]} event={() => toggleImg(3)} />

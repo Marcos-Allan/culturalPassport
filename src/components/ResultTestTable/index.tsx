@@ -70,7 +70,7 @@ export default function ResultTestTable(props: Props) {
                             {
                                 data: [props.myCorrectResponse, (props.questions.length - props.myCorrectResponse)],
                                 borderColor: 'black',
-                                backgroundColor: [`${theme == 'light' ? '#6E9488' : '#6E9488'}`, `${theme == 'light' ? '#723F28' : '#B47C49'}`]
+                                backgroundColor: [`${theme == 'light' ? '#20db48' : '#20db48'}`, `${theme == 'light' ? '#75028E' : '#8D46DC'}`]
                             }
                         ]
                     }}
@@ -82,7 +82,7 @@ export default function ResultTestTable(props: Props) {
                 <div className={`flex flex-col items-center justify-center flex-grow-[1] gap-[3px]`}>
                     <p className={`border-[1px] w-full font-bold text-center text-[12px] ${theme == 'light' ? 'text-my-black' : 'text-my-white'}`}>Gabarito</p>
                     {props.questions.map((response:string, i:number) => (
-                        <p key={response} className={`border-[1px] w-full text-center ${props.yourResponse[i] == props.correctResponse[i] ? 'text-[#00ff00] border-[#00ff00]' : 'text-[#ff0000] border-[#ff0000]'}`}>
+                        <p key={response} className={`border-[1px] w-full text-center ${props.yourResponse[i] == props.correctResponse[i] ? 'text-[#20db48] border-[#20db48]' : 'text-[#75028E] border-[#75028E]'}`}>
                             {props.yourResponse[i]}
                         </p>
                     ))}
@@ -91,7 +91,7 @@ export default function ResultTestTable(props: Props) {
                 <div className={`flex flex-col items-center justify-center flex-grow-[1] gap-[3px]`}>
                     <p className={`border-[1px] w-full font-bold text-center text-[12px] ${theme == 'light' ? 'text-my-black' : 'text-my-white'}`}>Resposta</p>
                     {props.questions.map((response:string, i:number) => (
-                        <p key={response} className={`border-[1px] w-full text-center ${props.yourResponse[i] == props.correctResponse[i] ? 'text-[#00ff00] border-[#00ff00]' : 'text-[#ff0000] border-[#ff0000]'}
+                        <p key={response} className={`border-[1px] w-full text-center ${props.yourResponse[i] == props.correctResponse[i] ? 'text-[#20db48] border-[#20db48]' : 'text-[#75028E] border-[#75028E]'}
                         `}>
                             {props.correctResponse[i]}
                         </p>

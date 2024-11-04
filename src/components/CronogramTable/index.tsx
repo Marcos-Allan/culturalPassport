@@ -24,7 +24,7 @@ export default function CronogramTable(props: Props) {
         const date = new Date()
 
         //VERIFICA O DIA DA ATUAL E RETORNA true OU false
-        if(word == days[date.getDay()]){
+        if(word == days[date.getDay()-1]){
             return true
         }else{
             return false

@@ -32,9 +32,8 @@ import { useNavigate, useLocation } from 'react-router-dom';
 
 //IMPORTAÇÃO DOS ICONES
 import { GoHome } from "react-icons/go";
-import { GrTrophy } from "react-icons/gr";
+import { GrTrophy, GrTrain } from "react-icons/gr";
 import { IoChatbubbleOutline, IoPersonOutline } from "react-icons/io5";
-import { LuPlaneTakeoff } from "react-icons/lu";
 import { LuMedal } from "react-icons/lu";
 
 export default function BottomNavigation() {
@@ -82,7 +81,7 @@ export default function BottomNavigation() {
             >
                 <div className={`flex items-center justify-center rounded-[50%] transition-all duration-[.2s] cursor-pointer
                     ${containsWord(location.pathname, 'travels') ? 'bg-my-white text-my-terciary' : 'text-my-white hover:bg-my-white hover:text-my-terciary'}`}>
-                    <LuPlaneTakeoff className={`text-[36px] p-[6px] `} />
+                    <GrTrain className={`text-[36px] p-[6px] `} />
                 </div>
                 <p className={`text-[10px] text-my-white`}>Passeios</p>
             </div>

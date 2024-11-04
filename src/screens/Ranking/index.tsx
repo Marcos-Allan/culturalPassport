@@ -111,7 +111,7 @@ export default function Ranking() {
             </Navbar>
 
 
-            <div className={`w-[90%] sm:ml-[30px] sm:px-12 sm:w-[70%] mb-[100px] sm:mb-[40px] lg:mb-0 flex items-center flex-col overflow-y-scroll scrollbar scrollbar-track-transparent scrollbar-thumb-my-secondary`}>
+            <div className={`w-[90%] sm:ml-[30px] sm:px-12 sm:w-[70%] mb-[100px] sm:mb-[40px] lg:mb-0 flex items-center flex-col overflow-y-scroll scrollbar-none`}>
                 
                 <div className={`w-[90%] flex justify-center items-end px-12 lg:px-32 my-4`}>
                     {loadingContent == false && users.length > 0 && users.map((user, i) => (
@@ -119,13 +119,13 @@ export default function Ranking() {
                             {i == 0 && (
                                 <div className='flex-grow-[1] h-[200px] bg-my-quartenary relative flex items-center justify-center order-1 rounded-t-[8px]'>
                                     <div className={`mt-2 absolute top-0`}>
-                                        <img src={user.img} className={`w-[40px] rounded-[50%] border-[2px] mb-1 animate-colorChange`} />
+                                        <img src={user.img} className={`w-[40px] rounded-[50%] border-[2px] border-transaprent mb-1 `} />
                                         <p className={`text-center font-bold text-my-white`}>1°</p>
                                     </div>
                                 </div>
                             )}
                             {i == 1 && (
-                                <div className='flex-grow-[1] h-[150px] bg-my-terciary relative flex items-center justify-center order-2 rounded-tr-[8px]'>
+                                <div className='flex-grow-[1] h-[150px] bg-my-quintenary relative flex items-center justify-center order-2 rounded-tr-[8px]'>
                                     <div className={`mt-2 absolute top-0`}>
                                         <img src={user.img} className={`w-[40px] rounded-[50%] border-[2px] border-transparent mb-1`} />
                                         <p className={`text-center font-bold text-my-white`}>2°</p>
@@ -148,7 +148,7 @@ export default function Ranking() {
                     <div className={`
                         w-[95%] flex justify-between items-center mb-2 text-my-white
                         ${i == 0 && 'bg-my-quartenary'}
-                        ${i == 1 && 'bg-my-terciary'}
+                        ${i == 1 && 'bg-my-quintenary'}
                         ${i == 2 && 'bg-my-secondary'}
                         ${i >= 3 && 'bg-my-gray'}
                         px-4 rounded-[6px] py-2

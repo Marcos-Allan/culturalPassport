@@ -88,7 +88,7 @@ export default function Home(){
                 <div className={`w-full flex flex-col items-center lg:w-[90%]`}>
                     <ImageComponente img={Person} width={['100', '60', '400', '100', '450']} />
                         
-                    <Button text="iniciar" route="/signs" />
+                    <Button text="iniciar" route="/sign-in" />
                 </div>
             </div>
             <Menu />

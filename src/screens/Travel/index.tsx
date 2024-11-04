@@ -152,34 +152,33 @@ export default function Travel() {
                 <MenuButton />
             </Navbar>
 
-            <div className={`min-h-[300px] w-full flex flex-col justify-start items-center mb-3 overflow-y-scroll overflow-visible scrollbar scrollbar-track-transparent scrollbar-thumb-my-secondary`}>
-
-
-                {loadingTravel == false && location.length >= 2 && (
-                    <>
-                        <TitlePage text='Localização do passeio' />
-                        <MapComponent position={[location[0], location[1]]} />
-                    </>
-                )}
+            <div className={`min-h-screen w-full flex flex-col justify-start items-center mb-3 overflow-y-scroll `}>
 
                 {loadingTravel == false && location.length <=1 && (
-                    <>
+                    <div className={`w-full flex flex-col items-center justify-center gap-4`}>
                         <Text text='Nenhum passeio disponivel no momento'/>
                         <IoMdSad className={`text-[150px] ${theme == 'light' ? 'text-my-gray' : 'text-my-gray-black'}`} />
-                    </>
+                    </div>
                 )}
 
                 {loadingTravel == true && (
                     <p className={`w-full text-center text-[18px] ${theme == 'light' ? 'text-my-black' : 'text-my-white'}`}>estamos carregando as matérias seja paciente</p>
                 )}
 
+                <h1 className={`text-[24px] font-bold text-center mb-3 ${theme == 'light' ? 'text-my-black' : 'text-my-white'}`}>Descrição</h1>
+                <p className={`w-[90%] lg:w-[80%] mb-[100px] sm:mb-[40px] lg:mb-0 ${theme == 'light' ? 'text-my-black' : 'text-my-white'} scrollbar-none`}>{travelDescription}</p>
+
+                {loadingTravel == false && location.length >= 2 && (
+                    <div className={`mb-[80px] w-full flex flex-col items-center gap-4`}>
+                        <TitlePage text='Localização do passeio' />
+                        <MapComponent position={[location[0], location[1]]} />
+                    </div>
+                )}
+                
+                <BottomNavigation />
+                
+                <Menu />
             </div>
-            <h1 className={`text-[24px] font-bold text-center mb-3 ${theme == 'light' ? 'text-my-black' : 'text-my-white'}`}>Descrição</h1>
-            <p className={`w-[90%] lg:w-[80%] overflow-y-scroll mb-[100px] sm:mb-[40px] lg:mb-0 ${theme == 'light' ? 'text-my-black' : 'text-my-white'} scrollbar scrollbar-track-transparent scrollbar-thumb-my-secondary`}>{travelDescription}</p>
-            
-            <BottomNavigation />
-            
-            <Menu />
         </>
     )
 }
