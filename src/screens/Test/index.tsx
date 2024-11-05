@@ -331,11 +331,11 @@ export default function Test() {
             {matter == 'fisíca' || matter == 'história' || matter == 'inglês' || matter == 'geografia' || matter == 'português' || matter == 'química' || matter == 'biologia' || matter == 'matemática' || matter == 'artes' || matter == 'filosofia' || matter == 'sociologia' || matter == 'espanhol' ? (
                 <>
                     <Navbar>
-                        <TitlePage text={`${capitalizeText(matter || 'matéria')}`} />
+                        <h1 className={`text-[32px] mb-[10px] w-full text-center font-bold ${theme == 'light' ? 'text-my-black' : 'text-my-white'}`}>{capitalizeText(matter || 'matéria')} </h1>
                     </Navbar>
                     
                     {questions.length > 0 ? (
-                        <div className={`w-[90%] sm:w-[60%] pe-6 h-[2800px] flex items-center justify-start flex-col overflow-y-scroll scrollbar scrollbar-track-transparent scrollbar-thumb-my-secondary`}>
+                        <div className={`w-[90%] sm:w-[60%] min-h-screen flex items-center justify-start flex-col overflow-y-scroll scrollbar-none`}>
                             
                             {questFinalized == false && (
                                 <div className={`w-full border-2 ${theme == 'light' ? 'border-my-black' : 'border-my-white'} min-h-[40px] rounded-[30px] relative overflow-hidden`}>

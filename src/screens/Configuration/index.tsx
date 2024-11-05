@@ -36,9 +36,9 @@ import Navbar from "../../components/Navbar/index.tsx";
 import TitlePage from "../../components/TitlePage/index.tsx"
 
 //IMPORTAÇÃO DOS ICONES
-import { CiLogout } from "react-icons/ci";
-import { IoMdTrash } from "react-icons/io";
-import { IoSunny, IoMoon } from "react-icons/io5";
+import { VscSignOut } from "react-icons/vsc";
+import { FiTrash2 } from "react-icons/fi";
+import { IoSunnyOutline, IoMoonOutline } from "react-icons/io5";
 
 //IMPORTAÇÃO DO PROVEDOR PARA PEGAR AS VARIÁVEIS GLOBAIS
 import { useMyContext } from '../../provider/geral';
@@ -77,35 +77,35 @@ export default function Configuration(){
                 <Return />
                 <TitlePage text="Configurações" space={true} />
             </Navbar>
+            
             <div className={`w-full flex flex-col items-center lg:h-full lg:w-[60%]`}>
                 {userS.logged == true && (
                     <div
-                        className={`w-[80%] flex py-3 transition-all duration-[.2s] cursor-pointer
-                            ${theme == 'light' ? 'text-my-black hover:text-my-secondary' : 'text-my-white hover:text-my-quintenary'}
+                        className={`w-[80%] flex py-3 transition-all duration-[.2s] cursor-pointer border-[2px] px-4 mt-3 rounded-[6px]
+                            ${theme == 'light' ? 'text-my-black hover:text-my-secondary hover:border-my-secondary border-my-black' : 'text-my-white hover:text-my-quintenary hover:border-my-quintenary border-my-white'}
                         `}
                         onClick={() => toggleLogout(!isLogout)}
                     >
-                        <CiLogout className={`text-[30px]`} />
+                        <VscSignOut className={`text-[30px]`} />
                         <p className={`text-[18px] font-semibold capitalize flex-grow-[1] text-left ps-[50px]`}>logout</p>
                     </div>
                 )}
 
                 {userS.logged == true && (
                     <div
-                        className={`w-[80%] flex py-3 transition-all duration-[.2s] cursor-pointer 
-                            ${theme == 'light' ? 'text-my-black hover:text-my-secondary' : 'text-my-white hover:text-my-quintenary'}
+                    className={`w-[80%] flex py-3 transition-all duration-[.2s] cursor-pointer border-[2px] px-4 mt-3 rounded-[6px]
+                            ${theme == 'light' ? 'text-my-black hover:text-my-secondary hover:border-my-secondary border-my-black' : 'text-my-white hover:text-my-quintenary hover:border-my-quintenary border-my-white'}
                         `}
                         onClick={() => toggleDeleteAccount(!isDelAccount)}
                     >
-                        <IoMdTrash className={`text-[30px]`} />
+                        <FiTrash2 className={`text-[30px]`} />
                         <p className={`text-[18px] font-semibold capitalize flex-grow-[1] text-left ps-[50px]`}>deletar conta</p>
                     </div>
                 )}
 
                 <div
-                    className={`
-                        w-[80%] flex py-3 transition-all duration-[.2s] cursor-pointer
-                        ${theme == 'light' ? 'text-my-black hover:text-my-secondary' : 'text-my-white hover:text-my-quintenary'}
+                    className={`w-[80%] flex py-3 transition-all duration-[.2s] cursor-pointer border-[2px] px-4 mt-3 rounded-[6px]
+                        ${theme == 'light' ? 'text-my-black hover:text-my-secondary hover:border-my-secondary border-my-black' : 'text-my-white hover:text-my-quintenary hover:border-my-quintenary border-my-white'}
                     `}
                     onClick={() => toggleTheme()}
                 >
@@ -113,7 +113,7 @@ export default function Configuration(){
                     {theme == 'light' ? (
                         //BOTA O ICONE DE SOL SE ESTIVER NO MODO LIGHT
                         <>
-                            <IoSunny
+                            <IoSunnyOutline
                                 className={`text-[30px]`}
                             />
                             <p className="text-[18px] font-semibold capitalize flex-grow-[1] text-left ps-[50px]">light mode</p>
@@ -121,7 +121,7 @@ export default function Configuration(){
                     ):(
                         //BOTA O ICONE DE LUA SE ESTIVER NO MODO DARK
                         <>
-                            <IoMoon
+                            <IoMoonOutline
                                 className={`text-[30px]`}
                             />
                             <p className="text-[18px] font-semibold capitalize flex-grow-[1] text-left ps-[50px]">dark mode</p>

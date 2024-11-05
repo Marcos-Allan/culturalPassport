@@ -37,7 +37,16 @@ import { IoChatbubbleOutline, IoPersonOutline } from "react-icons/io5";
 import { LuMedal } from "react-icons/lu";
 import { BsGear } from "react-icons/bs";
 
+//IMPORTAÇÃO DO PROVEDOR PARA PEGAR AS VARIÁVEIS GLOBAIS
+import { useMyContext } from "../../provider/geral"
+
 export default function BottomNavigation() {
+
+    //RESGATA AS VARIAVEIS GLOBAIS
+    const states:any = useMyContext()
+    
+    //DESESTRUTURA AS VARIAVEIS ESPECIFICADAS
+    const { theme } = states
 
     //UTILIZAÇÃO DO HOOK DE NAVEGAÇÃO 
     const navigate = useNavigate()
@@ -119,6 +128,8 @@ export default function BottomNavigation() {
                 </div>
                 <p className={`text-[10px] text-my-white`}>Ranking</p>
             </div>
+
+            <div className={`${theme == 'light' ? 'bg-my-white' : 'bg-my-black'} h-[90%] w-[1px] lg:h-[1px] lg:w-[90%] lg:mt-[-10px] lg:mb-[-20px]`} />
 
             <div
                 className={`lg:w-full flex flex-col items-center justify-center gap-[5px]`}

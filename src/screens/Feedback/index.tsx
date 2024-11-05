@@ -198,7 +198,7 @@ export default function Feedback() {
                 />
             </Navbar>
 
-            <div className={`${theme == 'light' ? 'bg-my-white' : 'bg-my-black'} overflow-y-scroll scrollbar-none w-[90%] sm:w-[60%] pt-[30px] h-full pb-[10px] flex flex-col gap-[20px] mb-[10px] sm:mb-[40px] lg:mb-0`}>
+            <div className={`${theme == 'light' ? 'bg-my-white' : 'bg-my-black'} overflow-y-scroll scrollbar-none w-[90%] sm:w-[60%] pt-[30px] h-full pb-[10px] flex flex-col gap-[20px] mb-[80px] sm:mb-[40px] lg:mb-0`}>
                 
                 <div className={`mx-auto rounded-[6px] py-2 px-4 w-full ${theme == 'light' ? 'bg-my-quintenary' : 'bg-my-quintenary'} opacity-[0.8]`}>
                     <p className={`${theme == 'light' ? 'text-my-black' : 'text-my-white'} text-left sm:text-center text-[14px]`}>
@@ -219,7 +219,6 @@ export default function Feedback() {
                     className={`w-[95%] sm:w-[60%] py-2 px-1 flex flex-row flex-wrap gap-1 mt-2 mb-[100px] lg:mb-0`}
                     onSubmit={(e) => {
                         e.preventDefault()
-                        // handleSubmit(JSON.stringify({ rating: selectedRating, message: inputMessage }))
                         handleSubmit(inputMessage, Number(selectedRating), `${new Date().getDate()}/${new Date().getMonth() + 1}/${new Date().getFullYear()}`)
                     }}
                 >

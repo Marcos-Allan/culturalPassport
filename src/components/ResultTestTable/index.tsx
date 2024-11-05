@@ -11,7 +11,6 @@ import { Doughnut } from 'react-chartjs-2'
 import { useMyContext } from '../../provider/geral';
 
 //IMPORTAÇÃO DOS COMPONENTES
-import TitlePage from "../TitlePage";
 import Button from '../Button';
 
 //TIPAGEM DAS PROPS DO COMPONENTE
@@ -40,7 +39,7 @@ export default function ResultTestTable(props: Props) {
 
     return(
         <div className='w-full flex flex-col items-center justify-start mb-[30px]'>
-            <TitlePage text='Resultado'/>
+            <h1 className={`text-[24px] w-full text-center font-bold ${theme == 'light' ? 'text-my-black' : 'text-my-white'}`}>Resultado</h1>
             
             <div className={`flex capitalize justify-between text-[20px] mt-3 px-2 py-3 rounded-[8px] w-full border-[1px] ${theme == 'light' ? 'border-my-black text-black' : 'border-my-white text-white'}`}>
                 <p>nota final:</p>

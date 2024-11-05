@@ -22,7 +22,7 @@
     "framer-motion": "^11.11.9",
     "katex": "^0.16.11",
     "leaflet": "^1.9.4",
-    "openmobile": "^1.0.6",
+    "openmobile": "^1.2.3",
     "react": "^18.2.0",
     "react-chartjs-2": "^5.2.0",
     "react-dom": "^18.2.0",
