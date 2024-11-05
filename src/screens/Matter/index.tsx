@@ -181,7 +181,7 @@ export default function Matter() {
                 <p className={`w-[90%] mt-8 mb-5 text-center text-[18px] ${theme == 'light' ? 'text-my-black' : 'text-my-white'}`}>Conteudos de {capitalizeText(matter || 'matéria')} que mais caem nos vestibulares</p>
 
                 {loadingContent == false && content.length > 0 && content.map((cont, i) => (
-                    <ContentCard background={cont.background} title={cont.title} event={() => redirect(cont.title)} key={i} />
+                    <ContentCard background={cont.background} title={cont.title} event={() => redirect(cont.title)} key={i} ind={i} />
                 ))}
 
                 {loadingContent == false && content.length == 0 &&(
@@ -209,6 +209,7 @@ export default function Matter() {
                                 materia={travel.materia}
                                 title={travel.title}
                                 type={travel.type} key={i}
+                                ind={i}
                             />
                         </>
                     ))}

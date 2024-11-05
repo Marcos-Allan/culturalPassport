@@ -27,11 +27,15 @@
  * By using the Software, you agree to these terms and conditions.
  */
 
+//IMPORTAÇÃO DAS BIBLIOTECAS
+import { useSpring, animated } from '@react-spring/web';
+
 //TIPAGEM DAS PROPS DO COMPONENTE
 interface Props {
     background: number,
     title: string,
     key: number,
+    ind: number,
     event?: () => void,
 }
 
@@ -46,19 +50,31 @@ export default function ContentCard(props: Props) {
     //DESESTRUTURA AS VARIAVEIS ESPECIFICADAS
     const { theme } = states
 
+    //APLICA ESTILO ANIMADO DA ANIMAÇÃO DE ENTRADA
+    const propsStyle:any = useSpring({
+        opacity: 1,
+        transform: 'translateX(0px)',
+        from: { transform: `${props.ind % 2 == 0 ? 'translateX(-100vw)' :  'translateX(100vw)'}`},
+        config: { tension: 0, friction: 0 },
+        delay: Number(Number(props.ind) + 1)* 250
+    });
+
     return(
-        <div
+        <animated.div
             onClick={() => {
                 props.event && props.event()
             }}
-            className={`w-full mb-4 flex justify-center rounded-[24px] py-4 hover:scale-[0.9] lg:hover:scale-[0.9] transition-all duration-[.3s] cursor-pointer border-[2px]
-            ${theme == 'light' ? 'bg-my-white' : 'bg-my-black'}
-            ${props.background == 0 || props.background == 4 || props.background == 8 || props.background == 12 ? 'border-[#5A94F2] text-[#5A94F2]' : ''}
-            ${props.background == 1 || props.background == 5 || props.background == 9 || props.background == 13 ? 'border-[#8D46DC] text-[#8D46DC]' : ''}
-            ${props.background == 2 || props.background == 6 || props.background == 10 || props.background == 14 ? 'border-[#4882FE] text-[#4882FE]' : ''}
-            ${props.background == 3 || props.background == 7 || props.background == 11 || props.background == 15 ? 'border-[#20DB48] text-[#20DB48]' : ''}
-        `}>
+            className={`
+                w-full mb-4 flex justify-center rounded-[24px] py-4 hover:scale-[0.9] lg:hover:scale-[0.9] transition-all duration-[.3s] cursor-pointer border-[2px]
+                ${theme == 'light' ? 'bg-my-white' : 'bg-my-black'}
+                ${props.background == 0 || props.background == 4 || props.background == 8 || props.background == 12 ? 'border-[#5A94F2] text-[#5A94F2]' : ''}
+                ${props.background == 1 || props.background == 5 || props.background == 9 || props.background == 13 ? 'border-[#8D46DC] text-[#8D46DC]' : ''}
+                ${props.background == 2 || props.background == 6 || props.background == 10 || props.background == 14 ? 'border-[#4882FE] text-[#4882FE]' : ''}
+                ${props.background == 3 || props.background == 7 || props.background == 11 || props.background == 15 ? 'border-[#20DB48] text-[#20DB48]' : ''}
+            `}
+            style={propsStyle}
+        >
             <p className={`capitalize font-semibold text-[18px] text-center`}>{props.title}</p>
-        </div>
+        </animated.div>
     )
 }
