@@ -29,6 +29,7 @@
 
 //IMPORTAÇÃO DAS BIBLIOTECAS
 import { useNavigate } from 'react-router-dom';
+import { useSpring, animated } from '@react-spring/web';
 
 //IMPORTAÇÃO DOS ICONES
 import { FiBook } from 'react-icons/fi';
@@ -40,6 +41,7 @@ interface Props {
     title: string,
     materia: string,
     concluded: boolean
+    ind: number
 }
 
 //IMPORTAÇÃO DO PROVEDOR PARA PEGAR AS VARIÁVEIS GLOBAIS
@@ -56,10 +58,21 @@ export default function TravelCard(props: Props) {
     //DESESTRUTURA AS VARIAVEIS ESPECIFICADAS
     const { theme } = states
 
+
+    //APLICA ESTILO ANIMADO DA ANIMAÇÃO DE ENTRADA
+    const propsStyle:any = useSpring({
+        opacity: 1,
+        transform: 'translateX(0px)',
+        from: { transform: `${props.ind % 2 == 0 ? 'translateX(-100vw)' :  'translateX(100vw)'}`},
+        config: { tension: 0, friction: 0 },
+        delay: Number(Number(props.ind) + 1)* 250
+    });
+
     return(
-        <div
+        <animated.div
             onClick={() => navigate(`/travels/${props.title}`)}
             className={`w-[90%] sm:w-[60%] border-2 my-2 ${theme == 'light' ? 'border-my-gray' : 'border-my-gray-black'} p-3 rounded-[16px] flex items-center justify-center hover:scale-[0.92] cursor-pointer transition-all duration-[.2s]`}
+            style={propsStyle}
         >
                 
             <div className={`flex-grow-[1] flex flex-col`}>
@@ -72,6 +85,6 @@ export default function TravelCard(props: Props) {
             ) : (
                 <FiBook className={`${props.concluded == true ? 'text-[#00ff00]' : `${theme == 'light' ? 'text-my-quintenary' : 'text-my-quintenary'}`} text-[28px]`} />
             )}
-        </div>
+        </animated.div>
     )
 }

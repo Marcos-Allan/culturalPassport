@@ -38,6 +38,7 @@ import Return from "../../components/Return";
 import TitlePage from "../../components/TitlePage";
 import ConquestCard from '../../components/ConquestCard';
 import Text from '../../components/Text';
+import BubbleAnimation from '../../components/Bubles';
 
 //IMPORTAÇÃO DO PROVEDOR PARA PEGAR AS VARIÁVEIS GLOBAIS
 import { useMyContext } from '../../provider/geral';
@@ -101,6 +102,7 @@ export default function Achievements() {
 
     return(
         <>
+            <BubbleAnimation />
             <Navbar>
                 <Return />
                 <TitlePage
@@ -108,9 +110,9 @@ export default function Achievements() {
                 />
             </Navbar>
             
-            <div className={`w-full flex flex-col justify-start items-center sm:gap-[20px] mb-[100px] sm:mb-[40px] lg:mb-0 overflow-y-scroll scrollbar scrollbar-track-transparent scrollbar-thumb-my-secondary`}>    
+            <div className={`w-full flex flex-col justify-start items-center sm:gap-[20px] mb-[100px] sm:mb-[40px] lg:mb-0 overflow-y-scroll overflow-x-hidden scrollbar scrollbar-track-transparent scrollbar-thumb-my-secondary`}>    
                 {loadingAchivements == false && conquests.length >= 1 && conquests.map((conq, i) => (
-                    <ConquestCard level={conq.level} message={conq.message} porcentage={conq.porcentage} backImg={conq.imgURL} title={conq.title} key={i} />
+                    <ConquestCard level={conq.level} message={conq.message} porcentage={conq.porcentage} backImg={conq.imgURL} title={conq.title} key={i} ind={i} />
                 ))}
                 
                 {loadingAchivements == false && conquests.length <= 0 && (

@@ -38,6 +38,7 @@ import Return from "../../components/Return";
 import TitlePage from "../../components/TitlePage";
 import Text from '../../components/Text';
 import TravelCard from '../../components/ExerciseCard';
+import BubbleAnimation from '../../components/Bubles';
 
 //IMPORTAÇÃO DO PROVEDOR PARA PEGAR AS VARIÁVEIS GLOBAIS
 import { useMyContext } from '../../provider/geral';
@@ -117,6 +118,7 @@ export default function Travels() {
 
     return(
         <>
+            <BubbleAnimation />
             <Navbar>
                 <Return />
                 <TitlePage
@@ -124,7 +126,7 @@ export default function Travels() {
                 />
             </Navbar>
 
-            <div className={`w-full flex flex-col justify-start items-center mb-[100px] sm:mb-[40px] lg:mb-0 overflow-y-scroll overflow-visible scrollbar scrollbar-track-transparent scrollbar-thumb-my-secondary`}>    
+            <div className={`w-full flex flex-col justify-start items-center mb-[100px] sm:mb-[40px] lg:mb-0 overflow-y-scroll overflow-x-hidden overflow-visible scrollbar scrollbar-track-transparent scrollbar-thumb-my-secondary`}>    
                 <Text text='Passeios' position='left' />
 
                 {loadingExercises == false && exercises.length >= 1 && exercises.map((exerc, i) => (
@@ -133,7 +135,9 @@ export default function Travels() {
                             concluded={exerc.concluded}
                             materia={exerc.materia}
                             title={exerc.title}
-                            type={exerc.type} key={i}
+                            type={exerc.type}
+                            key={i}
+                            ind={i}
                         />
                     </>
                 ))}

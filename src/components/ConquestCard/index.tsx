@@ -29,6 +29,7 @@
 
 //IMPORTAÇÃO DAS BIBLIOTECAS
 import { useState, useEffect } from 'react';
+import { useSpring, animated } from '@react-spring/web';
 
 //IMPORTAÇÃO DO PROVEDOR PARA PEGAR AS VARIÁVEIS GLOBAIS
 import { useMyContext } from '../../provider/geral';
@@ -40,6 +41,7 @@ interface Props {
     title: string;
     message: string;
     backImg: string;
+    ind: number,
 }
 
 export default function ConquestCard(props: Props) {
@@ -89,16 +91,27 @@ export default function ConquestCard(props: Props) {
         return level;
     }
 
-    // useEffect para monitorar mudanças em userS e props.title
+    //FUNÇÃ OCHAMADA TODA VEZ QUE A PÁGINA É RECARREGADA    
     useEffect(() => {
+        //CHAMA A FUNÇÃO QUE VERIFICA SE O USUÁRIO TEM A CONQUISTA  
         setAchievement(checkAchievement(props.title));
     }, [userS, props.title]);
 
+    //APLICA ESTILO ANIMADO DA ANIMAÇÃO DE ENTRADA
+    const propsStyle:any = useSpring({
+        opacity: 1,
+        transform: 'translateX(0px)',
+        from: { transform: `${props.ind % 2 == 0 ? 'translateX(-100vw)' :  'translateX(100vw)'}`},
+        config: { tension: 0, friction: 0 },
+        delay: Number(Number(props.ind) + 1)* 250
+    });
+
     return (
-        <div
+        <animated.div
             className={`w-[90%] sm:w-[60%] my-2 p-3 border-2 border-solid flex min-h-[180px] gap-[6px] rounded-[8px] transition-all duration-[.2s] ${
                 achievement ? 'animate-colorChange' : theme === 'light' ? 'border-my-quintenary' : 'border-my-secondary'
             }`}
+            style={propsStyle}
         >
             {/* ${props.title == "No caminho certo" && userS.simulationsConcludeds == 1 ? '' : 'grayscale(100%)'} */}
             <div
@@ -158,6 +171,6 @@ export default function ConquestCard(props: Props) {
                     </p>
                 </div>
             </div>
-        </div>
+        </animated.div>
     );
 }

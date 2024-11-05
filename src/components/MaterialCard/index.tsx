@@ -30,6 +30,7 @@
 //IMPORTAÇÃO DAS BIBLIOTECAS
 import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom';
+import { useSpring, animated } from '@react-spring/web';
 
 //IMPORTAÇÃO DO PROVEDOR PARA PEGAR AS VARIÁVEIS GLOBAIS
 import { useMyContext } from '../../provider/geral';
@@ -83,6 +84,7 @@ export default function MaterialCard(props: Props) {
         //COLOCA UMA NOVA COR NO ARRAY DE CORES
         setColors((colors) => [...colors, '#20DB48'])
 
+        //FUNÇÃO QUE PEGA A IMAGEM DA MATÉRIA
         switch (props.background) {
             case 0:
                 setImage(img1)
@@ -139,11 +141,20 @@ export default function MaterialCard(props: Props) {
 
     //UTILIZAÇÃO DO HOOK DE NAVEGAÇÃO 
     const navigate = useNavigate()
+
+    //APLICA ESTILO ANIMADO DA ANIMAÇÃO DE ENTRADA
+    const propsStyle:any = useSpring({
+        opacity: 1,
+        transform: 'translateY(0px)',
+        from: { transform: 'translateY(100vh)' },
+        config: { tension: 0, friction: 0 },
+        delay: Number(Number(props.background) + 1) * 250
+    });
     
     return(
-        <div
-            className={`relative mt-[20px] mx-2 w-5/12 sm:w-3/12 sm:mt-[20px] sm:mx-1 flex flex-col items-center justify-start rounded-[8px] border-[3px] hover:scale-[0.9] lg:hover:scale-[0.9] cursor-pointer transition-all duration-[.2s]`}
-            style={{ borderColor: `${colors[Number(props.background)]}` }}
+        <animated.div
+            className={`relative mt-[20px] mx-2 w-5/12 sm:w-3/12 sm:mt-[10px] sm:mx-1 flex flex-col items-center justify-start rounded-[8px] border-[3px] hover:scale-[0.9] lg:hover:scale-[0.9] cursor-pointer transition-all duration-[.2s]`}
+            style={{ borderColor: `${colors[Number(props.background)]}`, ...propsStyle }}
             onClick={() => navigate(`/materias/${props.titleMateria.toLowerCase()}`)}
         >
             <div className={`w-full flex items-center justify-center p-8`} style={{ backgroundColor: `${colors[Number(props.background)]}` }}>
@@ -154,6 +165,6 @@ export default function MaterialCard(props: Props) {
                 style={{ color: `${colors[Number(props.background)]}` }}
             >{props.titleMateria}</p>
             
-        </div>
+        </animated.div>
     )
 }
