@@ -34,10 +34,9 @@ import { useEffect, useState } from "react";
 import Navbar from "../../components/Navbar";
 import Return from "../../components/Return";
 import TitlePage from "../../components/TitlePage";
-import MenuButton from "../../components/MenuButton";
 import Text from "../../components/Text";
 import Button from "../../components/Button";
-import Menu from "../../components/Menu";
+import ToggleThemeBtn from "../../components/ToggleThemeBtn";
 
 //IMPORTAÇÃO DOS ICONES
 import { IoSadOutline } from "react-icons/io5";
@@ -74,7 +73,7 @@ export default function ErrorPage() {
             <Navbar>
                 <Return />
                 <TitlePage text="Erro" />
-                <MenuButton />
+                <ToggleThemeBtn />
             </Navbar>
 
             
@@ -88,7 +87,6 @@ export default function ErrorPage() {
             />
             
             <Button route={route} text="Voltar" />
-            <Menu />
         </>
     )
 }

@@ -34,12 +34,11 @@ import { useNavigate } from 'react-router-dom';
 //IMPORTAÇÃO DOS COMPONENTES
 import Navbar from "../../components/Navbar/index.tsx";
 import TitlePage from "../../components/TitlePage/index.tsx"
-import MenuButton from "../../components/MenuButton/index.tsx";
 import Button from "../../components/Button/index.tsx"
 import Text from "../../components/Text/index.tsx";
-import Menu from "../../components/Menu/index.tsx";
 import ImageComponente from '../../components/ImageComponente/index.tsx';
 import BubbleAnimation from '../../components/Bubles/index.tsx';
+import ToggleThemeBtn from '../../components/ToggleThemeBtn/index.tsx';
 
 //IMPORTAÇÃO DA IMAGEM USADA NA TELA
 import Person from '../../assets/imgs/person_1.png'
@@ -77,7 +76,7 @@ export default function Home(){
         <>
             <Navbar>
                 <TitlePage text="Bem Vindo Estudante" space={true} />
-                <MenuButton />
+                <ToggleThemeBtn />
             </Navbar>
             
             <div className={`w-full flex flex-col items-center lg:flex-row lg:justify-center lg:items-center lg:h-full lg:w-[60%]`}>
@@ -91,7 +90,6 @@ export default function Home(){
                     <Button text="iniciar" route="/sign-in" />
                 </div>
             </div>
-            <Menu />
             <BubbleAnimation />
         </>
     )

@@ -58,8 +58,6 @@ import avatar_8 from "../../../public/avatar-8.jpg"
 import Navbar from "../../components/Navbar";
 import Return from "../../components/Return";
 import TitlePage from "../../components/TitlePage";
-import MenuButton from "../../components/MenuButton";
-import Menu from "../../components/Menu";
 import Button from '../../components/Button';
 import BottomNavigation from '../../components/BottomNavigation';
 import AvatarImage from '../../components/AvatarImage';
@@ -357,7 +355,6 @@ export default function MyPerfil() {
             <Navbar>   
                 <Return />
                 <TitlePage text={`meu perfil`} />
-                <MenuButton />
             </Navbar>
             <div className={`w-full flex flex-col items-center overflow-y-scroll scrollbar scrollbar-track-transparent scrollbar-thumb-my-secondary`}>
                 
@@ -468,7 +465,6 @@ export default function MyPerfil() {
             </div>
 
             <BottomNavigation />
-            <Menu />
         </>
     )
 }

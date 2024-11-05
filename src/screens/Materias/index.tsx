@@ -32,8 +32,6 @@ import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 
 //IMPORTAÇÃO DOS COMPONENTES
-import Menu from "../../components/Menu";
-import MenuButton from "../../components/MenuButton";
 import Navbar from "../../components/Navbar";
 import Return from "../../components/Return";
 import TitlePage from "../../components/TitlePage";
@@ -120,7 +118,6 @@ export default function Materias() {
                 <TitlePage
                     text={`Matérias`}
                 />
-                <MenuButton />
             </Navbar>
 
             {/* <div className={`w-full flex flex-col justify-start items-center sm:gap-[20px] mb-[100px] sm:mb-[40px] lg:mb-0 overflow-y-scroll scrollbar scrollbar-track-transparent scrollbar-thumb-my-secondary`}>     */}
@@ -148,9 +145,6 @@ export default function Materias() {
             <CronogramPage />
             
             <BottomNavigation />
-            
-            <Menu />
-
         </>
     )
 }

@@ -32,13 +32,11 @@ import { useEffect, useState } from 'react'
 import { useParams, useNavigate, Link } from 'react-router-dom';
 
 //IMPORTAÇÃO DOS COMPONENTES
-import MenuButton from "../../components/MenuButton";
 import Navbar from "../../components/Navbar";
 import Return from "../../components/Return";
 import TitlePage from "../../components/TitlePage";
 import BottomNavigation from "../../components/BottomNavigation";
 import ContentCard from '../../components/ContentCard';
-import Menu from '../../components/Menu';
 import Text from '../../components/Text';
 
 //IMPORTAÇÃO DO PROVEDOR PARA PEGAR AS VARIÁVEIS GLOBAIS
@@ -176,7 +174,6 @@ export default function Matter() {
                 <TitlePage
                     text={`${capitalizeText(matter || 'matéria')}`}
                 />
-                <MenuButton />
             </Navbar>
 
 
@@ -237,10 +234,7 @@ export default function Matter() {
                 `}>Fazer prova</Link>
             </div>
 
-            
             <BottomNavigation />
-            
-            <Menu />
         </>
     )
 }

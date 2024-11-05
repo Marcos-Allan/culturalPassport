@@ -56,6 +56,8 @@ import Content from './screens/Content/index.tsx';
 import Travel from './screens/Travel/index.tsx';
 import Feedback from './screens/Feedback/index.tsx';
 import Travels from './screens/Travels/index.tsx';
+import Ranking from './screens/Ranking/index.tsx';
+import Configuration from './screens/Configuration/index.tsx';
 
 //IMPORTAÇÃO DO PROVEDOR QUE GUARDA AS VÁRIAVEIS DE ESTADO GLOBAL
 import { Provider } from './provider/index.tsx';
@@ -66,7 +68,6 @@ import Alert from './components/Alert/index.tsx';
 import LogoutPage from './components/LogoutPage/index.tsx';
 import DeleteAccountPage from './components/DeleteAccountPage/index.tsx';
 import NotificationProgramed from './components/NotificationProgramed/index.tsx';
-import Ranking from './screens/Ranking/index.tsx';
 
 //ARQUIVO DE CONFIGURAÇÃO DAS ROTAS
 const router = createBrowserRouter([
@@ -148,6 +149,11 @@ const router = createBrowserRouter([
   {
     path: "ranking",
     element: <Ranking />,
+    errorElement: <ErrorPage />
+  },
+  {
+    path: "configuration",
+    element: <Configuration />,
     errorElement: <ErrorPage />
   }
 ])

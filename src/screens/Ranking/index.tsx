@@ -32,12 +32,10 @@ import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 
 //IMPORTAÇÃO DOS COMPONENTES
-import MenuButton from "../../components/MenuButton";
 import Navbar from "../../components/Navbar";
 import Return from "../../components/Return";
 import TitlePage from "../../components/TitlePage";
 import BottomNavigation from "../../components/BottomNavigation";
-import Menu from '../../components/Menu';
 import Text from '../../components/Text';
 
 //IMPORTAÇÃO DO PROVEDOR PARA PEGAR AS VARIÁVEIS GLOBAIS
@@ -107,7 +105,6 @@ export default function Ranking() {
                 <TitlePage
                     text={'Ranking'}
                 />
-                <MenuButton />
             </Navbar>
 
 
@@ -177,11 +174,8 @@ export default function Ranking() {
                     <p className={`w-full text-center text-[18px] ${theme == 'light' ? 'text-my-black' : 'text-my-white'}`}>estamos carregando os usuários seja paciente</p>
                 )}
             </div>
-
             
             <BottomNavigation />
-            
-            <Menu />
         </>
     )
 }

@@ -35,6 +35,7 @@ import { GoHome } from "react-icons/go";
 import { GrTrophy, GrTrain } from "react-icons/gr";
 import { IoChatbubbleOutline, IoPersonOutline } from "react-icons/io5";
 import { LuMedal } from "react-icons/lu";
+import { BsGear } from "react-icons/bs";
 
 export default function BottomNavigation() {
 
@@ -50,8 +51,8 @@ export default function BottomNavigation() {
     }
 
     return(
-        <div className={`fixed bottom-0 w-full sm:px-[20%] h-[80px] px-3 bg-my-terciary flex justify-around items-center lg:h-full lg:w-[80px] lg:top-0 lg:left-0 lg:px-3 lg:flex-col`}>
-            
+        <div className={`fixed bottom-0 w-full sm:px-[20%] h-[80px] px-3 bg-my-terciary flex justify-around items-center lg:h-full lg:w-[80px] lg:top-0 lg:left-0 lg:px-0 lg:flex-col`}>
+
             <div
                 className={`flex flex-col items-center justify-center gap-[5px]`}
                 onClick={() => navigate('/materias')}
@@ -118,6 +119,19 @@ export default function BottomNavigation() {
                 </div>
                 <p className={`text-[10px] text-my-white`}>Ranking</p>
             </div>
+
+            <div
+                className={`lg:w-full flex flex-col items-center justify-center gap-[5px]`}
+                onClick={() => navigate('/configuration')}
+            >
+                <div className={`flex items-center justify-center rounded-[50%] transition-all duration-[.2s] cursor-pointer
+                    ${containsWord(location.pathname, 'configuration') ? 'bg-my-white text-my-terciary' : 'text-my-white hover:bg-my-white hover:text-my-terciary'}
+                `}>
+                    <BsGear className={`text-[36px] p-[6px]`} />
+                </div>
+                <p className={`text-[10px] text-my-white`}>Config</p>
+            </div>
+
         </div>
     )
 }

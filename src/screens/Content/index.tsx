@@ -32,12 +32,10 @@ import { useEffect, useState } from 'react'
 import { useParams, useNavigate } from 'react-router-dom';
 
 //IMPORTAÇÃO DOS COMPONENTES
-import MenuButton from "../../components/MenuButton";
 import Navbar from "../../components/Navbar";
 import Return from "../../components/Return";
 import TitlePage from "../../components/TitlePage";
 import BottomNavigation from "../../components/BottomNavigation";
-import Menu from '../../components/Menu';
 import MarkdownRenderer from '../../components/MarkdownRenderer';
 
 //IMPORTAÇÃO DO PROVEDOR PARA PEGAR AS VARIÁVEIS GLOBAIS
@@ -91,7 +89,6 @@ export default function Content() {
                 <TitlePage
                     text={`conteúdo`}
                 />
-                <MenuButton />
             </Navbar>
 
             <p className={`mt-8 mb-5 text-[18px] ${theme == 'light' ? 'tetx-my-black' : 'text-my-white'}`}>Conteudos de {capitalizeText(content || 'matéria')}</p>
@@ -101,8 +98,6 @@ export default function Content() {
             </div>
             
             <BottomNavigation />
-            
-            <Menu />
         </>
     )
 }

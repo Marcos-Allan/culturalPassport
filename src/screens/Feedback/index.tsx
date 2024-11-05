@@ -33,8 +33,6 @@ import { useNavigate } from 'react-router-dom';
 
 //IMPORTAÇÃO DOS COMPONENTES
 import BottomNavigation from "../../components/BottomNavigation";
-import Menu from "../../components/Menu";
-import MenuButton from "../../components/MenuButton";
 import Navbar from "../../components/Navbar";
 import Return from "../../components/Return";
 import TitlePage from "../../components/TitlePage";
@@ -198,7 +196,6 @@ export default function Feedback() {
                 <TitlePage
                     text={`Feedback`}
                 />
-                <MenuButton />
             </Navbar>
 
             <div className={`${theme == 'light' ? 'bg-my-white' : 'bg-my-black'} overflow-y-scroll scrollbar-none w-[90%] sm:w-[60%] pt-[30px] h-full pb-[10px] flex flex-col gap-[20px] mb-[10px] sm:mb-[40px] lg:mb-0`}>
@@ -239,8 +236,6 @@ export default function Feedback() {
             )}
 
             <BottomNavigation />
-            
-            <Menu />
         </>
     )
 }

@@ -36,11 +36,10 @@ import instance from '../../utils/axios';
 import Navbar from "../../components/Navbar";
 import Return from "../../components/Return";
 import TitlePage from '../../components/TitlePage'
-import MenuButton from '../../components/MenuButton'
 import Text from '../../components/Text'
 import Input from '../../components/Input';
 import Button from '../../components/Button'
-import Menu from '../../components/Menu';
+import ToggleThemeBtn from '../../components/ToggleThemeBtn';
 
 //IMPORTAÇÃO DO PROVEDOR PARA PEGAR AS VARIÁVEIS GLOBAIS
 import { useMyContext } from '../../provider/geral';
@@ -151,7 +150,7 @@ export default function ForgoutPassword() {
                     <TitlePage
                         text={`Esqueceu a senha`}
                     />
-                    <MenuButton />
+                    <ToggleThemeBtn />
                 </Navbar>
             </div>
 
@@ -166,7 +165,7 @@ export default function ForgoutPassword() {
                             <TitlePage
                                 text={`Esqueceu a senha?`}
                             />
-                            <MenuButton />
+                            <ToggleThemeBtn />
                         </Navbar>
                     </div>
 
@@ -191,7 +190,6 @@ export default function ForgoutPassword() {
 
                 </form>
             </div>
-            <Menu />
         </>
     )
 }

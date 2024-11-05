@@ -35,11 +35,10 @@ import { useNavigate } from 'react-router-dom';
 import Navbar from "../../components/Navbar";
 import Return from "../../components/Return";
 import TitlePage from '../../components/TitlePage'
-import MenuButton from '../../components/MenuButton'
 import Text from '../../components/Text'
 import Input from '../../components/Input';
 import Button from '../../components/Button'
-import Menu from '../../components/Menu';
+import ToggleThemeBtn from '../../components/ToggleThemeBtn';
 
 //IMPORTAÇÃO DO PROVEDOR PARA PEGAR AS VARIÁVEIS GLOBAIS
 import { useMyContext } from '../../provider/geral';
@@ -151,7 +150,7 @@ export default function ConfirmCode() {
                     <TitlePage
                         text={`Confirmar código`}
                     />
-                    <MenuButton />
+                    <ToggleThemeBtn />
                 </Navbar>
             </div>
 
@@ -165,7 +164,7 @@ export default function ConfirmCode() {
                             <TitlePage
                                 text={`confirmar o código`}
                             />
-                            <MenuButton />
+                            <ToggleThemeBtn />
                         </Navbar>
                     </div>
 
@@ -189,7 +188,6 @@ export default function ConfirmCode() {
                     <Button route='undefined' text={`enviar`} disabled={formValidate} event={verifyCode} />
                 </form>
             </div>
-            <Menu />
         </>
     )
 }

@@ -33,12 +33,10 @@ import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios'; 
 
 //IMPORTAÇÃO DOS COMPONENTES
-import MenuButton from "../../components/MenuButton";
 import Navbar from "../../components/Navbar";
 import Return from "../../components/Return";
 import TitlePage from "../../components/TitlePage";
 import BottomNavigation from "../../components/BottomNavigation";
-import Menu from '../../components/Menu';
 import Text from '../../components/Text'; 
 import MapComponent from '../../components/MapComponente';
 
@@ -149,7 +147,6 @@ export default function Travel() {
                 <TitlePage
                     text={`${capitalizeText(travel || 'Passeio')}`}
                 />
-                <MenuButton />
             </Navbar>
 
             <div className={`min-h-screen w-full flex flex-col justify-start items-center mb-3 overflow-y-scroll `}>
@@ -176,8 +173,6 @@ export default function Travel() {
                 )}
                 
                 <BottomNavigation />
-                
-                <Menu />
             </div>
         </>
     )

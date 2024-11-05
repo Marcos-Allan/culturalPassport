@@ -28,6 +28,8 @@
  */
 
 //IMPORTAÇÃO DAS BIBLIOTECAS
+//IMPORTAÇÃO DAS BIBLIOTECAS
+import { useLocation } from 'react-router-dom';
 import Skeleton, { SkeletonTheme } from 'react-loading-skeleton';
 import 'react-loading-skeleton/dist/skeleton.css'
 
@@ -42,17 +44,29 @@ interface Props {
 
 export default function TitlePage(props: Props) {
 
+    //VERIFICA A ROTA ATUAL
+    const location = useLocation();
+
     //RESGATA AS VARIAVEIS GLOBAIS
     const states:any = useMyContext()
 
     //DESESTRUTURA AS VARIAVEIS ESPECIFICADAS
     const { theme } = states
 
+    //location.pathname
     return(
         <SkeletonTheme baseColor={`${theme == 'light' ? '#818181bb' : '#c0c0c0bb'}`} highlightColor={`#ffffffbb`}>
             <h1 className={`text-center flex-grow-[1] pt-4 text-[26px] sm:text-[28px] font-bold capitalize
+                ${
+                    location.pathname !== '/' && 
+                    location.pathname !== '/sign-in' && 
+                    location.pathname !== '/sign-up' && 
+                    location.pathname !== '/forgout-password' && 
+                    location.pathname !== '/confirm-code' && 
+                    location.pathname !== '/switch-password' && 
+                    'mr-[55px] sm:mr-[44px]'
+                }
                 ${theme == 'light' ? 'text-my-black' : 'text-my-white'}
-                ${props.space && 'lg:pe-[80px]'}
             `}>{props.text || <Skeleton count={1}/>}</h1>
         </SkeletonTheme>
     )

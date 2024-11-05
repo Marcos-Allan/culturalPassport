@@ -27,46 +27,44 @@
  * By using the Software, you agree to these terms and conditions.
  */
 
-//IMPORTAÇÃO DAS BIBLIOTECAS
-import Skeleton, { SkeletonTheme } from 'react-loading-skeleton';
-import 'react-loading-skeleton/dist/skeleton.css'
-
 //IMPORTAÇÃO DOS ICONES
-import { IoMenu, IoCloseOutline } from "react-icons/io5";
+import { IoSunny, IoMoon } from "react-icons/io5";
 
 //IMPORTAÇÃO DO PROVEDOR PARA PEGAR AS VARIÁVEIS GLOBAIS
 import { useMyContext } from "../../provider/geral"
 
-export default function MenuButton() {
-
-    //UTILIZAÇÃO DO HOOK DE NAVEGAÇÃO 
-    const states:any = useMyContext()
+export default function ToggleThemeBtn() {
 
     //RESGATA AS VARIAVEIS GLOBAIS
-    const { theme, menuOpen, toggleMenuOpen } = states
+    const states:any = useMyContext()
+
+    //DESESTRUTURA AS VARIAVEIS ESPECIFICADAS
+    const { theme, toggleTheme } = states
 
     return(
-        <>
-            {/* VERIFICA SE O MENU ESTÁ ABERTO */}
-            {menuOpen == true ? (
-                //MUDA O ICONE DO MENU SE O MENU ESTIVER ABERTO
+        <div
+            className={`
+                mt-4 text-[40px] sm:text-[34px] ${theme == 'light' ? 'text-my-black' : 'text-my-white'} z-[2] hover:scale-[1.2] transition-all duration-[.2s] cursor-pointer
+            `}
+            onClick={() => toggleTheme()}
+
+        >
+            {/* VERIFICA SE O TEMA ESTÁ NO MODO dark OU light */}
+            {theme == 'light' ? (
+                //BOTA O ICONE DE SOL SE ESTIVER NO MODO LIGHT
                 <>
-                    <IoCloseOutline 
-                        className={`mt-4 text-[40px] sm:text-[34px] ${theme == 'light' ? 'text-my-black' : 'text-my-white'} z-[2] hover:scale-[1.2] transition-all duration-[.2s] cursor-pointer`}
-                        onClick={() => toggleMenuOpen()}
+                    <IoSunny
+                        className={`text-[30px]`}
                     />
                 </>
             ):(
-                //MUDA O ICONE DO MENU SE O MENU ESTIVER FECHADO
-                <div className={`relative`}>
-                    <SkeletonTheme baseColor={`${theme == 'light' ? '#818181bb' : '#c0c0c0bb'}`} highlightColor={`#ffffffbb`}>
-                        {<IoMenu
-                            className={`mt-4 text-[40px] sm:text-[34px] ${theme == 'light' ? 'text-my-black' : 'text-my-white'} z-[2] hover:scale-[1.2] transition-all duration-[.2s] cursor-pointer`}
-                            onClick={() => toggleMenuOpen()}
-                        /> || <Skeleton count={1} width={50} height={40} />}
-                    </SkeletonTheme>
-                </div> 
+                //BOTA O ICONE DE LUA SE ESTIVER NO MODO DARK
+                <>
+                    <IoMoon
+                        className={`text-[30px]`}
+                    />
+                </>
             )}
-        </>
+        </div>
     )
 }

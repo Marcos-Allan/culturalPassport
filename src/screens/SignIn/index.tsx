@@ -38,13 +38,12 @@ import instance from '../../utils/axios';
 import Navbar from "../../components/Navbar";
 import Return from "../../components/Return";
 import TitlePage from "../../components/TitlePage";
-import MenuButton from '../../components/MenuButton';
 import Input from '../../components/Input';
 import Linkin from "../../components/Linkin";
 import Button from "../../components/Button";
 import Separation from "../../components/Separation";
 import GoogleLogin from "../../components/GoogleLogin";
-import Menu from '../../components/Menu';
+import ToggleThemeBtn from '../../components/ToggleThemeBtn';
 
 //IMPORTAÇÃO DAS IMAGENS
 import bg from '../../assets/imgs/01bg.png'
@@ -204,7 +203,7 @@ export default function SignIn(){
                     <TitlePage
                         text={`Login`}
                         />
-                    <MenuButton />
+                    <ToggleThemeBtn />
                 </Navbar>
             </div>
 
@@ -216,7 +215,7 @@ export default function SignIn(){
                             <TitlePage
                                 text={`login`}
                             />
-                            <MenuButton />
+                            <ToggleThemeBtn />
                         </Navbar>
                     </div>
                     
@@ -260,7 +259,6 @@ export default function SignIn(){
                 <img className={`hidden lg:flex h-full`} src={bg} alt="livros com óculos em cima" />
 
             </div>
-            <Menu />
         </>
     )
 }

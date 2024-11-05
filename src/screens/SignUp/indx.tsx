@@ -41,11 +41,10 @@ import { useMyContext } from "../../provider/geral"
 import Navbar from "../../components/Navbar/index.tsx"
 import Return from "../../components/Return/index.tsx"
 import TitlePage from "../../components/TitlePage/index.tsx"
-import MenuButton from '../../components/MenuButton/index.tsx'
 import Input from '../../components/Input/index.tsx'
 import Button from "../../components/Button/index.tsx"
 import Linkin from "../../components/Linkin/index.tsx"
-import Menu from '../../components/Menu/index.tsx'
+import ToggleThemeBtn from '../../components/ToggleThemeBtn/index.tsx'
 
 //IMPORTAÇÃO DAS IMAGENS
 import bg from '../../assets/imgs/02bg.png'
@@ -274,7 +273,7 @@ export default function SignUp(){
                     <TitlePage
                         text={`cadastrar`}
                     />
-                    <MenuButton />
+                    <ToggleThemeBtn />
                 </Navbar>
             </div>
 
@@ -288,7 +287,7 @@ export default function SignUp(){
                             <TitlePage
                                 text={`Cadastrar-se`}
                             />
-                            <MenuButton />
+                            <ToggleThemeBtn />
                         </Navbar>
                     </div>
 
@@ -382,7 +381,6 @@ export default function SignUp(){
                 </form>
 
             </div>
-            <Menu />
         </>
     )
 }
