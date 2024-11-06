@@ -42,7 +42,7 @@ export default function NotificationProgramed() {
     const states:any = useMyContext()
 
     //DESESTRUTURA AS VARIAVEIS ESPECIFICADAS
-    const { toggleAlert, timeCronogram, userS } = states
+    const { toggleAlert, timeCronogram, userS, toggleUser } = states
 
     //SALVA O SOM DA NOTFICAÇÃO
     const alarm = new Audio(userS.soundAlert)
@@ -60,6 +60,9 @@ export default function NotificationProgramed() {
 
                     //COLOCA ALERT NA TELA
                     toggleAlert('success', 'Faça o login novamente por favor')
+
+                    //TIRA OS DADOS DA CONTA DO USUÁRIO DO FRONT-END
+                    toggleUser('', '', '', [], 0, '', '', [0, 0], false)
                 }
             })
             .catch(function (error) {

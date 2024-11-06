@@ -7,7 +7,7 @@
 
 /* Aumenta o tamanho dos inputs dentro do TimePicker */
 .custom-time-picker .react-time-picker__inputGroup__input {
-  width: 40px !important; /* ajuste conforme necessário */
+  width: 50px !important; /* ajuste conforme necessário */
   text-align: center !important;
   background-color: transparent !important;
   border: none !important;
