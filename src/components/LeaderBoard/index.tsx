@@ -13,7 +13,7 @@ export default function LeaderBoard(props: Props) {
         transform: 'translateY(0)',
         from: { transform: 'translateY(-100vh)' },
         config: { tension: 170, friction: 26 },
-        delay: 75
+        delay: 100
     });
     
     //APLICA ESTILO ANIMADO DA ANIMAÇÃO DE ENTRADA DO 2° LUGAR
@@ -21,7 +21,7 @@ export default function LeaderBoard(props: Props) {
         transform: 'translateY(0)',
         from: { transform: 'translateY(-100vh)' },
         config: { tension: 170, friction: 26 },
-        delay: 200
+        delay: 300
     });
     
     //APLICA ESTILO ANIMADO DA ANIMAÇÃO DE ENTRADA DO 3° LUGAR
@@ -29,7 +29,7 @@ export default function LeaderBoard(props: Props) {
         transform: 'translateY(0)',
         from: { transform: 'translateY(-100vh)' },
         config: { tension: 170, friction: 26 },
-        delay: 300
+        delay: 500
     });
 
     return (
@@ -40,7 +40,7 @@ export default function LeaderBoard(props: Props) {
                     style={propsStyleFirst}
                 >
                     <div className={`mt-2 absolute top-0`}>
-                        <img src={props.user.img} className={`w-[40px] rounded-[50%] border-[2px] border-transaprent mb-1 `} />
+                        <img src={props.user.img} className={`w-[40px] rounded-[50%] border-[2px] border-transparent mb-1 `} />
                         <p className={`text-center font-bold text-my-white`}>1°</p>
                     </div>
                 </animated.div>

@@ -79,6 +79,9 @@ export default function MyPerfil() {
     const [name, setName] = useState<string>()
     const [progress, setProgress] = useState<any>(0)
     const [days, setDays] = useState<string[]>(['segunda-feira', 'terça-feira', 'quarta-feira', 'quinta-feira', 'sexta-feira', 'sábado'])
+    
+    //DEFINE O ARRAY COM OS NOMES DOS SONS
+    const soundsName = ['pop', 'suave', 'suavation', 'antigo', 'simple', 'descoberta', 'simple2', 'noturno', 'assobio', 'tilt']
 
     //UTILIZAÇÃO DO HOOK DE NAVEGAÇÃO 
     const states:any = useMyContext()
@@ -90,7 +93,6 @@ export default function MyPerfil() {
     const fetchImages = async () => {
         //FAZ UMA REFERÊNCIA AO LOCAL DE AVATARES SALVOS NA NUVEM
         const storageRef = ref(storage, '/images/avatars');
-        // const storageRef = ref(storage, '/images/icons-achievements');
 
         try {
             //PEGA AS IMAGENS DENTRO DA PASTA ESPECIFICADA
@@ -422,11 +424,11 @@ export default function MyPerfil() {
 
                 <Button event={updateUser} text='Atualizar' route='undefined' />
                 
-                <h1 className={`text-center font-bold text-[24px] mt-4 mb-2 ${theme == 'light' ? 'text-my-secondary' : 'text-my-quintenary'}`}>Sons</h1>
+                <h1 className={`text-center font-bold text-[24px] mt-4 mb-8 ${theme == 'light' ? 'text-my-secondary' : 'text-my-quintenary'}`}>Sons</h1>
 
                 <div className={`w-[90%] sm:w-[60%] flex flex-row flex-wrap justify-center items-center`}>
-                    {sounds && sounds.map((sing:string) => (
-                        <AudioPlayer active={soundNotification == sing ? true : false} onClick={() => playAudio(sing)} />
+                    {sounds && sounds.map((sing:string, i) => (
+                        <AudioPlayer active={soundNotification == sing ? true : false} name={soundsName[i]} onClick={() => playAudio(sing)} />
                     ))}
                 </div>
                 
