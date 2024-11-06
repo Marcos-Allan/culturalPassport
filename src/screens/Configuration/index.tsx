@@ -34,16 +34,15 @@ import { useNavigate } from 'react-router-dom';
 //IMPORTAÇÃO DOS COMPONENTES
 import Navbar from "../../components/Navbar/index.tsx";
 import TitlePage from "../../components/TitlePage/index.tsx"
-
-//IMPORTAÇÃO DOS ICONES
-import { VscSignOut } from "react-icons/vsc";
-import { FiTrash2 } from "react-icons/fi";
-import { IoSunnyOutline, IoMoonOutline } from "react-icons/io5";
+import Return from '../../components/Return/index.tsx';
+import BottomNavigation from '../../components/BottomNavigation/index.tsx';
+import LogoutButton from '../../components/LogoutButton/index.tsx';
+import DeleteAccountButton from '../../components/DeleteAccountButton/index.tsx';
+import ToggleTheme from '../../components/ToggleTheme/index.tsx';
+import BubbleAnimation from '../../components/Bubles/index.tsx';
 
 //IMPORTAÇÃO DO PROVEDOR PARA PEGAR AS VARIÁVEIS GLOBAIS
 import { useMyContext } from '../../provider/geral';
-import Return from '../../components/Return/index.tsx';
-import BottomNavigation from '../../components/BottomNavigation/index.tsx';
 
 export default function Configuration(){
 
@@ -54,7 +53,7 @@ export default function Configuration(){
     const states:any = useMyContext()
 
     //DESESTRUTURA AS VARIAVEIS ESPECIFICADAS
-    const { theme, toggleLoading, toggleLogout, isLogout, toggleDeleteAccount, isDelAccount, toggleTheme, userS } = states
+    const { toggleLoading, userS } = states
     
     //FUNÇÃO CHAMADA AO RECARREGAR A PÁGINA
     useEffect(() => {
@@ -73,62 +72,24 @@ export default function Configuration(){
 
     return(
         <>
+            <BubbleAnimation />
             <Navbar>
                 <Return />
                 <TitlePage text="Configurações" space={true} />
             </Navbar>
             
             <div className={`w-full flex flex-col items-center lg:h-full lg:w-[60%]`}>
+                
+                <ToggleTheme />
+                
                 {userS.logged == true && (
-                    <div
-                        className={`w-[80%] flex py-3 transition-all duration-[.2s] cursor-pointer border-[2px] px-4 mt-3 rounded-[6px]
-                            ${theme == 'light' ? 'text-my-black hover:text-my-secondary hover:border-my-secondary border-my-black' : 'text-my-white hover:text-my-quintenary hover:border-my-quintenary border-my-white'}
-                        `}
-                        onClick={() => toggleLogout(!isLogout)}
-                    >
-                        <VscSignOut className={`text-[30px]`} />
-                        <p className={`text-[18px] font-semibold capitalize flex-grow-[1] text-left ps-[50px]`}>logout</p>
-                    </div>
+                    <LogoutButton />
                 )}
 
                 {userS.logged == true && (
-                    <div
-                    className={`w-[80%] flex py-3 transition-all duration-[.2s] cursor-pointer border-[2px] px-4 mt-3 rounded-[6px]
-                            ${theme == 'light' ? 'text-my-black hover:text-my-secondary hover:border-my-secondary border-my-black' : 'text-my-white hover:text-my-quintenary hover:border-my-quintenary border-my-white'}
-                        `}
-                        onClick={() => toggleDeleteAccount(!isDelAccount)}
-                    >
-                        <FiTrash2 className={`text-[30px]`} />
-                        <p className={`text-[18px] font-semibold capitalize flex-grow-[1] text-left ps-[50px]`}>deletar conta</p>
-                    </div>
+                    <DeleteAccountButton />
                 )}
-
-                <div
-                    className={`w-[80%] flex py-3 transition-all duration-[.2s] cursor-pointer border-[2px] px-4 mt-3 rounded-[6px]
-                        ${theme == 'light' ? 'text-my-black hover:text-my-secondary hover:border-my-secondary border-my-black' : 'text-my-white hover:text-my-quintenary hover:border-my-quintenary border-my-white'}
-                    `}
-                    onClick={() => toggleTheme()}
-                >
-                    {/* VERIFICA SE O TEMA ESTÁ NO MODO dark OU light */}
-                    {theme == 'light' ? (
-                        //BOTA O ICONE DE SOL SE ESTIVER NO MODO LIGHT
-                        <>
-                            <IoSunnyOutline
-                                className={`text-[30px]`}
-                            />
-                            <p className="text-[18px] font-semibold capitalize flex-grow-[1] text-left ps-[50px]">light mode</p>
-                        </>
-                    ):(
-                        //BOTA O ICONE DE LUA SE ESTIVER NO MODO DARK
-                        <>
-                            <IoMoonOutline
-                                className={`text-[30px]`}
-                            />
-                            <p className="text-[18px] font-semibold capitalize flex-grow-[1] text-left ps-[50px]">dark mode</p>
-                        </>
-                    )}
-                </div>
-
+            
             </div>
             
             {userS.logged == true && (

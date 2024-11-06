@@ -148,7 +148,7 @@ export default function MaterialCard(props: Props) {
         transform: 'translateY(0px)',
         from: { transform: 'translateY(100vh)' },
         config: { tension: 0, friction: 0 },
-        delay: Number(Number(props.background) + 1) * 250
+        delay: Number(Number(props.background) + 1) * 30
     });
     
     return(

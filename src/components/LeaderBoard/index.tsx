@@ -13,7 +13,7 @@ export default function LeaderBoard(props: Props) {
         transform: 'translateY(0)',
         from: { transform: 'translateY(-100vh)' },
         config: { tension: 170, friction: 26 },
-        delay: 250
+        delay: 75
     });
     
     //APLICA ESTILO ANIMADO DA ANIMAÇÃO DE ENTRADA DO 2° LUGAR
@@ -21,7 +21,7 @@ export default function LeaderBoard(props: Props) {
         transform: 'translateY(0)',
         from: { transform: 'translateY(-100vh)' },
         config: { tension: 170, friction: 26 },
-        delay: 750
+        delay: 200
     });
     
     //APLICA ESTILO ANIMADO DA ANIMAÇÃO DE ENTRADA DO 3° LUGAR
@@ -29,7 +29,7 @@ export default function LeaderBoard(props: Props) {
         transform: 'translateY(0)',
         from: { transform: 'translateY(-100vh)' },
         config: { tension: 170, friction: 26 },
-        delay: 1250
+        delay: 300
     });
 
     return (

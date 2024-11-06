@@ -27,8 +27,11 @@
  * By using the Software, you agree to these terms and conditions.
  */
 
+//IMPORTAÇÃO DAS BIBLIOTECAS
+import { useSpring, animated } from '@react-spring/web';
+
 //IMPORTAÇÃO DOS ICONES
-import { IoMdTrash } from "react-icons/io";
+import { FiTrash2 } from "react-icons/fi";
 
 //IMPORTAÇÃO DO PROVEDOR PARA PEGAR AS VARIÁVEIS GLOBAIS
 import { useMyContext } from "../../provider/geral"
@@ -41,14 +44,26 @@ export default function DeleteAccountButton() {
     //RESGATA AS VARIAVEIS GLOBAIS
     const { theme, toggleDeleteAccount, isDelAccount } = states
 
+    //APLICA ESTILO ANIMADO DA ANIMAÇÃO DE ENTRADA
+    const propsStyle:any = useSpring({
+        opacity: 1,
+        transform: 'translateX(0px)',
+        from: { transform: 'translateX(-100vw)'},
+        config: { tension: 0, friction: 0 },
+        delay: 250
+    });
+
     return(
-        <div className={`w-[80%] flex py-3 transition-all duration-[.2s] cursor-pointer 
-        ${theme == 'light' ? 'text-my-white hover:text-my-quintenary' : 'text-my-black hover:text-my-secondary'}
-        `}
+        <animated.div
+            className={`
+                w-[80%] flex py-3 transition-all duration-[.2s] cursor-pointer border-[2px] px-4 mt-3 rounded-[6px]
+                ${theme == 'light' ? 'text-my-black hover:text-my-secondary hover:border-my-secondary border-my-black' : 'text-my-white hover:text-my-quintenary hover:border-my-quintenary border-my-white'}
+            `}
+            style={propsStyle}
             onClick={() => toggleDeleteAccount(!isDelAccount)}
         >
-            <IoMdTrash className={`text-[30px]`} />
+            <FiTrash2 className={`text-[30px]`} />
             <p className={`text-[18px] font-semibold capitalize flex-grow-[1] text-left ps-[50px]`}>deletar conta</p>
-        </div>
+        </animated.div>
     )
 }

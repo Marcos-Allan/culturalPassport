@@ -27,8 +27,11 @@
  * By using the Software, you agree to these terms and conditions.
  */
 
+//IMPORTAÇÃO DAS BIBLIOTECAS
+import { useSpring, animated } from '@react-spring/web';
+
 //IMPORTAÇÃO DOS ICONES
-import { IoSunny, IoMoon } from "react-icons/io5";
+import { IoSunnyOutline, IoMoonOutline } from "react-icons/io5";
 
 //IMPORTAÇÃO DO PROVEDOR PARA PEGAR AS VARIÁVEIS GLOBAIS
 import { useMyContext } from "../../provider/geral"
@@ -41,17 +44,28 @@ export default function ToggleTheme() {
     //DESESTRUTURA AS VARIAVEIS ESPECIFICADAS
     const { theme, toggleTheme } = states
 
-    return(
-        <div
-            className={`w-[80%] flex py-3 transition-all duration-[.2s] cursor-pointer ${theme == 'light' ? 'text-my-white hover:text-my-quintenary' : 'text-my-black hover:text-my-secondary'}`}
-            onClick={() => toggleTheme()}
+    //APLICA ESTILO ANIMADO DA ANIMAÇÃO DE ENTRADA
+    const propsStyle:any = useSpring({
+        opacity: 1,
+        transform: 'translateX(0px)',
+        from: { transform: 'translateX(-100vw)'},
+        config: { tension: 0, friction: 0 },
+        delay: 50
+    });
 
+    return(
+        <animated.div
+            className={`w-[80%] flex py-3 transition-all duration-[.2s] cursor-pointer border-[2px] px-4 mt-3 rounded-[6px]
+                ${theme == 'light' ? 'text-my-black hover:text-my-secondary hover:border-my-secondary border-my-black' : 'text-my-white hover:text-my-quintenary hover:border-my-quintenary border-my-white'}
+            `}
+            style={propsStyle}
+            onClick={() => toggleTheme()}
         >
             {/* VERIFICA SE O TEMA ESTÁ NO MODO dark OU light */}
             {theme == 'light' ? (
                 //BOTA O ICONE DE SOL SE ESTIVER NO MODO LIGHT
                 <>
-                    <IoSunny
+                    <IoSunnyOutline
                         className={`text-[30px]`}
                     />
                     <p className="text-[18px] font-semibold capitalize flex-grow-[1] text-left ps-[50px]">light mode</p>
@@ -59,12 +73,12 @@ export default function ToggleTheme() {
             ):(
                 //BOTA O ICONE DE LUA SE ESTIVER NO MODO DARK
                 <>
-                    <IoMoon
+                    <IoMoonOutline
                         className={`text-[30px]`}
                     />
                     <p className="text-[18px] font-semibold capitalize flex-grow-[1] text-left ps-[50px]">dark mode</p>
                 </>
             )}
-        </div>
+        </animated.div>
     )
 }

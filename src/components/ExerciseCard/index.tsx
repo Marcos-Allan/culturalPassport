@@ -65,7 +65,7 @@ export default function TravelCard(props: Props) {
         transform: 'translateX(0px)',
         from: { transform: `${props.ind % 2 == 0 ? 'translateX(-100vw)' :  'translateX(100vw)'}`},
         config: { tension: 0, friction: 0 },
-        delay: Number(Number(props.ind) + 1)* 250
+        delay: Number(Number(props.ind) + 1)* 50
     });
 
     return(
