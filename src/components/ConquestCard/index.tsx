@@ -42,6 +42,7 @@ interface Props {
     message: string;
     backImg: string;
     ind: number,
+    active?: boolean,
 }
 
 export default function ConquestCard(props: Props) {
@@ -64,6 +65,14 @@ export default function ConquestCard(props: Props) {
         if (!userS || !userS.simulations) {
             console.error("Dados de usuário ou simulações não estão disponíveis");
             return false;
+        }
+
+        if(props.active){
+            //VERIFICA SE A CONQUISTA EXISTE NO BD
+            const hasAchievement = true
+            
+            //RETORNA A CONQUISTA PARA PODER COLOCAR NO BD DO USUÁRIO
+            return hasAchievement;
         }
 
         //VERIFICA SE A CONQUISTA EXISTE NO BD

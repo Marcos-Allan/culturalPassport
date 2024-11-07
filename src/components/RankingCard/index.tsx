@@ -29,6 +29,7 @@
 
 //IMPORTAÇÃO DAS BIBLIOTECAS
 import { useSpring, animated } from '@react-spring/web';
+import { useNavigate } from 'react-router-dom';
 
 // Tipagem das props do componente
 interface Props {
@@ -37,6 +38,8 @@ interface Props {
 }
 
 export default function RankingCard(props: Props) {
+    //UTILIZAÇÃO DO HOOK DE NAVEGAÇÃO ENTRE PÁGINAS DO react-router-dom
+    const navigate = useNavigate()
 
     //APLICA ESTILO ANIMADO DA ANIMAÇÃO DE ENTRADA
     const propsStyle:any = useSpring({
@@ -49,6 +52,7 @@ export default function RankingCard(props: Props) {
 
     return (
         <animated.div
+            onClick={() => navigate(`/ranking/user/${props.user.email}`)}
             className={`
                 w-[95%] flex justify-between items-center mb-2 text-my-white
                 ${props.ind === 0 && 'bg-my-quartenary'}

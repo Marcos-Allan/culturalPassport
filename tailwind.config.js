@@ -59,6 +59,16 @@ export default {
           '85%': { borderColor: 'rgb(128, 0, 128)' },
           '100%': { borderColor: 'rgb(255, 0, 0)' },
         },
+        textChange: {
+          '0%': { color: 'rgb(255, 0, 0)' },
+          '14%': { color: 'rgb(255, 165, 0)' },
+          '28%': { color: 'rgb(255, 255, 0)' },
+          '42%': { color: 'rgb(0, 128, 0)' },
+          '57%': { color: 'rgb(0, 255, 255)' },
+          '71%': { color: 'rgb(0, 0, 255)' },
+          '85%': { color: 'rgb(128, 0, 128)' },
+          '100%': { color: 'rgb(255, 0, 0)' },
+        },
         bgChange: {
           '0%': { backgroundColor: 'rgb(255, 0, 0)' },
           '14%': { backgroundColor: 'rgb(255, 165, 0)' },
@@ -72,7 +82,8 @@ export default {
       },
       animation: {
         colorChange: 'colorChange 4s linear infinite',
-        bgChange: 'bgChange 4s infinite linear'
+        bgChange: 'bgChange 4s infinite linear',
+        textChange: 'textChange 4s infinite linear',
       },
     },
   },

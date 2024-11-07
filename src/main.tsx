@@ -58,6 +58,7 @@ import Feedback from './screens/Feedback/index.tsx';
 import Travels from './screens/Travels/index.tsx';
 import Ranking from './screens/Ranking/index.tsx';
 import Configuration from './screens/Configuration/index.tsx';
+import UserProfile from './screens/UserProfile/index.tsx';
 
 //IMPORTAÇÃO DO PROVEDOR QUE GUARDA AS VÁRIAVEIS DE ESTADO GLOBAL
 import { Provider } from './provider/index.tsx';
@@ -154,6 +155,11 @@ const router = createBrowserRouter([
   {
     path: "configuration",
     element: <Configuration />,
+    errorElement: <ErrorPage />
+  },
+  {
+    path: "ranking/user/:user",
+    element: <UserProfile />,
     errorElement: <ErrorPage />
   }
 ])
