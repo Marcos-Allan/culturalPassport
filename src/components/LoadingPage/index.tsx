@@ -30,24 +30,38 @@
 //IMPORTAÇÃO DO PROVEDOR PARA PEGAR AS VARIÁVEIS GLOBAIS
 import { useMyContext } from "../../provider/geral"
 
+//IMPORTAÇÃO DAS IMAGENS
+import imageLoading from '../../../public/loading.gif'
+
 export default function LoadingPage() {
 
     //RESGATA AS VARIAVEIS GLOBAIS
     const states:any = useMyContext()
 
     //DESESTRUTURA AS VARIAVEIS ESPECIFICADAS
-    const { theme, loading } = states
+    const {  loading } = states
 
     return(
-        <div className={`
-            fixed top-0 left-0 w-screen h-screen flex justify-center items-center transition-all duration-[.3s]
-            ${loading == true ? 'opacity-1 z-[2]' : 'opacity-0 z-[-1]'}
-            ${theme == 'light' ? 'bg-my-black-opacity' : 'bg-my-white-opacity'}
-        `}>
-            <div className={`
-                w-[80px] h-[80px] bg-my-transparent rounded-[50%] border-[6px] border-t-transparent animate-spin
-                ${theme == 'light' ? 'border-my-quartenary' : 'border-my-terciary'}
-            `}></div>
-        </div>
+        <>
+            {/* <div className={`
+                fixed top-0 left-0 w-screen h-screen flex justify-center items-center transition-all duration-[.3s]
+                ${loading == true ? 'opacity-1 z-[2]' : 'opacity-0 z-[-1]'}
+                ${theme == 'light' ? 'bg-my-black-opacity' : 'bg-my-white-opacity'}
+            `}>
+                <div className={`
+                    w-[80px] h-[80px] bg-my-transparent rounded-[50%] border-[6px] border-t-transparent animate-spin
+                    ${theme == 'light' ? 'border-my-quartenary' : 'border-my-terciary'}
+                    `}></div>
+            </div> */}
+            <div
+                className={`
+                    fixed top-0 left-0 w-screen h-screen flex justify-center items-center bg-cover bg-center
+                    ${loading == true ? 'opacity-1 z-[2]' : 'opacity-0 z-[-1]'}
+                    bg-[#1F6CC7]
+                `}
+            >
+                <img src={imageLoading} className={`w-full sm:w-[50%] h-auto`} />
+            </div>
+        </>
     )
 }

@@ -35,14 +35,12 @@ import TimePicker from 'react-time-picker';
 //IMPORTAÇÃO DO PROVEDOR PARA PEGAR AS VARIÁVEIS GLOBAIS
 import { useMyContext } from "../../provider/geral"
 
-//IMPORTAÇÃO DOS ICONES
-import {  IoArrowForward } from "react-icons/io5";
-
 //CONFIGURAÇÃO DA BASE URL DO AXIOS
 import instance from '../../utils/axios';
 
 //IMPORTAÇÃO DOS ESTILOS DO INPUT
 import './TimePickerStyles.css';
+import Button from '../Button';
 
 export default function CronogramPage() {
 
@@ -180,10 +178,10 @@ export default function CronogramPage() {
                     absolute top-0 left-0 w-screen h-screen flex flex-col justify-center items-center
                     ${theme == 'light' ? 'bg-my-black-opacity' : 'bg-my-white-opacity'}
                 `}>
-                    <h1 className={`w-[80%] text-center text-[20px] font-medium mb-[14px] ${theme == 'light' ? 'text-my-white' : 'text-my-black'}`}>Olá <span className={`font-bold ${theme == 'light' ? 'text-my-quartenary' : 'text-my-secondary'}`}>{userS.name}</span>, defina seu cronograma de estudos</h1>
+                    <h1 className={`w-[80%] text-center text-[20px] font-medium mb-[14px] ${theme == 'light' ? 'text-my-white' : 'text-my-black'}`}>Olá <span className={`font-bold ${theme == 'light' ? 'text-my-quintenary' : 'text-my-secondary'}`}>{userS.name}</span>, defina seu cronograma de estudos</h1>
 
                     
-                    <div className={`ml-[40px] flex flex-row flex-wrap mb-3 text-[24px] py-2 px-4 ${theme == 'light' ? 'bg-my-secondary' : 'bg-my-quartenary'}`}>
+                    <div className={`ml-[40px] flex flex-row flex-wrap mb-3 text-[24px] py-2 px-4 ${theme == 'light' ? 'bg-my-secondary' : 'bg-my-quintenary'}`}>
                         <h1 className={`capitalize mr-3 ${theme == 'light' ? 'text-my-black' : 'text-my-white'}`}>horário: </h1>
                         <TimePicker
                             onChange={handleTimeChange}
@@ -198,23 +196,24 @@ export default function CronogramPage() {
                     </div>
 
 
-                    <div className={`ml-[40px] relative flex flex-row w-[80%] sm:w-[70%] lg:w-[50%] min-h-[280px] rounded-[8px] ${theme == 'light' ? 'bg-my-secondary' : 'bg-my-quartenary'} border-4 ${theme == 'light' ? 'border-my-secondary' : 'border-my-quartenary'}`}>
+                    <div className={`ml-[40px] relative flex flex-row w-[80%] sm:w-[70%] lg:w-[50%] min-h-[280px] rounded-[8px] ${theme == 'light' ? 'bg-my-secondary' : 'bg-my-quintenary'}`}>
                         <div
-                            className={`flex-grow-[1] py-8 px-4 rounded-[8px] ${theme == 'light' ? 'bg-my-white' : 'bg-my-black'}`}
+                            className={`w-full flex flex-row py-8 px-4 rounded-[8px] ${theme == 'light' ? 'bg-my-white' : 'bg-my-black'}`}
                         >
-                            <div className={`absolute top-0 left-[-39px] text-my-white mt-[28px] border-[4px] text-center ${theme == 'light' ? 'border-l-my-secondary border-t-my-secondary border-b-my-secondary border-r-my-white bg-my-white' : 'border-t-my-quartenary border-l-my-quartenary border-b-my-quartenary border-r-my-black bg-my-black'} flex flex-col gap-[5px] rounded-tl-[8px] rounded-bl-[8px]`}>
-                                <p className='capitalize py-[3px] bg-my-primary'>seg</p>
-                                <p className='capitalize py-[3px] bg-my-secondary'>ter</p>
-                                <p className='capitalize py-[3px] bg-my-terciary'>qua</p>
-                                <p className='capitalize py-[3px] bg-my-quartenary'>qui</p>
-                                <p className='capitalize py-[3px] bg-my-quintenary'>sex</p>
-                                <p className='capitalize py-[3px] bg-my-primary'>sab</p>
+                            <div className={`text-my-white flex flex-col items-center justify-between text-center ${theme == 'light' ? 'border-my-secondary' : 'border-my-quintenary bg-my-black'} flex flex-col gap-[5px]`}>
+                                <p className={`capitalize h-[30px] flex items-center w-full px-1 mr-[6px] justify-center ${theme == 'light' ? 'bg-my-quintenary' : 'bg-my-secondary' }`}>seg</p>
+                                <p className={`capitalize h-[30px] flex items-center w-full px-1 mr-[6px] justify-center ${theme == 'light' ? 'bg-my-quintenary' : 'bg-my-secondary' }`}>ter</p>
+                                <p className={`capitalize h-[30px] flex items-center w-full px-1 mr-[6px] justify-center ${theme == 'light' ? 'bg-my-quintenary' : 'bg-my-secondary' }`}>qua</p>
+                                <p className={`capitalize h-[30px] flex items-center w-full px-1 mr-[6px] justify-center ${theme == 'light' ? 'bg-my-quintenary' : 'bg-my-secondary' }`}>qui</p>
+                                <p className={`capitalize h-[30px] flex items-center w-full px-1 mr-[6px] justify-center ${theme == 'light' ? 'bg-my-quintenary' : 'bg-my-secondary' }`}>sex</p>
+                                <p className={`capitalize h-[30px] flex items-center w-full px-1 mr-[6px] justify-center ${theme == 'light' ? 'bg-my-quintenary' : 'bg-my-secondary' }`}>sab</p>
                             </div>
 
                             <DragDropContext onDragEnd={onDragEnd}>
                                 <Droppable droppableId="matters" type="list" direction="vertical">
                                     {(provided) => (
                                         <div
+                                            className='flex-grow-[1]'
                                             style={{
                                                 display: 'grid',
                                                 gridTemplateColumns: 'repeat(2, 1fr)',
@@ -237,7 +236,7 @@ export default function CronogramPage() {
                                                     className={`capitalize h-[30px] flex items-center justify-center cursor-pointer hover:underline transition-all duration-[.3s] text-[14px] text-center py-1 text-my-white ${
                                                         theme === 'light'
                                                             ? 'bg-my-secondary'
-                                                            : 'bg-my-quartenary'
+                                                            : 'bg-my-quintenary'
                                                         } `}
                                                     >
                                                     {mat}
@@ -254,20 +253,16 @@ export default function CronogramPage() {
 
                         </div>
 
-                         <IoArrowForward
-                             onClick={() => {
-                                updateUser()
-                                toggleCronogram(Number(time.split(':')[0]), Number(time.split(':')[1]))
-                            }}
-                             className={`
-                             absolute right-[0%] top-[0%] text-[20px] m-1 hover:scale-[1.2] transition-all duration-[.2s] cursor-pointer
-                                 ${theme == 'light'
-                                 ? 'text-my-secondary'
-                                 : 'text-my-quartenary'
-                                 }
-                             `}
-                         />
                     </div>
+                    <Button
+                        text='Atualizar'
+                        route='undefined'
+                        disabled={false}
+                        event={() => {
+                            updateUser()
+                            toggleCronogram(Number(time.split(':')[0]), Number(time.split(':')[1]))
+                        }}
+                    />
                 </div>
             )}
         </>
