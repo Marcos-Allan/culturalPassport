@@ -55,7 +55,7 @@ export default function LoadingPage() {
             </div> */}
             <div
                 className={`
-                    fixed top-0 left-0 w-screen h-screen flex justify-center items-center bg-cover bg-center
+                    fixed top-0 left-0 w-screen h-screen flex justify-center items-center bg-cover bg-center transition-all duration-[.3s]
                     ${loading == true ? 'opacity-1 z-[2]' : 'opacity-0 z-[-1]'}
                     bg-[#1F6CC7]
                 `}
