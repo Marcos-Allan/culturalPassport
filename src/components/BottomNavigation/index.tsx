@@ -114,7 +114,7 @@ export default function BottomNavigation() {
                 onClick={() => navigate('/ranking')}
             >
                 <div className={`flex items-center justify-center rounded-[50%] transition-all duration-[.2s] cursor-pointer
-                ${location.pathname == '/ranking'  ? 'bg-my-white text-my-terciary' : 'text-my-white hover:bg-my-white hover:text-my-terciary'}`}>
+                ${containsWord(location.pathname, '/ranking')  ? 'bg-my-white text-my-terciary' : 'text-my-white hover:bg-my-white hover:text-my-terciary'}`}>
                     <LuMedal className={`text-[36px] p-[6px]`} />
                 </div>
                 <p className={`text-[10px] text-my-white`}>Ranking</p>
