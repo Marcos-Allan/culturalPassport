@@ -140,7 +140,7 @@ export default function UserProfile() {
                 />
             </Navbar>
             
-            <div className={`w-full sm:px-12 sm:w-[70%] mb-[100px] mt-3 sm:mb-[40px] lg:mb-0 flex items-center flex-col overflow-y-scroll scrollbar-none overflow-x-hidden`}>
+            <div className={`w-full flex flex-col justify-start items-center sm:gap-[20px] mb-[100px] sm:mb-[40px] lg:mb-0 overflow-y-scroll overflow-x-hidden scrollbar scrollbar-track-transparent scrollbar-thumb-my-secondary`}>
 
                 {loadingContent == false && profile != null && (
                     <div className={`w-full flex flex-col items-center justify-start`}>
