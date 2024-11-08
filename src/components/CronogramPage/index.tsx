@@ -181,7 +181,7 @@ export default function CronogramPage() {
                     <h1 className={`w-[80%] text-center text-[20px] font-medium mb-[14px] ${theme == 'light' ? 'text-my-white' : 'text-my-black'}`}>Olá <span className={`font-bold ${theme == 'light' ? 'text-my-quintenary' : 'text-my-secondary'}`}>{userS.name}</span>, defina seu cronograma de estudos</h1>
 
                     
-                    <div className={`ml-[40px] flex flex-row flex-wrap mb-3 text-[24px] py-2 px-4 ${theme == 'light' ? 'bg-my-secondary' : 'bg-my-quintenary'}`}>
+                    <div className={`flex flex-row flex-wrap mb-3 text-[24px] py-2 px-4 ${theme == 'light' ? 'bg-my-secondary' : 'bg-my-quintenary'}`}>
                         <h1 className={`capitalize mr-3 ${theme == 'light' ? 'text-my-black' : 'text-my-white'}`}>horário: </h1>
                         <TimePicker
                             onChange={handleTimeChange}
@@ -196,9 +196,9 @@ export default function CronogramPage() {
                     </div>
 
 
-                    <div className={`ml-[40px] relative flex flex-row w-[80%] sm:w-[70%] lg:w-[50%] min-h-[280px] rounded-[8px] ${theme == 'light' ? 'bg-my-secondary' : 'bg-my-quintenary'}`}>
+                    <div className={`relative flex flex-row flex-wrap items-center justify-center pb-2 w-[80%] sm:w-[70%] lg:w-[50%] min-h-[280px] rounded-[8px] ${theme == 'light' ? 'bg-my-white' : 'bg-my-black'}`}>
                         <div
-                            className={`w-full flex flex-row py-8 px-4 rounded-[8px] ${theme == 'light' ? 'bg-my-white' : 'bg-my-black'}`}
+                            className={`w-full flex flex-row pt-8 mb-2 px-4 rounded-[8px] ${theme == 'light' ? 'bg-my-white' : 'bg-my-black'}`}
                         >
                             <div className={`text-my-white flex flex-col items-center justify-between text-center ${theme == 'light' ? 'border-my-secondary' : 'border-my-quintenary bg-my-black'} flex flex-col gap-[5px]`}>
                                 <p className={`capitalize h-[30px] flex items-center w-full px-1 mr-[6px] justify-center ${theme == 'light' ? 'bg-my-quintenary' : 'bg-my-secondary' }`}>seg</p>
@@ -252,17 +252,18 @@ export default function CronogramPage() {
                             </DragDropContext>
 
                         </div>
+                    
+                        <Button
+                            text='Atualizar'
+                            route='undefined'
+                            disabled={false}
+                            event={() => {
+                                updateUser()
+                                toggleCronogram(Number(time.split(':')[0]), Number(time.split(':')[1]))
+                            }}
+                        />
 
                     </div>
-                    <Button
-                        text='Atualizar'
-                        route='undefined'
-                        disabled={false}
-                        event={() => {
-                            updateUser()
-                            toggleCronogram(Number(time.split(':')[0]), Number(time.split(':')[1]))
-                        }}
-                    />
                 </div>
             )}
         </>
