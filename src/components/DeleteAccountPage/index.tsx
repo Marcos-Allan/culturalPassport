@@ -69,7 +69,7 @@ export default function DeleteAccountPage() {
 
     return(
         <div className={`w-screen h-screen flex items-center justify-center absolute top-0 left-0 transition-all duration-[.3s]
-            ${isDelAccount == true ? 'opacity-1 z-[2]' : 'opacity-0 z-[-1]'}
+            ${isDelAccount == true ? 'opacity-1 z-[2]' : 'opacity-0 z-[-10]'}
             ${theme == 'light' ? 'bg-my-white-opacity' : 'bg-my-black-opacity'}
         `}>
             <div className={`${theme == 'light' ? 'bg-my-black' : 'bg-my-white'} rounded-[6px] overflow-hidden m-0 p-0 w-[85%] max-w-[420px]`}>

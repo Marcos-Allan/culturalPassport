@@ -40,6 +40,7 @@ import LogoutButton from '../../components/LogoutButton/index.tsx';
 import DeleteAccountButton from '../../components/DeleteAccountButton/index.tsx';
 import ToggleTheme from '../../components/ToggleTheme/index.tsx';
 import BubbleAnimation from '../../components/Bubles/index.tsx';
+import PomodoroButton from '../../components/PomodoroButton/index.tsx';
 
 //IMPORTAÇÃO DO PROVEDOR PARA PEGAR AS VARIÁVEIS GLOBAIS
 import { useMyContext } from '../../provider/geral';
@@ -89,7 +90,8 @@ export default function Configuration(){
                 {userS.logged == true && (
                     <DeleteAccountButton />
                 )}
-            
+
+                <PomodoroButton />
             </div>
             
             {userS.logged == true && (

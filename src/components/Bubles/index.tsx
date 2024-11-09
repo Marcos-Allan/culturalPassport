@@ -29,15 +29,17 @@
 
 //IMPORTAÇÃO DAS BIBLIOTECAS
 import { motion, Variants } from 'framer-motion';
+import React, { useEffect } from 'react';
 
-const Bubble = () => {
-    //ARRAY DE CORES
+//COMPONENTE DA BOLHA
+const Bubble = React.memo(() => {
+    //DEFINE OARRAY DE CORES DAS BOLHAS
     const colors = ["#5A94F285", "#BF00FF85", "#4882FE85", "#20DB4885", "#4B155685", "#7A44A085"];
   
-    //ESCOLHE UMA COR ALEATÓRIA
+    //ESCOLHE UMA COR ALEATÓRIA DO ARRAY DE CORES
     const randomColor = colors[Math.floor(Math.random() * colors.length)];
 
-    //VARIÁVEIS DE POSIÇÃO E ANIMAÇÃO GERADAS ALEATORIAMENTE
+    //CRIA A CONFIGURAÇÃO DA ANIMAÇÃO DAS BOLHAS
     const randomX = Math.random() * 100;
     const randomYStart = 100 + Math.random() * 50;
     const randomYEnd = -10 - Math.random() * 30;
@@ -45,6 +47,7 @@ const Bubble = () => {
     const randomDuration = 4 + Math.random() * 4;
     const randomSize = 20 + Math.random() * 40;
 
+    //PASSA AS CONFIGURAÇÕES PARA AO CONSTRUTOR DAS BOLHAS
     const bubbleVariants: Variants = {
         start: {
             y: `${randomYStart}vh`,
@@ -81,26 +84,34 @@ const Bubble = () => {
             }}
         />
     );
-};
+});
 
+//COMPONENTE QUE RETORNA TODAS AS BOLHAS ANIMADAS CRIADAS
 const BubbleAnimation = () => {
-    const bubbles = Array.from({ length: 50 }, (_, i) => <Bubble key={i} />);
+    //FUNÇÃO CHAMADA TODA VEZ QUE A PÁGINA É RECARREGADA
+    useEffect(() => {
+        //CRIA O useEffect VAZIO PARA A FUNÇÃO DE BOLHAS SEREM CHAMADAS APENAS UMA VEZ
+    }, []);
 
-    return (
-        <div style={{ 
-            position: "fixed",
-            top: 0,
-            left: 0,
-            width: "100%", 
-            height: "100vh", 
-            overflow: "hidden",
-            zIndex: -1, // z-index baixo para bolhas ficarem no fundo
-            pointerEvents: "none",
-            background: "transparent",
-        }}>
-            {bubbles}
-        </div>
-    );
+  const bubbles = Array.from({ length: 50 }, (_, i) => <Bubble key={i} />);
+
+  return (
+    <div
+      style={{
+        position: "fixed",
+        top: 0,
+        left: 0,
+        width: "100%",
+        height: "100vh",
+        overflow: "hidden",
+        zIndex: -1,
+        pointerEvents: "none",
+        background: "transparent",
+      }}
+    >
+      {bubbles}
+    </div>
+  );
 };
 
 export default BubbleAnimation;

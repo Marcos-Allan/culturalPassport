@@ -69,6 +69,7 @@ import Alert from './components/Alert/index.tsx';
 import LogoutPage from './components/LogoutPage/index.tsx';
 import DeleteAccountPage from './components/DeleteAccountPage/index.tsx';
 import NotificationProgramed from './components/NotificationProgramed/index.tsx';
+import PomodoroTimer from './components/PomodoroTimer/index.tsx';
 
 //ARQUIVO DE CONFIGURAÇÃO DAS ROTAS
 const router = createBrowserRouter([
@@ -172,6 +173,7 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
         <RouterProvider router={router} />
         <LoadingPage />
         <NotificationProgramed />
+        <PomodoroTimer />
         <Alert />
         <LogoutPage />
         <DeleteAccountPage />
