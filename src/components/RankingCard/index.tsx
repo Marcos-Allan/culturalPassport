@@ -54,7 +54,7 @@ export default function RankingCard(props: Props) {
         <animated.div
             onClick={() => navigate(`/ranking/user/${props.user.email}`)}
             className={`
-                w-[95%] flex justify-between items-center mb-2 text-my-white
+                w-[95%] flex justify-between items-center mb-2 text-my-white cursor-pointer
                 ${props.ind === 0 && 'bg-my-quartenary'}
                 ${props.ind === 1 && 'bg-my-quintenary'}
                 ${props.ind === 2 && 'bg-my-secondary'}

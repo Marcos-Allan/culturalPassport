@@ -38,6 +38,7 @@ import TitlePage from "../../components/TitlePage";
 import BottomNavigation from "../../components/BottomNavigation";
 import Text from '../../components/Text';
 import BubbleAnimation from '../../components/Bubles';
+import ConquestCard from '../../components/ConquestCard';
 
 //IMPORTAÇÃO DO PROVEDOR PARA PEGAR AS VARIÁVEIS GLOBAIS
 import { useMyContext } from '../../provider/geral';
@@ -47,7 +48,11 @@ import instance from '../../utils/axios';
 
 //IMPORTAÇÃO DOS ICONES
 import { IoMdSad } from "react-icons/io";
-import ConquestCard from '../../components/ConquestCard';
+
+//IMPORTAÇÃO DAS IMAGENS
+import medal_one from '../../assets/imgs/medals/gold-medal2.png'
+import medal_two from '../../assets/imgs/medals/silver-medal2.png'
+import medal_three from '../../assets/imgs/medals/bronze-medal2.png'
 
 export default function UserProfile() {
 
@@ -65,6 +70,7 @@ export default function UserProfile() {
 
     //UTILIZAÇÃO DO HOOK useState
     const [profile, setProfile] = useState<any>(null)
+    const [users, setUsers] = useState<any>(null)
     const [conquests, setConquests] = useState<any[]>([])
     const [loadingContent, setLoadingContent] = useState<boolean>(false)
     const [loadingAchivements, setLoadingAchivements] = useState<boolean>(false)
@@ -128,7 +134,45 @@ export default function UserProfile() {
 
         //DEFINE O ARRAY COM AS CONQUISTAS
         getAchievements()
+        
+        //DEFINE O ARRAY COM OS USUÁRIOS
+        getUsers()
     },[])
+
+    //FUNÇÃO RESPONSÁVEL POR PEGAR OS USUÁRIOS
+    function getUsers() {
+        //MUDA O ESTADO DE CARREGAMENTO DA PÁGINA PARA false
+        setLoadingContent(false)
+        
+        instance.get('/users')
+        .then(function (response) {
+            //MUDA O ESTADO DE CARREGAMENTO DA PÁGINA PARA false
+            setLoadingContent(false)
+
+            //REORGANIZA O ARRAY COM BASE NO NÚMERO DE SIMULADOS CONCLUIDOS
+            const usersOrdenados = [...response.data].sort((a, b) => b.simulationsConcludeds - a.simulationsConcludeds);
+            
+            //COLOCA OS USUÁRIOS JA REORDENADOS NO ARRAY DE USUÁRIOS
+            setUsers(usersOrdenados)
+        })
+        .catch(function (error) {   
+            console.log(error)
+        })
+    }
+
+    //FUNÇÃO RESPONSÁVEL POR VERIFICAR A POSIÇÃO DO USUÁRIO NO RANKING
+    function getPosition() {
+        if (users && profile) {
+            //ENCONTRA O ÍNDICE DO USUÁRIO CORRESPONDENTE NO ARRAY DE USUÁRIOS
+            const position = users.findIndex((u: any) => u.name === profile.name);
+            if (position !== -1) {
+                return position;
+            } else {
+                return `${profile.name} not found in the ranking`;
+            }
+        }
+        return null;
+    }
 
     return(
         <>
@@ -136,16 +180,30 @@ export default function UserProfile() {
             <Navbar>
                 <Return />
                 <TitlePage
-                    text={profile ? profile.name : 'oi'}
+                    text={profile ? profile.name : 'Usuário'}
                 />
             </Navbar>
             
-            <div className={`w-full flex flex-col justify-start items-center sm:gap-[20px] mb-[100px] sm:mb-[40px] lg:mb-0 overflow-y-scroll overflow-x-hidden scrollbar scrollbar-track-transparent scrollbar-thumb-my-secondary`}>
+            <div className={`w-full flex flex-col justify-start items-center sm:gap-[20px] mb-[100px] sm:mb-[40px] lg:mb-0 overflow-y-scroll overflow-x-hidden scrollbar scrollbar-track-transparent scrollbar-thumb-my-secondary
+            `}>
 
                 {loadingContent == false && profile != null && (
                     <div className={`w-full flex flex-col items-center justify-start`}>
-                        <img src={profile.img} alt="" className={`w-[150px] h-[150px] rounded-[50%]`} />
-                        
+
+                        <div className={`relative flex items-center justify-center`}>    
+                            <img src={profile.img} alt="" className={`w-[150px] h-[150px] rounded-[50%]`} />
+
+                            {getPosition() == 0 && (
+                                <img src={medal_one} className={`w-[50px] absolute top-[10px] right-[-10px]`} alt="" />
+                            )}
+                            {getPosition() == 1 && (
+                                <img src={medal_two} className={`w-[50px] absolute top-[10px] right-[-10px]`} alt="" />
+                            )}
+                            {getPosition() == 2 && (
+                                <img src={medal_three} className={`w-[50px] absolute top-[10px] right-[-10px]`} alt="" />
+                            )}
+                        </div>
+
                         {profile.simulations.length >= 1 && (
                             <div className={`flex items-center justify-around w-full font-extrabold text-[24px] uppercase mt-4`}>
                                 <p className={`animate-textChange`}>conquistas</p>

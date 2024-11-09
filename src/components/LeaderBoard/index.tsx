@@ -38,9 +38,9 @@ interface Props {
 }
 
 //IMPORTAÇÃO DAS IMAGENS
-import medal_one from '../../assets/imgs/medals/gold-medal.png'
-import medal_two from '../../assets/imgs/medals/silver-medal.png'
-import medal_three from '../../assets/imgs/medals/bronze-medal.png'
+import medal_one from '../../assets/imgs/medals/gold-medal2.png'
+import medal_two from '../../assets/imgs/medals/silver-medal2.png'
+import medal_three from '../../assets/imgs/medals/bronze-medal2.png'
 
 export default function LeaderBoard(props: Props) {
     //UTILIZAÇÃO DO HOOK DE NAVEGAÇÃO ENTRE PÁGINAS DO react-router-dom
@@ -75,10 +75,10 @@ export default function LeaderBoard(props: Props) {
             {props.ind == 0 && (
                 <animated.div
                     onClick={() => navigate(`/ranking/user/${props.user.email}`)}
-                    className='flex-grow-[1] h-[200px] bg-my-quartenary relative flex items-center justify-center order-1 rounded-t-[8px] transition-all'
+                    className='flex-grow-[1] h-[200px] bg-my-quartenary relative flex items-center justify-center order-1 rounded-t-[8px] transition-all cursor-pointer'
                     style={propsStyleFirst}
                 >
-                    <img src={medal_one} alt="" className={`absolute top-[0px] w-[36px]`} />
+                    <img src={medal_one} alt="" className={`absolute top-[-2px] w-[36px]`} />
 
                     <div className={`mt-10 absolute top-0`}>
                         <img src={props.user.img} className={`w-[40px] rounded-[50%] border-[2px] border-transparent mb-1 `} />
@@ -89,11 +89,11 @@ export default function LeaderBoard(props: Props) {
             {props.ind == 1 && (
                 <animated.div
                     onClick={() => navigate(`/ranking/user/${props.user.email}`)}
-                    className='flex-grow-[1] h-[150px] bg-my-quintenary relative flex items-center justify-center order-2 rounded-tr-[8px] transition-all'
+                    className='flex-grow-[1] h-[150px] bg-my-quintenary relative flex items-center justify-center order-2 rounded-tr-[8px] transition-all cursor-pointer'
                     style={propsStyleSecond}
                 >
 
-                    <img src={medal_two} alt="" className={`absolute top-[0px] w-[36px]`} />
+                    <img src={medal_two} alt="" className={`absolute top-[-2px] w-[36px]`} />
 
                     <div className={`mt-10 absolute top-0`}>
                         <img src={props.user.img} className={`w-[40px] rounded-[50%] border-[2px] border-transparent mb-1`} />
@@ -104,11 +104,11 @@ export default function LeaderBoard(props: Props) {
             {props.ind == 2 && (
                 <animated.div
                     onClick={() => navigate(`/ranking/user/${props.user.email}`)}
-                    className='flex-grow-[1] h-[120px] bg-my-secondary relative flex items-center justify-center order-0 rounded-tl-[8px] transition-all'
+                    className='flex-grow-[1] h-[120px] bg-my-secondary relative flex items-center justify-center order-0 rounded-tl-[8px] transition-all cursor-pointer'
                     style={propsStyleThird}
                 >
 
-                    <img src={medal_three} alt="" className={`absolute top-[0px] w-[36px]`} />
+                    <img src={medal_three} alt="" className={`absolute top-[-2px] w-[36px]`} />
 
                     <div className={`mt-10 absolute top-0`}>
                         <img src={props.user.img} className={`w-[40px] rounded-[50%] border-[2px] border-transparent mb-1`} />
