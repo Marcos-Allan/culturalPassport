@@ -41,12 +41,12 @@ export default {
         'my-terciary': '#75028E',
         'my-quartenary': '#20db48',
         'my-quintenary': '#4882fe',
-        'my-black': '#000000',
-        'my-white': '#ffffff',
+        'my-black': '#0d0d0d',
+        'my-white': '#fefefe',
         'my-gray': '#818181',
         'my-gray-black': '#c0c0c0',
-        'my-white-opacity': '#ffffffbb',
-        'my-black-opacity': '#000000bb',
+        'my-white-opacity': '#fefefebb',
+        'my-black-opacity': '#0d0d0dbb',
       },
       keyframes: {
         colorChange: {
