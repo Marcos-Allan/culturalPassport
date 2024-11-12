@@ -228,8 +228,8 @@ export default function SignIn(){
                         event={handleInputEmailChange}
                         checked={stateEmail}
                         icon='email'
-                        messageCorrect='Email dentro do padrão'
-                        messageError='Email fora do padrão'
+                        messageCorrect='Email válido'
+                        messageError='Email inválido'
                     />   
                     <Input
                         text="Senha"
@@ -241,7 +241,7 @@ export default function SignIn(){
                         event={handleInputPasswordChange}
                         checked={statePassword}
                         icon='password'
-                        messageCorrect='Senha dentro do padrão'
+                        messageCorrect='Senha válida'
                         messageError='Senha precisa ter pelo menos 6 caracteres'
                     />
 

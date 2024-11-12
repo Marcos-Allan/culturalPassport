@@ -179,7 +179,7 @@ export default function ConfirmCode() {
                         placeholderLarge='Código'
                         text='Código'
                         icon='code'
-                        messageCorrect='código dentro do padrão'
+                        messageCorrect='código válido'
                         messageError='formato do código inválido'
                     />
 

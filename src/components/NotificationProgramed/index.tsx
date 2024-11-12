@@ -28,78 +28,80 @@
  */
 
 //IMPORAÇÃO DAS BIBLIOTECAS
-import { useEffect } from 'react'
+// import { useEffect } from 'react'
 
 //IMPORTAÇÃO DO PROVEDOR PARA PEGAR AS VARIÁVEIS GLOBAIS
-import { useMyContext } from '../../provider/geral';
+// import { useMyContext } from '../../provider/geral';
 
 //CONFIGURAÇÃO DA BASE URL DO AXIOS
-import instance from '../../utils/axios';
+// import instance from '../../utils/axios';
 
 export default function NotificationProgramed() {
 
-    //RESGATA AS VARIAVEIS GLOBAIS
-    const states:any = useMyContext()
+    // //RESGATA AS VARIAVEIS GLOBAIS
+    // const states:any = useMyContext()
 
-    //DESESTRUTURA AS VARIAVEIS ESPECIFICADAS
-    const { toggleAlert, timeCronogram, userS, toggleUser } = states
+    // //DESESTRUTURA AS VARIAVEIS ESPECIFICADAS
+    // const { toggleAlert, timeCronogram, userS, toggleUser } = states
 
-    //SALVA O SOM DA NOTFICAÇÃO
-    const alarm = new Audio(userS.soundAlert)
+    // //SALVA O SOM DA NOTFICAÇÃO
+    // const alarm = new Audio(userS.soundAlert)
 
-    //FUNÇÃO CHAMADA TODA VEZ QUE A PÁGINA É RECARREGADA
-    useEffect(() => {
-        //VERIFICA SE TEM DADO NA VARIAVEL DE ID DO USUÁRIO
-        if(userS.id !== ''){
-            instance.get(`/user/${userS.id}`)
-            .then(function (response) {
-                //VERIFICA SE A CONTA DO USUÁRIO ESTÁ CADASTRADA NO BD
-                if(response.data == "Usuário não encontrado"){
-                    //REMOVE OS DADOS DA CONTA DO localStorage
-                    localStorage.removeItem('userPC')
+    // //FUNÇÃO CHAMADA TODA VEZ QUE A PÁGINA É RECARREGADA
+    // useEffect(() => {
+    //     //VERIFICA SE TEM DADO NA VARIAVEL DE ID DO USUÁRIO
+    //     if(userS.id !== ''){
+    //         instance.get(`/user/${userS.id}`)
+    //         .then(function (response) {
+    //             //VERIFICA SE A CONTA DO USUÁRIO ESTÁ CADASTRADA NO BD
+    //             if(response.data == "Usuário não encontrado"){
+    //                 //REMOVE OS DADOS DA CONTA DO localStorage
+    //                 localStorage.removeItem('userPC')
 
-                    //COLOCA ALERT NA TELA
-                    toggleAlert('success', 'Faça o login novamente por favor')
+    //                 //COLOCA ALERT NA TELA
+    //                 toggleAlert('success', 'Faça o login novamente por favor')
 
-                    //TIRA OS DADOS DA CONTA DO USUÁRIO DO FRONT-END
-                    toggleUser('', '', '', [], 0, '', '', [0, 0], false)
-                }
-            })
-            .catch(function (error) {
-                //ESCREVE O ERRO NO CONSOLE 
-                console.log(error)
-            })
-        }
-    },[])
+    //                 //TIRA OS DADOS DA CONTA DO USUÁRIO DO FRONT-END
+    //                 toggleUser('', '', '', [], 0, '', '', [0, 0], false)
+    //             }
+    //         })
+    //         .catch(function (error) {
+    //             //ESCREVE O ERRO NO CONSOLE 
+    //             console.log(error)
+    //         })
+    //     }
+    // },[])
     
-    //FUNÇÃO CHAMADA TODA VEZ QUE A PÁGINA É RECARREGADA
-    useEffect(() => {
-        const verificarHorario = () => {
-            //PEGA O TEMPO ATUAL
-            const agora = new Date();
+    // //FUNÇÃO CHAMADA TODA VEZ QUE A PÁGINA É RECARREGADA
+    // useEffect(() => {
+    //     const verificarHorario = () => {
+    //         console.log('tempo')
+
+    //         //PEGA O TEMPO ATUAL
+    //         const agora = new Date();
             
-            //PEGA A HORA ATUAL
-            const horas = agora.getHours();
+    //         //PEGA A HORA ATUAL
+    //         const horas = agora.getHours();
             
-            //PEGA OS MINUTOS ATUAIS
-            const minutos = agora.getMinutes();
+    //         //PEGA OS MINUTOS ATUAIS
+    //         const minutos = agora.getMinutes();
     
-            //VERIFICA SE O TEMPO ATUAL É IGUAL AO TEMPO AGENDADO
-            if (horas === Number(userS.timeCronograma[0]) && minutos === Number(userS.timeCronograma[1])) {
-                //COLOCA ALERT NA TELA
-                toggleAlert("warning", `São ${userS.timeCronograma[0] >= 0 && userS.timeCronograma[0] <= 9 ? `0${userS.timeCronograma[0]}` : userS.timeCronograma[0]} : ${userS.timeCronograma[1] >= 0 && userS.timeCronograma[1] <= 9 ? `0${userS.timeCronograma[1]}` : userS.timeCronograma[1]} Hora da notificação!`)
+    //         //VERIFICA SE O TEMPO ATUAL É IGUAL AO TEMPO AGENDADO
+    //         if (horas === Number(userS.timeCronograma[0]) && minutos === Number(userS.timeCronograma[1])) {
+    //             //COLOCA ALERT NA TELA
+    //             toggleAlert("warning", `São ${userS.timeCronograma[0] >= 0 && userS.timeCronograma[0] <= 9 ? `0${userS.timeCronograma[0]}` : userS.timeCronograma[0]} : ${userS.timeCronograma[1] >= 0 && userS.timeCronograma[1] <= 9 ? `0${userS.timeCronograma[1]}` : userS.timeCronograma[1]} Hora da notificação!`)
 
-                //DA PLAY NO SOM DO ALERT
-                alarm.play()
-            }
-        };
+    //             //DA PLAY NO SOM DO ALERT
+    //             alarm.play()
+    //         }
+    //     };
     
-        //CONFIGURA O INTERVALO DE TEMPO QUE CHAMA A FUNÇÃO DE 30 EM 30 SEGUNDOS
-        const intervalo = setInterval(verificarHorario, 60000);
+    //     //CONFIGURA O INTERVALO DE TEMPO QUE CHAMA A FUNÇÃO DE 30 EM 30 SEGUNDOS
+    //     const intervalo = setInterval(verificarHorario, 60000);
     
-        // Limpa o intervalo quando o componente é desmontado
-        return () => clearInterval(intervalo);
-      }, [timeCronogram, userS]);
+    //     // Limpa o intervalo quando o componente é desmontado
+    //     return () => clearInterval(intervalo);
+    //   }, [timeCronogram, userS]);
 
     return(
         <>

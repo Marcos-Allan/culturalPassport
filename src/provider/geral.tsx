@@ -30,6 +30,9 @@
 //IMPORTA OS HOOKS DO REACT PARA CRIAR UM GERENCIAMENTO DE ESTADOS GLOBAIS
 import { useState, createContext, useContext, useEffect } from 'react'
 
+//CONFIGURAÇÃO DA BASE URL DO AXIOS
+import instance from '../utils/axios';
+
 //CRIA E EXPORTA O CONTEUDO DOS ESTADOS
 export const MyContext = createContext({})
 
@@ -132,6 +135,15 @@ export const MyProvider = ({ children } : { children: React.ReactNode }) => {
         setIsPaused(false);
     };
 
+    //FUNÇÃO RESPONSÁVEL POR ATUALIZAR O ESTADO DE 'TRABALHANDO' PARA 'DESCANSANDO' E VICE-VERSA
+    const updateCronogram = () => {
+        if (pomodoroState === 'work') {
+            toggleCronogram(Math.floor(pomodoroTime / 60), pomodoroTime % 60);
+        } else {
+            toggleCronogram(Math.floor(breakTime / 60), breakTime % 60);
+        }
+    };
+
     //FUNÇÃO RESPONSÁVEL POR ATUALIZAR A CONTAGEM DO TEMPO
     const tickTimer = () => {
         //VERIFICA SE O POMODORO ESTA ATIVO E SE ELE NÃO ESTÁ PAUSADO
@@ -161,15 +173,6 @@ export const MyProvider = ({ children } : { children: React.ReactNode }) => {
         }
     };
 
-    //FUNÇÃO RESPONSÁVEL POR ATUALIZAR O ESTADO DE 'TRABALHANDO' PARA 'DESCANSANDO' E VICE-VERSA
-    const updateCronogram = () => {
-        if (pomodoroState === 'work') {
-            toggleCronogram(Math.floor(pomodoroTime / 60), pomodoroTime % 60);
-        } else {
-            toggleCronogram(Math.floor(breakTime / 60), breakTime % 60);
-        }
-    };
-
     //FUNÇÃO QUE ATUALIZA O TIMER DO POMODORO
     useEffect(() => {
         const interval = setInterval(() => {
@@ -180,6 +183,80 @@ export const MyProvider = ({ children } : { children: React.ReactNode }) => {
         //LIMPA O INTERVALO AO DESMONTAR O COMPONENTE
         return () => clearInterval(interval);
     }, [isPomodoroActive, pomodoroState, pomodoroTime, breakTime, isPaused]);
+
+    //ERIFICA SE O USUÁRIO ESTÁ LOGADO OU NÃO
+    if(userS){
+
+        //FUNÇÃO RESPONSÁVEL POR INICIAR O ALERTA SONORO DA NOTIFICAÇÃO
+        const playNotificationSound = () => {
+            //SALVA O SOM DA NOTFICAÇÃO
+            const alarm = new Audio(userS.soundAlert)
+
+            //REPRODUZ O SOM
+            alarm.play()
+        };
+
+        //FUNÇÃO RESPONSÁVEL POR VERIFICAR E DISPARAR A NOTIFICAÇÃO NO HORÁRIO ESPECIFICADO
+        const verificarHorario = () => {
+            //PEGA O TEMPO ATUAL
+            const agora = new Date()
+
+            //PEGA A HORA ATUAL
+            const horas = agora.getHours()
+
+            //PEGA OS MINUTOS ATUAIS
+            const minutos = agora.getMinutes()
+
+            //VERIFICA SE O TEMPO ATUAL É IGUAL AO TEMPO AGENDADO
+            if (horas === Number(userS.timeCronograma[0]) && minutos === Number(userS.timeCronograma[1])) {
+
+                //COLOCA ALERT NA TELA
+                toggleAlert("warning", `São ${horas < 10 ? `0${horas}` : horas}:${minutos < 10 ? `0${minutos}` : minutos} - Hora da notificação!`)
+                
+                //CHAMA A FUNÇÃO QUE REPRODUZ O SOM
+                playNotificationSound()
+            }
+        };
+
+        //FUNÇÃO RESPONSÁVEL POR INICIAR A VERIFICAÇÃO DE HORÁRIO EM INTERVALOS DE UM MINUTO
+        const iniciarVerificacaoHorario = () => {
+            //INICIA A FUNÇÃO DE VERIFICAR HORÁRIO EM INTERVALOS DE UM MINUTO
+            const intervalo = setInterval(verificarHorario, 60000)
+
+            //DESMONTA O COMPONENTE
+            return () => clearInterval(intervalo)
+        };
+
+        //FUNÇÃO CHAMADA TODA VEZ QUE A PÁGINA É RECARREGADA
+        useEffect(() => {
+            //VERIFICA SE O USUÁRIO TEM ESTÁ LOGADO OU NÃO
+            if (userS.id !== '') {
+                //FAZ UMA REQUISIÇÃO PARA VER SE O USUÁRIO ESTÁ NO BD
+                instance.get(`/user/${userS.id}`)
+                .then(response => {
+                    //VERIFICA A RESPOSTA DA REQUISIÇÃO, SE O USUÁRIO ESTÁ CADASTRADO NO BD
+                    if (response.data === "Usuário não encontrado") {
+                        //REMOVE OS DADOS DO USUÁRIO DO localStorage DO FRONTEND
+                        localStorage.removeItem('userPC')
+
+                        //COLOCA ALERT NA TELA
+                        toggleAlert('success', 'Faça o login novamente por favor')
+
+                        //TIRA OS DADOS DO USUÁRIO DA APLICAÇÃO E REDIRECIONA ELE PARA TELA DE LOGIN
+                        toggleUser('', '', '', [], 0, '', '', [0, 0], false)
+                    }
+                })
+                .catch(error => console.log(error))
+            }
+
+            //REINICIA O A VERIFICAÇÃO DE HORÁRIO EM INTERVALOS DE 1 MINUTO
+            const limparIntervalo = iniciarVerificacaoHorario()
+
+            //RETORNA A FUNÇÃO DE VERIFICAR O HORÁRIO
+            return limparIntervalo
+
+        }, [userS.timeCronograma])
+    }
 
     //FUNÇÃO RESPONSAVEL POR TROCAR E SALVAR NO localStorage O TEMA ESCOLHIDO PELO USUÁRIO
     const toggleTheme = () => {

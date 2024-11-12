@@ -328,8 +328,8 @@ export default function SignUp(){
                             value={inputDateValue}
                             checked={stateDate}
                             icon='person'
-                            messageCorrect='data dentro do padrão'
-                            messageError='formato inválido'
+                            messageCorrect='data válida'
+                            messageError='data inválida'
                         /> 
                         <Input
                             mask=''
@@ -340,8 +340,8 @@ export default function SignUp(){
                             value={inputEmailValue}
                             checked={stateEmail}
                             icon='email'
-                            messageCorrect='email dentro do padrão'
-                            messageError='email fora do padrão'
+                            messageCorrect='email válido'
+                            messageError='email inválido'
                         />   
                     </div>
                     <div className={`w-full flex items-center flex-col lg:flex-row lg:gap-[30px] lg:w-[60%]`}>
@@ -355,7 +355,7 @@ export default function SignUp(){
                             event={handleInputPasswordChange} 
                             checked={statePassword}
                             icon='password'
-                            messageCorrect='senha dentro dos padrões'
+                            messageCorrect='senha válida'
                             messageError='senha precisa ter pelo menos 6 caracteres'
                         />
                         <Input
@@ -368,7 +368,7 @@ export default function SignUp(){
                             event={handleInputConfirmPasswordChange}
                             checked={stateConfirmPassword}
                             icon='password'
-                            messageCorrect='senhas estão iguais'
+                            messageCorrect='senhas confêrem'
                             messageError='as senhas não são iguais'
                         />
                     </div>

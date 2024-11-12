@@ -197,8 +197,8 @@ export default function SwitchPassword() {
                         checked={statePassword}
                         placeholderLarge='Senha'
                         icon='password'
-                        messageCorrect='nova senha aceita'
-                        messageError='senha fora do padrão'
+                        messageCorrect='senha válida'
+                        messageError='senha inválida'
                     />
                     <Input
                         mask=''

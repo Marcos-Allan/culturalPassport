@@ -180,8 +180,8 @@ export default function ForgoutPassword() {
                         placeholderLarge='Email' 
                         text='Email'
                         icon='email'
-                        messageCorrect='email dentro do padrão'
-                        messageError='email fora do padrão'
+                        messageCorrect='email válido'
+                        messageError='email inválido'
                     />
                     
                     <Text text={`enviaremos um código para o endereço de email digitado`} />
