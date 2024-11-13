@@ -104,6 +104,19 @@ export const MyProvider = ({ children } : { children: React.ReactNode }) => {
         //GARANTE QUE O TIMER NÃO ESTÁ PAUSADO
         setIsPaused(false);
     };
+    
+    const finishPomodoro = () => {
+        //MUDA O ESTADO DO POMODORO PARA ESTUDANDO
+        setPomodoroState('work');
+        //MUDA O ESTADO PARA O USUÁRIO NÃO PODER VER O TIMER DO POMODORO
+        setViewPomodoroTimer(false)
+        //INICIA O TEMPORIZADOR DE 25 MINUTOS
+        setPomodoroTime(25 * 60);
+        //DEIXA O POMODORO DESATIVO
+        setIsPomodoroActive(false);
+        //GARANTE QUE O TIMER NÃO ESTÁ PAUSADO
+        setIsPaused(false);
+    };
 
     //FUNÇÃO RESPONSÁVEL POR INICIAR O DESCANSO
     const startBreak = () => {
@@ -162,12 +175,30 @@ export const MyProvider = ({ children } : { children: React.ReactNode }) => {
                     
                     //CHAMA O ALERT FALANDO PARA O USUÁRIO IR DESCANSAR
                     toggleAlert('success', 'Pomodoro terminado, hora do descanso!');
+
+                    //VERIFICA SE O USUÁRIO ESTÁ LOGADO OU NÃO
+                    if(userS){
+                        //SALVA O SOM DA NOTFICAÇÃO
+                        const alarm = new Audio(userS.soundAlert)
+
+                        //REPRODUZ O SOM
+                        alarm.play()
+                    }
                 } else {
                     //TERMINA O CICLO DE DESCANSO E INICIA UM NOVO CILCO DE TRABALHO
                     startPomodoro();
 
                     //CHAMA O ALERT FALANDO PARA O USUÁRIO VOLTAR A ESTUDAR
                     toggleAlert('success', 'Descanso terminado, volta ao trabalho!');
+
+                    //VERIFICA SE O USUÁRIO ESTÁ LOGADO OU NÃO
+                    if(userS){
+                        //SALVA O SOM DA NOTFICAÇÃO
+                        const alarm = new Audio(userS.soundAlert)
+
+                        //REPRODUZ O SOM
+                        alarm.play()
+                    }
                 }
             }
         }
@@ -184,7 +215,7 @@ export const MyProvider = ({ children } : { children: React.ReactNode }) => {
         return () => clearInterval(interval);
     }, [isPomodoroActive, pomodoroState, pomodoroTime, breakTime, isPaused]);
 
-    //ERIFICA SE O USUÁRIO ESTÁ LOGADO OU NÃO
+    //VERIFICA SE O USUÁRIO ESTÁ LOGADO OU NÃO
     if(userS){
 
         //FUNÇÃO RESPONSÁVEL POR INICIAR O ALERTA SONORO DA NOTIFICAÇÃO
@@ -328,7 +359,7 @@ export const MyProvider = ({ children } : { children: React.ReactNode }) => {
     }
     //RETORNA TUDO PARA SER USADO EM TODO O SITE
     return (
-        <MyContext.Provider value={{ sucessColor, errorColor, theme, toggleTheme, menuOpen, toggleMenuOpen, userS, toggleUser, loading, toggleLoading, message, toggleAlert, isLogout, toggleLogout, isDelAccount, toggleDeleteAccount, timeCronogram, toggleCronogram, soundNotification, toggleSoundNotification, pomodoroState, pomodoroTime, breakTime, isPomodoroActive, isPaused, resumePomodoro, stopPomodoro, startPomodoro, viewPomodoroTimer }}>
+        <MyContext.Provider value={{ sucessColor, errorColor, theme, toggleTheme, menuOpen, toggleMenuOpen, userS, toggleUser, loading, toggleLoading, message, toggleAlert, isLogout, toggleLogout, isDelAccount, toggleDeleteAccount, timeCronogram, toggleCronogram, soundNotification, toggleSoundNotification, pomodoroState, pomodoroTime, breakTime, isPomodoroActive, isPaused, resumePomodoro, stopPomodoro, startPomodoro, finishPomodoro, viewPomodoroTimer }}>
             {children}
         </MyContext.Provider>
     )

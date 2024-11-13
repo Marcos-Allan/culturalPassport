@@ -34,7 +34,7 @@ import { useState } from 'react'
 import { useMyContext } from "../../provider/geral"
 
 //IMPORTAÇÃO DOS ÍCONES
-import { FaPause, FaPlay, FaRedo } from "react-icons/fa";
+import { FaPause, FaPlay, FaRedo, FaTimes } from "react-icons/fa"
 
 const PomodoroTimer = () => {
   
@@ -42,7 +42,7 @@ const PomodoroTimer = () => {
   const states: any = useMyContext();
 
   //DESESTRUTURA AS VARIAVEIS ESPECIFICADAS
-  const { theme, pomodoroState, pomodoroTime, breakTime, isPomodoroActive, isPaused, resumePomodoro, stopPomodoro, startPomodoro, viewPomodoroTimer } = states;
+  const { theme, pomodoroState, pomodoroTime, breakTime, isPomodoroActive, isPaused, resumePomodoro, stopPomodoro, startPomodoro, finishPomodoro, viewPomodoroTimer } = states;
 
   //UTILIZAÇÃO DO HOOK DE useState
   const [position, setPosition] = useState({ x: 0, y: 0 });
@@ -51,10 +51,13 @@ const PomodoroTimer = () => {
 
   //FUNÇÃO RESPONSÁVEL POR COMEÇAR O ARRASTE
   const handleStart = (e: React.MouseEvent | React.TouchEvent) => {
+    //PEGA AS COORDENADAS QUE O USUÁRIO COLOCA A NOTIFICAÇÃO
     const clientX = 'touches' in e ? e.touches[0].clientX : e.clientX;
     const clientY = 'touches' in e ? e.touches[0].clientY : e.clientY;
 
+    //MUDA O ESTADO DE DRAG PARA true
     setDragging(true);
+    //COLOCA A NOTIFICAÇÃO NA POSIÇÃO INICIAL
     setStartPosition({ x: clientX - position.x, y: clientY - position.y });
   };
 
@@ -73,7 +76,7 @@ const PomodoroTimer = () => {
       const windowHeight = window.innerHeight;
       
       //TAMANHO E ALTURA DO COMPONENTE FIXO
-      const notificationWidth = 140;
+      const notificationWidth = 180;
       const notificationHeight = 180;
 
       //IMPEDE QUE A NOTIFICAÇÃO SAIA DA TELA
@@ -92,6 +95,7 @@ const PomodoroTimer = () => {
 
   //FUNÇÃO RESPONSÁVEL POR PARAR O ARRASTE 
   const handleStop = () => {
+    //MUDA O ESTADO DE DRAG PARA false
     setDragging(false);
   };
 
@@ -114,7 +118,7 @@ const PomodoroTimer = () => {
           onTouchEnd={handleStop} 
           onMouseLeave={handleStop} 
           className={`
-            pomodoro-container m-3 px-3 py-1 rounded-[8px]
+            pomodoro-container m-3 px-8 py-1 rounded-[8px]
             ${theme == 'light' ? 'bg-my-black text-my-white' : 'bg-my-white text-my-black'}
           `}
         >
@@ -131,7 +135,7 @@ const PomodoroTimer = () => {
           <div className={`w-full flex items-center justify-between`}>
             {isPaused == true && (
               <button onClick={() => {
-                resumePomodoro(); // Despausar o Pomodoro se estiver pausado
+                resumePomodoro();
               }}>
                 <FaPlay />
               </button>
@@ -139,15 +143,24 @@ const PomodoroTimer = () => {
             
             {isPaused == false && (
               <button onClick={() => {
-                stopPomodoro(); // Despausar o Pomodoro se estiver pausado
+                stopPomodoro();
               }}>
                 <FaPause />
               </button>
-            )}
+            )}  
+
+            <button
+              className={`absolute top-0 right-0 m-1`}
+              onClick={() => {
+                finishPomodoro()
+              }}
+            >
+              <FaTimes />
+            </button>
             
             {isPomodoroActive == false && (
               <button onClick={() => {
-                startPomodoro(); // Caso contrário, inicia o Pomodoro(); // Despausar o Pomodoro se estiver pausado
+                startPomodoro();
               }}>
                 <FaRedo />
               </button>
