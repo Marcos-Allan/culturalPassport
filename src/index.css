@@ -15,7 +15,7 @@ body, html {
     width: 100vw;
     height: 100vh;
     overflow: hidden;
-    cursor: url('./assets/imgs/curso-icons/cursor.png'), grabbing;
+    cursor: url('https://firebasestorage.googleapis.com/v0/b/cultural-passport-78148.appspot.com/o/images%2Fcursores%2Fcursor.png?alt=media&token=369efea4-39e8-4ee3-8216-de62883451de'), auto;
 }
 
 @keyframes progressAnimation {
