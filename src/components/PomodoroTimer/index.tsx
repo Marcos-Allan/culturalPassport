@@ -117,7 +117,7 @@ const PomodoroTimer = () => {
           onTouchEnd={handleStop} 
           onMouseLeave={handleStop} 
           className={`
-            pomodoro-container m-3 px-8 py-1 rounded-[8px] ${dragging ? 'cursor-my-grabbing' : 'cursor-my-grab'}
+            pomodoro-container m-3 px-8 py-1 rounded-[8px] ${dragging ? 'cursor-grabbing' : 'cursor-grab'}
             ${theme == 'light' ? 'bg-my-black text-my-white' : 'bg-my-white text-my-black'}
           `}
         >
@@ -134,7 +134,7 @@ const PomodoroTimer = () => {
           <div className={`w-full flex items-center justify-between`}>
             {isPaused == true && (
               <button 
-                className={`cursor-my-pointer`}
+                className={`cursor-pointer`}
                 onClick={() => {
                   resumePomodoro();
                 }}
@@ -145,7 +145,7 @@ const PomodoroTimer = () => {
             
             {isPaused == false && (
               <button
-                className={`cursor-my-pointer`}
+                className={`cursor-pointer`}
                 onClick={() => {
                   stopPomodoro();
                 }}
@@ -155,7 +155,7 @@ const PomodoroTimer = () => {
             )}  
 
             <button
-              className={`absolute top-0 right-0 cursor-my-pointer p-2`}
+              className={`absolute top-0 right-0 cursor-pointer p-2`}
               onClick={() => {
                 finishPomodoro()
               }}
@@ -165,7 +165,7 @@ const PomodoroTimer = () => {
             
             {isPomodoroActive == false && (
               <button
-                className={`cursor-my-pointer`}
+                className={`cursor-pointer`}
                 onClick={() => {
                   startPomodoro();
                 }}
