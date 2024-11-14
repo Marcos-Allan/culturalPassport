@@ -211,7 +211,7 @@ export default function Input(props: Props) {
                     ms-2
                     mb-2
                     lg:hidden
-                    cursor-pointer
+                    cursor-my-pointer
                     ${theme == 'light' ? 'text-my-gray' : 'text-my-gray-black'}
                 `}
                 htmlFor={`input-${randomNumber}`}
@@ -247,7 +247,7 @@ export default function Input(props: Props) {
                     me-2
                     right-0
                     text-[24px]
-                    cursor-pointer
+                    cursor-my-pointer
                     hover:scale-[1.1]
                     transition-all
                     duration-[.3s]
@@ -279,6 +279,7 @@ export default function Input(props: Props) {
                         type={`${props.hidden == true ? 'password' : 'text'}`}
                         ref={passwordInputVisible}
                         className={`
+                        cursor-my-text
                         w-full
                         text-[20px]
                         rounded-[16px]

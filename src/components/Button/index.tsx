@@ -87,7 +87,7 @@ export default function Button(props: Props) {
                             border-[2px]
                             transition-all
                             duration-[0.2s]
-                            cursor-pointer
+                            cursor-my-pointer
                             ${theme == 'light'
                                 ? `bg-my-terciary text-my-white border-my-terciary focus:text-my-terciary hover:text-my-terciary`
                                 : `bg-my-quintenary text-my-black border-my-quintenary focus:text-my-quintenary hover:text-my-quintenary`
@@ -127,7 +127,8 @@ export default function Button(props: Props) {
                         focus:outline-none
                         transition-all
                         duration-[0.2s]
-                        ${props.disabled != true && 'hover:outline-none hover:bg-transparent cursor-pointer'}
+                        cursor-my-auto
+                        ${props.disabled != true && 'hover:outline-none hover:bg-transparent cursor-my-pointer'}
                         ${theme == 'light'
                             ? `bg-my-terciary disabled:bg-my-gray text-my-white border-my-terciary disabled:border-my-gray focus:text-my-terciary
                                 ${props.disabled != true && 'hover:text-my-terciary'}`

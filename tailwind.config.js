@@ -48,6 +48,13 @@ export default {
         'my-white-opacity': '#fefefebb',
         'my-black-opacity': '#0d0d0dbb',
       },
+      cursor: {
+        'my-auto': 'url(./src/assets/imgs/curso-icons/cursor.png), auto',
+        'my-text': 'url(./src/assets/imgs/curso-icons/text.png), text',
+        'my-pointer': 'url(./src/assets/imgs/curso-icons/pointer.png), pointer',
+        'my-grab': 'url(./src/assets/imgs/curso-icons/grab.png), grab',
+        'my-grabbing': 'url(./src/assets/imgs/curso-icons/hold.png), grabbing',
+      },
       keyframes: {
         colorChange: {
           '0%': { borderColor: 'rgb(255, 0, 0)' },

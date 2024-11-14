@@ -134,7 +134,7 @@ export default function GoogleLogin() {
                 //FAZ LOGIN COM REDIRECIONAMENTO PARA OUTRA PÁGINA
                 handleGoogleLogin()
             }}
-            className={`w-[80px] h-[80px] sm:w-[52px] sm:h-[52px] lg:w-[52px] lg:h-[52px] border rounded-[50%] flex justify-center items-center lg:border-none cursor-pointer hover:scale-[1.2] transition-all duration-[.2s]
+            className={`w-[80px] h-[80px] sm:w-[52px] sm:h-[52px] lg:w-[52px] lg:h-[52px] border rounded-[50%] flex justify-center items-center lg:border-none cursor-my-pointer hover:scale-[1.2] transition-all duration-[.2s]
             ${theme == 'light' ? 'border-my-gray lg:bg-black' : 'border-my-gray-black lg:bg-my-white'}
         `}>
             <FcGoogle

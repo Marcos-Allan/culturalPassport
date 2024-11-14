@@ -54,6 +54,7 @@ export default function Linkin(props: Props) {
                 font-medium
                 text-[20px]
                 sm:text-[16px]
+                cursor-my-pointer
                 hover:underline
                 focus:underline
                 focus:outline-none

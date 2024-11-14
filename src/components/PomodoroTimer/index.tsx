@@ -107,7 +107,6 @@ const PomodoroTimer = () => {
             position: 'fixed',
             top: `${position.y}px`,
             left: `${position.x}px`,
-            cursor: dragging ? 'grabbing' : 'grab',
             touchAction: 'none',
           }}
           onMouseDown={handleStart}
@@ -118,7 +117,7 @@ const PomodoroTimer = () => {
           onTouchEnd={handleStop} 
           onMouseLeave={handleStop} 
           className={`
-            pomodoro-container m-3 px-8 py-1 rounded-[8px]
+            pomodoro-container m-3 px-8 py-1 rounded-[8px] ${dragging ? 'cursor-my-grabbing' : 'cursor-my-grab'}
             ${theme == 'light' ? 'bg-my-black text-my-white' : 'bg-my-white text-my-black'}
           `}
         >
@@ -134,23 +133,29 @@ const PomodoroTimer = () => {
 
           <div className={`w-full flex items-center justify-between`}>
             {isPaused == true && (
-              <button onClick={() => {
-                resumePomodoro();
-              }}>
+              <button 
+                className={`cursor-my-pointer`}
+                onClick={() => {
+                  resumePomodoro();
+                }}
+              >
                 <FaPlay />
               </button>
             )}
             
             {isPaused == false && (
-              <button onClick={() => {
-                stopPomodoro();
-              }}>
+              <button
+                className={`cursor-my-pointer`}
+                onClick={() => {
+                  stopPomodoro();
+                }}
+              >
                 <FaPause />
               </button>
             )}  
 
             <button
-              className={`absolute top-0 right-0 m-1`}
+              className={`absolute top-0 right-0 cursor-my-pointer p-2`}
               onClick={() => {
                 finishPomodoro()
               }}
@@ -159,9 +164,12 @@ const PomodoroTimer = () => {
             </button>
             
             {isPomodoroActive == false && (
-              <button onClick={() => {
-                startPomodoro();
-              }}>
+              <button
+                className={`cursor-my-pointer`}
+                onClick={() => {
+                  startPomodoro();
+                }}
+              >
                 <FaRedo />
               </button>
             )}
