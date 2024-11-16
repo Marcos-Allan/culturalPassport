@@ -46,7 +46,8 @@ import GoogleLogin from "../../components/GoogleLogin";
 import ToggleThemeBtn from '../../components/ToggleThemeBtn';
 
 //IMPORTAÇÃO DAS IMAGENS
-import bg from '../../assets/imgs/01bg.png'
+// import bg from '../../assets/imgs/01bg.png'
+import bg2 from '../../assets/imgs/06bg.png'
 
 //IMPORTAÇÃO DO PROVEDOR PARA PEGAR AS VARIÁVEIS GLOBAIS
 import { useMyContext } from '../../provider/geral';
@@ -60,7 +61,7 @@ export default function SignIn(){
     const states:any = useMyContext()
 
     //DESESTRUTURA AS VARIAVEIS ESPECIFICADAS
-    const { userS, toggleUser, toggleLoading, toggleAlert } = states
+    const { userS, toggleUser, toggleLoading, toggleAlert, theme } = states
 
     //UTILIZA O HOOK useState
     const [inputEmailValue, setInputEmailValue] = useState<string>('')
@@ -256,7 +257,10 @@ export default function SignIn(){
                     <GoogleLogin />
                 </form>
 
-                <img className={`hidden lg:flex h-full`} src={bg} alt="livros com óculos em cima" />
+                {/* <img className={`hidden lg:flex h-full`} src={bg} alt="livros com óculos em cima" /> */}
+                <div className={`max-w-[424px] min-w-[424px] hidden lg:flex h-full ${theme == 'light' ? 'bg-my-secondary' : 'bg-my-quintenary'} flex-col items-center justify-center`}>
+                    <img className={`w-[200px]`} src={bg2} alt="livros com óculos em cima" />
+                </div>
 
             </div>
         </>

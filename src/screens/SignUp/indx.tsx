@@ -47,7 +47,8 @@ import Linkin from "../../components/Linkin/index.tsx"
 import ToggleThemeBtn from '../../components/ToggleThemeBtn/index.tsx'
 
 //IMPORTAÇÃO DAS IMAGENS
-import bg from '../../assets/imgs/02bg.png'
+// import bg from '../../assets/imgs/02bg.png'
+import bg2 from '../../assets/imgs/07bg.png'
 
 export default function SignUp(){
 
@@ -58,7 +59,7 @@ export default function SignUp(){
     const states:any = useMyContext()
 
     //DESESTRUTURA AS VARIAVEIS ESPECIFICADAS
-    const { toggleLoading, toggleAlert, userS } = states
+    const { toggleLoading, toggleAlert, userS, theme } = states
 
     //UTILIZA O HOOK useState
     const [inputEmailValue, setInputEmailValue] = useState<string>('')
@@ -278,7 +279,12 @@ export default function SignUp(){
             </div>
 
             <div className={`w-full flex justify-center h-[100vh]`}>
-                <img className={`hidden lg:flex h-full`} src={bg} alt="pilha de livros" />
+                
+                {/* <img className={`hidden lg:flex h-full`} src={bg} alt="pilha de livros" /> */}
+
+                <div className={`max-w-[424px] min-w-[424px] hidden lg:flex h-full ${theme == 'light' ? 'bg-my-secondary' : 'bg-my-quintenary'} flex-col items-center justify-center`}>
+                    <img className={`w-[200px]`} src={bg2} alt="livros com óculos em cima" />
+                </div>
 
                 <form className={`mt-8 sm:mt-0 lg:mt-0 items-center flex lg:h-full flex-col w-full overflow-y-scroll mb-6 sm:mb-20 lg:gap-[10px] relative scrollbar-none`} onSubmit={(e) => e.preventDefault()}>
                     <div className={`hidden w-full lg:flex justify-center mt-6`}>

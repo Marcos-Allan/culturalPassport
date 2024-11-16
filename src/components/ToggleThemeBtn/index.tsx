@@ -44,7 +44,7 @@ export default function ToggleThemeBtn() {
     return(
         <div
             className={`
-                mt-4 text-[40px] sm:text-[34px] ${theme == 'light' ? 'text-my-black' : 'text-my-white'} z-[2] hover:scale-[1.2] transition-all duration-[.2s] cursor-my-pointer
+                mt-4 text-[40px] sm:text-[34px] ${theme == 'light' ? 'text-my-black' : 'text-my-white'} z-[2] hover:scale-[1.2] transition-all duration-[.2s] cursor-pointer
             `}
             onClick={() => toggleTheme()}
 

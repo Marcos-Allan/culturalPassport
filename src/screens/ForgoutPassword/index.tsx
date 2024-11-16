@@ -45,7 +45,8 @@ import ToggleThemeBtn from '../../components/ToggleThemeBtn';
 import { useMyContext } from '../../provider/geral';
 
 //IMPORTAÇÃO DAS IMAGENS
-import bg from '../../assets/imgs/03bg.png'
+// import bg from '../../assets/imgs/03bg.png'
+import bg2 from '../../assets/imgs/08bg.png'
 
 export default function ForgoutPassword() {
 
@@ -56,7 +57,7 @@ export default function ForgoutPassword() {
     const states:any = useMyContext()
 
     //DESESTRUTURA AS VARIAVEIS ESPECIFICADAS
-    const { userS, toggleAlert, toggleLoading, toggleUser } = states
+    const { userS, toggleAlert, toggleLoading, toggleUser, theme } = states
 
     //FUNÇÃO CHAMADA AO RECARREGAR A PÁGINA
     useEffect(() => {
@@ -155,7 +156,10 @@ export default function ForgoutPassword() {
             </div>
 
             <div className={`w-full flex justify-center h-[100vh]`}>
-                <img className={`hidden lg:flex h-full`} src={bg} alt="pilha de livros" />
+                {/* <img className={`hidden lg:flex h-full`} src={bg} alt="pilha de livros" /> */}
+                <div className={`max-w-[424px] h-screen min-w-[424px] hidden lg:flex ${theme == 'light' ? 'bg-my-secondary' : 'bg-my-quintenary'} flex-col items-center justify-center`}>
+                    <img className={`w-[200px]`} src={bg2} alt="livros com óculos em cima" />
+                </div>
 
                 <form className={`mt-8 items-center flex flex-col w-[90%] gap-[16px] relative`}
                     onSubmit={(e) => e.preventDefault()}>
