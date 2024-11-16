@@ -224,11 +224,11 @@ export default function Feedback() {
                 >
                     <StarRating onRatingSelect={handleRatingSelect} maxStars={5} />
                     
-                    <input type="text" name="" id="" value={inputMessage} onChange={(e) => setInputMessage(e.target.value)} placeholder='Descreva aqui ' className={`bg-transparent flex-grow-[1] rounded-tl-[5px] rounded-bl-[5px] py-1 text-[14px] ps-2 outline-none border-[2px] 
+                    <input type="text" name="" id="" value={inputMessage} onChange={(e) => setInputMessage(e.target.value)} placeholder='Descreva aqui ' className={`bg-transparent flex-grow-[1] rounded-tl-[5px] rounded-bl-[5px] py-1 text-[14px] ps-2 outline-none border-[2px] cursor-text
                         ${theme == 'light' ? 'border-my-secondary text-my-black' : 'border-my-quintenary text-my-white'}`}
                     />
                     
-                    <input type="submit" value="enviar" className={`px-5 text-my-white rounded-tr-[5px] rounded-br-[5px] uppercase outline-none hover:bg-transparent border-[1px] border-transparent
+                    <input type="submit" value="enviar" className={`px-5 cursor-pointer text-my-white rounded-tr-[5px] rounded-br-[5px] uppercase outline-none hover:bg-transparent border-[1px] border-transparent
                         ${theme == 'light' ? 'bg-my-secondary hover:border-my-secondary hover:text-my-secondary' : 'bg-my-quintenary hover:border-my-quintenary hover:text-my-quintenary'}`}
                     />
                 </form>

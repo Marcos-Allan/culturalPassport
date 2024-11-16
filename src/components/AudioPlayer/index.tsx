@@ -62,7 +62,7 @@ export default function AudioPlayer(props: Props) {
             onMouseEnter={() => setIsHover(true)}
             onMouseLeave={() => setIsHover(false)}
 
-            className={`p-1 m-1 rounded-[50%] relative outline-none flex items-center justify-center border-none ${props.active == true ? `${theme == 'light' ? 'bg-my-quintenary' : 'bg-my-secondary'}` : `${theme == 'light' ? 'bg-my-secondary' : 'bg-my-quintenary'}`}`}
+            className={`p-1 m-1 rounded-[50%] relative outline-none flex items-center justify-center border-none cursor-pointer ${props.active == true ? `${theme == 'light' ? 'bg-my-quintenary' : 'bg-my-secondary'}` : `${theme == 'light' ? 'bg-my-secondary' : 'bg-my-quintenary'}`}`}
         >
             <p className={`absolute top-[-30px] capitalize ${props.active == true ? 'block' : 'hidden'} ${theme == 'light' ? 'text-my-quintenary' : 'text-my-secondary'}`}>{props.name}</p>
 

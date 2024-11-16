@@ -74,7 +74,7 @@ export default function StarRating(props: Props) {
                 <button
                     key={starValue}
                     type="button"
-                    className={`text-[18px] focus:outline-none ${starValue <= (hoveredRating || rating) ? 'text-[#e2ff3b]' : 'text-gray-400'}`}
+                    className={`cursor-pointer text-[18px] focus:outline-none ${starValue <= (hoveredRating || rating) ? 'text-[#e2ff3b]' : 'text-gray-400'}`}
                     onClick={() => handleClick(starValue)}
                     onMouseEnter={() => handleMouseEnter(starValue)}
                     onMouseLeave={handleMouseLeave}

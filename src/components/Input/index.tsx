@@ -279,6 +279,7 @@ export default function Input(props: Props) {
                         type={`${props.hidden == true ? 'password' : 'text'}`}
                         ref={passwordInputVisible}
                         className={`
+                        cursor-text
                         w-full
                         text-[20px]
                         rounded-[16px]

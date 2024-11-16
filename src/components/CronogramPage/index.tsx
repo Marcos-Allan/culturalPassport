@@ -32,6 +32,9 @@ import { useState, useEffect } from 'react'
 import { DragDropContext, Droppable, Draggable } from '@hello-pangea/dnd';
 import TimePicker from 'react-time-picker';
 
+//IMPORTAÇÃO DOS COMPONENTES
+import Button from '../Button';
+
 //IMPORTAÇÃO DO PROVEDOR PARA PEGAR AS VARIÁVEIS GLOBAIS
 import { useMyContext } from "../../provider/geral"
 
@@ -40,7 +43,6 @@ import instance from '../../utils/axios';
 
 //IMPORTAÇÃO DOS ESTILOS DO INPUT
 import './TimePickerStyles.css';
-import Button from '../Button';
 
 export default function CronogramPage() {
 
@@ -53,7 +55,6 @@ export default function CronogramPage() {
     //UTILIZAÇÃO DO HOOK useState
     const [matters, setMatters] = useState<any[]>([])
     const [cronogramS, setCronogramS] = useState<any[]>([])
-
     const [time, setTime] = useState(`${userS.timeCronograma[0]}:${userS.timeCronograma[1]}`);
 
     const handleTimeChange = (event:any) => {
@@ -181,7 +182,7 @@ export default function CronogramPage() {
                     <h1 className={`w-[80%] text-center text-[20px] font-medium mb-[14px] ${theme == 'light' ? 'text-my-white' : 'text-my-black'}`}>Olá <span className={`font-bold ${theme == 'light' ? 'text-my-quintenary' : 'text-my-secondary'}`}>{userS.name}</span>, defina seu cronograma de estudos</h1>
 
                     
-                    <div className={`flex flex-row flex-wrap mb-3 text-[24px] py-2 px-4 ${theme == 'light' ? 'bg-my-secondary' : 'bg-my-quintenary'}`}>
+                    <div className={`flex flex-row flex-wrap mb-3 text-[24px] py-2 px-4 ${theme == 'light' ? 'bg-my-white' : 'bg-my-black'}`}>
                         <h1 className={`capitalize mr-3 ${theme == 'light' ? 'text-my-black' : 'text-my-white'}`}>horário: </h1>
                         <TimePicker
                             onChange={handleTimeChange}
@@ -201,12 +202,12 @@ export default function CronogramPage() {
                             className={`w-full flex flex-row pt-8 mb-2 px-4 rounded-[8px] ${theme == 'light' ? 'bg-my-white' : 'bg-my-black'}`}
                         >
                             <div className={`text-my-white flex flex-col items-center justify-between text-center ${theme == 'light' ? 'border-my-secondary' : 'border-my-quintenary bg-my-black'} flex flex-col gap-[5px]`}>
-                                <p className={`capitalize h-[30px] flex items-center w-full px-1 mr-[6px] justify-center ${theme == 'light' ? 'bg-my-quintenary' : 'bg-my-secondary' }`}>seg</p>
-                                <p className={`capitalize h-[30px] flex items-center w-full px-1 mr-[6px] justify-center ${theme == 'light' ? 'bg-my-quintenary' : 'bg-my-secondary' }`}>ter</p>
-                                <p className={`capitalize h-[30px] flex items-center w-full px-1 mr-[6px] justify-center ${theme == 'light' ? 'bg-my-quintenary' : 'bg-my-secondary' }`}>qua</p>
-                                <p className={`capitalize h-[30px] flex items-center w-full px-1 mr-[6px] justify-center ${theme == 'light' ? 'bg-my-quintenary' : 'bg-my-secondary' }`}>qui</p>
-                                <p className={`capitalize h-[30px] flex items-center w-full px-1 mr-[6px] justify-center ${theme == 'light' ? 'bg-my-quintenary' : 'bg-my-secondary' }`}>sex</p>
-                                <p className={`capitalize h-[30px] flex items-center w-full px-1 mr-[6px] justify-center ${theme == 'light' ? 'bg-my-quintenary' : 'bg-my-secondary' }`}>sab</p>
+                                <p className={`capitalize h-[30px] flex items-center w-full px-1 mr-[6px] justify-center border-[1px] ${theme == 'light' ? 'text-my-black border-my-black' : 'text-my-white border-my-white' }`}>seg</p>
+                                <p className={`capitalize h-[30px] flex items-center w-full px-1 mr-[6px] justify-center border-[1px] ${theme == 'light' ? 'text-my-black border-my-black' : 'text-my-white border-my-white' }`}>ter</p>
+                                <p className={`capitalize h-[30px] flex items-center w-full px-1 mr-[6px] justify-center border-[1px] ${theme == 'light' ? 'text-my-black border-my-black' : 'text-my-white border-my-white' }`}>qua</p>
+                                <p className={`capitalize h-[30px] flex items-center w-full px-1 mr-[6px] justify-center border-[1px] ${theme == 'light' ? 'text-my-black border-my-black' : 'text-my-white border-my-white' }`}>qui</p>
+                                <p className={`capitalize h-[30px] flex items-center w-full px-1 mr-[6px] justify-center border-[1px] ${theme == 'light' ? 'text-my-black border-my-black' : 'text-my-white border-my-white' }`}>sex</p>
+                                <p className={`capitalize h-[30px] flex items-center w-full px-1 mr-[6px] justify-center border-[1px] ${theme == 'light' ? 'text-my-black border-my-black' : 'text-my-white border-my-white' }`}>sab</p>
                             </div>
 
                             <DragDropContext onDragEnd={onDragEnd}>
@@ -233,10 +234,13 @@ export default function CronogramPage() {
                                                     {...provided2.dragHandleProps}
                                                 >
                                                     <p
-                                                    className={`capitalize h-[30px] flex items-center justify-center cursor-pointer hover:underline transition-all duration-[.3s] text-[14px] text-center py-1 text-my-white ${
-                                                        theme === 'light'
-                                                            ? 'bg-my-secondary'
-                                                            : 'bg-my-quintenary'
+                                                        className={`capitalize h-[30px] flex items-center justify-center cursor-pointer hover:underline transition-all duration-[.3s] text-[14px] text-center py-1 border-[1px]
+                                                        ${(ind == 0) || (ind == 3) || (ind == 6) || (ind == 9) ? 'bg-my-quintenary' : ''}
+                                                        ${(ind == 1) || (ind == 4) || (ind == 7) || (ind == 10) ? 'bg-my-secondary' : ''}
+                                                        ${(ind == 2) || (ind == 5) || (ind == 8) || (ind == 11) ? 'bg-my-quartenary' : ''}
+                                                        ${theme === 'light'
+                                                            ? 'text-my-black border-my-black'
+                                                            : 'text-my-white border-my-white'
                                                         } `}
                                                     >
                                                     {mat}

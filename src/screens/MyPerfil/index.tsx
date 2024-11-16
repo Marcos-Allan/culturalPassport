@@ -388,7 +388,7 @@ export default function MyPerfil() {
                         
                         <input
                             onChange={(e) => setName(e.target.value)}
-                            className={`text-[22px] w-full font-bold capitalize bg-transparent border-2 p-1 ps-2 rounded-[15px] outline-none
+                            className={`text-[22px] w-full font-bold capitalize bg-transparent border-2 p-1 ps-2 rounded-[15px] outline-none cursor-text
                             ${theme == 'light'
                             ? 'text-my-black border-my-terciary'
                             : 'text-my-white border-my-quintenary'}

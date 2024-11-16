@@ -49,11 +49,11 @@ export default {
         'my-black-opacity': '#0d0d0dbb',
       },
       cursor: {
-        'my-auto': 'url(https://firebasestorage.googleapis.com/v0/b/cultural-passport-78148.appspot.com/o/images%2Fcursores%2Fcursor.png?alt=media&token=369efea4-39e8-4ee3-8216-de62883451de), auto',
-        'my-text': 'url(https://firebasestorage.googleapis.com/v0/b/cultural-passport-78148.appspot.com/o/images%2Fcursores%2Ftext.png?alt=media&token=ad5745f7-dcea-4ef5-ae5d-16bd1c7cda58), text',
-        'my-pointer': 'url(https://firebasestorage.googleapis.com/v0/b/cultural-passport-78148.appspot.com/o/images%2Fcursores%2Fpointer.png?alt=media&token=864e8451-5430-43c6-86ff-56b2f65ecdc2), pointer',
-        'my-grab': 'url(https://firebasestorage.googleapis.com/v0/b/cultural-passport-78148.appspot.com/o/images%2Fcursores%2Fgrab.png?alt=media&token=42c327f8-4d9e-448e-b508-9c6c79534a47), grab',
-        'my-grabbing': 'url(https://firebasestorage.googleapis.com/v0/b/cultural-passport-78148.appspot.com/o/images%2Fcursores%2Fhold.png?alt=media&token=d2d0f31a-e90b-4fd5-a4d0-3f163f52abd8), grabbing',
+        'auto': 'url("https://firebasestorage.googleapis.com/v0/b/cultural-passport-78148.appspot.com/o/images%2Fcursores%2Fcursor.png?alt=media&token=369efea4-39e8-4ee3-8216-de62883451de") 0 0, auto',
+        'text': 'url("https://firebasestorage.googleapis.com/v0/b/cultural-passport-78148.appspot.com/o/images%2Fcursores%2Ftext.png?alt=media&token=ad5745f7-dcea-4ef5-ae5d-16bd1c7cda58") 14 0, text',
+        'pointer': 'url("https://firebasestorage.googleapis.com/v0/b/cultural-passport-78148.appspot.com/o/images%2Fcursores%2Fpointer.png?alt=media&token=864e8451-5430-43c6-86ff-56b2f65ecdc2") 14 0, pointer',
+        'grab': 'url("https://firebasestorage.googleapis.com/v0/b/cultural-passport-78148.appspot.com/o/images%2Fcursores%2Fgrab.png?alt=media&token=42c327f8-4d9e-448e-b508-9c6c79534a47") 14 0, grab',
+        'grabbing': 'url("https://firebasestorage.googleapis.com/v0/b/cultural-passport-78148.appspot.com/o/images%2Fcursores%2Fhold.png?alt=media&token=d2d0f31a-e90b-4fd5-a4d0-3f163f52abd8") 14 0, grabbing',
       },
       keyframes: {
         colorChange: {
