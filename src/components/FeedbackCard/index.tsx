@@ -46,9 +46,6 @@ export default function FeedbackCard(props: Props) {
     //DESESTRUTURA AS VARIAVEIS ESPECIFICADAS
     const { userS, theme } = states
 
-    //ARRAY DE CORES ESCOLHIDAS
-    const colors = ['#8D46DC', '#75028E', '#20db48', '#4882fe']
-
     const RenderStars = (count: number) => {
         return (
             <div className={`flex flex-row gap-1 mr-2`}>
@@ -56,15 +53,6 @@ export default function FeedbackCard(props: Props) {
             </div>
         );
     };
-
-    //FUNÇÃO RESPONSÁVEL POR 
-    function selectRandomColor(cores:[]) {
-        //GERA UM NÚMERO ALEATÓRIO ENTRE O NÚMERO MÁXIMO DE ITEMS DO ARRAY E O MÍNIMO
-        const indiceAleatorio = Math.floor(Math.random() * cores.length)
-
-        //RETORNA A COR ESCOLIDA PELO  ÍNDICE
-        return cores[indiceAleatorio]
-    }
 
     return(
         <>
@@ -77,8 +65,7 @@ export default function FeedbackCard(props: Props) {
                         <div className={`flex flex-row items-center gap-2`}>
                             <img src={props.msg.userImg} className='w-6 h-6 rounded-[50%]' />
                             <p
-                                style={{ color: selectRandomColor(colors as any) }}
-                                className={`font-black text-[16px] my-2`}
+                                className={`font-black text-[16px] my-2 text-my-secondary`}
                             >
                                 {props.msg.name}
                             </p>
@@ -98,7 +85,7 @@ export default function FeedbackCard(props: Props) {
                         <div className={`flex flex-row items-center gap-2`}>
                             <img src={userS.img} className='w-6 h-6 rounded-[50%]' />
                             <p
-                                className={`text-[#ff346e] font-black text-[16px] my-2`}
+                                className={`text-my-quartenary font-black text-[16px] my-2`}
                             >
                                 {userS.name}
                             </p>

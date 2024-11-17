@@ -30,6 +30,7 @@
 //IMPORTAÇÃO DAS BIBLIOTECAS    
 import { useEffect, useState, ChangeEvent } from 'react'
 import { useNavigate } from 'react-router-dom';
+import { useSpring, animated } from '@react-spring/web';
 
 //IMPORTAÇÃO DOS COMPONENTES
 import Navbar from "../../components/Navbar";
@@ -143,6 +144,15 @@ export default function ConfirmCode() {
         }
     },[stateCode])
 
+    //APLICA ESTILO ANIMADO DA ANIMAÇÃO DE ENTRADA
+    const propsStyle:any = useSpring({
+        opacity: 1,
+        transform: 'translateX(0px)',
+        from: { transform: 'translateY(-100vh)'},
+        config: { tension: 0, friction: 0 },
+        delay: 350
+    });
+
     return(
         <>      
             <div className='lg:hidden w-full flex justify-center items-center'>
@@ -158,7 +168,7 @@ export default function ConfirmCode() {
             <div className={`w-full flex justify-center h-[100vh]`}>
                 {/* <img className={`hidden lg:flex h-full`} src={bg} alt="pilha de livros" /> */}
                 <div className={`max-w-[424px] h-screen min-w-[424px] hidden lg:flex ${theme == 'light' ? 'bg-my-secondary' : 'bg-my-quintenary'} flex-col items-center justify-center`}>
-                    <img className={`w-[200px]`} src={bg2} alt="livros com óculos em cima" />
+                    <animated.img className={`w-[200px] transition-all`} style={propsStyle} src={bg2} alt="livros com óculos em cima" />
                 </div>
                 
 

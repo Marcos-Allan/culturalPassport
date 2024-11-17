@@ -53,7 +53,23 @@ export default function CronogramPage() {
     const { theme, userS, toggleLoading, toggleUser, toggleAlert, toggleCronogram, soundNotification } = states
 
     //UTILIZAÇÃO DO HOOK useState
-    const [matters, setMatters] = useState<any[]>([])
+    const [column1Matters, setColumn1Matters] = useState<string[]>([
+        'fisíca',
+        'história',
+        'inglês',
+        'geografia',
+        'artes',
+        'português',
+    ]);
+    const [column2Matters, setColumn2Matters] = useState<string[]>([
+        'química',
+        'biologia',
+        'matemática',
+        'filosofia',
+        'sociologia',
+        'espanhol',
+    ]);
+
     const [cronogramS, setCronogramS] = useState<any[]>([])
     const [time, setTime] = useState(`${userS.timeCronograma[0]}:${userS.timeCronograma[1]}`);
 
@@ -63,20 +79,22 @@ export default function CronogramPage() {
         console.log(event.split(':')[0])
         console.log(event.split(':')[1])
     };
-
-    const ord = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
     
     //FUNÇÃO CHAMADA TODA VEZ QUE A PÁGINA É RECARREGADA
     useEffect(() => {
 
-        //DEFINE O ARRAY COM AS MATÉRIAS
-        setMatters([
+        //DEFINE O ARRAY COM AS MATÉRIAS DA PRIMEIRA COLUNA
+        setColumn1Matters([
             'fisíca',
             'história',
             'inglês',
             'geografia',
             'artes',
             'português',
+        ])
+        
+        //DEFINE O ARRAY COM AS MATÉRIAS DA SEGUNDA COLUNA
+        setColumn2Matters([
             'química',
             'biologia',
             'matemática',
@@ -146,30 +164,88 @@ export default function CronogramPage() {
             })
     }
 
-    //FUNÇÃO RESPONSÁVL POR REORDENAR OS ITEMS DO ARRAY
-    function reorder(list: any[], startIndex: number, endIndex: number) {
-        const result = Array.from(list)
-        const [removed] = result.splice(startIndex, 1)
-        result.splice(endIndex, 0, removed)
-
-        return result
-    }
-
     //FUNÇÃO RESPONSÁVL POR FINALIZAR O DRAG 
-    function onDragEnd(result:any) {
-        //VERIFICA SE TEM RESULTADO 
-        if(!result){
-            return
+    function onDragEnd(result: any) {
+        const { source, destination } = result;
+    
+        //VERIFICA SE TROCOU A MATÉRIA DE LUGAR
+        if (!destination) return;
+    
+        //MOVENDO ENTRE AS COLUNAS
+        if (source.droppableId !== destination.droppableId) {
+            const sourceColumn =
+                source.droppableId === "column1" ? column1Matters : column2Matters;
+            const destinationColumn =
+                destination.droppableId === "column1" ? column1Matters : column2Matters;
+            const setSourceColumn =
+                source.droppableId === "column1" ? setColumn1Matters : setColumn2Matters;
+            const setDestinationColumn =
+                destination.droppableId === "column1" ? setColumn1Matters : setColumn2Matters;
+    
+            //CLONA AS COLUNAS PARA EVITAR MUTAÇÃO DIRETA
+            const updatedSource = [...sourceColumn];
+            const updatedDestination = [...destinationColumn];
+    
+            //REMOVE O ITEM DA COLUNA ORIGINAL
+            const [removed] = updatedSource.splice(source.index, 1);
+    
+            //ADICIONA O ITEM NA POSIÇÃO DESEJADA DA COLUNA ESPECÍFICADA
+            updatedDestination.splice(destination.index, 0, removed);
+    
+            //REMOVE O ULTIMO ITEM DA COLUNA ESPECIFICADA E COLOCA NA COLUNA ORIGINAL
+            const [lastItem] = updatedDestination.splice(updatedDestination.length - 1, 1);
+            updatedSource.push(lastItem);
+    
+            //ATUAIZA OS ESTADOS DA COLUNA
+            setSourceColumn(updatedSource);
+            setDestinationColumn(updatedDestination);
+    
+            //ATUALIZA O CRONOGRAMA APÓS OS ESTADOS DAS COLUNAS ATUALIZAREM
+            setTimeout(() => {
+                updateCronogram(updatedSource, updatedDestination);
+            }, 0);
+    
+            return;
         }
-
-        //CRIA UM NOVO ARRAY CHAMANDO A FUNÇÃO PARA REORDENAR
-        const items = reorder(matters, result.source.index, result.destination.index)
-
-        //SALVA O ARRAY DAS MATÉRIAS NO ESTADO DE MATÉRIA
-        setMatters(items)
-        
-        //SALVA O ARRAY DAS MATÉRIAS NO ESTADO DE CRONOGRAMA
-        setCronogramS(items)
+    
+        //MOVENDO DENTRO DA MESMA COLUNA
+        const sourceColumn =
+            source.droppableId === "column1" ? column1Matters : column2Matters;
+        const setColumn =
+            source.droppableId === "column1" ? setColumn1Matters : setColumn2Matters;
+    
+        const updatedColumn = [...sourceColumn];
+        const [removed] = updatedColumn.splice(source.index, 1);
+        updatedColumn.splice(destination.index, 0, removed);
+    
+        //ATUALIZA O ESTADO DA COLUNA
+        setColumn(updatedColumn);
+    
+        //ATUALIZA O CRONOGRAMA APÓS OS ESTADOS DAS COLUNAS ATUALIZAREM
+        setTimeout(() => {
+            updateCronogram(
+                source.droppableId === "column1" ? updatedColumn : column1Matters,
+                source.droppableId === "column2" ? updatedColumn : column2Matters
+            );
+        }, 0);
+    }
+    
+    //FUNÇÃO RESPONSÁVEL POR ATUALIZAR O CRONGRAMA
+    function updateCronogram(updatedColumn1: string[], updatedColumn2: string[]) {
+        setCronogramS([
+            updatedColumn1[0],
+            updatedColumn2[0],
+            updatedColumn1[1],
+            updatedColumn2[1],
+            updatedColumn1[2],
+            updatedColumn2[2],
+            updatedColumn1[3],
+            updatedColumn2[3],
+            updatedColumn1[4],
+            updatedColumn2[4],
+            updatedColumn1[5],
+            updatedColumn2[5],
+        ]);
     }
 
     return(
@@ -211,49 +287,88 @@ export default function CronogramPage() {
                             </div>
 
                             <DragDropContext onDragEnd={onDragEnd}>
-                                <Droppable droppableId="matters" type="list" direction="vertical">
-                                    {(provided) => (
-                                        <div
-                                            className='flex-grow-[1]'
-                                            style={{
-                                                display: 'grid',
-                                                gridTemplateColumns: 'repeat(2, 1fr)',
-                                                gap: '5px'
-                                            }}
-                                            ref={provided.innerRef}
-                                            {...provided.droppableProps}
-                                        >
-                                            {matters.map((mat, ind) => (
-                                            <Draggable draggableId={`${ind}`} index={ind} key={ind}>
-                                                {(provided2) => (
-                                                <div
-                                                    style={{ order: `${ord[ind]}` }}
-                                                    className={`order-[${ord[ind]}]`}
-                                                    ref={provided2.innerRef}
-                                                    {...provided2.draggableProps}
-                                                    {...provided2.dragHandleProps}
-                                                >
-                                                    <p
-                                                        className={`capitalize h-[30px] flex items-center justify-center cursor-pointer hover:underline transition-all duration-[.3s] text-[14px] text-center py-1 border-[1px]
-                                                        ${(ind == 0) || (ind == 3) || (ind == 6) || (ind == 9) ? 'bg-my-quintenary' : ''}
-                                                        ${(ind == 1) || (ind == 4) || (ind == 7) || (ind == 10) ? 'bg-my-secondary' : ''}
-                                                        ${(ind == 2) || (ind == 5) || (ind == 8) || (ind == 11) ? 'bg-my-quartenary' : ''}
-                                                        ${theme === 'light'
-                                                            ? 'text-my-black border-my-black'
-                                                            : 'text-my-white border-my-white'
-                                                        } `}
+                                <div className="flex flex-row justify-center items-start gap-4 w-full">
+                                    {/* Primeira Coluna */}
+                                    <Droppable droppableId="column1" type="COLUMN" direction="vertical">
+                                        {(provided) => (
+                                            <div
+                                                className="flex flex-col gap-2 w-[45%] border rounded p-2"
+                                                ref={provided.innerRef}
+                                                {...provided.droppableProps}
+                                            >
+                                                {column1Matters.map((mat, ind) => (
+                                                    <Draggable
+                                                        key={`column1-mat-${ind}`}
+                                                        draggableId={`column1-mat-${ind}`}
+                                                        index={ind}
                                                     >
-                                                    {mat}
-                                                    </p>
-                                                </div>
-                                                )}
-                                            </Draggable>
-                                            ))}
-                                            {provided.placeholder}
-                                        </div>
-                                    )}
-                                </Droppable>
+                                                        {(provided2) => (
+                                                            <div
+                                                                ref={provided2.innerRef}
+                                                                {...provided2.draggableProps}
+                                                                {...provided2.dragHandleProps}
+                                                                className={`capitalize flex items-center justify-center hover:underline transition-all duration-[.3s] text-[14px] text-center py-1 border-[1px] rounded ${
+                                                                    theme === "light"
+                                                                    ? "text-my-black border-my-black"
+                                                                    : "text-my-white border-my-white"
+                                                                }
+                                                                    ${ind == 0 || ind == 3 ? 'bg-my-secondary' : ''}
+                                                                    ${ind == 1 || ind == 4 ? 'bg-my-quintenary' : ''}
+                                                                    ${ind == 2 || ind == 5 ? 'bg-my-quartenary' : ''}
+                                                                `}
+                                                            >
+                                                                {mat}
+                                                            </div>
+                                                        )}
+                                                    </Draggable>
+                                                ))}
+                                                {provided.placeholder}
+                                            </div>
+                                        )}
+                                    </Droppable>
+
+                                    {/* Segunda Coluna */}
+                                    <Droppable droppableId="column2" type="COLUMN" direction="vertical">
+                                        {(provided) => (
+                                            <div
+                                                className="flex flex-col gap-2 w-[45%] border rounded p-2"
+                                                ref={provided.innerRef}
+                                                {...provided.droppableProps}
+                                            >
+                                                {column2Matters.map((mat, ind) => (
+                                                    <Draggable
+                                                        key={`column2-mat-${ind}`}
+                                                        draggableId={`column2-mat-${ind}`}
+                                                        index={ind}
+                                                    >
+                                                        {(provided2) => (
+                                                            <div
+                                                                ref={provided2.innerRef}
+                                                                {...provided2.draggableProps}
+                                                                {...provided2.dragHandleProps}
+                                                                className={`capitalize flex items-center justify-center hover:underline transition-all duration-[.3s] text-[14px] text-center py-1 border-[1px] rounded ${
+                                                                    theme === "light"
+                                                                        ? "text-my-black border-my-black"
+                                                                        : "text-my-white border-my-white"
+                                                                }
+                                                                    ${ind == 0 || ind == 3 ? 'bg-my-secondary' : ''}
+                                                                    ${ind == 1 || ind == 4 ? 'bg-my-quintenary' : ''}
+                                                                    ${ind == 2 || ind == 5 ? 'bg-my-quartenary' : ''}
+                                                                `}
+                                                            >
+                                                                {mat}
+                                                            </div>
+                                                        )}
+                                                    </Draggable>
+                                                ))}
+                                                {provided.placeholder}
+                                            </div>
+                                        )}
+                                    </Droppable>
+                                </div>
                             </DragDropContext>
+
+
 
                         </div>
                     

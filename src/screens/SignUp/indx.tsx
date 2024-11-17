@@ -30,6 +30,7 @@
 //IMPORTAÇÃO DAS BIBLIOTECAS
 import { useNavigate } from 'react-router-dom'
 import { useState, useEffect, ChangeEvent } from 'react'
+import { useSpring, animated } from '@react-spring/web';
 
 //CONFIGURAÇÃO DA BASE URL DO AXIOS
 import instance from '../../utils/axios.ts'
@@ -266,6 +267,15 @@ export default function SignUp(){
         }
     },[userS.logged])
 
+    //APLICA ESTILO ANIMADO DA ANIMAÇÃO DE ENTRADA
+    const propsStyle:any = useSpring({
+        opacity: 1,
+        transform: 'translateX(0px)',
+        from: { transform: 'translateY(-100vh)'},
+        config: { tension: 0, friction: 0 },
+        delay: 350
+    });
+
     return(
         <>
             <div className='lg:hidden w-full flex justify-center items-center'>
@@ -283,7 +293,7 @@ export default function SignUp(){
                 {/* <img className={`hidden lg:flex h-full`} src={bg} alt="pilha de livros" /> */}
 
                 <div className={`max-w-[424px] min-w-[424px] hidden lg:flex h-full ${theme == 'light' ? 'bg-my-secondary' : 'bg-my-quintenary'} flex-col items-center justify-center`}>
-                    <img className={`w-[200px]`} src={bg2} alt="livros com óculos em cima" />
+                    <animated.img className={`w-[200px] transition-all`} style={propsStyle} src={bg2} alt="livros com óculos em cima" />
                 </div>
 
                 <form className={`mt-8 sm:mt-0 lg:mt-0 items-center flex lg:h-full flex-col w-full overflow-y-scroll mb-6 sm:mb-20 lg:gap-[10px] relative scrollbar-none`} onSubmit={(e) => e.preventDefault()}>
