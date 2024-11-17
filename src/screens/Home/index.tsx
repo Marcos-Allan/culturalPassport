@@ -42,6 +42,7 @@ import ToggleThemeBtn from '../../components/ToggleThemeBtn/index.tsx';
 
 //IMPORTAÇÃO DA IMAGEM USADA NA TELA
 import Person from '../../assets/imgs/person_1.png'
+import Cerebro from '../../assets/imgs/cérebro.png'
 
 //IMPORTAÇÃO DO PROVEDOR PARA PEGAR AS VARIÁVEIS GLOBAIS
 import { useMyContext } from '../../provider/geral';
@@ -85,7 +86,8 @@ export default function Home(){
                 />
 
                 <div className={`w-full flex flex-col items-center lg:w-[90%]`}>
-                    <ImageComponente img={Person} width={['100', '60', '400', '100', '450']} />
+                    {/* <ImageComponente img={Person} width={['100', '60', '400', '100', '450']} /> */}
+                    <ImageComponente img={Cerebro} width={['100', '60', '400', '80', '450']} />
                         
                     <Button text="iniciar" route="/sign-in" />
                 </div>
