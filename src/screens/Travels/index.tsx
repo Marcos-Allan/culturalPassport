@@ -126,7 +126,7 @@ export default function Travels() {
                 />
             </Navbar>
 
-            <div className={`w-full flex flex-col justify-start items-center mb-[100px] sm:mb-[40px] lg:mb-0 overflow-y-scroll overflow-x-hidden overflow-visible scrollbar scrollbar-track-transparent scrollbar-thumb-my-secondary`}>    
+            <div className={`w-full flex flex-col justify-start items-center mb-[100px] sm:mb-[40px] lg:mb-0 overflow-y-scroll overflow-x-hidden overflow-visible scrollbar scrollbar-track-transparent scrollbar-thumb-my-secondary`}>
                 <Text text='Passeios' position='left' />
 
                 {loadingExercises == false && exercises.length >= 1 && exercises.map((exerc, i) => (

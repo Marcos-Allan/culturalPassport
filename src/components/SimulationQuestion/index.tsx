@@ -44,10 +44,10 @@ export default function SimulationQuestion(props: Props) {
     const { theme } = states
 
     return(
-        <div className={`flex flex-col items-center border-[1px] ${theme == 'light' ? 'border-my-black' : 'border-my-white'} my-2 mt-5 p-3 pt-1 rounded-[20px] min-h-[100px] overflow-y-scroll scrollbar scrollbar-track-transparent scrollbar-thumb-my-secondary`}>
+        <div className={`flex flex-col items-center border-[1px] ${theme == 'light' ? 'border-my-black' : 'border-my-white'} my-2 mt-5 p-3 pt-1 rounded-[20px]`}>
             <h1 className={`text-[24px] font-medium ${theme == 'light' ? 'text-my-black' : 'text-my-white'}`}>{props.questIndex + 1} - {props.questions[props.questIndex].content}</h1>
             <div className={`w-full h-[1px] ${theme == 'light' ? 'bg-my-gray' : 'bg-my-gray-black'} my-2 lg:hidden`}/>
-            <p className={`text-[22px] ${theme == 'light' ? 'text-my-black' : 'text-my-white'} `}>{props.questions[props.questIndex].answer}</p>
+            <p className={`text-[22px] h-auto ${theme == 'light' ? 'text-my-black' : 'text-my-white'} `}>{props.questions[props.questIndex].answer}</p>
         </div>
     )
 }

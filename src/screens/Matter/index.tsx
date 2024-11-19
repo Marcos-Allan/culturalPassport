@@ -38,6 +38,7 @@ import TitlePage from "../../components/TitlePage";
 import BottomNavigation from "../../components/BottomNavigation";
 import ContentCard from '../../components/ContentCard';
 import Text from '../../components/Text';
+import GameCard from '../../components/GameCard';
 
 //IMPORTAÇÃO DO PROVEDOR PARA PEGAR AS VARIÁVEIS GLOBAIS
 import { useMyContext } from '../../provider/geral';
@@ -199,11 +200,11 @@ export default function Matter() {
                     <p className={`w-full text-center text-[18px] ${theme == 'light' ? 'text-my-black' : 'text-my-white'}`}>estamos carregando as matérias seja paciente</p>
                 )}
 
-                <p className={`w-[90%] mt-8 mb-5 text-center text-[18px] ${theme == 'light' ? 'text-my-black' : 'text-my-white'}`}>Passeios relacionados com a matéria</p>
 
                 <div className={`w-screen flex flex-col items-center`}>
                     {loadingTravels == false && travels.length > 0 && travels.map((travel, i) => (
                         <>
+                            <p className={`w-[90%] mt-8 mb-5 text-center text-[18px] ${theme == 'light' ? 'text-my-black' : 'text-my-white'}`}>Passeios relacionados com a matéria</p>
                             <TravelCard
                                 concluded={travel.concluded}
                                 materia={travel.materia}
@@ -213,6 +214,20 @@ export default function Matter() {
                             />
                         </>
                     ))}
+                    
+                    {matter == 'matemática' && (
+                    <>
+                        <p className={`w-[90%] mt-8 mb-5 text-center text-[18px] ${theme == 'light' ? 'text-my-black' : 'text-my-white'}`}>Jogos relacionados com a matéria</p>
+                        <GameCard
+                            concluded={false}
+                            materia={'matemática'}
+                            title={'MathQuest'}
+                            route='games/math-quest'
+                            key={1}
+                            ind={1}
+                        />
+                    </>
+                )}
                 </div>
 
                 {loadingTravels == false && travels.length == 0 &&(
@@ -225,6 +240,8 @@ export default function Matter() {
                         />
                     </div>
                 )}
+
+                
                 
                 {loadingContent == true && (
                     <p className={`w-full text-center text-[18px] ${theme == 'light' ? 'text-my-black' : 'text-my-white'}`}>estamos carregando os passeios seja paciente</p>

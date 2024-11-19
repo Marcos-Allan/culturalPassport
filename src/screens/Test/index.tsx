@@ -335,7 +335,7 @@ export default function Test() {
                     </Navbar>
                     
                     {questions.length > 0 ? (
-                        <div className={`w-[90%] sm:w-[60%] min-h-screen flex items-center justify-start flex-col overflow-y-scroll scrollbar-none`}>
+                        <div className={`w-[90%] sm:w-[60%] flex flex-col justify-start items-center mb-[100px] sm:mb-[40px] lg:mb-0 overflow-y-scroll overflow-x-hidden overflow-visible scrollbar scrollbar-track-transparent scrollbar-thumb-my-secondary`}>
                             
                             {questFinalized == false && (
                                 <div className={`w-full border-2 ${theme == 'light' ? 'border-my-black' : 'border-my-white'} min-h-[40px] rounded-[30px] relative overflow-hidden`}>
@@ -350,7 +350,7 @@ export default function Test() {
                                     <ol className='mt-3 w-full flex flex-col' type='a'>
                                         {questions[questIndex].questions.map((quest:any, i:number) => (
                                             <>
-                                            <SimulationResponses alterResponse={alterResponse} getResultQuestion={getResultQuestion} i={i} quest={quest} questIndex={questIndex} setGetResultQuestion={setGetResultQuestion} yourResponse={yourResponse} />
+                                                <SimulationResponses alterResponse={alterResponse} getResultQuestion={getResultQuestion} i={i} quest={quest} questIndex={questIndex} setGetResultQuestion={setGetResultQuestion} yourResponse={yourResponse} />
                                             </>
                                         ))}
                                     </ol>
