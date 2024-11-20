@@ -202,32 +202,35 @@ export default function Matter() {
 
 
                 <div className={`w-screen flex flex-col items-center`}>
-                    {loadingTravels == false && travels.length > 0 && travels.map((travel, i) => (
+
+                    {loadingTravels == false && travels.length > 0 && (
                         <>
                             <p className={`w-[90%] mt-8 mb-5 text-center text-[18px] ${theme == 'light' ? 'text-my-black' : 'text-my-white'}`}>Passeios relacionados com a matéria</p>
-                            <TravelCard
-                                concluded={travel.concluded}
-                                materia={travel.materia}
-                                title={travel.title}
-                                type={travel.type} key={i}
-                                ind={i}
-                            />
+                            {travels.map((travel, i) => (
+                                <TravelCard
+                                    concluded={travel.concluded}
+                                    materia={travel.materia}
+                                    title={travel.title}
+                                    type={travel.type} key={i}
+                                    ind={i}
+                                />
+                            ))}
                         </>
-                    ))}
+                    )}
                     
                     {matter == 'matemática' && (
-                    <>
-                        <p className={`w-[90%] mt-8 mb-5 text-center text-[18px] ${theme == 'light' ? 'text-my-black' : 'text-my-white'}`}>Jogos relacionados com a matéria</p>
-                        <GameCard
-                            concluded={false}
-                            materia={'matemática'}
-                            title={'MathQuest'}
-                            route='games/math-quest'
-                            key={1}
-                            ind={1}
-                        />
-                    </>
-                )}
+                        <>
+                            <p className={`w-[90%] mt-8 mb-5 text-center text-[18px] ${theme == 'light' ? 'text-my-black' : 'text-my-white'}`}>Jogos relacionados com a matéria</p>
+                            <GameCard
+                                concluded={false}
+                                materia={'matemática'}
+                                title={'MathQuest'}
+                                route='games/math-quest'
+                                key={1}
+                                ind={1}
+                            />
+                        </>
+                    )}
                 </div>
 
                 {loadingTravels == false && travels.length == 0 &&(

@@ -95,7 +95,14 @@ export default function MathQuest() {
             value: num1 + num2
         }
 
-        setOptions([response1, response2, response3])
+        const randomNumberOptions = Math.floor(Math.random() * 3)
+        if(randomNumberOptions == 0){
+            setOptions([response1, response2, response3])
+        }else if(randomNumberOptions == 1){
+            setOptions([response1, response3, response2])
+        }else{
+            setOptions([response3, response1, response2])
+        }
     }
 
     return(
