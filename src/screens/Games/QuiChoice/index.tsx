@@ -72,8 +72,8 @@ export default function QuiChoice() {
         
             getResults(number, randomNumber(119), randomNumber(119))
             
-            
             const type = randomNumber(3)
+            
             if(type == 0){
                 const result = `${response.data[number].numato}°`
                 
