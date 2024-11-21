@@ -1,0 +1,946 @@
+[
+    {
+        "numato": "1",
+        "state": "Gás",
+        "icn": "H",
+        "nms": "hidrogênio",
+        "ele": "químico",
+        "de": "(1s1)"
+    },
+    {
+        "numato": "2",
+        "state": "Gás",
+        "icn": "He",
+        "nms": "hélio",
+        "ele": "químico",
+        "de": "(1s2)"
+    },
+    {
+        "numato": "3",
+        "state": "Sólido",
+        "icn": "Li",
+        "nms": "litio",
+        "ele": "químico",
+        "de": "1s2 (2s1)"
+    },
+    {
+        "numato": "4",
+        "state": "Sólido",
+        "icn": "Be",
+        "nms": "berílio",
+        "ele": "químico",
+        "de": "1s2 (2s2)"
+    },
+    {
+        "numato": "5",
+        "state": "Sólido",
+        "icn": "B",
+        "nms": "boro",
+        "ele": "químico",
+        "de": "1s2 2s2 (2p1)"
+    },
+    {
+        "numato": "6",
+        "state": "Sólido",
+        "icn": "C",
+        "nms": "carbono",
+        "ele": "químico",
+        "de": "1s2 2s2 (2p2)"
+    },
+    {
+        "numato": "7",
+        "state": "Gás",
+        "icn": "N",
+        "nms": "nitrogênio",
+        "ele": "químico",
+        "de": "1s2 2s2 (2p3)"
+    },
+    {
+        "numato": "8",
+        "state": "Gás",
+        "icn": "O",
+        "nms": "oxigênio",
+        "ele": "químico",
+        "de": "1s2 2s2 (2p4)"
+    },
+    {
+        "numato": "9",
+        "state": "Gás",
+        "icn": "F",
+        "nms": "flúor",
+        "ele": "químico",
+        "de": "1s2 2s2 (2p5)"
+    },
+    {
+        "numato": "10",
+        "state": "Gás",
+        "icn": "Ne",
+        "nms": "neônio",
+        "ele": "químico",
+        "de": "1s2 2s2 (2p6)"
+    },
+    {
+        "numato": "11",
+        "state": "Sólido",
+        "icn": "Na",
+        "nms": "sódio",
+        "ele": "químico",
+        "de": "1s2 2s2 2p6 (3s1)"
+    },
+    {
+        "numato": "12",
+        "state": "Sólido",
+        "icn": "Mg",
+        "nms": "magnésio",
+        "ele": "químico",
+        "de": "1s2 2s2 2p6 (3s2)"
+    },
+    {
+        "numato": "13",
+        "state": "Sólido",
+        "icn": "Al",
+        "nms": "alumínio",
+        "ele": "químico",
+        "de": "1s2 2s2 2p6 3s2 (3p1)"
+    },
+    {
+        "numato": "14",
+        "state": "Sólido",
+        "icn": "Si",
+        "nms": "silicio",
+        "ele": "químico",
+        "de": "1s2 2s2 2p6 3s2 (3p2)"
+    },
+    {
+        "numato": "15",
+        "state": "Sólido",
+        "icn": "P",
+        "nms": "fósforo",
+        "ele": "químico",
+        "de": "1s2 2s2 2p6 3s2 (3p3)"
+    },
+    {
+        "numato": "16",
+        "state": "Sólido",
+        "icn": "S",
+        "nms": "enxofre",
+        "ele": "químico",
+        "de": "1s2 2s2 2p6 3s2 (3p4)"
+    },
+    {
+        "numato": "17",
+        "state": "Gás",
+        "icn": "Cl",
+        "nms": "cloro",
+        "ele": "químico",
+        "de": "1s2 2s2 2p6 3s2 (3p5)"
+    },
+    {
+        "numato": "18",
+        "state": "Gás",
+        "icn": "Ar",
+        "nms": "argônio",
+        "ele": "químico",
+        "de": "1s2 2s2 2p6 3s2 (3p6)"
+    },
+    {
+        "numato": "19",
+        "state": "Sólido",
+        "icn": "K",
+        "nms": "potássio",
+        "ele": "químico",
+        "de": "[Ar] 4s1"
+    },
+    {
+        "numato": "20",
+        "state": "Sólido",
+        "icn": "Ca",
+        "nms": "cálcio",
+        "ele": "químico",
+        "de": "[Ar] 4s2"
+    },
+    {
+        "numato": "21",
+        "state": "Sólido",
+        "icn": "Sc",
+        "nms": "escândio",
+        "ele": "químico",
+        "de": "[Ar] 3d1 4s2"
+    },
+    {
+        "numato": "22",
+        "state": "Sólido",
+        "icn": "Ti",
+        "nms": "titânio",
+        "ele": "químico",
+        "de": "[Ar] 3d2 4s2"
+    },
+    {
+        "numato": "23",
+        "state": "Sólido",
+        "icn": "V",
+        "nms": "vanádio",
+        "ele": "químico",
+        "de": "[Ar] 3d3 4s2"
+    },
+    {
+        "numato": "24",
+        "state": "Sólido",
+        "icn": "Cr",
+        "nms": "cromo",
+        "ele": "químico",
+        "de": "[Ar] 3d5 4s1"
+    },
+    {
+        "numato": "25",
+        "state": "Sólido",
+        "icn": "Mn",
+        "nms": "manganês",
+        "ele": "químico",
+        "de": "[Ar] 3d5 4s2"
+    },
+    {
+        "numato": "26",
+        "state": "Sólido",
+        "icn": "Fe",
+        "nms": "ferro",
+        "ele": "químico",
+        "de": "[Ar] 3d6 4s2"
+    },
+    {
+        "numato": "27",
+        "state": "Sólido",
+        "icn": "Co",
+        "nms": "cobalto",
+        "ele": "químico",
+        "de": "[Ar] 3d7 4s2"
+    },
+    {
+        "numato": "28",
+        "state": "Sólido",
+        "icn": "Ni",
+        "nms": "níquel",
+        "ele": "químico",
+        "de": "[Ar] 3d8 4s2"
+    },
+    {
+        "numato": "29",
+        "state": "Sólido",
+        "icn": "Cu",
+        "nms": "cobre",
+        "ele": "químico",
+        "de": "[Ar] 3d10 4s1"
+    },
+    {
+        "numato": "30",
+        "state": "Sólido",
+        "icn": "Zn",
+        "nms": "zinco",
+        "ele": "químico",
+        "de": "[Ar] 3d10 4s2"
+    },
+    {
+        "numato": "31",
+        "state": "Sólido",
+        "icn": "Ga",
+        "nms": "gálio",
+        "ele": "químico",
+        "de": "[Ar] 3d10 4s2 4p1"
+    },
+    {
+        "numato": "32",
+        "state": "Sólido",
+        "icn": "Ge",
+        "nms": "germânio",
+        "ele": "químico",
+        "de": "[Ar] 3d10 4s2 4p2"
+    },
+    {
+        "numato": "33",
+        "state": "Sólido",
+        "icn": "As",
+        "nms": "arsênio",
+        "ele": "químico",
+        "de": "[Ar] 3d10 4s2 4p3"
+    },
+    {
+        "numato": "34",
+        "state": "Sólido",
+        "icn": "Se",
+        "nms": "selênio",
+        "ele": "químico",
+        "de": "[Ar] 3d10 4s2 4p4"
+    },
+    {
+        "numato": "35",
+        "state": "Líquido",
+        "icn": "Br",
+        "nms": "bromo",
+        "ele": "químico",
+        "de": "[Ar] 3d10 4s2 4p5"
+    },
+    {
+        "numato": "36",
+        "state": "Gás",
+        "icn": "Kr",
+        "nms": "criptônio",
+        "ele": "químico",
+        "de": "[Ar] 3d10 4s2 4p6"
+    },
+    {
+        "numato": "37",
+        "state": "Sólido",
+        "icn": "Rb",
+        "nms": "rubídio",
+        "ele": "químico",
+        "de": "[Kr] 5s1"
+    },
+    {
+        "numato": "38",
+        "state": "Sólido",
+        "icn": "Sr",
+        "nms": "estrôncio",
+        "ele": "químico",
+        "de": "[Kr] 5s2"
+    },
+    {
+        "numato": "39",
+        "state": "Sólido",
+        "icn": "Y",
+        "nms": "ítrio",
+        "ele": "químico",
+        "de": "[Kr] 4d1 5s2"
+    },
+    {
+        "numato": "40",
+        "state": "Sólido",
+        "icn": "Zr",
+        "nms": "zircônio",
+        "ele": "químico",
+        "de": "[Kr] 4d2 5s2"
+    },
+    {
+        "numato": "41",
+        "state": "Sólido",
+        "icn": "Nb",
+        "nms": "nióbio",
+        "ele": "químico",
+        "de": "[Kr] 4d4 5s1"
+    },
+    {
+        "numato": "42",
+        "state": "Sólido",
+        "icn": "Mo",
+        "nms": "molibdênio",
+        "ele": "químico",
+        "de": "[Kr] 4d5 5s1"
+    },
+    {
+        "numato": "43",
+        "state": "Sólido",
+        "icn": "Tc",
+        "nms": "tecnécio",
+        "ele": "químico",
+        "de": "[Kr] 4d5 5s2"
+    },
+    {
+        "numato": "44",
+        "state": "Sólido",
+        "icn": "Ru",
+        "nms": "rutênio",
+        "ele": "químico",
+        "de": "[Kr] 4d7 5s1"
+    },
+    {
+        "numato": "45",
+        "state": "Sólido",
+        "icn": "Rh",
+        "nms": "ródio",
+        "ele": "químico",
+        "de": "[Kr] 4d8 5s1"
+    },
+    {
+        "numato": "46",
+        "state": "Sólido",
+        "icn": "Pd",
+        "nms": "paládio",
+        "ele": "químico",
+        "de": "[Kr] 4d10"
+    },
+    {
+        "numato": "47",
+        "state": "Sólido",
+        "icn": "Ag",
+        "nms": "prata",
+        "ele": "químico",
+        "de": "[Kr] 4d10 5s1"
+    },
+    {
+        "numato": "48",
+        "state": "Sólido",
+        "icn": "Cd",
+        "nms": "cádmio",
+        "ele": "químico",
+        "de": "[Kr] 4d10 5s2"
+    },
+    {
+        "numato": "49",
+        "state": "Sólido",
+        "icn": "In",
+        "nms": "índio",
+        "ele": "químico",
+        "de": "[Kr] 4d10 5s2 5p1"
+    },
+    {
+        "numato": "50",
+        "state": "Sólido",
+        "icn": "Sn",
+        "nms": "estanho",
+        "ele": "químico",
+        "de": "[Kr] 4d10 5s2 5p2"
+    },
+    {
+        "numato": "51",
+        "state": "Sólido",
+        "icn": "Sb",
+        "nms": "antimônio",
+        "ele": "químico",
+        "de": "[Kr] 4d10 5s2 5p3"
+    },
+    {
+        "numato": "52",
+        "state": "Sólido",
+        "icn": "Te",
+        "nms": "telúrio",
+        "ele": "químico",
+        "de": "[Kr] 4d10 5s2 5p4"
+    },
+    {
+        "numato": "53",
+        "state": "Sólido",
+        "icn": "I",
+        "nms": "iodo",
+        "ele": "químico",
+        "de": "[Kr] 4d10 5s2 5p5"
+    },
+    {
+        "numato": "54",
+        "state": "Gás",
+        "icn": "Xe",
+        "nms": "xenônio",
+        "ele": "químico",
+        "de": "[Kr] 4d10 5s2 5p6"
+    },
+    {
+        "numato": "55",
+        "state": "Sólido",
+        "icn": "Cs",
+        "nms": "césio",
+        "ele": "químico",
+        "de": "[Xe] 6s1"
+    },
+    {
+        "numato": "56",
+        "state": "Sólido",
+        "icn": "Ba",
+        "nms": "bário",
+        "ele": "químico",
+        "de": "[Xe] 6s2"
+    },
+    {
+        "numato": "57",
+        "state": "Sólido",
+        "icn": "La",
+        "nms": "lantânio",
+        "ele": "químico",
+        "de": "[Xe] 5d1 6s2"
+    },
+    {
+        "numato": "58",
+        "state": "Sólido",
+        "icn": "Ce",
+        "nms": "cério",
+        "ele": "químico",
+        "de": "[Xe] 4f1 5d1 6s2"
+    },
+    {
+        "numato": "59",
+        "state": "Sólido",
+        "icn": "Pr",
+        "nms": "praseodímio",
+        "ele": "químico",
+        "de": "[Xe] 4f3 6s2"
+    },
+    {
+        "numato": "60",
+        "state": "Sólido",
+        "icn": "Nd",
+        "nms": "neodímio",
+        "ele": "químico",
+        "de": "[Xe] 4f4 6s2"
+    },
+    {
+        "numato": "61",
+        "state": "Sólido",
+        "icn": "Pm",
+        "nms": "promécio",
+        "ele": "químico",
+        "de": "[Xe] 4f5 6s2"
+    },
+    {
+        "numato": "62",
+        "state": "Sólido",
+        "icn": "Sm",
+        "nms": "samário",
+        "ele": "químico",
+        "de": "[Xe] 4f6 6s2"
+    },
+    {
+        "numato": "63",
+        "state": "Sólido",
+        "icn": "Eu",
+        "nms": "európio",
+        "ele": "químico",
+        "de": "[Xe] 4f7 6s2"
+    },
+    {
+        "numato": "64",
+        "state": "Sólido",
+        "icn": "Gd",
+        "nms": "gadolínio",
+        "ele": "químico",
+        "de": "[Xe] 4f7 5d1 6s2"
+    },
+    {
+        "numato": "65",
+        "state": "Sólido",
+        "icn": "Tb",
+        "nms": "térbio",
+        "ele": "químico",
+        "de": "[Xe] 4f9 6s2"
+    },
+    {
+        "numato": "66",
+        "state": "Sólido",
+        "icn": "Dy",
+        "nms": "dissprósio",
+        "ele": "químico",
+        "de": "[Xe] 4f10 6s2"
+    },
+    {
+        "numato": "67",
+        "state": "Sólido",
+        "icn": "Ho",
+        "nms": "hólmio",
+        "ele": "químico",
+        "de": "[Xe] 4f11 6s2"
+    },
+    {
+        "numato": "68",
+        "state": "Sólido",
+        "icn": "Er",
+        "nms": "érbio",
+        "ele": "químico",
+        "de": "[Xe] 4f12 6s2"
+    },
+    {
+        "numato": "69",
+        "state": "Sólido",
+        "icn": "Tm",
+        "nms": "túlio",
+        "ele": "químico",
+        "de": "[Xe] 4f13 6s2"
+    },
+    {
+        "numato": "70",
+        "state": "Sólido",
+        "icn": "Yb",
+        "nms": "itérbio",
+        "ele": "químico",
+        "de": "[Xe] 4f14 6s2"
+    },
+    {
+        "numato": "71",
+        "state": "Sólido",
+        "icn": "Lu",
+        "nms": "lutécio",
+        "ele": "químico",
+        "de": "[Xe] 4f14 5d1 6s2"
+    },
+    {
+        "numato": "72",
+        "state": "Sólido",
+        "icn": "Hf",
+        "nms": "háfnio",
+        "ele": "químico",
+        "de": "[Xe] 4f14 5d2 6s2"
+    },
+    {
+        "numato": "73",
+        "state": "Sólido",
+        "icn": "Ta",
+        "nms": "tântalo",
+        "ele": "químico",
+        "de": "[Xe] 4f14 5d3 6s2"
+    },
+    {
+        "numato": "74",
+        "state": "Sólido",
+        "icn": "W",
+        "nms": "tungstênio",
+        "ele": "químico",
+        "de": "[Xe] 4f14 5d4 6s2"
+    },
+    {
+        "numato": "75",
+        "state": "Sólido",
+        "icn": "Re",
+        "nms": "rênio",
+        "ele": "químico",
+        "de": "[Xe] 4f14 5d5 6s2"
+    },
+    {
+        "numato": "76",
+        "state": "Sólido",
+        "icn": "Os",
+        "nms": "ósmio",
+        "ele": "químico",
+        "de": "[Xe] 4f14 5d6 6s2"
+    },
+    {
+        "numato": "77",
+        "state": "Sólido",
+        "icn": "Ir",
+        "nms": "irídio",
+        "ele": "químico",
+        "de": "[Xe] 4f14 5d7 6s2"
+    },
+    {
+        "numato": "78",
+        "state": "Sólido",
+        "icn": "Pt",
+        "nms": "platina",
+        "ele": "químico",
+        "de": "[Xe] 4f14 5d9 6s1"
+    },
+    {
+        "numato": "79",
+        "state": "Sólido",
+        "icn": "Au",
+        "nms": "ouro",
+        "ele": "químico",
+        "de": "[Xe] 4f14 5d10 6s1"
+    },
+    {
+        "numato": "80",
+        "state": "Líquido",
+        "icn": "Hg",
+        "nms": "mercúrio",
+        "ele": "químico",
+        "de": "[Xe] 4f14 5d10 6s2"
+    },
+    {
+        "numato": "81",
+        "state": "Sólido",
+        "icn": "Tl",
+        "nms": "tálio",
+        "ele": "químico",
+        "de": "[Xe] 4f14 5d10 6s2 6p1"
+    },
+    {
+        "numato": "82",
+        "state": "Sólido",
+        "icn": "Pb",
+        "nms": "chumbo",
+        "ele": "químico",
+        "de": "[Xe] 4f14 5d10 6s2 6p2"
+    },
+    {
+        "numato": "83",
+        "state": "Sólido",
+        "icn": "Bi",
+        "nms": "bismuto",
+        "ele": "químico",
+        "de": "[Xe] 4f14 5d10 6s2 6p3"
+    },
+    {
+        "numato": "84",
+        "state": "Sólido",
+        "icn": "Po",
+        "nms": "polônio",
+        "ele": "químico",
+        "de": "[Xe] 4f14 5d10 6s2 6p4"
+    },
+    {
+        "numato": "85",
+        "state": "Sólido",
+        "icn": "At",
+        "nms": "astato",
+        "ele": "químico",
+        "de": "[Xe] 4f14 5d10 6s2 6p5"
+    },
+    {
+        "numato": "86",
+        "state": "Gasoso",
+        "icn": "Rn",
+        "nms": "rádon",
+        "ele": "químico",
+        "de": "[Xe] 4f14 5d10 6s2 6p6"
+    },
+    {
+        "numato": "87",
+        "state": "Sólido",
+        "icn": "Fr",
+        "nms": "frâncio",
+        "ele": "químico",
+        "de": "[Rn] 7s1"
+    },
+    {
+        "numato": "88",
+        "state": "Sólido",
+        "icn": "Ra",
+        "nms": "rádio",
+        "ele": "químico",
+        "de": "[Rn] 7s2"
+    },
+    {
+        "numato": "89",
+        "state": "Sólido",
+        "icn": "Ac",
+        "nms": "actínio",
+        "ele": "químico",
+        "de": "[Rn] 6d1 7s2"
+    },
+    {
+        "numato": "90",
+        "state": "Sólido",
+        "icn": "Th",
+        "nms": "tório",
+        "ele": "químico",
+        "de": "[Rn] 6d2 7s2"
+    },
+    {
+        "numato": "91",
+        "state": "Sólido",
+        "icn": "Pa",
+        "nms": "protactínio",
+        "ele": "químico",
+        "de": "[Rn] 5f2 6d1 7s2"
+    },
+    {
+        "numato": "92",
+        "state": "Sólido",
+        "icn": "U",
+        "nms": "urânio",
+        "ele": "químico",
+        "de": "[Rn] 5f3 6d1 7s2"
+    },
+    {
+        "numato": "93",
+        "state": "Sólido",
+        "icn": "Np",
+        "nms": "neptúnio",
+        "ele": "químico",
+        "de": "[Rn] 5f4 6d1 7s2"
+    },
+    {
+        "numato": "94",
+        "state": "Sólido",
+        "icn": "Pu",
+        "nms": "plutônio",
+        "ele": "químico",
+        "de": "[Rn] 5f6 7s2"
+    },
+    {
+        "numato": "95",
+        "state": "Sólido",
+        "icn": "Am",
+        "nms": "amerício",
+        "ele": "químico",
+        "de": "[Rn] 5f7 7s2"
+    },
+    {
+        "numato": "96",
+        "state": "Sólido",
+        "icn": "Cm",
+        "nms": "cúrio",
+        "ele": "químico",
+        "de": "[Rn] 5f7 6d1 7s2"
+    },
+    {
+        "numato": "97",
+        "state": "Sólido",
+        "icn": "Bk",
+        "nms": "berquélio",
+        "ele": "químico",
+        "de": "[Rn] 5f9 7s2"
+    },
+    {
+        "numato": "98",
+        "state": "Sólido",
+        "icn": "Cf",
+        "nms": "califórnio",
+        "ele": "químico",
+        "de": "[Rn] 5f10 7s2"
+    },
+    {
+        "numato": "99",
+        "state": "Sólido",
+        "icn": "Es",
+        "nms": "einsteinio",
+        "ele": "químico",
+        "de": "[Rn] 5f11 7s2"
+    },
+    {
+        "numato": "100",
+        "state": "Sólido",
+        "icn": "Fm",
+        "nms": "férmio",
+        "ele": "químico",
+        "de": "[Rn] 5f12 7s2"
+    },
+    {
+        "numato": "101",
+        "state": "Sólido",
+        "icn": "Md",
+        "nms": "mendelévio",
+        "ele": "químico",
+        "de": "[Rn] 5f13 7s2"
+    },
+    {
+        "numato": "102",
+        "state": "Sólido",
+        "icn": "No",
+        "nms": "nobélio",
+        "ele": "químico",
+        "de": "[Rn] 5f14 7s2"
+    },
+    {
+        "numato": "103",
+        "state": "Sólido",
+        "icn": "Lr",
+        "nms": "laurêncio",
+        "ele": "químico",
+        "de": "[Rn] 5f14 7s2 7p1"
+    },
+    {
+        "numato": "104",
+        "state": "Sólido",
+        "icn": "Rf",
+        "nms": "rutherfórdio",
+        "ele": "químico",
+        "de": "[Rn] 5f14 6d2 7s2"
+    },
+    {
+        "numato": "105",
+        "state": "Sólido",
+        "icn": "Db",
+        "nms": "dúbnio",
+        "ele": "químico",
+        "de": "[Rn] 5f14 6d3 7s2"
+    },
+    {
+        "numato": "106",
+        "state": "Sólido",
+        "icn": "Sg",
+        "nms": "seabórgio",
+        "ele": "químico",
+        "de": "[Rn] 5f14 6d4 7s2"
+    },
+    {
+        "numato": "107",
+        "state": "Sólido",
+        "icn": "Bh",
+        "nms": "bohrium",
+        "ele": "químico",
+        "de": "[Rn] 5f14 6d5 7s2"
+    },
+    {
+        "numato": "108",
+        "state": "Sólido",
+        "icn": "Hs",
+        "nms": "hássio",
+        "ele": "químico",
+        "de": "[Rn] 5f14 6d6 7s2"
+    },
+    {
+        "numato": "109",
+        "state": "Sólido",
+        "icn": "Mt",
+        "nms": "meitnério",
+        "ele": "químico",
+        "de": "[Rn] 5f14 6d7 7s2"
+    },
+    {
+        "numato": "110",
+        "state": "Sólido",
+        "icn": "Ds",
+        "nms": "darmstádio",
+        "ele": "químico",
+        "de": "[Rn] 5f14 6d8 7s2"
+    },
+    {
+        "numato": "111",
+        "state": "Sólido",
+        "icn": "Rg",
+        "nms": "roentgênio",
+        "ele": "químico",
+        "de": "[Rn] 5f14 6d9 7s2"
+    },
+    {
+        "numato": "112",
+        "state": "Sólido",
+        "icn": "Cn",
+        "nms": "copernício",
+        "ele": "químico",
+        "de": "[Rn] 5f14 6d10 7s2"
+    },
+    {
+        "numato": "113",
+        "state": "Sólido",
+        "icn": "Nh",
+        "nms": "nihônio",
+        "ele": "químico",
+        "de": "[Rn] 5f14 6d10 7p1"
+    },
+    {
+        "numato": "114",
+        "state": "Sólido",
+        "icn": "Fl",
+        "nms": "fleróvio",
+        "ele": "químico",
+        "de": "[Rn] 5f14 6d10 7p2"
+    },
+    {
+        "numato": "115",
+        "state": "Sólido",
+        "icn": "Mc",
+        "nms": "moscóvio",
+        "ele": "químico",
+        "de": "[Rn] 5f14 6d10 7p3"
+    },
+    {
+        "numato": "116",
+        "state": "Sólido",
+        "icn": "Lv",
+        "nms": "livermório",
+        "ele": "químico",
+        "de": "[Rn] 5f14 6d10 7p4"
+    },
+    {
+        "numato": "117",
+        "state": "Sólido",
+        "icn": "Ts",
+        "nms": "tenessine",
+        "ele": "químico",
+        "de": "[Rn] 5f14 6d10 7p5"
+    },
+    {
+        "numato": "118",
+        "state": "Gás",
+        "icn": "Og",
+        "nms": "oganessônio",
+        "ele": "químico",
+        "de": "[Rn] 5f14 6d10 7p6"
+    }
+]

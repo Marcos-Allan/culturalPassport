@@ -60,6 +60,7 @@ import Ranking from './screens/Ranking/index.tsx';
 import Configuration from './screens/Configuration/index.tsx';
 import UserProfile from './screens/UserProfile/index.tsx';
 import MathQuest from './screens/Games/MathQuest/index.tsx';
+import QuiChoice from './screens/Games/QuiChoice/index.tsx';
 
 //IMPORTAÇÃO DO PROVEDOR QUE GUARDA AS VÁRIAVEIS DE ESTADO GLOBAL
 import { Provider } from './provider/index.tsx';
@@ -167,6 +168,11 @@ const router = createBrowserRouter([
   {
     path: "games/math-quest",
     element: <MathQuest />,
+    errorElement: <ErrorPage />
+  },
+  {
+    path: "games/qui-choice",
+    element: <QuiChoice />,
     errorElement: <ErrorPage />
   }
 ])

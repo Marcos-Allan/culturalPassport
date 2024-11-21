@@ -231,6 +231,20 @@ export default function Matter() {
                             />
                         </>
                     )}
+                    
+                    {matter == 'química' && (
+                        <>
+                            <p className={`w-[90%] mt-8 mb-5 text-center text-[18px] ${theme == 'light' ? 'text-my-black' : 'text-my-white'}`}>Jogos relacionados com a matéria</p>
+                            <GameCard
+                                concluded={false}
+                                materia={'química'}
+                                title={'QuiChoice'}
+                                route='games/qui-choice'
+                                key={1}
+                                ind={1}
+                            />
+                        </>
+                    )}
                 </div>
 
                 {loadingTravels == false && travels.length == 0 &&(
