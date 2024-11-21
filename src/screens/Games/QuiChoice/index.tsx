@@ -68,9 +68,9 @@ export default function QuiChoice() {
         .then(function (response) {
             console.log(response.data)
 
-            const number = randomNumber(119)
+            const number = randomNumber(118)
         
-            getResults(number, randomNumber(119), randomNumber(119))
+            getResults(number, randomNumber(118), randomNumber(118), response.data)
             
             const type = randomNumber(3)
             
@@ -106,23 +106,24 @@ export default function QuiChoice() {
     }
 
     //FUNÇÃO RESPONSÁVEL POR GERAR OS RESULTADOS
-    function getResults(num1:number, num2:number, num3:number) {
+    function getResults(num1:number, num2:number, num3:number, datas:any) {
         
-        axios.get('/tb.json')
-        .then(function (response) { 
+        console.log(datas)
+        
+        setTimeout(() => {
             const response1 = {
                 isCorrect: false,
-                value: response.data[num3]
+                value: datas[num3]
             }
             const response2 = {
                 isCorrect: false,
-                value: response.data[num2]
+                value: datas[num2]
             }
             const response3 = {
                 isCorrect: true,
-                value: response.data[num1]
+                value: datas[num1]
             }
-    
+
             const randomNumberOptions = Math.floor(Math.random() * 3)
             if(randomNumberOptions == 0){
                 setOptions([response1, response2, response3])
@@ -131,10 +132,7 @@ export default function QuiChoice() {
             }else{
                 setOptions([response3, response1, response2])
             }  
-        })
-        .catch(function (error) {
-            console.log(error)
-        })
+        }, 0);
     }
 
     return(
@@ -214,12 +212,10 @@ export default function QuiChoice() {
                             onClick={() => {
                                 if(option.isCorrect == true){
                                     setAcertos(acertos + 1)
-                                    console.log('vc acertou')
                                     console.log(options)
                                     getQuestion()
                                 }else{
                                     setErros(erros + 1)
-                                    console.log('vc errou')
                                 }
                                 setQuestionsTotal(questionsTotal + 1)
                             }}  
