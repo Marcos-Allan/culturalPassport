@@ -40,7 +40,7 @@ import BottomNavigation from '../../../components/BottomNavigation';
 //IMPORTAÇÃO DO PROVEDOR PARA PEGAR AS VARIÁVEIS GLOBAIS
 import { useMyContext } from '../../../provider/geral';
 
-export default function QuiChoice() {
+export default function CountryChoice() {
 
     //RESGATA AS VARIAVEIS GLOBAIS
     const states:any = useMyContext()
@@ -64,32 +64,32 @@ export default function QuiChoice() {
     //FUNÇÃO RESPONSÁVEL POR GERAR AS QUESTÕES
     function getQuestion() {
         console.log('pegando os dados')
-        axios.get('/tb.json')
+        axios.get('/gc.json')
         .then(function (response) {
             console.log(response.data)
 
-            const number = randomNumber(118)
+            const number = randomNumber(29)
         
-            getResults(number, randomNumber(118), randomNumber(118), response.data)
+            getResults(number, randomNumber(29), randomNumber(29), response.data)
             
             const type = randomNumber(3)
             
             if(type == 0){
-                const result = `${response.data[number].numato}°`
+                const result = `${response.data[number].img}`
                 
-                setQuestion(`${response.data[number].numato}°`)
+                setQuestion(`${response.data[number].img}`)
                 
                 return result
             }else if(type == 1){
-                const result = `${response.data[number].de}`
+                const result = `${response.data[number].img}`
                 
-                setQuestion(`${response.data[number].de}`)
+                setQuestion(`${response.data[number].img}`)
                 
                 return result
             }else{
-                const result = `${response.data[number].nms}`
+                const result = `${response.data[number].img}`
                 
-                setQuestion(`${response.data[number].nms}`)
+                setQuestion(`${response.data[number].img}`)
                 
                 return result
 
@@ -140,7 +140,7 @@ export default function QuiChoice() {
             <Navbar>
                 <Return />
                 <TitlePage
-                    text={'QuiChoice'}
+                    text={'CountryChoice'}
                 />
             </Navbar>
             
@@ -188,7 +188,7 @@ export default function QuiChoice() {
                 {levelSelected !== "" && (
                     <>
                         <div className={`w-full border-[1px] flex items-center justify-center mt-5 py-10 text-[24px] font-bold rounded-[8px]`}>
-                            <p className={`${theme == 'light' ? 'text-my-black border-my-black' : 'text-my-white border-my-white'}`}>{question}</p>
+                            <img src={question} alt="" className={`w-[230px] h-[230px] sm:w-[200px] sm:h-[200px]`} />
                         </div>
                         <div className={`mt-2 text-[18px] uppercase w-full flex flex-row justify-between items-center flex-wrap ${theme == 'light' ? 'text-my-black' : 'text-my-white'}`}>
                             <p className={`font-bold text-my-quartenary`}>acertos: {acertos}</p>
@@ -202,7 +202,7 @@ export default function QuiChoice() {
                     {options.length > 0 && options.map((option:any, i:number) => (
                         <button
                             key={i}
-                            className={`w-[22vw] h-[22vw] sm:w-[18vw] sm:h-[18vw] border-[1px] flex items-center justify-center mt-3 text-[20px] rounded-[8px] cursor-pointer
+                            className={`w-[22vw] h-[22vw] sm:w-[14vw] sm:h-[14vw] border-[1px] flex items-center justify-center mt-3 text-[20px] rounded-[8px] capitalize cursor-pointer
                                 ${i == 0 && 'bg-my-secondary'}
                                 ${i == 1 && 'bg-my-quintenary'}
                                 ${i == 2 && 'bg-my-quartenary'}
@@ -219,7 +219,7 @@ export default function QuiChoice() {
                                 setQuestionsTotal(questionsTotal + 1)
                             }}  
                         >
-                            {option.value.icn}
+                            {option.value.name}
                         </button>
                     ))}
                 </div>
