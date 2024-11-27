@@ -1,0 +1,182 @@
+[
+    {
+        "id": 0,
+        "sentence": "Carlos couldn’t ____ the English test at school because he doesn’t ____ anything from class.",
+        "words": [
+            {"order": 0, "text": "do"},
+            {"order": 1, "text": "English"},
+            {"order": 2, "text": "understand"}
+        ]
+    },
+    {
+        "id": 1,
+        "sentence": "She had to ____ the broken ____ to finish the ____ on time.",
+        "words": [
+            {"order": 0, "text": "fix"},
+            {"order": 1, "text": "machine"},
+            {"order": 2, "text": "project"}
+        ]
+    },
+    {
+        "id": 2,
+        "sentence": "The boy tried to ____ the lost ____ and call for ____.",
+        "words": [
+            {"order": 0, "text": "find"},
+            {"order": 1, "text": "dog"},
+            {"order": 2, "text": "help"}
+        ]
+    },
+    {
+        "id": 3,
+        "sentence": "They wanted to ____ a new ____ before the end of ____.",
+        "words": [
+            {"order": 0, "text": "start"},
+            {"order": 1, "text": "project"},
+            {"order": 2, "text": "summer"}
+        ]
+    },
+    {
+        "id": 4,
+        "sentence": "She needed to ____ her broken ____ to catch the ____.",
+        "words": [
+            {"order": 0, "text": "fix"},
+            {"order": 1, "text": "phone"},
+            {"order": 2, "text": "call"}
+        ]
+    },
+    {
+        "id": 5,
+        "sentence": "He couldn’t ____ the correct ____ to solve the ____ question.",
+        "words": [
+            {"order": 0, "text": "choose"},
+            {"order": 1, "text": "answer"},
+            {"order": 2, "text": "math"}
+        ]
+    },
+    {
+        "id": 6,
+        "sentence": "The team had to ____ the old ____ to build something ____.",
+        "words": [
+            {"order": 0, "text": "remove"},
+            {"order": 1, "text": "structure"},
+            {"order": 2, "text": "better"}
+        ]
+    },
+    {
+        "id": 7,
+        "sentence": "They decided to ____ a large ____ to store all the ____.",
+        "words": [
+            {"order": 0, "text": "build"},
+            {"order": 1, "text": "warehouse"},
+            {"order": 2, "text": "goods"}
+        ]
+    },
+    {
+        "id": 8,
+        "sentence": "We need to ____ the final ____ before presenting the ____.",
+        "words": [
+            {"order": 0, "text": "review"},
+            {"order": 1, "text": "report"},
+            {"order": 2, "text": "results"}
+        ]
+    },
+    {
+        "id": 9,
+        "sentence": "She had to ____ the forgotten ____ to complete the ____ in time.",
+        "words": [
+            {"order": 0, "text": "retrieve"},
+            {"order": 1, "text": "files"},
+            {"order": 2, "text": "task"}
+        ]
+    },
+    {
+        "id": 10,
+        "sentence": "He tried to ____ the missing ____ and explain the ____ to everyone.",
+        "words": [
+            {"order": 0, "text": "locate"},
+            {"order": 1, "text": "document"},
+            {"order": 2, "text": "situation"}
+        ]
+    },
+    {
+        "id": 11,
+        "sentence": "The students had to ____ their group ____ before the next ____.",
+        "words": [
+            {"order": 0, "text": "finalize"},
+            {"order": 1, "text": "presentation"},
+            {"order": 2, "text": "class"}
+        ]
+    },
+    {
+        "id": 12,
+        "sentence": "She decided to ____ the delicious ____ at the local ____.",
+        "words": [
+            {"order": 0, "text": "try"},
+            {"order": 1, "text": "dish"},
+            {"order": 2, "text": "restaurant"}
+        ]
+    },
+    {
+        "id": 13,
+        "sentence": "They need to ____ their daily ____ to improve their ____ performance.",
+        "words": [
+            {"order": 0, "text": "evaluate"},
+            {"order": 1, "text": "routine"},
+            {"order": 2, "text": "work"}
+        ]
+    },
+    {
+        "id": 14,
+        "sentence": "We planned to ____ the upcoming ____ to avoid potential ____.",
+        "words": [
+            {"order": 0, "text": "discuss"},
+            {"order": 1, "text": "event"},
+            {"order": 2, "text": "problems"}
+        ]
+    },
+    {
+        "id": 15,
+        "sentence": "The teacher asked to ____ the new ____ during the upcoming ____.",
+        "words": [
+            {"order": 0, "text": "introduce"},
+            {"order": 1, "text": "topic"},
+            {"order": 2, "text": "lecture"}
+        ]
+    },
+    {
+        "id": 16,
+        "sentence": "They wanted to ____ the special ____ to create something ____.",
+        "words": [
+            {"order": 0, "text": "use"},
+            {"order": 1, "text": "material"},
+            {"order": 2, "text": "unique"}
+        ]
+    },
+    {
+        "id": 17,
+        "sentence": "We have to ____ this new ____ to complete the next ____.",
+        "words": [
+            {"order": 0, "text": "learn"},
+            {"order": 1, "text": "technique"},
+            {"order": 2, "text": "project"}
+        ]
+    },
+    {
+        "id": 18,
+        "sentence": "She hoped to ____ the required ____ before the important ____.",
+        "words": [
+            {"order": 0, "text": "obtain"},
+            {"order": 1, "text": "approval"},
+            {"order": 2, "text": "meeting"}
+        ]
+    },
+    {
+        "id": 19,
+        "sentence": "He had to ____ the missing ____ to ensure everything went ____.",
+        "words": [
+            {"order": 0, "text": "identify"},
+            {"order": 1, "text": "part"},
+            {"order": 2, "text": "smoothly"}
+        ]
+    }
+]

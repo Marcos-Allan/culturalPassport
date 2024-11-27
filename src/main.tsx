@@ -62,6 +62,7 @@ import UserProfile from './screens/UserProfile/index.tsx';
 import MathQuest from './screens/Games/MathQuest/index.tsx';
 import QuiChoice from './screens/Games/QuiChoice/index.tsx';
 import CountryChoice from './screens/Games/CountryChoice/index.tsx';
+import OrderWords from './screens/Games/OrderWords';
 
 //IMPORTAÇÃO DO PROVEDOR QUE GUARDA AS VÁRIAVEIS DE ESTADO GLOBAL
 import { Provider } from './provider/index.tsx';
@@ -179,6 +180,11 @@ const router = createBrowserRouter([
   {
     path: "games/country-choice",
     element: <CountryChoice />,
+    errorElement: <ErrorPage />
+  },
+  {
+    path: "games/order-words",
+    element: <OrderWords />,
     errorElement: <ErrorPage />
   }
 ])
