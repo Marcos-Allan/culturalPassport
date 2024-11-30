@@ -268,7 +268,7 @@ export default function SignIn(){
                 </form>
 
                 {/* <img className={`hidden lg:flex h-full`} src={bg} alt="livros com óculos em cima" /> */}
-                <div className={`max-w-[424px] min-w-[424px] hidden lg:flex min-h-full ${theme == 'light' ? 'bg-[#8D46D0]' : 'bg-my-quintenary'} flex-col items-center justify-center`}>
+                <div className={`max-w-[424px] min-w-[424px] hidden lg:flex min-h-full ${theme == 'light' ? 'bg-[#8D46D0]' : 'bg-[#8D46D0]'} flex-col items-center justify-center`}>
                     <animated.img className={`w-[300px] transition-all`} style={propsStyle} src={bg2} alt="livros com óculos em cima" />
                 </div>
 
