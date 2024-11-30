@@ -49,7 +49,7 @@ import instance from '../../utils/axios';
 
 //IMPORTAÇÃO DAS IMAGENS
 // import bg from '../../assets/imgs/03bg.png'
-import bg2 from '../../assets/imgs/08bg.png'
+import bg2 from '../../assets/imgs/newPassword.png'
 
 export default function SwitchPassword() {
 
@@ -185,7 +185,7 @@ export default function SwitchPassword() {
             <div className={`w-full flex justify-center h-[100vh]`}>
                 {/* <img className={`hidden lg:flex h-full`} src={bg} alt="pilha de livros" /> */}
                 <div className={`max-w-[424px] h-screen min-w-[424px] hidden lg:flex ${theme == 'light' ? 'bg-my-secondary' : 'bg-my-quintenary'} flex-col items-center justify-center`}>
-                    <animated.img className={`w-[200px] transition-all`} src={bg2} style={propsStyle} alt="livros com óculos em cima" />
+                    <animated.img className={`w-[300px] transition-all`} src={bg2} style={propsStyle} alt="livros com óculos em cima" />
                 </div>
 
                 <form className={`mt-8 items-center flex flex-col w-[90%] gap-[16px] relative`} onSubmit={(e) => e.preventDefault()}>

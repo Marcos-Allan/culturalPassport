@@ -48,7 +48,7 @@ import ToggleThemeBtn from '../../components/ToggleThemeBtn';
 
 //IMPORTAÇÃO DAS IMAGENS
 // import bg from '../../assets/imgs/01bg.png'
-import bg2 from '../../assets/imgs/06bg.png'
+import bg2 from '../../assets/imgs/signin.jpg'
 
 //IMPORTAÇÃO DO PROVEDOR PARA PEGAR AS VARIÁVEIS GLOBAIS
 import { useMyContext } from '../../provider/geral';
@@ -218,7 +218,7 @@ export default function SignIn(){
                 </Navbar>
             </div>
 
-            <div className={`w-full flex justify-center h-[100vh]`}>
+            <div className={`w-full flex justify-center min-h-[100vh]`}>
                 <form className={`mt-8 sm:mt-4 lg:mt-0 items-center lg:justify-center flex flex-col w-[100%] px-[5%] sm:overflow-y-scroll sm:pb-[80px] lg:pb-[50px] lg:px-[0%] relative scrollbar-none lg:gap-[10px]`} onSubmit={(e) => e.preventDefault()}>
                     <div className={`hidden w-full lg:flex justify-center mt-6 mb-8`}>
                         <Navbar>
@@ -268,8 +268,8 @@ export default function SignIn(){
                 </form>
 
                 {/* <img className={`hidden lg:flex h-full`} src={bg} alt="livros com óculos em cima" /> */}
-                <div className={`max-w-[424px] min-w-[424px] hidden lg:flex h-full ${theme == 'light' ? 'bg-my-secondary' : 'bg-my-quintenary'} flex-col items-center justify-center`}>
-                    <animated.img className={`w-[200px] transition-all`} style={propsStyle} src={bg2} alt="livros com óculos em cima" />
+                <div className={`max-w-[424px] min-w-[424px] hidden lg:flex min-h-full ${theme == 'light' ? 'bg-[#8D46D0]' : 'bg-my-quintenary'} flex-col items-center justify-center`}>
+                    <animated.img className={`w-[300px] transition-all`} style={propsStyle} src={bg2} alt="livros com óculos em cima" />
                 </div>
 
             </div>

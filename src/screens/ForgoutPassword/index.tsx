@@ -49,7 +49,7 @@ import { useMyContext } from '../../provider/geral';
 
 //IMPORTAÇÃO DAS IMAGENS
 // import bg from '../../assets/imgs/03bg.png'
-import bg2 from '../../assets/imgs/08bg.png'
+import bg2 from '../../assets/imgs/emailCode.png'
 
 export default function ForgoutPassword() {
 
@@ -170,7 +170,7 @@ export default function ForgoutPassword() {
             <div className={`w-full flex justify-center h-[100vh]`}>
                 {/* <img className={`hidden lg:flex h-full`} src={bg} alt="pilha de livros" /> */}
                 <div className={`max-w-[424px] h-screen min-w-[424px] hidden lg:flex ${theme == 'light' ? 'bg-my-secondary' : 'bg-my-quintenary'} flex-col items-center justify-center`}>
-                    <animated.img className={`w-[200px] transition-all`} style={propsStyle} src={bg2} alt="livros com óculos em cima" />
+                    <animated.img className={`w-[300px] transition-all`} style={propsStyle} src={bg2} alt="livros com óculos em cima" />
                 </div>
 
                 <form className={`mt-8 items-center flex flex-col w-[90%] gap-[16px] relative`}

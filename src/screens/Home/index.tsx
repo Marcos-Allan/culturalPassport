@@ -42,7 +42,7 @@ import ToggleThemeBtn from '../../components/ToggleThemeBtn/index.tsx';
 
 //IMPORTAÇÃO DA IMAGEM USADA NA TELA
 // import Person from '../../assets/imgs/person_1.png'
-import Cerebro from '../../assets/imgs/cérebro.png'
+import Cerebro from '../../assets/imgs/cérebro.jpg'
 
 //IMPORTAÇÃO DO PROVEDOR PARA PEGAR AS VARIÁVEIS GLOBAIS
 import { useMyContext } from '../../provider/geral';

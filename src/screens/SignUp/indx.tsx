@@ -49,7 +49,7 @@ import ToggleThemeBtn from '../../components/ToggleThemeBtn/index.tsx'
 
 //IMPORTAÇÃO DAS IMAGENS
 // import bg from '../../assets/imgs/02bg.png'
-import bg2 from '../../assets/imgs/07bg.png'
+import bg2 from '../../assets/imgs/signup.png'
 
 export default function SignUp(){
 
@@ -288,12 +288,12 @@ export default function SignUp(){
                 </Navbar>
             </div>
 
-            <div className={`w-full flex justify-center h-[100vh]`}>
+            <div className={`w-full flex justify-center min-h-[100vh]`}>
                 
                 {/* <img className={`hidden lg:flex h-full`} src={bg} alt="pilha de livros" /> */}
 
-                <div className={`max-w-[424px] min-w-[424px] hidden lg:flex h-full ${theme == 'light' ? 'bg-my-secondary' : 'bg-my-quintenary'} flex-col items-center justify-center`}>
-                    <animated.img className={`w-[200px] transition-all`} style={propsStyle} src={bg2} alt="livros com óculos em cima" />
+                <div className={`max-w-[424px] min-w-[424px] hidden lg:flex min-h-full ${theme == 'light' ? 'bg-my-secondary' : 'bg-my-quintenary'} flex-col items-center justify-center`}>
+                    <animated.img className={`w-[300px] transition-all`} style={propsStyle} src={bg2} alt="livros com óculos em cima" />
                 </div>
 
                 <form className={`mt-8 sm:mt-0 lg:mt-0 items-center flex lg:h-full flex-col w-full overflow-y-scroll mb-6 sm:mb-20 lg:gap-[10px] relative scrollbar-none`} onSubmit={(e) => e.preventDefault()}>
